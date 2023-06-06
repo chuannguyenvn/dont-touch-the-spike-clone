@@ -1,6 +1,6 @@
 import Updatable from "./Updatable.js"
 import Debug from "./Debug.js"
-import Input from "./input/Input.js"
+import Input from "../input/Input.js"
 
 class Game
 {

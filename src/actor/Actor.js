@@ -1,6 +1,6 @@
-import Game from "../Game.js";
+import Game from "../system/Game.js";
 import ComponentType from "../component/ComponentType.js";
-import Debug from "../Debug.js";
+import Debug from "../system/Debug.js";
 import Transform from "../component/Transform.js";
 class Actor {
     constructor() {

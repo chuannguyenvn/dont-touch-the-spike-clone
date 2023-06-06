@@ -1,5 +1,5 @@
-﻿import Game from "../Game.js"
-import Debug from "../Debug.js"
+﻿import Game from "../system/Game.js"
+import Debug from "../system/Debug.js"
 
 class Input
 {

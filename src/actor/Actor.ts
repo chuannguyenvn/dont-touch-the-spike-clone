@@ -1,8 +1,8 @@
-﻿import Updatable from "../Updatable.js"
-import Game from "../Game.js"
+﻿import Updatable from "../system/Updatable.js"
+import Game from "../system/Game.js"
 import Component from "../component/Component.js"
 import ComponentType from "../component/ComponentType.js"
-import Debug from "../Debug.js"
+import Debug from "../system/Debug.js"
 import Transform from "../component/Transform.js"
 
 class Actor implements Updatable

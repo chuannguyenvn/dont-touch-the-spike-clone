@@ -1,7 +1,7 @@
-﻿import Game from "./src/game.js"
+﻿import Game from "./src/system/Game.js"
 import Input from "./src/input/Input.js"
 import Actor from "./src/actor/Actor.js"
-import Debug from "./src/Debug.js"
+import Debug from "./src/system/Debug.js"
 import Vector2 from "./src/types/Vector2.js"
 
 const canvas = document.getElementById("canvas")
@@ -15,4 +15,4 @@ actor.update = () => {
 }
 Game.registerUpdatable(actor)
 
-console.log(Vector2.left.bind(Vector2).angle(new Vector2(0, 1)))
+console.log(Vector2.left().angle(new Vector2(0, 1)))
