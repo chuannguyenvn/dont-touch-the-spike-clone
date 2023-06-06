@@ -1,5 +1,5 @@
 ﻿import ComponentType from "./ComponentType.js"
-import Actor from "../actor/Actor"
+import Actor from "../actor/Actor.js"
 
 class Component
 {

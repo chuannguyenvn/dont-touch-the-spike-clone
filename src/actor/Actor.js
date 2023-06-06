@@ -3,13 +3,15 @@ import ComponentType from "../component/ComponentType.js";
 import Debug from "../system/Debug.js";
 import Transform from "../component/Transform.js";
 import Sprite from "../component/Sprite.js";
+import RectangleCollider from "../component/RectangleCollider.js";
+import CircleCollider from "../component/CircleCollider.js";
 class Actor {
     constructor() {
         this.components = [];
         Game.registerUpdatable(this);
     }
     update(deltaTime) {
-        console.log(deltaTime);
+        //
     }
     getComponent(componentType) {
         let result = this.components.filter(component => component.type === componentType);
@@ -29,6 +31,13 @@ class Actor {
                 break;
             case ComponentType.SPRITE:
                 newComponent = new Sprite(this);
+                break;
+            case ComponentType.RECTANGLE_COLLIDER:
+                newComponent = new RectangleCollider(this);
+                break;
+            case ComponentType.CIRCLE_COLLIDER:
+                newComponent = new CircleCollider(this);
+                break;
         }
         for (let requirement of newComponent.componentRequirements) {
             if (this.components.findIndex(component => component.type == requirement) == -1) {

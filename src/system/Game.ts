@@ -2,6 +2,7 @@ import Updatable from "./Updatable.js"
 import Debug from "./Debug.js"
 import Input from "../input/Input.js"
 import Canvas from "./Canvas.js"
+import Physics from "./Physics.js"
 
 class Game
 {
@@ -22,6 +23,7 @@ class Game
         let currentTimestamp = Date.now()
 
         Game.update((currentTimestamp - Game.lastFrameTimestamp) / 1000)
+        Physics.handlePhysics()
         Canvas.draw()
 
         Game.lastFrameTimestamp = currentTimestamp

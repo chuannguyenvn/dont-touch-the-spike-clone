@@ -1,6 +1,7 @@
 import Component from "./Component.js";
 import ComponentType from "./ComponentType.js";
-import { ParamGameEvent } from "../types/Event";
+import { ParamGameEvent } from "../types/Event.js";
+import Physics from "../system/Physics.js";
 class Collider extends Component {
     constructor(owner) {
         super(owner);
@@ -12,6 +13,7 @@ class Collider extends Component {
         this.collisionEnded = new ParamGameEvent();
         this.currentFrameCollidingColliders = [];
         this.lastFrameCollidingColliders = [];
+        Physics.registerCollider(this);
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM);
     }
     getWorldPosition() {
