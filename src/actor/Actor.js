@@ -12,13 +12,13 @@ class Actor {
         console.log(deltaTime);
     }
     getComponent(componentType) {
-        let result = this.components.filter(component => component.type == componentType);
+        let result = this.components.filter(component => component.type === componentType);
         if (result.length === 0)
             Debug.logError(`Component of type ${componentType} not found on actor ${this.name}`);
         return result[0];
     }
     addComponent(componentType) {
-        if (this.components.findIndex(component => component.type == componentType) != -1) {
+        if (this.components.findIndex(component => component.type === componentType) !== -1) {
             Debug.logError(`Component of type ${componentType} already exists on actor ${this.name}.`);
             return;
         }

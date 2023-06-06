@@ -21,5 +21,14 @@ actor.update = () => {
     transform.position = new Vector2(50, 50)
     if (Input.getKeyDown(" ")) Debug.log('asdf')
 }
-Game.registerUpdatable(actor)
+
+let background = new Actor()
+background.addComponent(ComponentType.TRANSFORM)
+let sprite2 = background.addComponent(ComponentType.SPRITE)
+sprite2.setImage("./assets/kenney/Characters/character_0007.png")
+background.update = (deltaTime) => {
+    let transform2 = background.getComponent(ComponentType.TRANSFORM)
+    transform2.position = transform2.position.add(new Vector2(deltaTime * 100, 0))
+    console.log(transform2.position.x)
+}
 

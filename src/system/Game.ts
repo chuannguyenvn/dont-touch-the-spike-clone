@@ -9,7 +9,7 @@ class Game
     private static updatables: Updatable[] = []
     private static lastFrameTimestamp: number = -1
 
-    public static init(ctx: CanvasRenderingContext2D): void
+    public static init(): void
     {
         Debug.assert(!Game.isInitialized, "Game is already initialized.")
 
@@ -21,17 +21,17 @@ class Game
     {
         let currentTimestamp = Date.now()
 
-        Game.update(currentTimestamp - Game.lastFrameTimestamp)
+        Game.update((currentTimestamp - Game.lastFrameTimestamp) / 1000)
         Canvas.draw()
-        
+
         Game.lastFrameTimestamp = currentTimestamp
         Input.resetInput()
         window.requestAnimationFrame(Game.gameLoop)
     };
 
-    private static update(deltaTime: number): void
+    private static update(secondsSinceLastFrame: number): void
     {
-        Game.updatables.forEach(updatable => updatable.update(deltaTime))
+        Game.updatables.forEach(updatable => updatable.update(secondsSinceLastFrame))
     };
 
     public static registerUpdatable(updatable: Updatable): void

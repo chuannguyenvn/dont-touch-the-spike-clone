@@ -37,6 +37,12 @@ class Vector2 {
     angle(toVector) {
         return Math.acos(this.dot(toVector) / (this.length() * toVector.length())) * Maths.Rad2Deg;
     }
+    add(other) {
+        return new Vector2(this.x + other.x, this.y + other.y);
+    }
+    subtract(other) {
+        return new Vector2(this.x - other.x, this.y - other.y);
+    }
     xx() {
         return new Vector2(this.x, this.x);
     }

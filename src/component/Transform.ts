@@ -1,7 +1,7 @@
 ﻿import Vector2 from "../types/Vector2.js"
 import ComponentType from "./ComponentType.js"
 import Component from "./Component.js"
-import Actor from "../actor/Actor"
+import Actor from "../actor/Actor.js"
 
 class Transform extends Component
 {

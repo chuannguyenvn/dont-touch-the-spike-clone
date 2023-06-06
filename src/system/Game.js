@@ -2,7 +2,7 @@ import Debug from "./Debug.js";
 import Input from "../input/Input.js";
 import Canvas from "./Canvas.js";
 class Game {
-    static init(ctx) {
+    static init() {
         Debug.assert(!Game.isInitialized, "Game is already initialized.");
         Game.lastFrameTimestamp = Date.now();
         window.requestAnimationFrame(Game.gameLoop);
@@ -10,15 +10,15 @@ class Game {
     ;
     static gameLoop() {
         let currentTimestamp = Date.now();
-        Game.update(currentTimestamp - Game.lastFrameTimestamp);
+        Game.update((currentTimestamp - Game.lastFrameTimestamp) / 1000);
         Canvas.draw();
         Game.lastFrameTimestamp = currentTimestamp;
         Input.resetInput();
         window.requestAnimationFrame(Game.gameLoop);
     }
     ;
-    static update(deltaTime) {
-        Game.updatables.forEach(updatable => updatable.update(deltaTime));
+    static update(secondsSinceLastFrame) {
+        Game.updatables.forEach(updatable => updatable.update(secondsSinceLastFrame));
     }
     ;
     static registerUpdatable(updatable) {

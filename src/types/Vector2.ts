@@ -65,6 +65,16 @@ class Vector2
         return Math.acos(this.dot(toVector) / (this.length() * toVector.length())) * Maths.Rad2Deg
     }
 
+    public add(other: Vector2): Vector2
+    {
+        return new Vector2(this.x + other.x, this.y + other.y)
+    }
+
+    public subtract(other: Vector2): Vector2
+    {
+        return new Vector2(this.x - other.x, this.y - other.y)
+    }
+    
     public xx(): Vector2
     {
         return new Vector2(this.x, this.x)

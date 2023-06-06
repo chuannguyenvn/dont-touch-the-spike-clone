@@ -23,14 +23,14 @@ class Actor implements Updatable
 
     public getComponent(componentType: ComponentType): Component
     {
-        let result = this.components.filter(component => component.type == componentType)
+        let result = this.components.filter(component => component.type === componentType)
         if (result.length === 0) Debug.logError(`Component of type ${componentType} not found on actor ${this.name}`)
         return result[0]
     }
 
     public addComponent(componentType: ComponentType): Component | undefined
     {
-        if (this.components.findIndex(component => component.type == componentType) != -1)
+        if (this.components.findIndex(component => component.type === componentType) !== -1)
         {
             Debug.logError(`Component of type ${componentType} already exists on actor ${this.name}.`)
             return
