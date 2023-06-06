@@ -1,0 +1,33 @@
+﻿enum Ease
+{
+    LINEAR,
+    IN_SINE,
+    OUT_SINE,
+    IN_OUT_SINE,
+    IN_CUBIC,
+    OUT_CUBIC,
+    IN_OUT_CUBIC,
+    IN_QUINT,
+    OUT_QUINT,
+    IN_OUT_QUINT,
+    IN_CIRC,
+    OUT_CIRC,
+    IN_OUT_CIRC,
+    IN_ELASTIC,
+    OUT_ELASTIC,
+    IN_OUT_ELASTIC,
+    IN_QUAD,
+    OUT_QUAD,
+    IN_OUT_QUAD,
+    IN_QUART,
+    OUT_QUART,
+    IN_OUT_QUART,
+    IN_EXPO,
+    OUT_EXPO,
+    IN_OUT_EXPO,
+    IN_BACK,
+    OUT_BACK,
+    IN_OUT_BACK,
+}
+
+export default Ease

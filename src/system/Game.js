@@ -2,6 +2,8 @@ import Debug from "./Debug.js";
 import Input from "../input/Input.js";
 import Canvas from "./Canvas.js";
 import Physics from "./Physics.js";
+import TweenEngine from "./tween/TweenEngine.js";
+import Time from "./Time.js";
 class Game {
     static init() {
         Debug.assert(!Game.isInitialized, "Game is already initialized.");
@@ -11,16 +13,18 @@ class Game {
     ;
     static gameLoop() {
         let currentTimestamp = Date.now();
-        Game.update((currentTimestamp - Game.lastFrameTimestamp) / 1000);
+        Time.lastFrameTime = Game.lastFrameTimestamp;
         Physics.handlePhysics();
+        Game.update();
+        TweenEngine.handleTween();
         Canvas.draw();
         Game.lastFrameTimestamp = currentTimestamp;
         Input.resetInput();
         window.requestAnimationFrame(Game.gameLoop);
     }
     ;
-    static update(secondsSinceLastFrame) {
-        Game.updatables.forEach(updatable => updatable.update(secondsSinceLastFrame));
+    static update() {
+        Game.updatables.forEach(updatable => updatable.update());
     }
     ;
     static registerUpdatable(updatable) {

@@ -3,6 +3,8 @@ import Debug from "./Debug.js"
 import Input from "../input/Input.js"
 import Canvas from "./Canvas.js"
 import Physics from "./Physics.js"
+import TweenEngine from "./tween/TweenEngine.js"
+import Time from "./Time.js"
 
 class Game
 {
@@ -21,9 +23,11 @@ class Game
     private static gameLoop(): void
     {
         let currentTimestamp = Date.now()
+        Time.lastFrameTime = Game.lastFrameTimestamp
 
-        Game.update((currentTimestamp - Game.lastFrameTimestamp) / 1000)
         Physics.handlePhysics()
+        Game.update()
+        TweenEngine.handleTween()
         Canvas.draw()
 
         Game.lastFrameTimestamp = currentTimestamp
@@ -31,9 +35,9 @@ class Game
         window.requestAnimationFrame(Game.gameLoop)
     };
 
-    private static update(secondsSinceLastFrame: number): void
+    private static update(): void
     {
-        Game.updatables.forEach(updatable => updatable.update(secondsSinceLastFrame))
+        Game.updatables.forEach(updatable => updatable.update())
     };
 
     public static registerUpdatable(updatable: Updatable): void

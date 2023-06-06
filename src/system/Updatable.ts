@@ -1,7 +1,6 @@
 ﻿interface Updatable
 {
-    // deltaTime is in seconds.
-    update: (deltaTime: number) => void;
+    update: () => void;
 }
 
 export default Updatable;
