@@ -1,14 +1,9 @@
-﻿const express = require('express');
+﻿import Game from "./src/game.js"
+import Actor from "./src/actor/Actor.js"
 
-const app = express();
-app.use(express.static('./src'));
+const canvas = document.getElementById("canvas")
+const ctx = canvas.getContext("2d")
 
-app.get('/', (req, res)=>{
-    res.sendFile('index.html', {root: __dirname});
-    // startGame();
-})
-
-const PORT = 1234
-app.listen(PORT, () =>{
-    console.log(`Sever is running on port ${PORT}`);
-})
+Game.init(ctx)
+let actor = new Actor()
+Game.registerUpdatable(actor)
