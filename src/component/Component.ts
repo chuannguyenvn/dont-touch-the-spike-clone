@@ -3,11 +3,7 @@
 class Component
 {
     public readonly type: ComponentType
-
-    constructor(type: ComponentType)
-    {
-        this.type = type
-    }
+    public readonly componentRequirements: ComponentType[] = []
 }
 
 export default Component

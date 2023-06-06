@@ -1,6 +1,6 @@
 class Component {
-    constructor(type) {
-        this.type = type;
+    constructor() {
+        this.componentRequirements = [];
     }
 }
 export default Component;

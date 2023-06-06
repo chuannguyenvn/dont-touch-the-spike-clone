@@ -17,11 +17,23 @@ class Actor {
         return result[0];
     }
     addComponent(componentType) {
+        if (this.components.findIndex(component => component.type == componentType)) {
+            Debug.logError(`Component of type ${componentType} already exists on actor ${this.name}.`);
+            return;
+        }
+        let newComponent;
         switch (componentType) {
             case ComponentType.TRANSFORM:
-                this.components.push(new Transform());
+                newComponent = new Transform();
                 break;
         }
+        for (let requirement of newComponent.componentRequirements) {
+            if (this.components.findIndex(component => component.type == componentType)) {
+                Debug.logError(`Component of type ${newComponent} requires component of type ${requirement}.`);
+                return;
+            }
+        }
+        this.components.push(newComponent);
     }
     removeComponent(componentType) {
         // TODO
