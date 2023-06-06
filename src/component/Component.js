@@ -1,6 +1,7 @@
 class Component {
-    constructor() {
+    constructor(owner) {
         this.componentRequirements = [];
+        this.owner = owner;
     }
 }
 export default Component;

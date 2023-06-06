@@ -1,22 +1,22 @@
 ﻿import Vector2 from "../types/Vector2.js"
 import ComponentType from "./ComponentType.js"
 import Component from "./Component.js"
-import vector2 from "../types/Vector2.js"
+import Actor from "../actor/Actor"
 
 class Transform extends Component
 {
     // COMPONENT METADATA //
     public readonly type = ComponentType.TRANSFORM
     public readonly componentRequirements = []
-
+    
     // COMPONENT PROPERTIES //
     public position: Vector2
     public rotation: number
     public scale: Vector2
 
-    constructor(position: Vector2 = Vector2.zero(), rotation: number = 0, scale: Vector2 = vector2.one())
+    constructor(owner: Actor, position: Vector2 = Vector2.zero(), rotation: number = 0, scale: Vector2 = Vector2.one())
     {
-        super()
+        super(owner)
         this.position = position
         this.rotation = rotation
         this.scale = scale

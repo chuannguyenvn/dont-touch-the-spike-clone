@@ -1,10 +1,9 @@
 import Vector2 from "../types/Vector2.js";
 import ComponentType from "./ComponentType.js";
 import Component from "./Component.js";
-import vector2 from "../types/Vector2.js";
 class Transform extends Component {
-    constructor(position = Vector2.zero(), rotation = 0, scale = vector2.one()) {
-        super();
+    constructor(owner, position = Vector2.zero(), rotation = 0, scale = Vector2.one()) {
+        super(owner);
         // COMPONENT METADATA //
         this.type = ComponentType.TRANSFORM;
         this.componentRequirements = [];

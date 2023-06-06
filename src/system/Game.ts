@@ -1,19 +1,18 @@
 import Updatable from "./Updatable.js"
 import Debug from "./Debug.js"
 import Input from "../input/Input.js"
+import Canvas from "./Canvas.js"
 
 class Game
 {
-    public static canvasContext: HTMLElement
     private static isInitialized: boolean = false
     private static updatables: Updatable[] = []
     private static lastFrameTimestamp: number = -1
 
-    public static init(ctx: HTMLElement): void
+    public static init(ctx: CanvasRenderingContext2D): void
     {
         Debug.assert(!Game.isInitialized, "Game is already initialized.")
 
-        Game.canvasContext = ctx
         Game.lastFrameTimestamp = Date.now()
         window.requestAnimationFrame(Game.gameLoop)
     };
@@ -23,9 +22,10 @@ class Game
         let currentTimestamp = Date.now()
 
         Game.update(currentTimestamp - Game.lastFrameTimestamp)
+        Canvas.draw()
+        
         Game.lastFrameTimestamp = currentTimestamp
         Input.resetInput()
-
         window.requestAnimationFrame(Game.gameLoop)
     };
 
