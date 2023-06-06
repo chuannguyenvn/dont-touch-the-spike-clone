@@ -1,0 +1,26 @@
+﻿<component name="ProjectCodeStyleConfiguration">
+  <code_scheme name="Project" version="173">
+    <option name="LINE_SEPARATOR" value="&#10;" />
+    <option name="RIGHT_MARGIN" value="130" />
+    <JSCodeStyleSettings version="0">
+      <option name="USE_SEMICOLON_AFTER_STATEMENT" value="false" />
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+    </JSCodeStyleSettings>
+    <TypeScriptCodeStyleSettings version="0">
+      <option name="USE_SEMICOLON_AFTER_STATEMENT" value="false" />
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+      <option name="FUNCTION_EXPRESSION_BRACE_STYLE" value="2" />
+    </TypeScriptCodeStyleSettings>
+    <codeStyleSettings language="SQL">
+      <indentOptions>
+        <option name="INDENT_SIZE" value="3" />
+        <option name="TAB_SIZE" value="3" />
+      </indentOptions>
+    </codeStyleSettings>
+    <codeStyleSettings language="TypeScript">
+      <option name="BRACE_STYLE" value="2" />
+      <option name="CLASS_BRACE_STYLE" value="2" />
+      <option name="METHOD_BRACE_STYLE" value="2" />
+    </codeStyleSettings>
+  </code_scheme>
+</component>
