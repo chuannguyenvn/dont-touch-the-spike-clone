@@ -31,9 +31,11 @@ class Vector2 {
         return new Vector2(this.y, this.x);
     }
 }
-Vector2.left = new Vector2(-1, 0);
-Vector2.right = new Vector2(1, 0);
-Vector2.up = new Vector2(0, 1);
-Vector2.down = new Vector2(0, -1);
+Vector2.left = () => new Vector2(-1, 0);
+Vector2.right = () => new Vector2(1, 0);
+Vector2.up = () => new Vector2(0, 1);
+Vector2.down = () => new Vector2(0, -1);
+Vector2.zero = () => new Vector2(0, 0);
+Vector2.one = () => new Vector2(1, 1);
 export default Vector2;
 //# sourceMappingURL=Vector2.js.map
