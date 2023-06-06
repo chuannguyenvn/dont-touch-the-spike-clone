@@ -19,6 +19,9 @@ class Vector2 {
     static one() {
         return new Vector2(1, 1);
     }
+    static distance(v1, v2) {
+        return v1.subtract(v2).length();
+    }
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -42,6 +45,9 @@ class Vector2 {
     }
     subtract(other) {
         return new Vector2(this.x - other.x, this.y - other.y);
+    }
+    multiply(number) {
+        return new Vector2(this.x * number, this.y * number);
     }
     xx() {
         return new Vector2(this.x, this.x);

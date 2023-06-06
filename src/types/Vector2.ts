@@ -32,6 +32,11 @@ class Vector2
     {
         return new Vector2(1, 1)
     }
+    
+    public static distance(v1: Vector2, v2: Vector2): number
+    {
+        return v1.subtract(v2).length()
+    }
 
     // MEMBER METHODS //
     public x: number
@@ -74,7 +79,12 @@ class Vector2
     {
         return new Vector2(this.x - other.x, this.y - other.y)
     }
-    
+
+    public multiply(number: number): Vector2
+    {
+        return new Vector2(this.x * number, this.y * number)
+    }
+
     public xx(): Vector2
     {
         return new Vector2(this.x, this.x)
