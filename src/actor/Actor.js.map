@@ -1,1 +1,1 @@
-{"version":3,"file":"Actor.js","sourceRoot":"","sources":["Actor.ts"],"names":[],"mappings":"AAEA,MAAM,KAAK;IAEP;IAGA,CAAC;IAED,MAAM,CAAC,SAAiB;QAEpB,OAAO,CAAC,GAAG,CAAC,SAAS,CAAC,CAAA;IAC1B,CAAC;CACJ;AAED,eAAe,KAAK,CAAC"}
+{"version":3,"file":"Actor.js","sourceRoot":"","sources":["Actor.ts"],"names":[],"mappings":"AACA,OAAO,IAAI,MAAM,YAAY,CAAC;AAE9B,MAAM,KAAK;IAEP;QAEI,IAAI,CAAC,iBAAiB,CAAC,IAAI,CAAC,CAAC;IACjC,CAAC;IAED,MAAM,CAAC,SAAiB;QAEpB,OAAO,CAAC,GAAG,CAAC,SAAS,CAAC,CAAA;IAC1B,CAAC;CACJ;AAED,eAAe,KAAK,CAAC"}

@@ -1,10 +1,11 @@
-﻿import Updatable from "../Updatable"
+﻿import Updatable from "../Updatable.js";
+import Game from "../Game.js";
 
 class Actor implements Updatable
 {
     constructor()
     {
-        
+        Game.registerUpdatable(this);
     }
 
     update(deltaTime: number): void
