@@ -5,7 +5,7 @@ import vector2 from "../types/Vector2.js";
 class Transform extends Component {
     constructor(position = Vector2.zero(), rotation = 0, scale = vector2.one()) {
         super();
-        // Component metadata //
+        // COMPONENT METADATA //
         this.type = ComponentType.TRANSFORM;
         this.componentRequirements = [];
         this.position = position;

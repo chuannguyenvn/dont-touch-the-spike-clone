@@ -1,5 +1,24 @@
 import Maths from "../utility/Maths.js";
 class Vector2 {
+    // STATIC FUNCTIONS //
+    static left() {
+        return new Vector2(-1, 0);
+    }
+    static right() {
+        return new Vector2(1, 0);
+    }
+    static up() {
+        return new Vector2(0, 1);
+    }
+    static down() {
+        return new Vector2(0, -1);
+    }
+    static zero() {
+        return new Vector2(0, 0);
+    }
+    static one() {
+        return new Vector2(1, 1);
+    }
     constructor(x, y) {
         this.x = x;
         this.y = y;
@@ -31,11 +50,5 @@ class Vector2 {
         return new Vector2(this.y, this.x);
     }
 }
-Vector2.left = () => new Vector2(-1, 0);
-Vector2.right = () => new Vector2(1, 0);
-Vector2.up = () => new Vector2(0, 1);
-Vector2.down = () => new Vector2(0, -1);
-Vector2.zero = () => new Vector2(0, 0);
-Vector2.one = () => new Vector2(1, 1);
 export default Vector2;
 //# sourceMappingURL=Vector2.js.map

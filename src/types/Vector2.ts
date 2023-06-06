@@ -2,6 +2,38 @@
 
 class Vector2
 {
+    // STATIC FUNCTIONS //
+    public static left(): Vector2
+    {
+        return new Vector2(-1, 0)
+    }
+
+    public static right(): Vector2
+    {
+        return new Vector2(1, 0)
+    }
+
+    public static up(): Vector2
+    {
+        return new Vector2(0, 1)
+    }
+
+    public static down(): Vector2
+    {
+        return new Vector2(0, -1)
+    }
+
+    public static zero(): Vector2
+    {
+        return new Vector2(0, 0)
+    }
+
+    public static one(): Vector2
+    {
+        return new Vector2(1, 1)
+    }
+
+    // MEMBER METHODS //
     public x: number
     public y: number
 
@@ -52,13 +84,6 @@ class Vector2
     {
         return new Vector2(this.y, this.x)
     }
-
-    public static readonly left = () => new Vector2(-1, 0)
-    public static readonly right = () => new Vector2(1, 0)
-    public static readonly up = () => new Vector2(0, 1)
-    public static readonly down = () => new Vector2(0, -1)
-    public static readonly zero = () => new Vector2(0, 0)
-    public static readonly one = () => new Vector2(1, 1)
 }
 
 export default Vector2

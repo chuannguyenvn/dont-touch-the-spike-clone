@@ -9,7 +9,7 @@ class Game
     private static updatables: Updatable[] = []
     private static lastFrameTimestamp: number = -1
 
-    public static init(ctx: HTMLElement)
+    public static init(ctx: HTMLElement): void
     {
         Debug.assert(!Game.isInitialized, "Game is already initialized.")
 
@@ -18,7 +18,7 @@ class Game
         window.requestAnimationFrame(Game.gameLoop)
     };
 
-    private static gameLoop()
+    private static gameLoop(): void
     {
         let currentTimestamp = Date.now()
 
@@ -29,12 +29,12 @@ class Game
         window.requestAnimationFrame(Game.gameLoop)
     };
 
-    private static update(deltaTime: number)
+    private static update(deltaTime: number): void
     {
         Game.updatables.forEach(updatable => updatable.update(deltaTime))
     };
 
-    public static registerUpdatable(updatable: Updatable)
+    public static registerUpdatable(updatable: Updatable): void
     {
         Game.updatables.push(updatable)
     };

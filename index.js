@@ -15,4 +15,4 @@ actor.update = () => {
 }
 Game.registerUpdatable(actor)
 
-console.log(Vector2.left.angle(new Vector2(0, 1)))
+console.log(Vector2.left.bind(Vector2).angle(new Vector2(0, 1)))

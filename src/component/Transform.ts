@@ -5,11 +5,11 @@ import vector2 from "../types/Vector2.js"
 
 class Transform extends Component
 {
-    // Component metadata //
+    // COMPONENT METADATA //
     public readonly type = ComponentType.TRANSFORM
     public readonly componentRequirements = []
 
-    // Component properties //
+    // COMPONENT PROPERTIES //
     public position: Vector2
     public rotation: number
     public scale: Vector2
