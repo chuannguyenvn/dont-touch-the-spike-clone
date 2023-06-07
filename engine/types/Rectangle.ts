@@ -15,10 +15,10 @@ class Rectangle implements Drawable
         this.size = size
     }
 
-    public draw(): void
+    public _draw(): void
     {
-        Canvas.canvasContext.fillStyle = this.color.toHex()
-        Canvas.canvasContext.fillRect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y)
+        Canvas._canvasContext.fillStyle = this.color.toHex()
+        Canvas._canvasContext.fillRect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y)
     }
 }
 

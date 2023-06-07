@@ -7,28 +7,28 @@ class Freeform implements Drawable
 {
     public drawOrder: number
     public color: Color
-    public points: Vector[]
+    public _points: Vector[]
 
     constructor(color: Color)
     {
         this.color = color
     }
 
+    public _draw(): void
+    {
+        Canvas._canvasContext.fillStyle = this.color.toHex()
+
+        Canvas._canvasContext.beginPath()
+        for (let i = 0; i < this._points.length; i++)
+        {
+            Canvas._canvasContext.lineTo(this._points[i].x, this._points[i].y)
+        }
+        Canvas._canvasContext.fill()
+    }
+    
     public setPoints(points: Vector[])
     {
-        this.points = points
-    }
-
-    public draw(): void
-    {
-        Canvas.canvasContext.fillStyle = this.color.toHex()
-
-        Canvas.canvasContext.beginPath()
-        for (let i = 0; i < this.points.length; i++)
-        {
-            Canvas.canvasContext.lineTo(this.points[i].x, this.points[i].y)
-        }
-        Canvas.canvasContext.fill()
+        this._points = points
     }
 }
 

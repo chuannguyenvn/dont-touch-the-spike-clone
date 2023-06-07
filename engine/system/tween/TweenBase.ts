@@ -6,33 +6,33 @@ import TweenEngine from "./TweenEngine.js"
 class TweenBase
 {
     public evaluate: (x: number) => void
-    public startTime: number
-    public duration: number
-    public delay: number
-    public ease: Ease
+    public _startTime: number
+    public _duration: number
+    public _delay: number
+    public _ease: Ease
 
-    public isStarted: boolean = false
+    public _isStarted: boolean = false
     public tweenStarted: GameEvent = new GameEvent()
     public tweenEnded: GameEvent = new GameEvent()
 
     constructor(duration: number, delay: number, ease: Ease)
     {
-        this.duration = duration
-        this.delay = delay
-        this.ease = ease
-        TweenEngine.registerTween(this)
+        this._duration = duration
+        this._delay = delay
+        this._ease = ease
+        TweenEngine._registerTween(this)
     }
 
-    public start()
+    public _start(): void
     {
-        this.isStarted = true
-        this.startTime = Time.timeSinceGameStart()
+        this._isStarted = true
+        this._startTime = Time.timeSinceGameStart()
         this.tweenStarted.invoke()
     }
 
-    public end()
+    public _end(): void
     {
-        TweenEngine.unregisterTween(this)
+        TweenEngine._unregisterTween(this)
         this.evaluate(1)
         this.tweenEnded.invoke()
     }
@@ -40,9 +40,9 @@ class TweenBase
 
     public chain(tween: TweenBase): TweenBase
     {
-        TweenEngine.unregisterTween(tween)
-        this.tweenEnded.subscribe(tween.start)
-        tween.tweenStarted.subscribe(() => TweenEngine.registerTween(tween))
+        TweenEngine._unregisterTween(tween)
+        this.tweenEnded.subscribe(tween._start)
+        tween.tweenStarted.subscribe(() => TweenEngine._registerTween(tween))
         return tween
     }
 }

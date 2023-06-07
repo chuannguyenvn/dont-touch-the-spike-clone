@@ -21,7 +21,7 @@ class RectangleCollider extends Collider
 
     public AABB(): Rect
     {
-        let position = this.ownerTransform.position
+        let position = this._ownerTransform.position
         return new Rect(position.add(this.offset), this.size)
     }
 }

@@ -4,49 +4,52 @@ import Canvas from "./Canvas.js"
 import Physics from "./Physics.js"
 import TweenEngine from "./tween/TweenEngine.js"
 import Time from "./Time.js"
-import Node from "../node/Node"
+import Node from "../node/Node.js"
 
-class Game
+abstract class Game
 {
-    private static isInitialized: boolean = false
-    private static nodes: Node[] = []
-    private static lastFrameTimestamp: number = -1
+    private static _isInitialized: boolean = false
+    private static _nodes: Node[] = []
+    private static _lastFrameTimestamp: number = -1
 
-    public static init(): void
+    public static init(canvasContext: CanvasRenderingContext2D): void
     {
-        Debug.assert(!Game.isInitialized, "Game is already initialized.")
+        Debug.assert(!Game._isInitialized, "Game is already initialized.")
 
-        Game.lastFrameTimestamp = Date.now()
-        window.requestAnimationFrame(Game.gameLoop)
+        Time._init()
+        Input._init()
+        Canvas._init(canvasContext)
+        Game._lastFrameTimestamp = Date.now()
+        window.requestAnimationFrame(Game._gameLoop)
     };
 
-    private static gameLoop(): void
+    private static _gameLoop(): void
     {
         let currentTimestamp = Date.now()
-        Time.lastFrameTime = Game.lastFrameTimestamp
+        Time._lastFrameTime = Game._lastFrameTimestamp
 
-        Physics.handlePhysics()
-        Game.update()
-        TweenEngine.handleTween()
-        Canvas.draw()
+        Physics._handlePhysics()
+        Game._update()
+        TweenEngine._handleTween()
+        Canvas._draw()
 
-        Game.lastFrameTimestamp = currentTimestamp
-        Input.resetInput()
-        window.requestAnimationFrame(Game.gameLoop)
+        Game._lastFrameTimestamp = currentTimestamp
+        Input._resetInput()
+        window.requestAnimationFrame(Game._gameLoop)
     };
 
-    private static update(): void
+    private static _update(): void
     {
-        for (let i = 0; i <this.nodes.length; i++)
+        for (let i = 0; i < this._nodes.length; i++)
         {
-            if (this.nodes[i].parentNode !== null) continue
-            this.nodes[i].executeUpdate()
+            if (this._nodes[i].parentNode !== null) continue
+            this._nodes[i]._executeUpdate()
         }
     };
 
-    public static registerUpdatable(node: Node): void
+    public static _registerUpdatable(node: Node): void
     {
-        Game.nodes.push(node)
+        Game._nodes.push(node)
     };
 }
 

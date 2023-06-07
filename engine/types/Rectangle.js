@@ -4,9 +4,9 @@ class Rectangle {
         this.color = color;
         this.size = size;
     }
-    draw() {
-        Canvas.canvasContext.fillStyle = this.color.toHex();
-        Canvas.canvasContext.fillRect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
+    _draw() {
+        Canvas._canvasContext.fillStyle = this.color.toHex();
+        Canvas._canvasContext.fillRect(-this.size.x / 2, -this.size.y / 2, this.size.x, this.size.y);
     }
 }
 export default Rectangle;

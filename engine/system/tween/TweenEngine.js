@@ -1,30 +1,30 @@
 import Time from "../Time.js";
 import easeDictionary from "./EaseDictionary.js";
 class TweenEngine {
-    static registerTween(tween) {
-        this.tweens.push(tween);
+    static _registerTween(tween) {
+        this._tweens.push(tween);
     }
-    static unregisterTween(tween) {
-        TweenEngine.tweens = TweenEngine.tweens.filter(x => x != tween);
+    static _unregisterTween(tween) {
+        TweenEngine._tweens = TweenEngine._tweens.filter(x => x != tween);
     }
-    static handleTween() {
+    static _handleTween() {
         let finishedTweens = [];
-        for (let tween of TweenEngine.tweens) {
-            if (!tween.isStarted)
-                tween.start();
-            if (tween.startTime + tween.delay < Time.timeSinceGameStart()) {
-                let x = (Time.timeSinceGameStart() - tween.startTime) / tween.duration;
-                let easedX = easeDictionary[tween.ease](x);
+        for (let tween of TweenEngine._tweens) {
+            if (!tween._isStarted)
+                tween._start();
+            if (tween._startTime + tween._delay < Time.timeSinceGameStart()) {
+                let x = (Time.timeSinceGameStart() - tween._startTime) / tween._duration;
+                let easedX = easeDictionary[tween._ease](x);
                 tween.evaluate(easedX);
             }
-            if (tween.startTime + tween.duration < Time.timeSinceGameStart()) {
+            if (tween._startTime + tween._duration < Time.timeSinceGameStart()) {
                 finishedTweens.push(tween);
-                tween.end();
+                tween._end();
             }
         }
-        TweenEngine.tweens = TweenEngine.tweens.filter(x => !finishedTweens.includes(x));
+        TweenEngine._tweens = TweenEngine._tweens.filter(x => !finishedTweens.includes(x));
     }
 }
-TweenEngine.tweens = [];
+TweenEngine._tweens = [];
 export default TweenEngine;
 //# sourceMappingURL=TweenEngine.js.map

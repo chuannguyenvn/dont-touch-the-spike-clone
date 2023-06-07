@@ -3,12 +3,12 @@ class Sprite {
     constructor(imagePath = "") {
         this.setImage(imagePath);
     }
-    draw() {
-        Canvas.canvasContext.drawImage(this.image, -this.image.width / 2, -this.image.height / 2);
+    _draw() {
+        Canvas._canvasContext.drawImage(this._image, -this._image.width / 2, -this._image.height / 2);
     }
     setImage(imagePath) {
-        this.image = new Image();
-        this.image.src = imagePath;
+        this._image = new Image();
+        this._image.src = imagePath;
     }
 }
 export default Sprite;

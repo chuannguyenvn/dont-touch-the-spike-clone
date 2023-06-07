@@ -9,34 +9,34 @@ import Physics from "../system/Physics.js"
 class Collider extends Component
 {
     // COMPONENT METADATA //
-    public readonly componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
+    public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
+    private _currentFrameCollidingColliders: Collider[] = []
+    private _lastFrameCollidingColliders: Collider[] = []
+    protected _ownerTransform: Transform
+    
     public collisionStarted: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionHappening: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionEnded: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
-    private currentFrameCollidingColliders: Collider[] = []
-    private lastFrameCollidingColliders: Collider[] = []
-
-    protected ownerTransform: Transform
     public offset: Vector
 
     constructor(owner: Node)
     {
         super(owner)
-        Physics.registerCollider(this)
-        this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
+        Physics._registerCollider(this)
+        this._ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
     }
 
-    public getWorldPosition()
+    public _getWorldPosition(): Vector
     {
-        return this.ownerTransform.position.add(this.offset)
+        return this._ownerTransform.position.add(this.offset)
     }
 
-    public addCollidingCollider(collider: Collider)
+    public _addCollidingCollider(collider: Collider): void
     {
-        this.currentFrameCollidingColliders.push(collider)
-        if (this.lastFrameCollidingColliders.findIndex(c => c === collider) === -1)
+        this._currentFrameCollidingColliders.push(collider)
+        if (this._lastFrameCollidingColliders.findIndex(c => c === collider) === -1)
         {
             this.collisionStarted.invoke(collider)
         }
@@ -46,17 +46,17 @@ class Collider extends Component
         }
     }
 
-    public confirmCollidingColliders()
+    public _confirmCollidingColliders(): void
     {
-        for (let collider of this.lastFrameCollidingColliders)
+        for (let collider of this._lastFrameCollidingColliders)
         {
-            if (this.currentFrameCollidingColliders.findIndex(c => c === collider) === -1)
+            if (this._currentFrameCollidingColliders.findIndex(c => c === collider) === -1)
             {
                 this.collisionEnded.invoke(collider)
             }
         }
 
-        this.lastFrameCollidingColliders = this.currentFrameCollidingColliders
+        this._lastFrameCollidingColliders = this._currentFrameCollidingColliders
     }
 }
 

@@ -8,12 +8,12 @@ class Transform extends Component {
         super(owner);
         // COMPONENT METADATA //
         this.type = ComponentType.TRANSFORM;
-        this.componentRequirements = [];
+        this._componentRequirements = [];
         this.position = position;
         this.rotation = rotation;
         this.scale = scale;
     }
-    localToWorldMatrix() {
+    _localToWorldMatrix() {
         const translationMatrix = Matrix.translate(this.position.x, this.position.y);
         const rotationMatrix = Matrix.rotate(this.rotation);
         const scaleMatrix = Matrix.scale(this.scale.x, this.scale.y);
@@ -21,21 +21,21 @@ class Transform extends Component {
     }
     tweenPosition(to, duration, delay, ease) {
         const evaluate = (x) => {
-            this.position = (to.subtract(tween.startValue)).multiply(x).add(tween.startValue);
+            this.position = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue);
         };
         let tween = new Tween(evaluate, () => this.position, duration, delay, ease);
         return tween;
     }
     tweenPositionX(to, duration, delay, ease) {
         const evaluate = (x) => {
-            this.position.x = (to - tween.startValue) * x + tween.startValue;
+            this.position.x = (to - tween._startValue) * x + tween._startValue;
         };
         let tween = new Tween(evaluate, () => this.position.x, duration, delay, ease);
         return tween;
     }
     tweenPositionY(to, duration, delay, ease) {
         const evaluate = (x) => {
-            this.position.y = (to - tween.startValue) * x + tween.startValue;
+            this.position.y = (to - tween._startValue) * x + tween._startValue;
         };
         let tween = new Tween(evaluate, () => this.position.y, duration, delay, ease);
         return tween;

@@ -4,11 +4,11 @@ class Circle {
         this.color = color;
         this.size = size;
     }
-    draw() {
-        Canvas.canvasContext.fillStyle = this.color.toHex();
-        Canvas.canvasContext.beginPath();
-        Canvas.canvasContext.arc(0, 0, this.size, 0, 2 * Math.PI);
-        Canvas.canvasContext.fill();
+    _draw() {
+        Canvas._canvasContext.fillStyle = this.color.toHex();
+        Canvas._canvasContext.beginPath();
+        Canvas._canvasContext.arc(0, 0, this.size, 0, 2 * Math.PI);
+        Canvas._canvasContext.fill();
     }
 }
 export default Circle;

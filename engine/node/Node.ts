@@ -18,34 +18,37 @@ class Node
     constructor(name: string)
     {
         this.name = name
-        Game.registerUpdatable(this)
+        Game._registerUpdatable(this)
+        this.init()
+    }
+
+    public init(): void
+    {
     }
 
     public start(): void
     {
-
     }
 
     public update(): void
     {
-
     }
 
-    public executeStart(): void
+    public _executeStart(): void
     {
         this.start()
         for (let i = 0; i < this.childNodes.length; i++)
         {
-            this.childNodes[i].executeStart()
+            this.childNodes[i]._executeStart()
         }
     }
 
-    public executeUpdate(): void
+    public _executeUpdate(): void
     {
         this.update()
         for (let i = 0; i < this.childNodes.length; i++)
         {
-            this.childNodes[i].executeUpdate()
+            this.childNodes[i]._executeUpdate()
         }
     }
 
@@ -56,13 +59,13 @@ class Node
         return result[0]
     }
 
-
     public addComponent(componentType: ComponentType): Component | undefined
     {
-        if (this.components.findIndex(component => component.type === componentType) !== -1)
+        let i = this.components.findIndex(component => component.type === componentType)
+        if (i !== -1)
         {
             Debug.logError(`Component of type ${componentType} already exists on actor ${this.name}.`)
-            return
+            return this.components[i]
         }
 
         let newComponent: Component
@@ -82,7 +85,7 @@ class Node
                 break
         }
 
-        for (let requirement of newComponent.componentRequirements)
+        for (let requirement of newComponent._componentRequirements)
         {
             if (this.components.findIndex(component => component.type == requirement) == -1)
             {

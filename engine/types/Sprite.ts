@@ -4,24 +4,25 @@ import Color from "./Color.js"
 
 class Sprite implements Drawable
 {
-    color: Color
-    drawOrder: number
-    private image: HTMLImageElement
+    private _image: HTMLImageElement
+
+    public color: Color
+    public drawOrder: number
 
     constructor(imagePath: string = "")
     {
         this.setImage(imagePath)
     }
     
-    draw()
+    _draw()
     {
-        Canvas.canvasContext.drawImage(this.image, -this.image.width / 2, -this.image.height / 2)
+        Canvas._canvasContext.drawImage(this._image, -this._image.width / 2, -this._image.height / 2)
     }
 
     public setImage(imagePath: string): void
     {
-        this.image = new Image()
-        this.image.src = imagePath
+        this._image = new Image()
+        this._image.src = imagePath
     }
 }
 

@@ -10,7 +10,7 @@ class Transform extends Component
 {
     // COMPONENT METADATA //
     public readonly type = ComponentType.TRANSFORM
-    public readonly componentRequirements = []
+    public readonly _componentRequirements = []
 
     // COMPONENT PROPERTIES //
     public position: Vector
@@ -25,7 +25,7 @@ class Transform extends Component
         this.scale = scale
     }
 
-    public localToWorldMatrix(): Matrix
+    public _localToWorldMatrix(): Matrix
     {
         const translationMatrix = Matrix.translate(this.position.x, this.position.y)
         const rotationMatrix = Matrix.rotate(this.rotation)
@@ -38,7 +38,7 @@ class Transform extends Component
     {
         const evaluate = (x: number) =>
         {
-            this.position = (to.subtract(tween.startValue)).multiply(x).add(tween.startValue)
+            this.position = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue)
         }
 
         let tween = new Tween<Vector>(evaluate, () => this.position, duration, delay, ease)
@@ -50,7 +50,7 @@ class Transform extends Component
     {
         const evaluate = (x: number) =>
         {
-            this.position.x = (to - tween.startValue) * x + tween.startValue
+            this.position.x = (to - tween._startValue) * x + tween._startValue
         }
 
         let tween = new Tween<number>(evaluate, () => this.position.x, duration, delay, ease)
@@ -62,7 +62,7 @@ class Transform extends Component
     {
         const evaluate = (x: number) =>
         {
-            this.position.y = (to - tween.startValue) * x + tween.startValue
+            this.position.y = (to - tween._startValue) * x + tween._startValue
         }
 
         let tween = new Tween<number>(evaluate, () => this.position.y, duration, delay, ease)

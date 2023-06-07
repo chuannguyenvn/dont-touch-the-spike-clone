@@ -3,28 +3,28 @@ import { GameEvent } from "../../types/Event.js";
 import TweenEngine from "./TweenEngine.js";
 class TweenBase {
     constructor(duration, delay, ease) {
-        this.isStarted = false;
+        this._isStarted = false;
         this.tweenStarted = new GameEvent();
         this.tweenEnded = new GameEvent();
-        this.duration = duration;
-        this.delay = delay;
-        this.ease = ease;
-        TweenEngine.registerTween(this);
+        this._duration = duration;
+        this._delay = delay;
+        this._ease = ease;
+        TweenEngine._registerTween(this);
     }
-    start() {
-        this.isStarted = true;
-        this.startTime = Time.timeSinceGameStart();
+    _start() {
+        this._isStarted = true;
+        this._startTime = Time.timeSinceGameStart();
         this.tweenStarted.invoke();
     }
-    end() {
-        TweenEngine.unregisterTween(this);
+    _end() {
+        TweenEngine._unregisterTween(this);
         this.evaluate(1);
         this.tweenEnded.invoke();
     }
     chain(tween) {
-        TweenEngine.unregisterTween(tween);
-        this.tweenEnded.subscribe(tween.start);
-        tween.tweenStarted.subscribe(() => TweenEngine.registerTween(tween));
+        TweenEngine._unregisterTween(tween);
+        this.tweenEnded.subscribe(tween._start);
+        tween.tweenStarted.subscribe(() => TweenEngine._registerTween(tween));
         return tween;
     }
 }

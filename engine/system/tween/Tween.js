@@ -3,13 +3,13 @@ class Tween extends TweenBase {
     constructor(evaluateFunction, retrieveStartValue, duration, delay, ease) {
         super(duration, delay, ease);
         this.evaluate = evaluateFunction;
-        this.retrieveStartValue = retrieveStartValue;
-        this.start = this.start.bind(this);
+        this._retrieveStartValue = retrieveStartValue;
+        this._start = this._start.bind(this);
     }
-    start() {
+    _start() {
         console.log(this);
-        this.startValue = this.retrieveStartValue();
-        super.start();
+        this._startValue = this._retrieveStartValue();
+        super._start();
     }
 }
 export default Tween;

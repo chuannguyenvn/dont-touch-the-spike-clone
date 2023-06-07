@@ -1,15 +1,15 @@
 class Time {
-    static init() {
-        Time.startTime = Date.now();
+    static _init() {
+        Time._startTime = Date.now();
     }
     static time() {
         return Date.now() / 1000;
     }
     static timeSinceGameStart() {
-        return (Date.now() - Time.startTime) / 1000;
+        return (Date.now() - Time._startTime) / 1000;
     }
     static deltaTime() {
-        return (Date.now() - Time.lastFrameTime) / 1000;
+        return (Date.now() - Time._lastFrameTime) / 1000;
     }
 }
 export default Time;

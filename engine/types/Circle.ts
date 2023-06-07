@@ -5,9 +5,9 @@ import Canvas from "../system/Canvas.js"
 
 class Circle implements Drawable
 {
-    color: Color
-    drawOrder: number
-    size: number
+    public drawOrder: number
+    public color: Color
+    public size: number
     
     constructor(size: number, color: Color)
     {
@@ -15,12 +15,12 @@ class Circle implements Drawable
         this.size = size
     }
 
-    public draw(): void
+    public _draw(): void
     {
-        Canvas.canvasContext.fillStyle = this.color.toHex()
-        Canvas.canvasContext.beginPath();
-        Canvas.canvasContext.arc(0, 0, this.size, 0, 2 * Math.PI);
-        Canvas.canvasContext.fill();
+        Canvas._canvasContext.fillStyle = this.color.toHex()
+        Canvas._canvasContext.beginPath();
+        Canvas._canvasContext.arc(0, 0, this.size, 0, 2 * Math.PI);
+        Canvas._canvasContext.fill();
     }
 }
 

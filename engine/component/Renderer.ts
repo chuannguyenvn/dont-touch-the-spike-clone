@@ -4,12 +4,13 @@ import Node from "../node/Node.js"
 import Transform from "./Transform.js"
 import Canvas from "../system/Canvas.js"
 import Drawable from "../types/Drawable.js"
+import Matrix from "../types/Matrix.js"
 
 class Renderer extends Component
 {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RENDERER
-    public readonly componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
+    public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
     private drawable: Drawable
@@ -20,22 +21,22 @@ class Renderer extends Component
         super(owner)
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
 
-        Canvas.registerSprite(this)
+        Canvas._registerSprite(this)
     }
 
-    public localToWorldMatrix()
+    public _localToWorldMatrix(): Matrix
     {
-        return this.ownerTransform.localToWorldMatrix()
+        return this.ownerTransform._localToWorldMatrix()
     }
 
-    public setDrawable(drawable: Drawable)
+    public setDrawable(drawable: Drawable): void
     {
         this.drawable = drawable
     }
 
-    draw(): void
+    public draw(): void
     {
-        this.drawable.draw()
+        this.drawable._draw()
     }
 }
 

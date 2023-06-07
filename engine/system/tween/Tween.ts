@@ -6,8 +6,8 @@ import TweenBase from "./TweenBase.js"
 
 class Tween<T extends number | Vector> extends TweenBase
 {
-    public retrieveStartValue: () => T
-    public startValue: T
+    public _retrieveStartValue: () => T
+    public _startValue: T
 
     constructor(evaluateFunction: (x: number) => void,
                 retrieveStartValue: () => T,
@@ -17,15 +17,15 @@ class Tween<T extends number | Vector> extends TweenBase
     {
         super(duration, delay, ease)
         this.evaluate = evaluateFunction
-        this.retrieveStartValue = retrieveStartValue
-        this.start = this.start.bind(this)
+        this._retrieveStartValue = retrieveStartValue
+        this._start = this._start.bind(this)
     }
 
-    public start()
+    public _start()
     {
         console.log(this)
-        this.startValue = this.retrieveStartValue()
-        super.start()
+        this._startValue = this._retrieveStartValue()
+        super._start()
     }
 }
 

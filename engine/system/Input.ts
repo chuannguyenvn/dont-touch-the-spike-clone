@@ -4,25 +4,25 @@ import Vector from "../types/Vector.js"
 
 class Input
 {
-    private static lastKeyUpKey: string
-    private static lastKeyDownKey: string
-    private static lastMousePosition: Vector
+    private static _lastKeyUpKey: string
+    private static _lastKeyDownKey: string
+    private static _lastMousePosition: Vector
 
-    public static init(): void
+    public static _init(): void
     {
         const keyUpHandler = (event: KeyboardEvent): void =>
         {
-            Input.lastKeyUpKey = event.key
+            Input._lastKeyUpKey = event.key
         }
 
         const keyDownHandler = (event: KeyboardEvent): void =>
         {
-            Input.lastKeyDownKey = event.key
+            Input._lastKeyDownKey = event.key
         }
 
         const logMousePosition = (event: MouseEvent): void =>
         {
-            if (event) Input.lastMousePosition = new Vector(event.clientX, event.clientY)
+            if (event) Input._lastMousePosition = new Vector(event.clientX, event.clientY)
         }
 
         document.addEventListener('keyup', keyUpHandler, false)
@@ -30,26 +30,26 @@ class Input
         document.onmousemove = logMousePosition
     }
 
-    public static resetInput(): void
+    public static _resetInput(): void
     {
-        Input.lastKeyUpKey = ""
-        Input.lastKeyDownKey = ""
+        Input._lastKeyUpKey = ""
+        Input._lastKeyDownKey = ""
     }
 
     public static getKeyDown(key: string): boolean
     {
-        return Input.lastKeyDownKey == key
+        return Input._lastKeyDownKey == key
     }
 
     public static getKeyUp(key: string): boolean
     {
-        return Input.lastKeyUpKey == key
+        return Input._lastKeyUpKey == key
     }
 
     public static getMousePosition(): Vector
     {
-        if (this.lastMousePosition)
-            return this.lastMousePosition
+        if (this._lastMousePosition)
+            return this._lastMousePosition
         else
             return Vector.zero()
     }

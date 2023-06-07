@@ -1,6 +1,6 @@
 class Component {
     constructor(owner) {
-        this.componentRequirements = [];
+        this._componentRequirements = [];
         this.owner = owner;
     }
 }

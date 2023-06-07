@@ -1,31 +1,31 @@
 class GameEvent {
     constructor() {
-        this.eventCallbacks = [];
+        this._eventCallbacks = [];
     }
     subscribe(callback) {
-        this.eventCallbacks.push(callback);
+        this._eventCallbacks.push(callback);
     }
     unsubscribe() {
         // TODO
     }
     invoke() {
-        for (let callback of this.eventCallbacks) {
+        for (let callback of this._eventCallbacks) {
             callback();
         }
     }
 }
 class ParamGameEvent {
     constructor() {
-        this.eventCallbacks = [];
+        this._eventCallbacks = [];
     }
     subscribe(callback) {
-        this.eventCallbacks.push(callback);
+        this._eventCallbacks.push(callback);
     }
     unsubscribe() {
         // TODO
     }
     invoke(arg) {
-        for (let callback of this.eventCallbacks) {
+        for (let callback of this._eventCallbacks) {
             callback(arg);
         }
     }

@@ -5,44 +5,45 @@ import Matrix from "../types/Matrix.js"
 
 class Canvas
 {
-    private static canvasSize: Vector = new Vector(400, 600)
-    private static sprites: Renderer[] = []
-    public static canvasContext: CanvasRenderingContext2D
+    private static _sprites: Renderer[] = []
+    public static _canvasContext: CanvasRenderingContext2D
+    public static _worldToCameraMatrix: Matrix
+    
+    public static canvasSize: Vector = new Vector(400, 600)
     public static backgroundColor: Color = Color.white()
-    public static worldToCameraMatrix: Matrix
 
-    public static init(canvasContext: CanvasRenderingContext2D): void
+    public static _init(canvasContext: CanvasRenderingContext2D): void
     {
-        Canvas.canvasContext = canvasContext
+        Canvas._canvasContext = canvasContext
         let translationMatrix = Matrix.translate(-Canvas.canvasSize.x / 4, Canvas.canvasSize.y / 4)
         let scaleMatrix = Matrix.scale(1, 1)
-        this.worldToCameraMatrix = scaleMatrix.multiplyMatrix(translationMatrix)
+        this._worldToCameraMatrix = scaleMatrix.multiplyMatrix(translationMatrix)
     }
 
-    public static draw(): void
+    public static _draw(): void
     {
-        Canvas.canvasContext.clearRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
-        Canvas.canvasContext.fillStyle = 'white'
-        Canvas.canvasContext.fillRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
-        
-        for (let sprite of this.sprites)
+        Canvas._canvasContext.clearRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
+        Canvas._canvasContext.fillStyle = 'white'
+        Canvas._canvasContext.fillRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
+
+        for (let sprite of this._sprites)
         {
-            let localToWorld = sprite.localToWorldMatrix()
+            let localToWorld = sprite._localToWorldMatrix()
             let worldToCamera = Matrix.identity() // Canvas.worldToCameraMatrix
             let res = worldToCamera.multiplyMatrix(localToWorld)
 
-            Canvas.canvasContext.setTransform(
+            Canvas._canvasContext.setTransform(
                 res.values[0][0], res.values[1][0], res.values[0][1],
                 res.values[1][1], res.values[0][2], res.values[1][2])
-            
+
             sprite.draw()
-            Canvas.canvasContext.resetTransform()
+            Canvas._canvasContext.resetTransform()
         }
     }
 
-    public static registerSprite(sprite: Renderer): void
+    public static _registerSprite(sprite: Renderer): void
     {
-        this.sprites.push(sprite)
+        this._sprites.push(sprite)
     }
 }
 

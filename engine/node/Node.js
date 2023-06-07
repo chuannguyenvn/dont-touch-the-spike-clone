@@ -11,22 +11,25 @@ class Node {
         this.childNodes = [];
         this.components = [];
         this.name = name;
-        Game.registerUpdatable(this);
+        Game._registerUpdatable(this);
+        this.init();
+    }
+    init() {
     }
     start() {
     }
     update() {
     }
-    executeStart() {
+    _executeStart() {
         this.start();
         for (let i = 0; i < this.childNodes.length; i++) {
-            this.childNodes[i].executeStart();
+            this.childNodes[i]._executeStart();
         }
     }
-    executeUpdate() {
+    _executeUpdate() {
         this.update();
         for (let i = 0; i < this.childNodes.length; i++) {
-            this.childNodes[i].executeUpdate();
+            this.childNodes[i]._executeUpdate();
         }
     }
     getComponent(componentType) {
@@ -36,9 +39,10 @@ class Node {
         return result[0];
     }
     addComponent(componentType) {
-        if (this.components.findIndex(component => component.type === componentType) !== -1) {
+        let i = this.components.findIndex(component => component.type === componentType);
+        if (i !== -1) {
             Debug.logError(`Component of type ${componentType} already exists on actor ${this.name}.`);
-            return;
+            return this.components[i];
         }
         let newComponent;
         switch (componentType) {
@@ -55,7 +59,7 @@ class Node {
                 newComponent = new CircleCollider(this);
                 break;
         }
-        for (let requirement of newComponent.componentRequirements) {
+        for (let requirement of newComponent._componentRequirements) {
             if (this.components.findIndex(component => component.type == requirement) == -1) {
                 Debug.logError(`Component of type ${newComponent} requires component of type ${requirement}.`);
                 return;

@@ -5,39 +5,42 @@ import Physics from "./Physics.js";
 import TweenEngine from "./tween/TweenEngine.js";
 import Time from "./Time.js";
 class Game {
-    static init() {
-        Debug.assert(!Game.isInitialized, "Game is already initialized.");
-        Game.lastFrameTimestamp = Date.now();
-        window.requestAnimationFrame(Game.gameLoop);
+    static init(canvasContext) {
+        Debug.assert(!Game._isInitialized, "Game is already initialized.");
+        Time._init();
+        Input._init();
+        Canvas._init(canvasContext);
+        Game._lastFrameTimestamp = Date.now();
+        window.requestAnimationFrame(Game._gameLoop);
     }
     ;
-    static gameLoop() {
+    static _gameLoop() {
         let currentTimestamp = Date.now();
-        Time.lastFrameTime = Game.lastFrameTimestamp;
-        Physics.handlePhysics();
-        Game.update();
-        TweenEngine.handleTween();
-        Canvas.draw();
-        Game.lastFrameTimestamp = currentTimestamp;
-        Input.resetInput();
-        window.requestAnimationFrame(Game.gameLoop);
+        Time._lastFrameTime = Game._lastFrameTimestamp;
+        Physics._handlePhysics();
+        Game._update();
+        TweenEngine._handleTween();
+        Canvas._draw();
+        Game._lastFrameTimestamp = currentTimestamp;
+        Input._resetInput();
+        window.requestAnimationFrame(Game._gameLoop);
     }
     ;
-    static update() {
-        for (let i = 0; i < this.nodes.length; i++) {
-            if (this.nodes[i].parentNode !== null)
+    static _update() {
+        for (let i = 0; i < this._nodes.length; i++) {
+            if (this._nodes[i].parentNode !== null)
                 continue;
-            this.nodes[i].executeUpdate();
+            this._nodes[i]._executeUpdate();
         }
     }
     ;
-    static registerUpdatable(node) {
-        Game.nodes.push(node);
+    static _registerUpdatable(node) {
+        Game._nodes.push(node);
     }
     ;
 }
-Game.isInitialized = false;
-Game.nodes = [];
-Game.lastFrameTimestamp = -1;
+Game._isInitialized = false;
+Game._nodes = [];
+Game._lastFrameTimestamp = -1;
 export default Game;
 //# sourceMappingURL=Game.js.map

@@ -3,16 +3,16 @@ class Freeform {
     constructor(color) {
         this.color = color;
     }
-    setPoints(points) {
-        this.points = points;
-    }
-    draw() {
-        Canvas.canvasContext.fillStyle = this.color.toHex();
-        Canvas.canvasContext.beginPath();
-        for (let i = 0; i < this.points.length; i++) {
-            Canvas.canvasContext.lineTo(this.points[i].x, this.points[i].y);
+    _draw() {
+        Canvas._canvasContext.fillStyle = this.color.toHex();
+        Canvas._canvasContext.beginPath();
+        for (let i = 0; i < this._points.length; i++) {
+            Canvas._canvasContext.lineTo(this._points[i].x, this._points[i].y);
         }
-        Canvas.canvasContext.fill();
+        Canvas._canvasContext.fill();
+    }
+    setPoints(points) {
+        this._points = points;
     }
 }
 export default Freeform;

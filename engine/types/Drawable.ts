@@ -4,7 +4,7 @@ interface Drawable
 {
     drawOrder: number
     color: Color
-    draw(): void
+    _draw(): void
 }
 
 export default Drawable

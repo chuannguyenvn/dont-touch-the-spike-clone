@@ -4,7 +4,7 @@ import Node from "../node/Node.js"
 class Component
 {
     public readonly type: ComponentType
-    public readonly componentRequirements: ComponentType[] = []
+    public readonly _componentRequirements: ComponentType[] = []
     public readonly owner: Node
     
     constructor(owner: Node)

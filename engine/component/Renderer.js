@@ -6,18 +6,18 @@ class Renderer extends Component {
         super(owner);
         // COMPONENT METADATA //
         this.type = ComponentType.RENDERER;
-        this.componentRequirements = [ComponentType.TRANSFORM];
+        this._componentRequirements = [ComponentType.TRANSFORM];
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM);
-        Canvas.registerSprite(this);
+        Canvas._registerSprite(this);
     }
-    localToWorldMatrix() {
-        return this.ownerTransform.localToWorldMatrix();
+    _localToWorldMatrix() {
+        return this.ownerTransform._localToWorldMatrix();
     }
     setDrawable(drawable) {
         this.drawable = drawable;
     }
     draw() {
-        this.drawable.draw();
+        this.drawable._draw();
     }
 }
 export default Renderer;

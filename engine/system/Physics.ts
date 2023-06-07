@@ -5,63 +5,63 @@ import Vector from "../types/Vector.js"
 
 class Physics
 {
-    private static colliders: Collider[] = []
+    private static _colliders: Collider[] = []
 
-    public static registerCollider(collider: Collider)
+    public static _registerCollider(collider: Collider)
     {
-        this.colliders.push(collider)
+        this._colliders.push(collider)
     }
 
-    public static handlePhysics()
+    public static _handlePhysics()
     {
-        for (let i = 0; i < this.colliders.length; i++)
+        for (let i = 0; i < this._colliders.length; i++)
         {
-            for (let j = i + 1; j < this.colliders.length; j++)
+            for (let j = i + 1; j < this._colliders.length; j++)
             {
-                if (this.colliders[i] instanceof RectangleCollider)
+                if (this._colliders[i] instanceof RectangleCollider)
                 {
-                    let collider1 = this.colliders[i] as RectangleCollider
+                    let collider1 = this._colliders[i] as RectangleCollider
 
-                    if (this.colliders[j] instanceof RectangleCollider)
+                    if (this._colliders[j] instanceof RectangleCollider)
                     {
-                        let collider2 = this.colliders[j] as RectangleCollider
+                        let collider2 = this._colliders[j] as RectangleCollider
                         
-                        let pos1 = collider1.getWorldPosition()
-                        let pos2 = collider2.getWorldPosition()
+                        let pos1 = collider1._getWorldPosition()
+                        let pos2 = collider2._getWorldPosition()
                         let size1 = collider1.size
                         let size2 = collider2.size
                         if (Math.abs(pos1.subtract(pos2).x) < size1.x / 2 + size2.x / 2 &&
                             Math.abs(pos1.subtract(pos2).y) < size1.y / 2 + size2.y / 2)
                         {
-                            Physics.broadcastCollision(collider1, collider2)
+                            Physics._broadcastCollision(collider1, collider2)
                         }
                     }
-                    else if (this.colliders[j] instanceof CircleCollider)
+                    else if (this._colliders[j] instanceof CircleCollider)
                     {
-                        let collider2 = this.colliders[j] as CircleCollider
+                        let collider2 = this._colliders[j] as CircleCollider
 
                     }
                 }
-                else if (this.colliders[i] instanceof CircleCollider)
+                else if (this._colliders[i] instanceof CircleCollider)
                 {
-                    let collider1 = this.colliders[i] as CircleCollider
+                    let collider1 = this._colliders[i] as CircleCollider
 
-                    if (this.colliders[j] instanceof RectangleCollider)
+                    if (this._colliders[j] instanceof RectangleCollider)
                     {
-                        let collider2 = this.colliders[j] as RectangleCollider
+                        let collider2 = this._colliders[j] as RectangleCollider
 
                     }
-                    else if (this.colliders[j] instanceof CircleCollider)
+                    else if (this._colliders[j] instanceof CircleCollider)
                     {
-                        let collider2 = this.colliders[j] as CircleCollider
+                        let collider2 = this._colliders[j] as CircleCollider
 
-                        let pos1 = collider1.getWorldPosition()
-                        let pos2 = collider2.getWorldPosition()
+                        let pos1 = collider1._getWorldPosition()
+                        let pos2 = collider2._getWorldPosition()
                         let size1 = collider1.size
                         let size2 = collider2.size
                         if (Vector.distance(pos1, pos2) > size1 + size2)
                         {
-                            Physics.broadcastCollision(collider1, collider2)
+                            Physics._broadcastCollision(collider1, collider2)
                         }
                     }
                 }
@@ -69,10 +69,10 @@ class Physics
         }
     }
 
-    private static broadcastCollision(collider1: Collider, collider2: Collider): void
+    private static _broadcastCollision(collider1: Collider, collider2: Collider): void
     {
-        collider1.addCollidingCollider(collider2)
-        collider2.addCollidingCollider(collider1)
+        collider1._addCollidingCollider(collider2)
+        collider2._addCollidingCollider(collider1)
     }
 }
 

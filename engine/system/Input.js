@@ -1,33 +1,33 @@
 import Vector from "../types/Vector.js";
 class Input {
-    static init() {
+    static _init() {
         const keyUpHandler = (event) => {
-            Input.lastKeyUpKey = event.key;
+            Input._lastKeyUpKey = event.key;
         };
         const keyDownHandler = (event) => {
-            Input.lastKeyDownKey = event.key;
+            Input._lastKeyDownKey = event.key;
         };
         const logMousePosition = (event) => {
             if (event)
-                Input.lastMousePosition = new Vector(event.clientX, event.clientY);
+                Input._lastMousePosition = new Vector(event.clientX, event.clientY);
         };
         document.addEventListener('keyup', keyUpHandler, false);
         document.addEventListener('keydown', keyDownHandler, false);
         document.onmousemove = logMousePosition;
     }
-    static resetInput() {
-        Input.lastKeyUpKey = "";
-        Input.lastKeyDownKey = "";
+    static _resetInput() {
+        Input._lastKeyUpKey = "";
+        Input._lastKeyDownKey = "";
     }
     static getKeyDown(key) {
-        return Input.lastKeyDownKey == key;
+        return Input._lastKeyDownKey == key;
     }
     static getKeyUp(key) {
-        return Input.lastKeyUpKey == key;
+        return Input._lastKeyUpKey == key;
     }
     static getMousePosition() {
-        if (this.lastMousePosition)
-            return this.lastMousePosition;
+        if (this._lastMousePosition)
+            return this._lastMousePosition;
         else
             return Vector.zero();
     }

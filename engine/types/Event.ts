@@ -1,10 +1,10 @@
 ﻿class GameEvent
 {
-    private eventCallbacks: (() => void)[] = []
+    private _eventCallbacks: (() => void)[] = []
 
     public subscribe(callback: () => void): void
     {
-        this.eventCallbacks.push(callback)
+        this._eventCallbacks.push(callback)
     }
 
     public unsubscribe(): void
@@ -14,7 +14,7 @@
 
     public invoke(): void
     {
-        for (let callback of this.eventCallbacks)
+        for (let callback of this._eventCallbacks)
         {
             callback()
         }
@@ -23,11 +23,11 @@
 
 class ParamGameEvent<T>
 {
-    private eventCallbacks: ((arg: T) => void)[] = []
+    private _eventCallbacks: ((arg: T) => void)[] = []
     
     public subscribe(callback: (arg: T) => void): void
     {
-        this.eventCallbacks.push(callback)
+        this._eventCallbacks.push(callback)
     }
 
     public unsubscribe(): void
@@ -37,7 +37,7 @@ class ParamGameEvent<T>
 
     public invoke(arg: T): void
     {
-        for (let callback of this.eventCallbacks)
+        for (let callback of this._eventCallbacks)
         {
             callback(arg)
         }
