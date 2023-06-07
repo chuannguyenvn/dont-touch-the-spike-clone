@@ -16,7 +16,7 @@ class Transform extends Component {
         const evaluate = (x) => {
             this.position = (to.subtract(tween.startValue)).multiply(x).add(tween.startValue);
         };
-        let tween = new Tween(evaluate, this.position, duration, delay, ease);
+        let tween = new Tween(evaluate, () => this.position, duration, delay, ease);
         return tween;
     }
 }

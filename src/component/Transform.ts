@@ -30,8 +30,8 @@ class Transform extends Component
         {
             this.position = (to.subtract(tween.startValue)).multiply(x).add(tween.startValue)
         }
-
-        let tween = new Tween<Vector2>(evaluate, this.position, duration, delay, ease)
+        
+        let tween = new Tween<Vector2>(evaluate, () => this.position, duration, delay, ease)
 
         return tween
     }
