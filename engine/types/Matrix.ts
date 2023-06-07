@@ -32,8 +32,8 @@ class Matrix
     public static rotate(angle: number): Matrix
     {
         const rotationMatrix = Matrix.identity()
-        const cosTheta = Math.cos(angle * Maths.Deg2Rad)
-        const sinTheta = Math.sin(angle * Maths.Deg2Rad)
+        const cosTheta = Math.cos(angle * Maths.deg2Rad)
+        const sinTheta = Math.sin(angle * Maths.deg2Rad)
         rotationMatrix.values[0][0] = cosTheta
         rotationMatrix.values[0][1] = -sinTheta
         rotationMatrix.values[1][0] = sinTheta
