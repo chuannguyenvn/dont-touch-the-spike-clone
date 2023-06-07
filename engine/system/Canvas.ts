@@ -15,9 +15,9 @@ class Canvas
     public static _init(canvasContext: CanvasRenderingContext2D): void
     {
         Canvas._canvasContext = canvasContext
-        let translationMatrix = Matrix.translate(-Canvas.canvasSize.x / 4, Canvas.canvasSize.y / 4)
-        let scaleMatrix = Matrix.scale(1, 1)
-        this._worldToCameraMatrix = scaleMatrix.multiplyMatrix(translationMatrix)
+        let translationMatrix = Matrix.translate(Canvas.canvasSize.x / 2, Canvas.canvasSize.y / 2)
+        let scaleMatrix = Matrix.scale(1, -1)
+        this._worldToCameraMatrix = translationMatrix.multiplyMatrix(scaleMatrix)
     }
 
     public static _draw(): void
@@ -28,8 +28,8 @@ class Canvas
 
         for (let sprite of this._sprites)
         {
-            let localToWorld = sprite._localToWorldMatrix()
-            let worldToCamera = Matrix.identity() // Canvas.worldToCameraMatrix
+            let localToWorld = sprite._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
+            let worldToCamera = Canvas._worldToCameraMatrix
             let res = worldToCamera.multiplyMatrix(localToWorld)
 
             Canvas._canvasContext.setTransform(

@@ -1,6 +1,7 @@
 ﻿import Game from "./Game.js"
 import Debug from "./Debug.js"
 import Vector from "../types/Vector.js"
+import Canvas from "./Canvas.js"
 
 class Input
 {
@@ -22,7 +23,7 @@ class Input
 
         const logMousePosition = (event: MouseEvent): void =>
         {
-            if (event) Input._lastMousePosition = new Vector(event.clientX, event.clientY)
+            if (event) Input._lastMousePosition = new Vector(event.clientX, event.clientY, 1)
         }
 
         document.addEventListener('keyup', keyUpHandler, false)
@@ -49,7 +50,7 @@ class Input
     public static getMousePosition(): Vector
     {
         if (this._lastMousePosition)
-            return this._lastMousePosition
+            return Canvas._worldToCameraMatrix.inverse().multiplyVector(this._lastMousePosition)
         else
             return Vector.zero()
     }
