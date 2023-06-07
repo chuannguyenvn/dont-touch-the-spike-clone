@@ -1,9 +1,9 @@
-import Vector2 from "../types/Vector2.js";
+import Vector from "../types/Vector.js";
 import ComponentType from "./ComponentType.js";
 import Component from "./Component.js";
 import Tween from "../system/tween/Tween.js";
 class Transform extends Component {
-    constructor(owner, position = Vector2.zero(), rotation = 0, scale = Vector2.one()) {
+    constructor(owner, position = Vector.zero(), rotation = 0, scale = Vector.one()) {
         super(owner);
         // COMPONENT METADATA //
         this.type = ComponentType.TRANSFORM;

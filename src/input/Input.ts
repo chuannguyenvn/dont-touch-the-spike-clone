@@ -1,12 +1,12 @@
 ﻿import Game from "../system/Game.js"
 import Debug from "../system/Debug.js"
-import Vector2 from "../types/Vector2.js"
+import Vector from "../types/Vector.js"
 
 class Input
 {
     private static lastKeyUpKey: string
     private static lastKeyDownKey: string
-    private static lastMousePosition: Vector2
+    private static lastMousePosition: Vector
 
     public static init(): void
     {
@@ -22,7 +22,7 @@ class Input
 
         const logMousePosition = (event: MouseEvent): void =>
         {
-            if (event) Input.lastMousePosition = new Vector2(event.clientX, event.clientY)
+            if (event) Input.lastMousePosition = new Vector(event.clientX, event.clientY)
         }
 
         document.addEventListener('keyup', keyUpHandler, false)
@@ -46,12 +46,12 @@ class Input
         return Input.lastKeyUpKey == key
     }
 
-    public static getMousePosition(): Vector2
+    public static getMousePosition(): Vector
     {
         if (this.lastMousePosition)
             return this.lastMousePosition
         else
-            return Vector2.zero()
+            return Vector.zero()
     }
 }
 

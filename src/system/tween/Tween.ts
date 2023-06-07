@@ -1,10 +1,10 @@
 ﻿import TweenEngine from "./TweenEngine.js"
 import Ease from "./Ease.js"
-import Vector2 from "../../types/Vector2.js"
+import Vector from "../../types/Vector.js"
 import TweenBase from "./TweenBase.js"
 
 
-class Tween<T extends number | Vector2> extends TweenBase
+class Tween<T extends number | Vector> extends TweenBase
 {
     public retrieveStartValue: () => T
     public startValue: T

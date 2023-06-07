@@ -1,9 +1,9 @@
 import ComponentType from "./ComponentType.js";
 import Collider from "./Collider.js";
-import Vector2 from "../types/Vector2.js";
+import Vector from "../types/Vector.js";
 import Rect from "../types/Rect.js";
 class CircleCollider extends Collider {
-    constructor(owner, size = 1, offset = Vector2.zero()) {
+    constructor(owner, size = 1, offset = Vector.zero()) {
         super(owner);
         // COMPONENT METADATA //
         this.type = ComponentType.RECTANGLE_COLLIDER;
@@ -12,7 +12,7 @@ class CircleCollider extends Collider {
     }
     AABB() {
         let position = this.ownerTransform.position;
-        return new Rect(position.add(this.offset), Vector2.one().multiply(2));
+        return new Rect(position.add(this.offset), Vector.one().multiply(2));
     }
 }
 export default CircleCollider;

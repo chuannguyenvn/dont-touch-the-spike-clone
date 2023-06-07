@@ -1,4 +1,4 @@
-import Vector2 from "../types/Vector2.js";
+import Vector from "../types/Vector.js";
 import Color from "../types/Color.js";
 class Canvas {
     static init(canvasContext) {
@@ -14,7 +14,7 @@ class Canvas {
         this.sprites.push(sprite);
     }
 }
-Canvas.canvasSize = new Vector2(400, 600);
+Canvas.canvasSize = new Vector(400, 600);
 Canvas.sprites = [];
 Canvas.backgroundColor = Color.white();
 export default Canvas;

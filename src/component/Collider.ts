@@ -2,7 +2,7 @@
 import ComponentType from "./ComponentType.js"
 import Actor from "../actor/Actor.js"
 import Transform from "./Transform.js"
-import Vector2 from "../types/Vector2.js"
+import Vector from "../types/Vector.js"
 import {ParamGameEvent} from "../types/Event.js"
 import Physics from "../system/Physics.js"
 
@@ -19,7 +19,7 @@ class Collider extends Component
     private lastFrameCollidingColliders: Collider[] = []
 
     protected ownerTransform: Transform
-    public offset: Vector2
+    public offset: Vector
 
     constructor(owner: Actor)
     {

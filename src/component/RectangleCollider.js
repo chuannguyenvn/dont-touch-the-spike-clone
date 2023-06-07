@@ -1,9 +1,9 @@
 import ComponentType from "./ComponentType.js";
 import Collider from "./Collider.js";
-import Vector2 from "../types/Vector2.js";
+import Vector from "../types/Vector.js";
 import Rect from "../types/Rect.js";
 class RectangleCollider extends Collider {
-    constructor(owner, size = Vector2.one(), offset = Vector2.zero()) {
+    constructor(owner, size = Vector.one(), offset = Vector.zero()) {
         super(owner);
         // COMPONENT METADATA //
         this.type = ComponentType.RECTANGLE_COLLIDER;

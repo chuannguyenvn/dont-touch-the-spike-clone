@@ -1,11 +1,11 @@
-﻿import Vector2 from "./Vector2.js"
+﻿import Vector from "./Vector.js"
 
 class Rect
 {
-    public center: Vector2
-    public size: Vector2
+    public center: Vector
+    public size: Vector
 
-    constructor(center: Vector2, size: Vector2)
+    constructor(center: Vector, size: Vector)
     {
         this.center = center
         this.size = size

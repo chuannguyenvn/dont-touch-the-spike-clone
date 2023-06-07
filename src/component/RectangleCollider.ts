@@ -1,7 +1,7 @@
 ﻿import ComponentType from "./ComponentType.js"
 import Actor from "../actor/Actor.js"
 import Collider from "./Collider.js"
-import Vector2 from "../types/Vector2.js"
+import Vector from "../types/Vector.js"
 import Rect from "../types/Rect.js"
 
 class RectangleCollider extends Collider
@@ -10,9 +10,9 @@ class RectangleCollider extends Collider
     public readonly type: ComponentType = ComponentType.RECTANGLE_COLLIDER
 
     // COMPONENT PROPERTIES //
-    public size: Vector2
+    public size: Vector
 
-    constructor(owner: Actor, size: Vector2 = Vector2.one(), offset: Vector2 = Vector2.zero())
+    constructor(owner: Actor, size: Vector = Vector.one(), offset: Vector = Vector.zero())
     {
         super(owner)
         this.size = size

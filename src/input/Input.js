@@ -1,4 +1,4 @@
-import Vector2 from "../types/Vector2.js";
+import Vector from "../types/Vector.js";
 class Input {
     static init() {
         const keyUpHandler = (event) => {
@@ -9,7 +9,7 @@ class Input {
         };
         const logMousePosition = (event) => {
             if (event)
-                Input.lastMousePosition = new Vector2(event.clientX, event.clientY);
+                Input.lastMousePosition = new Vector(event.clientX, event.clientY);
         };
         document.addEventListener('keyup', keyUpHandler, false);
         document.addEventListener('keydown', keyDownHandler, false);
@@ -29,7 +29,7 @@ class Input {
         if (this.lastMousePosition)
             return this.lastMousePosition;
         else
-            return Vector2.zero();
+            return Vector.zero();
     }
 }
 export default Input;

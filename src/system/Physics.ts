@@ -1,7 +1,7 @@
 ﻿import Collider from "../component/Collider.js"
 import RectangleCollider from "../component/RectangleCollider.js"
 import CircleCollider from "../component/CircleCollider.js"
-import Vector2 from "../types/Vector2.js"
+import Vector from "../types/Vector.js"
 
 class Physics
 {
@@ -59,7 +59,7 @@ class Physics
                         let pos2 = collider2.getWorldPosition()
                         let size1 = collider1.size
                         let size2 = collider2.size
-                        if (Vector2.distance(pos1, pos2) > size1 + size2)
+                        if (Vector.distance(pos1, pos2) > size1 + size2)
                         {
                             Physics.broadcastCollision(collider1, collider2)
                         }

@@ -1,10 +1,10 @@
 ﻿import Sprite from "../component/Sprite.js"
-import Vector2 from "../types/Vector2.js"
+import Vector from "../types/Vector.js"
 import Color from "../types/Color.js"
 
 class Canvas
 {
-    private static canvasSize: Vector2 = new Vector2(400, 600)
+    private static canvasSize: Vector = new Vector(400, 600)
     private static sprites: Sprite[] = []
     public static canvasContext: CanvasRenderingContext2D
     public static backgroundColor: Color = Color.white()
