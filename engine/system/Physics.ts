@@ -30,8 +30,8 @@ class Physics
                         let pos2 = collider2.getWorldPosition()
                         let size1 = collider1.size
                         let size2 = collider2.size
-                        if (Math.abs(pos1.subtract(pos2).x) < size1.x + size2.x &&
-                            Math.abs(pos1.subtract(pos2).y) < size1.y + size2.y)
+                        if (Math.abs(pos1.subtract(pos2).x) < size1.x / 2 + size2.x / 2 &&
+                            Math.abs(pos1.subtract(pos2).y) < size1.y / 2 + size2.y / 2)
                         {
                             Physics.broadcastCollision(collider1, collider2)
                         }
