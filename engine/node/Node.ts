@@ -4,7 +4,7 @@ import Component from "../component/Component.js"
 import ComponentType from "../component/ComponentType.js"
 import Debug from "../system/Debug.js"
 import Transform from "../component/Transform.js"
-import Sprite from "../component/Sprite.js"
+import Renderer from "../component/Renderer.js"
 import RectangleCollider from "../component/RectangleCollider.js"
 import CircleCollider from "../component/CircleCollider.js"
 
@@ -71,8 +71,8 @@ class Node
             case ComponentType.TRANSFORM:
                 newComponent = new Transform(this)
                 break
-            case ComponentType.SPRITE:
-                newComponent = new Sprite(this)
+            case ComponentType.RENDERER:
+                newComponent = new Renderer(this)
                 break
             case ComponentType.RECTANGLE_COLLIDER:
                 newComponent = new RectangleCollider(this)

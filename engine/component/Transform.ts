@@ -27,21 +27,9 @@ class Transform extends Component
 
     public localToWorldMatrix(): Matrix
     {
-        const translationMatrix = new Matrix()
-        translationMatrix.values[2][0] = this.position.x
-        translationMatrix.values[2][1] = this.position.y
-
-        const rotationMatrix = new Matrix()
-        const cosTheta = Math.cos(this.rotation)
-        const sinTheta = Math.sin(this.rotation)
-        rotationMatrix.values[0][0] = cosTheta
-        rotationMatrix.values[0][1] = -sinTheta
-        rotationMatrix.values[1][0] = sinTheta
-        rotationMatrix.values[1][1] = cosTheta
-
-        const scaleMatrix = new Matrix()
-        scaleMatrix.values[0][0] = this.scale.x
-        scaleMatrix.values[1][1] = this.scale.y
+        const translationMatrix = Matrix.translate(this.position.x, this.position.y)
+        const rotationMatrix = Matrix.rotate(this.rotation)
+        const scaleMatrix = Matrix.scale(this.scale.x, this.scale.y)
 
         return translationMatrix.multiplyMatrix(rotationMatrix).multiplyMatrix(scaleMatrix)
     }

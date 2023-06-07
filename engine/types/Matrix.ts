@@ -1,4 +1,5 @@
 ﻿import Vector from "./Vector.js"
+import Maths from "../utility/Maths.js"
 
 class Matrix
 {
@@ -20,18 +21,103 @@ class Matrix
         )
     }
 
+    public static translate(x: number, y: number): Matrix
+    {
+        const translationMatrix = Matrix.identity()
+        translationMatrix.values[0][2] = x
+        translationMatrix.values[1][2] = y
+        return translationMatrix
+    }
+
+    public static rotate(angle: number): Matrix
+    {
+        const rotationMatrix = Matrix.identity()
+        const cosTheta = Math.cos(angle * Maths.Deg2Rad)
+        const sinTheta = Math.sin(angle * Maths.Deg2Rad)
+        rotationMatrix.values[0][0] = cosTheta
+        rotationMatrix.values[0][1] = -sinTheta
+        rotationMatrix.values[1][0] = sinTheta
+        rotationMatrix.values[1][1] = cosTheta
+        return rotationMatrix
+    }
+
+    public static scale(x: number, y: number): Matrix
+    {
+        const scaleMatrix = Matrix.identity()
+        scaleMatrix.values[0][0] = x
+        scaleMatrix.values[1][1] = y
+        return scaleMatrix
+    }
+
     public values: number[][] = []
 
-    constructor(x1y1: number = 0, x2y1: number = 0, x3y1: number = 0,
-                x1y2: number = 0, x2y2: number = 0, x3y2: number = 0,
-                x1y3: number = 0, x2y3: number = 0, x3y3: number = 0)
+    constructor(x0y0: number = 0, x0y1: number = 0, x0y2: number = 0,
+                x1y0: number = 0, x1y1: number = 0, x1y2: number = 0,
+                x2y0: number = 0, x2y1: number = 0, x2y2: number = 0)
     {
         this.values = [
-            [x1y1, x2y1, x3y1],
-            [x1y2, x2y2, x3y2],
-            [x1y3, x2y3, x3y3],
+            [x0y0, x0y1, x0y2],
+            [x1y0, x1y1, x1y2],
+            [x2y0, x2y1, x2y2],
         ]
+    }
 
+    public determinant(): number
+    {
+        const a = this.values[0][0]
+        const b = this.values[0][1]
+        const c = this.values[0][2]
+        const d = this.values[1][0]
+        const e = this.values[1][1]
+        const f = this.values[1][2]
+        const g = this.values[2][0]
+        const h = this.values[2][1]
+        const i = this.values[2][2]
+
+        const det = a * (e * i - f * h) - b * (d * i - f * g) + c * (d * h - e * g)
+
+        return det
+    }
+
+    public inverse(): Matrix
+    {
+        const determinant = this.determinant()
+        if (determinant === 0)
+        {
+            throw new Error("Matrix is not invertible.")
+        }
+
+        const inverseMatrix = new Matrix()
+        const invDeterminant = 1 / determinant
+
+        inverseMatrix.values[0][0] = (this.values[1][1] * this.values[2][2] - this.values[1][2] * this.values[2][1]) * invDeterminant
+        inverseMatrix.values[0][1] = (this.values[0][2] * this.values[2][1] - this.values[0][1] * this.values[2][2]) * invDeterminant
+        inverseMatrix.values[0][2] = (this.values[0][1] * this.values[1][2] - this.values[0][2] * this.values[1][1]) * invDeterminant
+
+        inverseMatrix.values[1][0] = (this.values[1][2] * this.values[2][0] - this.values[1][0] * this.values[2][2]) * invDeterminant
+        inverseMatrix.values[1][1] = (this.values[0][0] * this.values[2][2] - this.values[0][2] * this.values[2][0]) * invDeterminant
+        inverseMatrix.values[1][2] = (this.values[0][2] * this.values[1][0] - this.values[0][0] * this.values[1][2]) * invDeterminant
+
+        inverseMatrix.values[2][0] = (this.values[1][0] * this.values[2][1] - this.values[1][1] * this.values[2][0]) * invDeterminant
+        inverseMatrix.values[2][1] = (this.values[0][1] * this.values[2][0] - this.values[0][0] * this.values[2][1]) * invDeterminant
+        inverseMatrix.values[2][2] = (this.values[0][0] * this.values[1][1] - this.values[0][1] * this.values[1][0]) * invDeterminant
+
+        return inverseMatrix
+    }
+
+    public transpose(): Matrix
+    {
+        const transposeMatrix = new Matrix()
+
+        for (let i = 0; i < 3; i++)
+        {
+            for (let j = 0; j < 3; j++)
+            {
+                transposeMatrix.values[i][j] = this.values[j][i]
+            }
+        }
+
+        return transposeMatrix
     }
 
     public multiplyMatrix(other: Matrix)
@@ -65,7 +151,7 @@ class Matrix
         return result
     }
 
-    public multiplyMatrixComponentWise(other: Matrix)
+    public matrixMultiplyComponentWise(other: Matrix)
     {
         let result = new Matrix()
 
@@ -82,13 +168,11 @@ class Matrix
 
     public multiplyVector(vector: Vector): Vector
     {
-        const result = new Vector(
+        return new Vector(
             this.values[0][0] * vector.x + this.values[0][1] * vector.y + this.values[0][2] * vector.z,
             this.values[1][0] * vector.x + this.values[1][1] * vector.y + this.values[1][2] * vector.z,
             this.values[2][0] * vector.x + this.values[2][1] * vector.y + this.values[2][2] * vector.z
         )
-
-        return result
     }
 }
 

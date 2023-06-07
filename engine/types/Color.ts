@@ -5,12 +5,24 @@
     public b: number
     public a: number
 
-    constructor(r: number = 0, g: number = 0, b: number = 0, a: number = 0)
+    constructor(r: number = 1, g: number = 1, b: number = 1, a: number = 1)
     {
         this.r = r
         this.g = g
         this.b = b
         this.a = a
+    }
+
+    public toHex()
+    {
+        function componentToHex(c: number)
+        {
+            let hex = c.toString(16)
+            return hex.length == 1 ? "0" + hex : hex
+        }
+
+        return "#" + componentToHex(this.r) + componentToHex(this.g) + componentToHex(this.b)
+
     }
 
     public static black()

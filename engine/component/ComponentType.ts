@@ -1,7 +1,7 @@
 ﻿enum ComponentType
 {
     TRANSFORM,
-    SPRITE,
+    RENDERER,
     RECTANGLE_COLLIDER,
     CIRCLE_COLLIDER,
 }

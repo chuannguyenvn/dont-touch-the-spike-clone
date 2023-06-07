@@ -21,7 +21,7 @@ class Vector {
     static distance(v1, v2) {
         return v1.subtract(v2).length();
     }
-    constructor(x, y, z) {
+    constructor(x, y, z = 0) {
         this.x = x;
         this.y = y;
         this.z = z;

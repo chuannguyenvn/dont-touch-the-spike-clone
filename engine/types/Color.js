@@ -1,9 +1,16 @@
 class Color {
-    constructor(r = 0, g = 0, b = 0, a = 0) {
+    constructor(r = 1, g = 1, b = 1, a = 1) {
         this.r = r;
         this.g = g;
         this.b = b;
         this.a = a;
+    }
+    toHex() {
+        function componentToHex(c) {
+            let hex = (c* 255).toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+        return "#" + componentToHex(this.r) + componentToHex(this.g) + componentToHex(this.b);
     }
     static black() {
         return new Color(0, 0, 0, 0);
