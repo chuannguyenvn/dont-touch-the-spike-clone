@@ -17,11 +17,11 @@ class Canvas {
             let worldToCamera = Canvas._worldToCameraMatrix;
             let res = worldToCamera.multiplyMatrix(localToWorld);
             Canvas._canvasContext.setTransform(res.values[0][0], res.values[1][0], res.values[0][1], res.values[1][1], res.values[0][2], res.values[1][2]);
-            sprite.draw();
+            sprite._draw();
             Canvas._canvasContext.resetTransform();
         }
     }
-    static _registerSprite(sprite) {
+    static _registerRenderer(sprite) {
         this._sprites.push(sprite);
     }
 }

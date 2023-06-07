@@ -1,6 +1,7 @@
 import Component from "./Component.js";
 import ComponentType from "./ComponentType.js";
 import Canvas from "../system/Canvas.js";
+import Vector from "../types/Vector.js";
 class Renderer extends Component {
     constructor(owner) {
         super(owner);
@@ -8,7 +9,7 @@ class Renderer extends Component {
         this.type = ComponentType.RENDERER;
         this._componentRequirements = [ComponentType.TRANSFORM];
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM);
-        Canvas._registerSprite(this);
+        Canvas._registerRenderer(this);
     }
     _localToWorldMatrix() {
         return this.ownerTransform._localToWorldMatrix();
@@ -16,8 +17,8 @@ class Renderer extends Component {
     setDrawable(drawable) {
         this.drawable = drawable;
     }
-    draw() {
-        this.drawable._draw();
+    _draw() {
+        this.drawable._draw(Vector.zero());
     }
 }
 export default Renderer;

@@ -36,12 +36,12 @@ class Canvas
                 res.values[0][0], res.values[1][0], res.values[0][1],
                 res.values[1][1], res.values[0][2], res.values[1][2])
 
-            sprite.draw()
+            sprite._draw()
             Canvas._canvasContext.resetTransform()
         }
     }
 
-    public static _registerSprite(sprite: Renderer): void
+    public static _registerRenderer(sprite: Renderer): void
     {
         this._sprites.push(sprite)
     }

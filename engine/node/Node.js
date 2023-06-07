@@ -5,6 +5,8 @@ import Transform from "../component/Transform.js";
 import Renderer from "../component/Renderer.js";
 import RectangleCollider from "../component/RectangleCollider.js";
 import CircleCollider from "../component/CircleCollider.js";
+import Button from "../component/Button.js";
+import Text from "../component/Text.js";
 class Node {
     constructor(name) {
         this.parentNode = null;
@@ -57,6 +59,12 @@ class Node {
                 break;
             case ComponentType.CIRCLE_COLLIDER:
                 newComponent = new CircleCollider(this);
+                break;
+            case ComponentType.BUTTON:
+                newComponent = new Button(this);
+                break;
+            case ComponentType.TEXT:
+                newComponent = new Text(this);
                 break;
         }
         for (let requirement of newComponent._componentRequirements) {

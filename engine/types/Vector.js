@@ -60,6 +60,9 @@ class Vector {
     multiply(number) {
         return new Vector(this.x * number, this.y * number, this.z * number);
     }
+    multiplyComp(other) {
+        return new Vector(this.x * other.x, this.y * other.y, this.z * other.z);
+    }
     xx() {
         return new Vector(this.x, this.x, this.z);
     }

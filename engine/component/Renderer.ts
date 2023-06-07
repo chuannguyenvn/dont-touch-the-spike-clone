@@ -5,6 +5,7 @@ import Transform from "./Transform.js"
 import Canvas from "../system/Canvas.js"
 import Drawable from "../types/Drawable.js"
 import Matrix from "../types/Matrix.js"
+import Vector from "../types/Vector.js"
 
 class Renderer extends Component
 {
@@ -13,7 +14,7 @@ class Renderer extends Component
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
-    private drawable: Drawable
+    protected drawable: Drawable
     private ownerTransform: Transform
 
     constructor(owner: Node)
@@ -21,7 +22,7 @@ class Renderer extends Component
         super(owner)
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
 
-        Canvas._registerSprite(this)
+        Canvas._registerRenderer(this)
     }
 
     public _localToWorldMatrix(): Matrix
@@ -34,9 +35,9 @@ class Renderer extends Component
         this.drawable = drawable
     }
 
-    public draw(): void
+    public _draw(): void
     {
-        this.drawable._draw()
+        this.drawable._draw(Vector.zero())
     }
 }
 
