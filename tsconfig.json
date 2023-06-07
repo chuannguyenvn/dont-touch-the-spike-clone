@@ -24,7 +24,7 @@
   "typeRoots": [
     "./node_modules/@types",
     "./phaser/types",
-    "./src/types",
+    "./engine/types",
     "./src/**/types"
 ],
 }

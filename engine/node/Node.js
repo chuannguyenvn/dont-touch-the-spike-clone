@@ -5,12 +5,15 @@ import Transform from "../component/Transform.js";
 import Sprite from "../component/Sprite.js";
 import RectangleCollider from "../component/RectangleCollider.js";
 import CircleCollider from "../component/CircleCollider.js";
-class Actor {
+class Node {
     constructor() {
         this.components = [];
+        this.childNodes = [];
         Game.registerUpdatable(this);
     }
-    update(deltaTime) {
+    start() {
+    }
+    update() {
         //
     }
     getComponent(componentType) {
@@ -52,5 +55,5 @@ class Actor {
         // TODO
     }
 }
-export default Actor;
-//# sourceMappingURL=Actor.js.map
+export default Node;
+//# sourceMappingURL=Node.js.map

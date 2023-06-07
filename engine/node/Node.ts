@@ -8,17 +8,23 @@ import Sprite from "../component/Sprite.js"
 import RectangleCollider from "../component/RectangleCollider.js"
 import CircleCollider from "../component/CircleCollider.js"
 
-class Actor implements Updatable
+class Node 
 {
     public name: string
     private components: Component[] = []
+    private childNodes: Node[] = []
 
     constructor()
     {
         Game.registerUpdatable(this)
     }
 
-    public update(deltaTime: number): void
+    public start(): void
+    {
+        
+    }
+    
+    public update(): void
     {
         //
     }
@@ -29,6 +35,7 @@ class Actor implements Updatable
         if (result.length === 0) Debug.logError(`Component of type ${componentType} not found on actor ${this.name}`)
         return result[0]
     }
+
 
     public addComponent(componentType: ComponentType): Component | undefined
     {
@@ -41,7 +48,6 @@ class Actor implements Updatable
         let newComponent: Component
         switch (componentType)
         {
-
             case ComponentType.TRANSFORM:
                 newComponent = new Transform(this)
                 break
@@ -75,4 +81,5 @@ class Actor implements Updatable
     }
 }
 
-export default Actor
+
+export default Node

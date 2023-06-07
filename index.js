@@ -1,13 +1,13 @@
-﻿import Game from "./src/system/Game.js"
-import Input from "./src/input/Input.js"
-import Actor from "./src/actor/Actor.js"
-import Debug from "./src/system/Debug.js"
-import Canvas from "./src/system/Canvas.js"
-import ComponentType from "./src/component/ComponentType.js"
-import {GameEvent, ParamGameEvent} from "./src/types/Event.js"
-import Ease from "./src/system/tween/Ease.js"
-import Time from "./src/system/Time.js"
-import Vector from "./src/types/Vector.js"
+﻿import Game from "./engine/system/Game.js"
+import Input from "./engine/system/Input.js"
+import Node from "./engine/node/Node.js"
+import Debug from "./engine/system/Debug.js"
+import Canvas from "./engine/system/Canvas.js"
+import ComponentType from "./engine/component/ComponentType.js"
+import {GameEvent, ParamGameEvent} from "./engine/types/Event.js"
+import Ease from "./engine/system/tween/Ease.js"
+import Time from "./engine/system/Time.js"
+import Vector from "./engine/types/Vector.js"
 
 const canvas = document.getElementById("canvas")
 const ctx = canvas.getContext("2d")
@@ -18,18 +18,18 @@ Input.init()
 Canvas.init(ctx)
 Game.init()
 
-// let actor = new Actor()
-// actor.addComponent(ComponentType.TRANSFORM)
-// let sprite = actor.addComponent(ComponentType.SPRITE)
-// let collider = actor.addComponent(ComponentType.RECTANGLE_COLLIDER)
+// let node = new Node()
+// node.addComponent(ComponentType.TRANSFORM)
+// let sprite = node.addComponent(ComponentType.SPRITE)
+// let collider = node.addComponent(ComponentType.RECTANGLE_COLLIDER)
 // collider.size = new Vector2(10, 10)
 // sprite.setImage("./assets/kenney/Characters/character_0007.png")
-// actor.update = (deltaTime) => {
-//     let transform = actor.getComponent(ComponentType.TRANSFORM)
+// node.update = (deltaTime) => {
+//     let transform = node.getComponent(ComponentType.TRANSFORM)
 //         transform.position = Input.getMousePosition().multiply(1, -1)
 // }
 
-let actor2 = new Actor()
+let actor2 = new Node()
 actor2.addComponent(ComponentType.TRANSFORM)
 let sprite2 = actor2.addComponent(ComponentType.SPRITE)
 sprite2.setImage("./assets/kenney/Characters/character_0001.png")

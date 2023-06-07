@@ -1,6 +1,6 @@
 ﻿import Component from "./Component.js"
 import ComponentType from "./ComponentType.js"
-import Actor from "../actor/Actor.js"
+import Node from "../node/Node.js"
 import Transform from "./Transform.js"
 import Canvas from "../system/Canvas.js"
 
@@ -14,7 +14,7 @@ class Sprite extends Component
     private image: HTMLImageElement
     private ownerTransform: Transform
 
-    constructor(owner: Actor, imagePath: string = "")
+    constructor(owner: Node, imagePath: string = "")
     {
         super(owner)
         this.setImage(imagePath)

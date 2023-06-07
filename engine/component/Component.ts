@@ -1,13 +1,13 @@
 ﻿import ComponentType from "./ComponentType.js"
-import Actor from "../actor/Actor.js"
+import Node from "../node/Node.js"
 
 class Component
 {
     public readonly type: ComponentType
     public readonly componentRequirements: ComponentType[] = []
-    public readonly owner: Actor
+    public readonly owner: Node
     
-    constructor(owner: Actor)
+    constructor(owner: Node)
     {
         this.owner = owner
     }

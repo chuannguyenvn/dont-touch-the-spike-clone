@@ -1,7 +1,7 @@
 ﻿import Vector from "../types/Vector.js"
 import ComponentType from "./ComponentType.js"
 import Component from "./Component.js"
-import Actor from "../actor/Actor.js"
+import Node from "../node/Node.js"
 import Tween from "../system/tween/Tween.js"
 import Ease from "../system/tween/Ease.js"
 
@@ -16,7 +16,7 @@ class Transform extends Component
     public rotation: number
     public scale: Vector
 
-    constructor(owner: Actor, position: Vector = Vector.zero(), rotation: number = 0, scale: Vector = Vector.one())
+    constructor(owner: Node, position: Vector = Vector.zero(), rotation: number = 0, scale: Vector = Vector.one())
     {
         super(owner)
         this.position = position

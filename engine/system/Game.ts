@@ -1,6 +1,6 @@
 import Updatable from "./Updatable.js"
 import Debug from "./Debug.js"
-import Input from "../input/Input.js"
+import Input from "./Input.js"
 import Canvas from "./Canvas.js"
 import Physics from "./Physics.js"
 import TweenEngine from "./tween/TweenEngine.js"

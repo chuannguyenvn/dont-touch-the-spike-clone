@@ -1,6 +1,6 @@
 ﻿import Component from "./Component.js"
 import ComponentType from "./ComponentType.js"
-import Actor from "../actor/Actor.js"
+import Node from "../node/Node.js"
 import Transform from "./Transform.js"
 import Vector from "../types/Vector.js"
 import {ParamGameEvent} from "../types/Event.js"
@@ -21,7 +21,7 @@ class Collider extends Component
     protected ownerTransform: Transform
     public offset: Vector
 
-    constructor(owner: Actor)
+    constructor(owner: Node)
     {
         super(owner)
         Physics.registerCollider(this)
