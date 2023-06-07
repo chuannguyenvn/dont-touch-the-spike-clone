@@ -26,6 +26,20 @@ class Transform extends Component {
         let tween = new Tween(evaluate, () => this.position, duration, delay, ease);
         return tween;
     }
+    tweenPositionX(to, duration, delay, ease) {
+        const evaluate = (x) => {
+            this.position.x = (to - tween.startValue) * x + tween.startValue;
+        };
+        let tween = new Tween(evaluate, () => this.position.x, duration, delay, ease);
+        return tween;
+    }
+    tweenPositionY(to, duration, delay, ease) {
+        const evaluate = (x) => {
+            this.position.y = (to - tween.startValue) * x + tween.startValue;
+        };
+        let tween = new Tween(evaluate, () => this.position.y, duration, delay, ease);
+        return tween;
+    }
 }
 export default Transform;
 //# sourceMappingURL=Transform.js.map
