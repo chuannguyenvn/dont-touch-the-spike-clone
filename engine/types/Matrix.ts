@@ -20,7 +20,7 @@ class Matrix
         )
     }
 
-    private values: number[][] = []
+    public values: number[][] = []
 
     constructor(x1y1: number = 0, x2y1: number = 0, x3y1: number = 0,
                 x1y2: number = 0, x2y2: number = 0, x3y2: number = 0,
@@ -34,7 +34,7 @@ class Matrix
 
     }
 
-    public matrixMultiply(other: Matrix)
+    public multiplyMatrix(other: Matrix)
     {
         let result = new Matrix()
 
@@ -65,7 +65,7 @@ class Matrix
         return result
     }
 
-    public matrixMultiplyComponentWise(other: Matrix)
+    public multiplyMatrixComponentWise(other: Matrix)
     {
         let result = new Matrix()
 
@@ -91,3 +91,5 @@ class Matrix
         return result
     }
 }
+
+export default Matrix

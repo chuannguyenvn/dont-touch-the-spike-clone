@@ -14,7 +14,7 @@ class Matrix {
             [x1y3, x2y3, x3y3],
         ];
     }
-    matrixMultiply(other) {
+    multiplyMatrix(other) {
         let result = new Matrix();
         let a = this.values;
         let b = other.values;
@@ -36,7 +36,7 @@ class Matrix {
         r[2][2] = a20 * b02 + a21 * b12 + a22 * b22;
         return result;
     }
-    matrixMultiplyComponentWise(other) {
+    multiplyMatrixComponentWise(other) {
         let result = new Matrix();
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
@@ -50,4 +50,5 @@ class Matrix {
         return result;
     }
 }
+export default Matrix;
 //# sourceMappingURL=Matrix.js.map
