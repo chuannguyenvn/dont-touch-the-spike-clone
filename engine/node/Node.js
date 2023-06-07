@@ -6,15 +6,28 @@ import Sprite from "../component/Sprite.js";
 import RectangleCollider from "../component/RectangleCollider.js";
 import CircleCollider from "../component/CircleCollider.js";
 class Node {
-    constructor() {
-        this.components = [];
+    constructor(name) {
+        this.parentNode = null;
         this.childNodes = [];
+        this.components = [];
+        this.name = name;
         Game.registerUpdatable(this);
     }
     start() {
     }
     update() {
-        //
+    }
+    executeStart() {
+        this.start();
+        for (let i = 0; i < this.childNodes.length; i++) {
+            this.childNodes[i].executeStart();
+        }
+    }
+    executeUpdate() {
+        this.update();
+        for (let i = 0; i < this.childNodes.length; i++) {
+            this.childNodes[i].executeUpdate();
+        }
     }
     getComponent(componentType) {
         let result = this.components.filter(component => component.type === componentType);
@@ -53,6 +66,27 @@ class Node {
     }
     removeComponent(componentType) {
         // TODO
+    }
+    setChild(childNode) {
+        if (this.childNodes.includes(childNode))
+            return;
+        this.childNodes.push(childNode);
+        childNode.parentNode = this;
+    }
+    removeChild(childNode) {
+        if (!this.childNodes.includes(childNode))
+            return;
+        this.childNodes = this.childNodes.filter((c) => c !== childNode);
+        childNode.parentNode = null;
+    }
+    setParent(parentNode) {
+        parentNode.setChild(this);
+    }
+    removeParent() {
+        if (this.parentNode === null)
+            return;
+        else
+            this.parentNode.removeChild(this);
     }
 }
 export default Node;

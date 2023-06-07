@@ -24,16 +24,20 @@ class Game {
     }
     ;
     static update() {
-        Game.updatables.forEach(updatable => updatable.update());
+        for (let i = 0; i < this.nodes.length; i++) {
+            if (this.nodes[i].parentNode !== null)
+                continue;
+            this.nodes[i].executeUpdate();
+        }
     }
     ;
-    static registerUpdatable(updatable) {
-        Game.updatables.push(updatable);
+    static registerUpdatable(node) {
+        Game.nodes.push(node);
     }
     ;
 }
 Game.isInitialized = false;
-Game.updatables = [];
+Game.nodes = [];
 Game.lastFrameTimestamp = -1;
 export default Game;
 //# sourceMappingURL=Game.js.map

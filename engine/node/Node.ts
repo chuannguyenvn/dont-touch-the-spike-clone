@@ -8,25 +8,45 @@ import Sprite from "../component/Sprite.js"
 import RectangleCollider from "../component/RectangleCollider.js"
 import CircleCollider from "../component/CircleCollider.js"
 
-class Node 
+class Node
 {
     public name: string
+    public parentNode: Node | null = null
+    public childNodes: Node[] = []
     private components: Component[] = []
-    private childNodes: Node[] = []
 
-    constructor()
+    constructor(name: string)
     {
+        this.name = name
         Game.registerUpdatable(this)
     }
 
     public start(): void
     {
-        
+
     }
-    
+
     public update(): void
     {
-        //
+
+    }
+
+    public executeStart(): void
+    {
+        this.start()
+        for (let i = 0; i < this.childNodes.length; i++)
+        {
+            this.childNodes[i].executeStart()
+        }
+    }
+
+    public executeUpdate(): void
+    {
+        this.update()
+        for (let i = 0; i < this.childNodes.length; i++)
+        {
+            this.childNodes[i].executeUpdate()
+        }
     }
 
     public getComponent(componentType: ComponentType): Component
@@ -53,7 +73,7 @@ class Node
                 break
             case ComponentType.SPRITE:
                 newComponent = new Sprite(this)
-                break;
+                break
             case ComponentType.RECTANGLE_COLLIDER:
                 newComponent = new RectangleCollider(this)
                 break
@@ -78,6 +98,33 @@ class Node
     public removeComponent(componentType: ComponentType): void
     {
         // TODO
+    }
+
+    public setChild(childNode: Node)
+    {
+        if (this.childNodes.includes(childNode)) return
+        this.childNodes.push(childNode)
+        childNode.parentNode = this
+    }
+
+    public removeChild(childNode: Node)
+    {
+        if (!this.childNodes.includes(childNode)) return
+        this.childNodes = this.childNodes.filter((c) => c !== childNode)
+        childNode.parentNode = null
+    }
+
+    public setParent(parentNode: Node)
+    {
+        parentNode.setChild(this)
+    }
+
+    public removeParent()
+    {
+        if (this.parentNode === null)
+            return
+        else
+            this.parentNode.removeChild(this)
     }
 }
 

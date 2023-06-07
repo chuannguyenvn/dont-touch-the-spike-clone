@@ -1,15 +1,15 @@
-import Updatable from "./Updatable.js"
 import Debug from "./Debug.js"
 import Input from "./Input.js"
 import Canvas from "./Canvas.js"
 import Physics from "./Physics.js"
 import TweenEngine from "./tween/TweenEngine.js"
 import Time from "./Time.js"
+import Node from "../node/Node"
 
 class Game
 {
     private static isInitialized: boolean = false
-    private static updatables: Updatable[] = []
+    private static nodes: Node[] = []
     private static lastFrameTimestamp: number = -1
 
     public static init(): void
@@ -37,12 +37,16 @@ class Game
 
     private static update(): void
     {
-        Game.updatables.forEach(updatable => updatable.update())
+        for (let i = 0; i <this.nodes.length; i++)
+        {
+            if (this.nodes[i].parentNode !== null) continue
+            this.nodes[i].executeUpdate()
+        }
     };
 
-    public static registerUpdatable(updatable: Updatable): void
+    public static registerUpdatable(node: Node): void
     {
-        Game.updatables.push(updatable)
+        Game.nodes.push(node)
     };
 }
 
