@@ -34,39 +34,39 @@ class Transform extends Component
         return translationMatrix.multiplyMatrix(rotationMatrix).multiplyMatrix(scaleMatrix)
     }
 
-    public tweenPosition(to: Vector, duration: number, delay: number, ease: Ease): Tween<Vector>
+    public tweenPosition(to: Vector, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Vector>
     {
         const evaluate = (x: number) =>
         {
+            if (relative) to.add(tween._startValue)
             this.position = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue)
         }
 
         let tween = new Tween<Vector>(evaluate, () => this.position, duration, delay, ease)
-
         return tween
     }
 
-    public tweenPositionX(to: number, duration: number, delay: number, ease: Ease): Tween<number>
+    public tweenPositionX(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number>
     {
         const evaluate = (x: number) =>
         {
+            if (relative) to += tween._startValue
             this.position.x = (to - tween._startValue) * x + tween._startValue
         }
 
         let tween = new Tween<number>(evaluate, () => this.position.x, duration, delay, ease)
-
         return tween
     }
 
-    public tweenPositionY(to: number, duration: number, delay: number, ease: Ease): Tween<number>
+    public tweenPositionY(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number>
     {
         const evaluate = (x: number) =>
         {
+            if (relative) to += tween._startValue
             this.position.y = (to - tween._startValue) * x + tween._startValue
         }
 
         let tween = new Tween<number>(evaluate, () => this.position.y, duration, delay, ease)
-
         return tween
     }
 }

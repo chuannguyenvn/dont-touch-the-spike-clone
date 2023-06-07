@@ -34,7 +34,7 @@ class Game {
         }
     }
     ;
-    static _registerUpdatable(node) {
+    static _registerNode(node) {
         Game._nodes.push(node);
     }
     ;

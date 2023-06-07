@@ -23,7 +23,6 @@ class Tween<T extends number | Vector> extends TweenBase
 
     public _start()
     {
-        console.log(this)
         this._startValue = this._retrieveStartValue()
         super._start()
     }

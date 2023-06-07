@@ -9,10 +9,15 @@ import Input from "../engine/system/Input.js"
 import Time from "../engine/system/Time.js"
 import RectangleCollider from "../engine/component/RectangleCollider.js"
 import Maths from "../engine/utility/Maths.js"
-import Debug from "../engine/system/Debug"
+import Debug from "../engine/system/Debug.js"
+import Collider from "../engine/component/Collider.js"
+import {GameEvent} from "../engine/types/Event.js"
 
 class Bird extends Node
 {
+    public touchedLeftWall: GameEvent
+    public touchedRightWall: GameEvent
+    
     public transform: Transform
     public collider: RectangleCollider
     public renderer: Renderer
@@ -32,10 +37,16 @@ class Bird extends Node
 
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
         this.collider.size = new Vector(20, 20)
+        this.collider.collisionStarted.subscribe(this.handleCollisionStart.bind(this))
 
         let sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(sprite)
+ 
+        this.touchedLeftWall = new GameEvent()
+        this.touchedRightWall = new GameEvent()
+        this.touchedRightWall.subscribe(this.turnLeft.bind(this))
+        this.touchedLeftWall.subscribe(this.turnRight.bind(this))
     }
 
     public update()
@@ -48,9 +59,6 @@ class Bird extends Node
 
         this.transform.position.x = Maths.clamp(this.transform.position.x, -200, 200)
         this.transform.position.y = Maths.clamp(this.transform.position.y, -300, 300)
-
-        console.log(elapsedJumpTime)
-        console.log(this.jumpYFunction(elapsedJumpTime))
     }
 
     private move(): void
@@ -85,6 +93,19 @@ class Bird extends Node
     {
         let x = elapsedTime * this.jumpCurveXCoeff
         return (-(Math.pow(x - 1, 2)) + 1) * this.jumpCurveYCoeff + this.lastJumpPosY
+    }
+
+    private handleCollisionStart(collider: Collider)
+    {
+        if (collider.owner.name === "Wall")
+        {
+            if (this.isMovingRight) this.touchedRightWall.invoke()
+            else this.touchedLeftWall.invoke()
+        }
+        else if (collider.owner.name === "Spike")
+        {
+            console.log("lose")
+        }
     }
 }
 

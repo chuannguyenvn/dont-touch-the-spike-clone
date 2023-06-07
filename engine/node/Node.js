@@ -11,7 +11,7 @@ class Node {
         this.childNodes = [];
         this.components = [];
         this.name = name;
-        Game._registerUpdatable(this);
+        Game._registerNode(this);
         this.init();
     }
     init() {

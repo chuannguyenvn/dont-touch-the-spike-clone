@@ -47,7 +47,7 @@ abstract class Game
         }
     };
 
-    public static _registerUpdatable(node: Node): void
+    public static _registerNode(node: Node): void
     {
         Game._nodes.push(node)
     };

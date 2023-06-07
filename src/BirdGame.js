@@ -6,12 +6,21 @@ class BirdGame extends Game {
     static init(ctx) {
         super.init(ctx);
         let bird = new Bird("Main Bird");
-        let leftWall = new Wall("Left Wall");
+        bird.start();
+        let leftWall = new Wall("Wall");
         leftWall.transform.position = new Vector(-200, 0);
-        leftWall.collider.collisionStarted.subscribe(bird.turnRight.bind(bird));
-        let rightWall = new Wall("Right Wall");
+        leftWall.start();
+        let rightWall = new Wall("Wall");
         rightWall.transform.position = new Vector(200, 0);
-        rightWall.collider.collisionStarted.subscribe(bird.turnLeft.bind(bird));
+        rightWall.start();
+        bird.touchedLeftWall.subscribe(() => {
+            leftWall.hideSpike();
+            rightWall.showSpike();
+        });
+        bird.touchedRightWall.subscribe(() => {
+            rightWall.hideSpike();
+            leftWall.showSpike();
+        });
     }
 }
 export default BirdGame;

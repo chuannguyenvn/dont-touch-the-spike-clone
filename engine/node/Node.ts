@@ -1,5 +1,4 @@
-﻿import Updatable from "../system/Updatable.js"
-import Game from "../system/Game.js"
+﻿import Game from "../system/Game.js"
 import Component from "../component/Component.js"
 import ComponentType from "../component/ComponentType.js"
 import Debug from "../system/Debug.js"
@@ -18,7 +17,7 @@ class Node
     constructor(name: string)
     {
         this.name = name
-        Game._registerUpdatable(this)
+        Game._registerNode(this)
         this.init()
     }
 

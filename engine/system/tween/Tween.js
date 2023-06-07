@@ -7,7 +7,6 @@ class Tween extends TweenBase {
         this._start = this._start.bind(this);
     }
     _start() {
-        console.log(this);
         this._startValue = this._retrieveStartValue();
         super._start();
     }

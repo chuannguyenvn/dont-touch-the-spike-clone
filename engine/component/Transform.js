@@ -19,22 +19,28 @@ class Transform extends Component {
         const scaleMatrix = Matrix.scale(this.scale.x, this.scale.y);
         return translationMatrix.multiplyMatrix(rotationMatrix).multiplyMatrix(scaleMatrix);
     }
-    tweenPosition(to, duration, delay, ease) {
+    tweenPosition(to, duration, delay, ease, relative) {
         const evaluate = (x) => {
+            if (relative)
+                to.add(tween._startValue);
             this.position = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue);
         };
         let tween = new Tween(evaluate, () => this.position, duration, delay, ease);
         return tween;
     }
-    tweenPositionX(to, duration, delay, ease) {
+    tweenPositionX(to, duration, delay, ease, relative) {
         const evaluate = (x) => {
+            if (relative)
+                to += tween._startValue;
             this.position.x = (to - tween._startValue) * x + tween._startValue;
         };
         let tween = new Tween(evaluate, () => this.position.x, duration, delay, ease);
         return tween;
     }
-    tweenPositionY(to, duration, delay, ease) {
+    tweenPositionY(to, duration, delay, ease, relative) {
         const evaluate = (x) => {
+            if (relative)
+                to += tween._startValue;
             this.position.y = (to - tween._startValue) * x + tween._startValue;
         };
         let tween = new Tween(evaluate, () => this.position.y, duration, delay, ease);
