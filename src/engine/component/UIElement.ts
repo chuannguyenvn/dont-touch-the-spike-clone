@@ -3,6 +3,8 @@ import Color from "../types/Color"
 import Renderer from "./Renderer"
 import Vector from "../types/Vector"
 import Node from "../node/Node"
+import Rect from "../types/Rect"
+import Transform from "./Transform"
 
 class UIElement extends Renderer
 {
@@ -16,6 +18,11 @@ class UIElement extends Renderer
     public drawOrder: number
     public color: Color
     public elementSize: Vector
+    get rect(): Rect
+    {
+        let transform = this.owner.getComponent(ComponentType.TRANSFORM) as Transform
+        return new Rect(transform.position, this.elementSize)
+    }
 
     constructor(owner: Node)
     {

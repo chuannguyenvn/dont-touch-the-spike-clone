@@ -24,7 +24,9 @@ class PlayButton extends Node
         this.button.elementSize = new Vector(200, 100)
         this.button.setDrawable(new Rectangle(new Vector(200, 100), Color.red()))
         this.button.pivot = Alignment.MID_LEFT
-        
+        this.button.clicked.subscribe(() => console.log("clicked"))
+        this.button.hovered.subscribe(() => console.log("hovered"))
+
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(new TextContent("Play", Color.blue()))
     }

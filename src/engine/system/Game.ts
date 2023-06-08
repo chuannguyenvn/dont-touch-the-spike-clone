@@ -28,6 +28,7 @@ abstract class Game
         const currentTimestamp = Date.now()
         Time._lastFrameTime = Game._lastFrameTimestamp
 
+        Input._handleInput()
         Physics._handlePhysics()
         Game._update()
         TweenEngine._handleTween()

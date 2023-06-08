@@ -58,8 +58,8 @@ class BirdGame extends Game
         bird.scoreChanged.subscribe(scoreText.changeScore.bind(scoreText))
         scoreText.start()
 
-        // let playButton = new PlayButton("Play Button")
-        // playButton.start()
+        let playButton = new PlayButton("Play Button")
+        playButton.start()
     }
 }
 

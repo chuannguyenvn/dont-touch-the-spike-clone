@@ -63,6 +63,8 @@ class Bird extends Node
         this.glideSprite.scale = Vector.one().multiply(0.1)
         
         this.scoreChanged = new ParamGameEvent<number>()
+        
+        this.turnRight()
     }
 
     public update()
@@ -129,7 +131,7 @@ class Bird extends Node
         }
         else if (collider.owner.name === "Spike")
         {
-            alert("fuck")
+            // alert("You lose")
         }
     }
 }
