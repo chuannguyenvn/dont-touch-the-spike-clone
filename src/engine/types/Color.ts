@@ -13,16 +13,16 @@
         this.a = a
     }
 
-    public toHex()
+    public toString()
     {
         function componentToHex(c: number)
         {
-            const hex = Math.round(c * 255).toString(16)
-            return hex.length == 1 ? "0" + hex : hex
+            const hex = Math.round(c * 255)
+            return hex
         }
 
-        return "#" + componentToHex(this.r) + componentToHex(this.g) + componentToHex(this.b)
-
+        console.log(`rgba(${componentToHex(this.r)}, ${componentToHex(this.g)}, ${componentToHex(this.b)}, ${this.a})`)
+        return `rgba(${componentToHex(this.r)}, ${componentToHex(this.g)}, ${componentToHex(this.b)}, ${this.a})`
     }
 
     public static black()

@@ -22,7 +22,7 @@ class TextContent implements Drawable
         Canvas._canvasContext.font = this.font
         Canvas._canvasContext.textAlign = "center"
         Canvas._canvasContext.textBaseline = "middle"
-        Canvas._canvasContext.fillStyle = this.color.toHex()
+        Canvas._canvasContext.fillStyle = this.color.toString()
         Canvas._canvasContext.fillText(this.text, this.offSet.x, this.offSet.y)
         const metrics = Canvas._canvasContext.measureText(this.text)
         const fontHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent

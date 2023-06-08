@@ -19,7 +19,7 @@ class Rectangle implements Drawable
 
     public _draw(): void
     {
-        Canvas._canvasContext.fillStyle = this.color.toHex()
+        Canvas._canvasContext.fillStyle = this.color.toString()
         Canvas._canvasContext.fillRect(this.offSet.x, this.offSet.y, this.size.x, this.size.y)
     }
 

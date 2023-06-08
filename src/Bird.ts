@@ -14,7 +14,6 @@ import GameState from "./GameState"
 
 class Bird extends Node
 {
-    public score: number = 0
     public touchedLeftWall: GameEvent
     public touchedRightWall: GameEvent
     public scoreChanged: ParamGameEvent<number>
@@ -54,10 +53,10 @@ class Bird extends Node
         this.touchedRightWall = new GameEvent()
         this.touchedLeftWall.subscribe(this.turnRight.bind(this))
         this.touchedRightWall.subscribe(this.turnLeft.bind(this))
-        this.touchedLeftWall.subscribe(() => this.score++)
-        this.touchedRightWall.subscribe(() => this.score++)
-        this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(this.score))
-        this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(this.score))
+        this.touchedLeftWall.subscribe(() => BirdGame.currentScore++)
+        this.touchedRightWall.subscribe(() => BirdGame.currentScore++)
+        this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
+        this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
 
         this.jumpSprite = new Sprite("assets/Jump.png")
         this.jumpSprite.scale = Vector.one().multiply(0.1)
@@ -82,6 +81,10 @@ class Bird extends Node
             this.isLocked = false
             this.jump()
         }
+        else if (gameState === GameState.RESULT)
+        {
+            this.isLocked = true
+        }
     }
 
     public update()
@@ -93,7 +96,7 @@ class Bird extends Node
         }
 
         this.move()
-        if (Input.getKeyDown(' ')) this.jump()
+        if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
 
         let elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
         this.transform.position.y = this.jumpYFunction(elapsedJumpTime)
@@ -151,7 +154,7 @@ class Bird extends Node
         }
         else if (collider.owner.name === "Spike")
         {
-            // alert("You lose")
+            BirdGame.changeState(GameState.RESULT)
         }
     }
     

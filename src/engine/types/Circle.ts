@@ -19,7 +19,7 @@ class Circle implements Drawable
 
     public _draw(): void
     {
-        Canvas._canvasContext.fillStyle = this.color.toHex()
+        Canvas._canvasContext.fillStyle = this.color.toString()
         Canvas._canvasContext.beginPath()
         Canvas._canvasContext.arc(0, 0, this.size, 0, 2 * Math.PI)
         Canvas._canvasContext.fill()

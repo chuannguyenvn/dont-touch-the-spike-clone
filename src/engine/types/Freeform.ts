@@ -17,7 +17,7 @@ class Freeform implements Drawable
 
     public _draw(): void
     {
-        Canvas._canvasContext.fillStyle = this.color.toHex()
+        Canvas._canvasContext.fillStyle = this.color.toString()
 
         Canvas._canvasContext.beginPath()
         for (let i = 0; i < this._points.length; i++)
