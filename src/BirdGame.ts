@@ -9,6 +9,8 @@ import Renderer from "./engine/component/Renderer"
 import Circle from "./engine/types/Circle"
 import Color from "./engine/types/Color"
 import Transform from "./engine/component/Transform"
+import VerticalWall from "./VerticalWall"
+import HorizontalWall from "./HorizontalWall"
 
 class BirdGame extends Game
 {
@@ -19,11 +21,11 @@ class BirdGame extends Game
         let bird = new Bird("Main Bird")
         bird.start()
 
-        let leftWall = new Wall("Wall")
+        let leftWall = new VerticalWall("Wall")
         leftWall.transform.position = new Vector(-250, 0)
         leftWall.start()
 
-        let rightWall = new Wall("Wall")
+        let rightWall = new VerticalWall("Wall")
         rightWall.transform.position = new Vector(250, 0)
         rightWall.start()
 
@@ -39,8 +41,16 @@ class BirdGame extends Game
             leftWall.showSpike()
         })
 
-        let playButton = new PlayButton("Play Button")
-        playButton.start()
+        let topWall = new HorizontalWall("Wall")
+        topWall.transform.position = new Vector(0, 300)
+        topWall.start()
+
+        let bottomWall = new HorizontalWall("Wall")
+        bottomWall.transform.position = new Vector(0, -300)
+        bottomWall.start()
+
+        // let playButton = new PlayButton("Play Button")
+        // playButton.start()
     }
 }
 

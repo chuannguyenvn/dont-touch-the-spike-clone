@@ -13,49 +13,13 @@ class Wall extends Node
 {
     public transform: Transform
     public collider: RectangleCollider
-    private spikes: Spike[] = []
+    protected spikes: Spike[] = []
 
     constructor(name: string)
     {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
-        this.collider.size = new Vector(100, 600)
-    }
-    
-    public start()
-    {
-        for (let y = -200; y <= 200; y += 50)
-        {
-            let spike = new Spike("Spike")
-            spike.setParent(this)
-            spike.transform.position = new Vector(this.transform.position.x, y)
-            spike.start()
-
-            this.spikes.push(spike)
-        }
-
-        console.log(this.transform.position)
-    }
-
-    public showSpike()
-    {
-        for (let i = 0; i < this.spikes.length; i++)
-        {
-            if (Maths.randomRangeInt(0, 2) == 0)
-            {
-                this.spikes[i].show()
-            }
-        }
-    }
-
-    public hideSpike()
-    {
-        for (let i = 0; i < this.spikes.length; i++)
-        {
-            this.spikes[i].hide()
-        }
     }
 }
 
