@@ -23,7 +23,7 @@ class ResultScore extends Node
         this.transform.position = new Vector(0, 30)
         
         this.textContent = new TextContent("", Color.white())
-        this.textContent.font = "30px Courier New"
+        this.textContent.font = "30px open sans"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER

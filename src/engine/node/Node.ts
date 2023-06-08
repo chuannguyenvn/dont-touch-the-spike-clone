@@ -36,6 +36,11 @@ class Node
     public update(): void
     {
     }
+    
+    public destroy(): void
+    {
+        
+    }
 
     public _executeStart(): void
     {

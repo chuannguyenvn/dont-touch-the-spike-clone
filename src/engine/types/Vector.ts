@@ -1,4 +1,6 @@
-﻿class Vector
+﻿import Maths from "../utility/Maths"
+
+class Vector
 {
     // STATIC FUNCTIONS //
     public static left(): Vector
@@ -29,6 +31,11 @@
     public static one(): Vector
     {
         return new Vector(1, 1, 1)
+    }
+    
+    public static randomUnit(): Vector
+    {
+        return (new Vector(Maths.randomRange(-1, 1), Maths.randomRange(-1, 1))).normalized()
     }
 
     public static distance(v1: Vector, v2: Vector): number

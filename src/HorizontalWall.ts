@@ -15,6 +15,7 @@ class HorizontalWall extends Wall
     {
         super(name)
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
+        this.renderer.drawOrder = 100
     }
 
     public start()

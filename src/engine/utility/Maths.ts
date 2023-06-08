@@ -16,10 +16,15 @@
         if (val < 0) return -1
         return 0
     }
+
+    public static randomRange(minInclusive: number, maxInclusive: number): number
+    {
+        return Math.random() * (maxInclusive - minInclusive) + minInclusive
+    }
     
     public static randomRangeInt(minInclusive: number, maxExclusive: number): number
     {
-        return Math.round(Math.random() * (maxExclusive - minInclusive)) + minInclusive
+        return Math.round(Maths.randomRange(minInclusive, maxExclusive)) + minInclusive
     }
 }
 

@@ -11,6 +11,7 @@ import Collider from "./engine/component/Collider"
 import {GameEvent, ParamGameEvent} from "./engine/types/Event"
 import BirdGame from "./BirdGame"
 import GameState from "./GameState"
+import TrailDot from "./TrailDot"
 
 class Bird extends Node
 {
@@ -32,8 +33,11 @@ class Bird extends Node
     private jumpCurveYCoeff: number = 100
     private jumpSprite: Sprite
     private glideSprite: Sprite
+
     private jumpSpriteTimeout: number = 0.4
     private jumpSpriteTimer: number = 0.4
+    private trailDotSpawnTimeout: number = 0.1
+    private trailDotSpawnTimer: number = 0.1
 
     public init()
     {
@@ -43,12 +47,13 @@ class Bird extends Node
         this.lastJumpPosY = this.transform.position.y
 
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
-        this.collider.size = new Vector(20, 20)
+        this.collider.size = new Vector(15, 15)
         this.collider.collisionStarted.subscribe(this.handleCollisionStart.bind(this))
 
         let sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(sprite)
+        this.renderer.drawOrder = 5
 
         this.touchedLeftWall = new GameEvent()
         this.touchedRightWall = new GameEvent()
@@ -91,7 +96,6 @@ class Bird extends Node
 
     public update()
     {
-        console.log(BirdGame.currentScore)
         if (this.isLocked)
         {
             this.playIdleAnimation()
@@ -106,6 +110,14 @@ class Bird extends Node
 
         this.jumpSpriteTimer -= Time.deltaTime()
         if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
+
+        this.trailDotSpawnTimer -= Time.deltaTime()
+        if (this.trailDotSpawnTimer < 0)
+        {
+            let trailDot = new TrailDot("Dot", this.transform.position)
+            trailDot.start()
+            this.trailDotSpawnTimer = this.trailDotSpawnTimeout
+        }
     }
 
     private move(): void
@@ -161,18 +173,18 @@ class Bird extends Node
             BirdGame.changeState(GameState.RESULT)
         }
     }
-    
+
     private wallTouchedHandler()
     {
         if (!this.isAlive) return
         BirdGame.currentScore++
     }
-    
+
     private playIdleAnimation()
     {
         if (Math.round(Time.timeSinceGameStart()) % 2 === 0) this.renderer.setDrawable(this.glideSprite)
         else this.renderer.setDrawable(this.jumpSprite)
-        
+
         this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20
     }
 }

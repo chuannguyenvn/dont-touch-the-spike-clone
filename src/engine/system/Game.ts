@@ -52,6 +52,11 @@ abstract class Game
     {
         Game._nodes.push(node)
     }
+
+    public static _unregisterNode(node: Node): void
+    {
+        Game._nodes = Game._nodes.filter((node) => node !== node)
+    }
 }
 
 export default Game

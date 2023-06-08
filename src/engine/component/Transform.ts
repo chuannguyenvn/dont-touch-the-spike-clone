@@ -69,6 +69,18 @@ class Transform extends Component
         const tween = new Tween<number>(evaluate, () => this.position.y, duration, delay, ease)
         return tween
     }
+
+    public tweenScale(to: Vector, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Vector>
+    {
+        const evaluate = (x: number) =>
+        {
+            if (relative) to.add(tween._startValue)
+            this.scale = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue)
+        }
+
+        const tween = new Tween<Vector>(evaluate, () => this.scale, duration, delay, ease)
+        return tween
+    }
 }
 
 export default Transform

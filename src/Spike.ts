@@ -8,8 +8,7 @@ import Color from "./engine/types/Color"
 import Freeform from "./engine/types/Freeform"
 import Ease from "./engine/system/tween/Ease"
 import Maths from "./engine/utility/Maths"
-import GameState from "./GameState"
-import BirdGame from "./BirdGame"
+
 
 class Spike extends Node
 {
@@ -31,22 +30,7 @@ class Spike extends Node
             new Vector(-25, 0), new Vector(0, -25)])
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(triangle)
-        
-        // BirdGame.gameStateChanged.subscribe(this.stateChangedHandler.bind(this))
-    }
-    
-    private stateChangedHandler(gameState: GameState)
-    {
-        if (gameState === GameState.PLAY)
-        {
-            this.isActive = true
-            this.isVisible = true
-        }
-        else
-        {
-            this.isActive = false
-            this.isVisible = false
-        }
+        this.renderer.drawOrder = 100
     }
     
     start(): void

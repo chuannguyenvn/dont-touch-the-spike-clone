@@ -20,7 +20,7 @@ class RetryButton extends Node
     init(): void
     {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, -100)
+        this.transform.position = new Vector(0, -150)
 
         let rectangle = new Rectangle(new Vector(200, 100), Color.white())
         this.button = this.addComponent(ComponentType.BUTTON) as Button
@@ -29,7 +29,7 @@ class RetryButton extends Node
         this.button.pivot = Alignment.MID_CENTER
 
         let textContent = new TextContent("Retry", Color.grey())
-        textContent.font = "30px Sans-serif"
+        textContent.font = "30px open sans"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(textContent)
 
