@@ -1,34 +1,39 @@
 ﻿import Node from "./engine/node/Node"
 import Transform from "./engine/component/Transform"
-import Renderer from "./engine/component/Renderer"
+import Button from "./engine/component/Button"
 import Text from "./engine/component/Text"
-import TextContent from "./engine/types/TextContent"
 import ComponentType from "./engine/component/ComponentType"
+import Vector from "./engine/types/Vector"
+import Rectangle from "./engine/types/Rectangle"
 import Color from "./engine/types/Color"
 import {Alignment} from "./engine/component/UIElement"
+import TextContent from "./engine/types/TextContent"
 import BirdGame from "./BirdGame"
 import GameState from "./GameState"
-import Vector from "./engine/types/Vector"
 
-class HighScore extends Node
+class RetryButton extends Node
 {
     public transform: Transform
+    public button: Button
     public text: Text
-    private textContent: TextContent
 
-    constructor(name: string)
+    init(): void
     {
-        super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, -30)
-        
-        this.textContent = new TextContent("00", Color.white())
-        this.textContent.font = "30px Courier New"
+        this.transform.position = new Vector(0, -100)
+
+        let rectangle = new Rectangle(new Vector(200, 100), Color.white())
+        this.button = this.addComponent(ComponentType.BUTTON) as Button
+        this.button.elementSize = new Vector(200, 100)
+        this.button.setDrawable(rectangle)
+        this.button.pivot = Alignment.MID_CENTER
+
+        let textContent = new TextContent("Retry", Color.grey())
+        textContent.font = "30px Sans-serif"
         this.text = this.addComponent(ComponentType.TEXT) as Text
-        this.text.setDrawable(this.textContent)
-        this.text.pivot = Alignment.MID_CENTER
-        this.text.drawOrder = 10
-        
+        this.text.setDrawable(textContent)
+
+        this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
@@ -38,7 +43,6 @@ class HighScore extends Node
         {
             this.isVisible = true
             this.isActive = true
-            this.textContent.text = `High score: ${BirdGame.highScore}`
         }
         else
         {
@@ -46,6 +50,11 @@ class HighScore extends Node
             this.isActive = false
         }
     }
+
+    private changeToPlayState(): void
+    {
+        BirdGame.changeState(GameState.WELCOME)
+    }
 }
 
-export default HighScore
+export default RetryButton

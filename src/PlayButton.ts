@@ -20,17 +20,18 @@ class PlayButton extends Node
     init(): void
     {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, 0)
+        this.transform.position = new Vector(0, -100)
 
+        let rectangle = new Rectangle(new Vector(200, 100), Color.white())
         this.button = this.addComponent(ComponentType.BUTTON) as Button
         this.button.elementSize = new Vector(200, 100)
-        this.button.setDrawable(new Rectangle(new Vector(200, 100), Color.red()))
-        this.button.pivot = Alignment.MID_LEFT
-        this.button.clicked.subscribe(() => console.log("clicked"))
-        this.button.hovered.subscribe(() => console.log("hovered"))
+        this.button.setDrawable(rectangle)
+        this.button.pivot = Alignment.MID_CENTER
 
+        let textContent = new TextContent("Play", Color.grey())
+        textContent.font = "30px Sans-serif"
         this.text = this.addComponent(ComponentType.TEXT) as Text
-        this.text.setDrawable(new TextContent("Play", Color.blue()))
+        this.text.setDrawable(textContent)
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))

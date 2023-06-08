@@ -2,9 +2,26 @@
 import Spike from "./Spike"
 import Vector from "./engine/types/Vector"
 import Maths from "./engine/utility/Maths"
+import BirdGame from "./BirdGame"
+import GameState from "./GameState"
 
 class VerticalWall extends Wall
 {
+
+    constructor(name: string)
+    {
+        super(name)
+        BirdGame.gameStateChanged.subscribe(this.stateChangedHandler.bind(this))
+    }
+
+    private stateChangedHandler(gameState: GameState)
+    {
+        if (gameState === GameState.WELCOME)
+        {
+            this.hideSpike()
+        }
+    }
+
     public start()
     {
         this.collider.size = new Vector(100, 600)

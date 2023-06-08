@@ -23,6 +23,7 @@ class Bird extends Node
     public renderer: Renderer
 
     private isLocked: boolean = true
+    private isAlive: boolean = true
     private lastJumpTime: number = 0
     private lastJumpPosY: number
     private isMovingRight: boolean = true
@@ -53,8 +54,8 @@ class Bird extends Node
         this.touchedRightWall = new GameEvent()
         this.touchedLeftWall.subscribe(this.turnRight.bind(this))
         this.touchedRightWall.subscribe(this.turnLeft.bind(this))
-        this.touchedLeftWall.subscribe(() => BirdGame.currentScore++)
-        this.touchedRightWall.subscribe(() => BirdGame.currentScore++)
+        this.touchedLeftWall.subscribe(this.wallTouchedHandler.bind(this))
+        this.touchedRightWall.subscribe(this.wallTouchedHandler.bind(this))
         this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
         this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
 
@@ -74,21 +75,23 @@ class Bird extends Node
     {
         if (gameState === GameState.WELCOME)
         {
+            this.isLocked = true
             this.transform.position.x = 0
         }
         else if (gameState === GameState.PLAY)
         {
+            this.isAlive = true
             this.isLocked = false
             this.jump()
         }
         else if (gameState === GameState.RESULT)
         {
-            this.isLocked = true
         }
     }
 
     public update()
     {
+        console.log(BirdGame.currentScore)
         if (this.isLocked)
         {
             this.playIdleAnimation()
@@ -154,8 +157,15 @@ class Bird extends Node
         }
         else if (collider.owner.name === "Spike")
         {
+            this.isAlive = false
             BirdGame.changeState(GameState.RESULT)
         }
+    }
+    
+    private wallTouchedHandler()
+    {
+        if (!this.isAlive) return
+        BirdGame.currentScore++
     }
     
     private playIdleAnimation()

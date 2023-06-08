@@ -32,8 +32,9 @@ class ScoreText extends Node
 
     private gameStateChangedHandler(gameState: GameState): void
     {
-        if (gameState == GameState.PLAY)
+        if (gameState === GameState.PLAY)
         {
+            this.textContent.text = "0"
             this.isVisible = true
             this.isActive = true
         }

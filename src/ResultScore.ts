@@ -20,10 +20,10 @@ class ResultScore extends Node
     {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, 40)
+        this.transform.position = new Vector(0, 30)
         
         this.textContent = new TextContent("", Color.white())
-        this.textContent.font = "20px Courier New"
+        this.textContent.font = "30px Courier New"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER

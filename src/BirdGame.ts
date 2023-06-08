@@ -11,6 +11,7 @@ import GameState from "./GameState"
 import ResultBackground from "./ResultBackground"
 import ResultScore from "./ResultScore"
 import HighScore from "./HighScore"
+import RetryButton from "./RetryButton"
 
 
 class BirdGame extends Game
@@ -31,13 +32,12 @@ class BirdGame extends Game
     {
         if (gameState === GameState.WELCOME)
         {
-            this.currentScore = 0
+            BirdGame.currentScore = 0
         }
         else if (gameState === GameState.PLAY)
         {
 
         }
-
         else if (gameState === GameState.RESULT)
         {
             if (BirdGame.highScore < BirdGame.currentScore)
@@ -74,11 +74,11 @@ class BirdGame extends Game
             leftWall.showSpike()
         })
 
-        let topWall = new HorizontalWall("Wall")
+        let topWall = new HorizontalWall("Top Wall")
         topWall.transform.position = new Vector(0, 300)
         topWall.start()
 
-        let bottomWall = new HorizontalWall("Wall")
+        let bottomWall = new HorizontalWall("Bottom Wall")
         bottomWall.transform.position = new Vector(0, -300)
         bottomWall.start()
 
@@ -100,8 +100,11 @@ class BirdGame extends Game
 
         let highScore = new HighScore("High Score")
         highScore.start()
+        
+        let retryButton = new RetryButton("Retry Button")
+        retryButton.start()
 
-        this.changeState(GameState.WELCOME)
+        BirdGame.changeState(GameState.WELCOME)
     }
 }
 
