@@ -19,12 +19,17 @@ class Bird extends Node
     public transform: Transform
     public collider: RectangleCollider
     public renderer: Renderer
+    
     private lastJumpTime: number = 0
     private lastJumpPosY: number
     private isMovingRight: boolean = true
     private moveSpeed: number = 200
     private jumpCurveXCoeff: number = 3
     private jumpCurveYCoeff: number = 100
+    private jumpSprite: Sprite
+    private glideSprite: Sprite
+    private jumpSpriteTimeout: number = 0.4
+    private jumpSpriteTimer: number = 0.4
 
     public init()
     {
@@ -45,6 +50,11 @@ class Bird extends Node
         this.touchedRightWall = new GameEvent()
         this.touchedRightWall.subscribe(this.turnLeft.bind(this))
         this.touchedLeftWall.subscribe(this.turnRight.bind(this))
+
+        this.jumpSprite = new Sprite("assets/Jump.png")
+        this.jumpSprite.scale = Vector.one().multiply(0.1)
+        this.glideSprite = new Sprite("assets/Glide.png")
+        this.glideSprite.scale = Vector.one().multiply(0.1)
     }
 
     public update()
@@ -57,6 +67,9 @@ class Bird extends Node
 
         this.transform.position.x = Maths.clamp(this.transform.position.x, -200, 200)
         this.transform.position.y = Maths.clamp(this.transform.position.y, -300, 300)
+    
+        this.jumpSpriteTimer -= Time.deltaTime()
+        if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite) 
     }
 
     private move(): void
@@ -74,17 +87,23 @@ class Bird extends Node
     public turnLeft(): void
     {
         this.isMovingRight = false
+        this.jumpSprite.flipX = false
+        this.glideSprite.flipX = false
     }
 
     public turnRight(): void
     {
         this.isMovingRight = true
+        this.jumpSprite.flipX = true
+        this.glideSprite.flipX = true
     }
 
     private jump(): void
     {
+        this.renderer.setDrawable(this.jumpSprite)
         this.lastJumpTime = Time.timeSinceGameStart()
         this.lastJumpPosY = this.transform.position.y
+        this.jumpSpriteTimer = this.jumpSpriteTimeout
     }
 
     private jumpYFunction(elapsedTime: number): number
