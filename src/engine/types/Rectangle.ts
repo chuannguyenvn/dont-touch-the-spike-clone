@@ -1,7 +1,7 @@
-﻿import Drawable from "./Drawable.js"
-import Canvas from "../system/Canvas.js"
-import Color from "./Color.js"
-import Vector from "./Vector.js"
+﻿import Drawable from "./Drawable"
+import Canvas from "../system/Canvas"
+import Color from "./Color"
+import Vector from "./Vector"
 
 class Rectangle implements Drawable
 {

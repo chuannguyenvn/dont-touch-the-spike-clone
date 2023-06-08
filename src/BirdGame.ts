@@ -1,15 +1,8 @@
-﻿import Game from "../engine/system/Game.js"
-import Bird from "./Bird.js"
-import Wall from "./Wall.js"
-import Vector from "../engine/types/Vector.js"
-import Node from "../engine/node/Node.js"
-import ComponentType from "../engine/component/ComponentType.js"
-import Button from "../engine/component/Button.js"
-import Rectangle from "../engine/types/Rectangle.js"
-import Color from "../engine/types/Color.js"
-import {Alignment} from "../engine/component/UIElement.js"
-import Transform from "../engine/component/Transform.js"
-import PlayButton from "./PlayButton.js"
+﻿import Game from "./engine/system/Game"
+import Bird from "./Bird"
+import Wall from "./Wall"
+import Vector from "./engine/types/Vector"
+import PlayButton from "./PlayButton"
 
 class BirdGame extends Game
 {

@@ -1,13 +1,13 @@
-﻿import Node from "../engine/node/Node.js"
-import Transform from "../engine/component/Transform.js"
-import RectangleCollider from "../engine/component/RectangleCollider.js"
-import Renderer from "../engine/component/Renderer.js"
-import ComponentType from "../engine/component/ComponentType.js"
-import Vector from "../engine/types/Vector.js"
-import Color from "../engine/types/Color.js"
-import Freeform from "../engine/types/Freeform.js"
-import Ease from "../engine/system/tween/Ease.js"
-import Maths from "../engine/utility/Maths.js"
+﻿import Node from "./engine/node/Node"
+import Transform from "./engine/component/Transform"
+import RectangleCollider from "./engine/component/RectangleCollider"
+import Renderer from "./engine/component/Renderer"
+import ComponentType from "./engine/component/ComponentType"
+import Vector from "./engine/types/Vector"
+import Color from "./engine/types/Color"
+import Freeform from "./engine/types/Freeform"
+import Ease from "./engine/system/tween/Ease"
+import Maths from "./engine/utility/Maths"
 
 class Spike extends Node
 {

@@ -1,5 +1,5 @@
-﻿import Color from "./Color.js"
-import Vector from "./Vector.js"
+﻿import Color from "./Color"
+import Vector from "./Vector"
 
 interface Drawable
 {

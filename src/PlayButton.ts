@@ -1,13 +1,13 @@
-﻿import Node from "../engine/node/Node.js"
-import ComponentType from "../engine/component/ComponentType.js"
-import Transform from "../engine/component/Transform.js"
-import Vector from "../engine/types/Vector.js"
-import Button from "../engine/component/Button.js"
-import Rectangle from "../engine/types/Rectangle.js"
-import Color from "../engine/types/Color.js"
-import {Alignment} from "../engine/component/UIElement.js"
-import Text from "../engine/component/Text.js"
-import TextContent from "../engine/types/TextContent.js"
+﻿import Node from "./engine/node/Node"
+import ComponentType from "./engine/component/ComponentType"
+import Transform from "./engine/component/Transform"
+import Vector from "./engine/types/Vector"
+import Button from "./engine/component/Button"
+import Rectangle from "./engine/types/Rectangle"
+import Color from "./engine/types/Color"
+import {Alignment} from "./engine/component/UIElement"
+import Text from "./engine/component/Text"
+import TextContent from "./engine/types/TextContent"
 
 class PlayButton extends Node
 {

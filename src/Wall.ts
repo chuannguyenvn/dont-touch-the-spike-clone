@@ -1,13 +1,13 @@
-﻿import Node from "../engine/node/Node.js"
-import Transform from "../engine/component/Transform.js"
-import Renderer from "../engine/component/Renderer.js"
-import ComponentType from "../engine/component/ComponentType.js"
-import Vector from "../engine/types/Vector.js"
-import RectangleCollider from "../engine/component/RectangleCollider.js"
-import Rectangle from "../engine/types/Rectangle.js"
-import Color from "../engine/types/Color.js"
-import Spike from "./Spike.js"
-import Maths from "../engine/utility/Maths.js"
+﻿import Node from "./engine/node/Node"
+import Transform from "./engine/component/Transform"
+import Renderer from "./engine/component/Renderer"
+import ComponentType from "./engine/component/ComponentType"
+import Vector from "./engine/types/Vector"
+import RectangleCollider from "./engine/component/RectangleCollider"
+import Rectangle from "./engine/types/Rectangle"
+import Color from "./engine/types/Color"
+import Spike from "./Spike"
+import Maths from "./engine/utility/Maths"
 
 class Wall extends Node
 {
