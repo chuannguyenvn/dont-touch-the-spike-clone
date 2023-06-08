@@ -65,11 +65,11 @@ class Bird extends Node
         let elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
         this.transform.position.y = this.jumpYFunction(elapsedJumpTime)
 
-        this.transform.position.x = Maths.clamp(this.transform.position.x, -200, 200)
-        this.transform.position.y = Maths.clamp(this.transform.position.y, -300, 300)
-    
+        // this.transform.position.x = Maths.clamp(this.transform.position.x, -200, 200)
+        // this.transform.position.y = Maths.clamp(this.transform.position.y, -300, 300)
+
         this.jumpSpriteTimer -= Time.deltaTime()
-        if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite) 
+        if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
     }
 
     private move(): void

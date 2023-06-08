@@ -37,7 +37,7 @@ class Renderer extends Component
 
     public _draw(): void
     {
-        this.drawable._draw(Vector.zero())
+        this.drawable._draw()
     }
 }
 

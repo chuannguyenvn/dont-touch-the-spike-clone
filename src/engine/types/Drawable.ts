@@ -5,7 +5,8 @@ interface Drawable
 {
     drawOrder: number
     color: Color
-    _draw(offSet: Vector): void
+    offSet: Vector
+    _draw(): void
 }
 
 export default Drawable

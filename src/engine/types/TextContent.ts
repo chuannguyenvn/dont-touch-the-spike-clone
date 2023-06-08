@@ -8,24 +8,23 @@ class TextContent implements Drawable
     public text: string
     public color: Color
     public drawOrder: number
-
+    public offSet: Vector
+    
     constructor(text: string, color: Color = Color.black())
     {
         this.text = text
         this.color = color
     }
     
-    _draw(offSet: Vector): void 
+    _draw(): void 
     {
         Canvas._canvasContext.font = "30px Verdana"
         Canvas._canvasContext.fillStyle = this.color.toHex()
-        Canvas._canvasContext.fillText(this.text, offSet.x, offSet.y)
+        Canvas._canvasContext.fillText(this.text, this.offSet.x, this.offSet.y)
         const metrics = Canvas._canvasContext.measureText(this.text)
         const fontHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent
         const actualHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
         const elementSize = new Vector(metrics.width, actualHeight)
-        console.log(elementSize)
-
     }
 }
 

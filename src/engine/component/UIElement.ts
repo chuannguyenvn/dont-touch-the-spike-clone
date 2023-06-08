@@ -57,7 +57,8 @@ class UIElement extends Renderer
 
         }
 
-        this.drawable._draw(this.elementSize.multiplyComp(normalizedCoordinate))
+        this.drawable.offSet = this.elementSize.multiplyComp(normalizedCoordinate)
+        this.drawable._draw()
     }
 
 }

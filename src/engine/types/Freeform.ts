@@ -8,6 +8,7 @@ class Freeform implements Drawable
     public drawOrder: number
     public color: Color
     public _points: Vector[]
+    public offSet: Vector
 
     constructor(color: Color)
     {

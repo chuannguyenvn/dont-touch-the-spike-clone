@@ -24,7 +24,7 @@ class Spike extends Node
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
         this.collider.size = new Vector(50, 50)
 
-        let triangle = new Freeform(Color.red())
+        let triangle = new Freeform(Color.grey())
         triangle.setPoints([new Vector(25, 0), new Vector(0, 25),
             new Vector(-25, 0), new Vector(0, -25)])
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
@@ -33,8 +33,8 @@ class Spike extends Node
 
     start(): void
     {
-        this.showingPosX = this.transform.position.x
-        this.hidingPosX = this.transform.position.x + Maths.sign(this.transform.position.x) * 50
+        this.showingPosX = Maths.sign(this.transform.position.x) * 200
+        this.hidingPosX =  Maths.sign(this.transform.position.x) * 250
     }
 
     public show(): void

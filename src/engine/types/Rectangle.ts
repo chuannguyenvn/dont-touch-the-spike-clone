@@ -8,18 +8,21 @@ class Rectangle implements Drawable
     public drawOrder: number
     public color: Color
     public size: Vector
+    public offSet: Vector
 
     constructor(size: Vector, color: Color)
     {
         this.color = color
         this.size = size
+        this.offSet = new Vector(-this.size.x / 2, -this.size.y / 2)
     }
 
-    public _draw(offset: Vector = new Vector(-this.size.x / 2, -this.size.y / 2)): void
+    public _draw(): void
     {
         Canvas._canvasContext.fillStyle = this.color.toHex()
-        Canvas._canvasContext.fillRect(offset.x, offset.y, this.size.x, this.size.y)
+        Canvas._canvasContext.fillRect(this.offSet.x, this.offSet.y, this.size.x, this.size.y)
     }
+
 }
 
 export default Rectangle

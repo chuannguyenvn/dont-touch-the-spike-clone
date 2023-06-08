@@ -13,21 +13,17 @@ class Wall extends Node
 {
     public transform: Transform
     public collider: RectangleCollider
-    public renderer: Renderer
     private spikes: Spike[] = []
 
-    public init()
+    constructor(name: string)
     {
+        super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
-        this.collider.size = new Vector(10, 600)
-
-        let rectangle = new Rectangle(new Vector(10, 600), new Color(1, 0.5, 0))
-        this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
-        this.renderer.setDrawable(rectangle)
+        this.collider.size = new Vector(100, 600)
     }
-
+    
     public start()
     {
         for (let y = -200; y <= 200; y += 50)
@@ -39,6 +35,8 @@ class Wall extends Node
 
             this.spikes.push(spike)
         }
+
+        console.log(this.transform.position)
     }
 
     public showSpike()

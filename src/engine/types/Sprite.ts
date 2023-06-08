@@ -14,6 +14,7 @@ class Sprite implements Drawable
     public flipX: boolean = false
     public flipY: boolean = false
     public scale: Vector = Vector.one()
+    public offSet: Vector
 
     constructor(imagePath = "")
     {
@@ -31,6 +32,7 @@ class Sprite implements Drawable
         this._image = new Image()
         this._image.src = imagePath
     }
+
 }
 
 export default Sprite

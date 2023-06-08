@@ -26,9 +26,9 @@ class Canvas
         Canvas._canvasContext.fillStyle = 'white'
         Canvas._canvasContext.fillRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
 
-        for (const sprite of this._sprites)
+        for (const renderer of this._sprites)
         {
-            const localToWorld = sprite._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
+            const localToWorld = renderer._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
             const worldToCamera = Canvas._worldToCameraMatrix
             const res = worldToCamera.multiplyMatrix(localToWorld)
 
@@ -36,7 +36,7 @@ class Canvas
                 res.values[0][0], res.values[1][0], res.values[0][1],
                 res.values[1][1], res.values[0][2], res.values[1][2])
 
-            sprite._draw()
+            renderer._draw()
             Canvas._canvasContext.resetTransform()
         }
     }
