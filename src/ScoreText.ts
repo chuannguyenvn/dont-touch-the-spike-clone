@@ -1,11 +1,9 @@
 ﻿import Node from "./engine/node/Node"
 import Transform from "./engine/component/Transform"
-import Renderer from "./engine/component/Renderer"
 import ComponentType from "./engine/component/ComponentType"
 import TextContent from "./engine/types/TextContent"
 import Color from "./engine/types/Color"
-import Circle from "./engine/types/Circle"
-import {Alignment, UIElement} from "./engine/component/UIElement"
+import {Alignment} from "./engine/component/UIElement"
 import Text from "./engine/component/Text"
 import BirdGame from "./BirdGame"
 import GameState from "./GameState"
@@ -16,8 +14,7 @@ class ScoreText extends Node
     public text: Text
     private textContent: TextContent
 
-    constructor(name: string)
-    {
+    constructor(name: string) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
@@ -30,24 +27,21 @@ class ScoreText extends Node
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
-    private gameStateChangedHandler(gameState: GameState): void
-    {
+    public changeScore(score: number): void {
+        this.textContent.text = score.toString()
+    }
+
+    private gameStateChangedHandler(gameState: GameState): void {
         if (gameState === GameState.PLAY)
         {
             this.textContent.text = "0"
             this.isVisible = true
             this.isActive = true
-        }
-        else
+        } else
         {
             this.isVisible = false
             this.isActive = false
         }
-    }
-
-    public changeScore(score: number)
-    {
-        this.textContent.text = score.toString()
     }
 }
 

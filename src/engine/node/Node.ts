@@ -12,38 +12,32 @@ import Text from '../component/Text'
 class Node
 {
     public name: string
-    public isActive: boolean = true
-    public isVisible: boolean = true
+    public isActive = true
+    public isVisible = true
     public parentNode: Node | null = null
     public childNodes: Node[] = []
     private components: Component[] = []
 
-    constructor(name: string)
-    {
+    constructor(name: string) {
         this.name = name
         Game._registerNode(this)
         this.init()
     }
 
-    public init(): void
-    {
+    public init(): void {
     }
 
-    public start(): void
-    {
+    public start(): void {
     }
 
-    public update(): void
-    {
-    }
-    
-    public destroy(): void
-    {
-        
+    public update(): void {
     }
 
-    public _executeStart(): void
-    {
+    public destroy(): void {
+
+    }
+
+    public _executeStart(): void {
         this.start()
         for (let i = 0; i < this.childNodes.length; i++)
         {
@@ -51,26 +45,23 @@ class Node
         }
     }
 
-    public _executeUpdate(): void
-    {
+    public _executeUpdate(): void {
         if (!this.isActive) return
         this.update()
-        
+
         for (let i = 0; i < this.childNodes.length; i++)
         {
             this.childNodes[i]._executeUpdate()
         }
     }
 
-    public getComponent(componentType: ComponentType): Component
-    {
+    public getComponent(componentType: ComponentType): Component {
         const result = this.components.filter(component => component.type === componentType)
         if (result.length === 0) Debug.logError(`Component of type ${componentType} not found on actor ${this.name}`)
         return result[0]
     }
 
-    public addComponent(componentType: ComponentType): Component | undefined
-    {
+    public addComponent(componentType: ComponentType): Component | undefined {
         const i = this.components.findIndex(component => component.type === componentType)
         if (i !== -1)
         {
@@ -114,32 +105,27 @@ class Node
         return newComponent
     }
 
-    public removeComponent(componentType: ComponentType): void
-    {
+    public removeComponent(componentType: ComponentType): void {
         // TODO
     }
 
-    public setChild(childNode: Node)
-    {
+    public setChild(childNode: Node) {
         if (this.childNodes.includes(childNode)) return
         this.childNodes.push(childNode)
         childNode.parentNode = this
     }
 
-    public removeChild(childNode: Node)
-    {
+    public removeChild(childNode: Node) {
         if (!this.childNodes.includes(childNode)) return
         this.childNodes = this.childNodes.filter((c) => c !== childNode)
         childNode.parentNode = null
     }
 
-    public setParent(parentNode: Node)
-    {
+    public setParent(parentNode: Node) {
         parentNode.setChild(this)
     }
 
-    public removeParent()
-    {
+    public removeParent() {
         if (this.parentNode === null)
             return
         else

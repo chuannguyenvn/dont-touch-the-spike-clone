@@ -16,92 +16,95 @@ import RetryButton from "./RetryButton"
 
 class BirdGame extends Game
 {
-    public static currentScore: number = 0
-    public static highScore: number = 0
-
+    public static highScore = 0
+    public static scoreChanged: ParamGameEvent<number> = new ParamGameEvent<number>()
     public static gameState: GameState = GameState.WELCOME
     public static gameStateChanged: ParamGameEvent<GameState> = new ParamGameEvent<GameState>()
 
-    public static changeState(newState: GameState)
-    {
+    private static _currentScore = 0
+
+    static get currentScore(): number {
+        return BirdGame._currentScore
+    }
+
+    static set currentScore(value: number) {
+        BirdGame._currentScore = value
+        BirdGame.scoreChanged.invoke(value)
+    }
+
+    public static changeState(newState: GameState): void {
         BirdGame.gameState = newState
         BirdGame.gameStateChanged.invoke(newState)
     }
 
-    public static stateChangeHandler(gameState: GameState)
-    {
+    public static stateChangeHandler(gameState: GameState): void {
         if (gameState === GameState.WELCOME)
         {
-            BirdGame.currentScore = 0
-        }
-        else if (gameState === GameState.PLAY)
+            BirdGame._currentScore = 0
+        } else if (gameState === GameState.PLAY)
         {
-
-        }
-        else if (gameState === GameState.RESULT)
+            //
+        } else if (gameState === GameState.RESULT)
         {
-            if (BirdGame.highScore < BirdGame.currentScore)
-                BirdGame.highScore = BirdGame.currentScore
+            if (BirdGame.highScore < BirdGame._currentScore)
+                BirdGame.highScore = BirdGame._currentScore
         }
     }
 
-    public static init(ctx: CanvasRenderingContext2D)
-    {
+    public static init(ctx: CanvasRenderingContext2D): void {
         super.init(ctx)
 
         BirdGame.gameStateChanged.subscribe(BirdGame.stateChangeHandler.bind(BirdGame))
 
-        let bird = new Bird("Main Bird")
+        const bird = new Bird("Main Bird")
         bird.start()
 
-        let leftWall = new VerticalWall("Wall")
+        const leftWall = new VerticalWall("Wall")
         leftWall.transform.position = new Vector(-250, 0)
         leftWall.start()
 
-        let rightWall = new VerticalWall("Wall")
+        const rightWall = new VerticalWall("Wall")
         rightWall.transform.position = new Vector(250, 0)
         rightWall.start()
 
-        bird.touchedLeftWall.subscribe(() =>
-        {
+        bird.touchedLeftWall.subscribe(() => {
             leftWall.hideSpike()
             rightWall.showSpike()
         })
 
-        bird.touchedRightWall.subscribe(() =>
-        {
+        bird.touchedRightWall.subscribe(() => {
             rightWall.hideSpike()
             leftWall.showSpike()
         })
 
-        let topWall = new HorizontalWall("Top Wall")
+        const topWall = new HorizontalWall("Top Wall")
         topWall.transform.position = new Vector(0, 300)
         topWall.start()
 
-        let bottomWall = new HorizontalWall("Bottom Wall")
+        const bottomWall = new HorizontalWall("Bottom Wall")
         bottomWall.transform.position = new Vector(0, -300)
         bottomWall.start()
 
-        let scoreBackground = new ScoreBackground("Score Background")
+        const scoreBackground = new ScoreBackground("Score Background")
         scoreBackground.start()
 
-        let scoreText = new ScoreText("Score Text")
+        const scoreText = new ScoreText("Score Text")
         bird.scoreChanged.subscribe(scoreText.changeScore.bind(scoreText))
         scoreText.start()
 
-        let playButton = new PlayButton("Play Button")
+        const playButton = new PlayButton("Play Button")
         playButton.start()
 
-        let resultBackground = new ResultBackground("Result Background")
+        const resultBackground = new ResultBackground("Result Background")
         resultBackground.start()
 
-        let resultScore = new ResultScore("Result Score")
+        const resultScore = new ResultScore("Result Score")
         resultScore.start()
 
-        let highScore = new HighScore("High Score")
+        const highScore = new HighScore("High Score")
         highScore.start()
-        
-        let retryButton = new RetryButton("Retry Button")
+
+        const retryButton = new RetryButton("Retry Button")
         retryButton.start()
 
         BirdGame.changeState(GameState.WELCOME)

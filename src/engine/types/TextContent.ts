@@ -10,15 +10,13 @@ class TextContent implements Drawable
     public drawOrder: number
     public offSet: Vector
     public font: string
-    
-    constructor(text: string, color: Color = Color.black())
-    {
+
+    constructor(text: string, color: Color = Color.black()) {
         this.text = text
         this.color = color
     }
-    
-    _draw(): void 
-    {
+
+    _draw(): void {
         Canvas._canvasContext.font = this.font
         Canvas._canvasContext.textAlign = "center"
         Canvas._canvasContext.textBaseline = "middle"

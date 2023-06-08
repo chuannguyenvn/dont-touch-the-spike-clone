@@ -1,14 +1,12 @@
-import ComponentType from './engine/component/ComponentType'
 import BirdGame from "./BirdGame"
 
 class Game
 {
-    constructor()
-    {
+    constructor() {
         console.log('Game created')
 
-        let game = document.getElementById("game")
-        let canvas = document.createElement("canvas")
+        const game = document.getElementById("game")
+        const canvas = document.createElement("canvas")
         canvas.id = "canvas"
         canvas.width = 400
         canvas.height = 600

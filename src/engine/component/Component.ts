@@ -6,9 +6,8 @@ class Component
     public readonly type: ComponentType
     public readonly _componentRequirements: ComponentType[] = []
     public readonly owner: Node
-    
-    constructor(owner: Node)
-    {
+
+    constructor(owner: Node) {
         this.owner = owner
     }
 }

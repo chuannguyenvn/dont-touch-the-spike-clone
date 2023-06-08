@@ -8,27 +8,17 @@ import GameState from "./GameState"
 class VerticalWall extends Wall
 {
 
-    constructor(name: string)
-    {
+    constructor(name: string) {
         super(name)
         BirdGame.gameStateChanged.subscribe(this.stateChangedHandler.bind(this))
     }
 
-    private stateChangedHandler(gameState: GameState)
-    {
-        if (gameState === GameState.WELCOME)
-        {
-            this.hideSpike()
-        }
-    }
-
-    public start()
-    {
+    public start(): void {
         this.collider.size = new Vector(100, 600)
 
         for (let y = -200; y <= 200; y += 50)
         {
-            let spike = new Spike("Spike")
+            const spike = new Spike("Spike")
             spike.setParent(this)
             spike.transform.position = new Vector(this.transform.position.x, y)
             spike.start()
@@ -37,26 +27,30 @@ class VerticalWall extends Wall
         }
     }
 
-    public showSpike()
-    {
-        let spikeCount = this.difficultyFunction(BirdGame.currentScore)
-        let spikeIndices = Maths.randomIntBag(0, this.spikes.length, spikeCount)
+    public showSpike(): void {
+        const spikeCount = this.difficultyFunction(BirdGame.currentScore)
+        const spikeIndices = Maths.randomIntBag(0, this.spikes.length, spikeCount)
         for (let i = 0; i < spikeIndices.length; i++)
         {
             this.spikes[spikeIndices[i]].show()
         }
     }
 
-    public hideSpike()
-    {
+    public hideSpike(): void {
         for (let i = 0; i < this.spikes.length; i++)
         {
             this.spikes[i].hide()
         }
     }
-    
-    private difficultyFunction(x: number)
-    {
+
+    private stateChangedHandler(gameState: GameState): void {
+        if (gameState === GameState.WELCOME)
+        {
+            this.hideSpike()
+        }
+    }
+
+    private difficultyFunction(x: number): number {
         return Math.floor(Math.log(x + 2) / Math.log(1.6))
     }
 }

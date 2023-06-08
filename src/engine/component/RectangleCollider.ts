@@ -12,15 +12,13 @@ class RectangleCollider extends Collider
     // COMPONENT PROPERTIES //
     public size: Vector
 
-    constructor(owner: Node, size: Vector = Vector.one(), offset: Vector = Vector.zero())
-    {
+    constructor(owner: Node, size: Vector = Vector.one(), offset: Vector = Vector.zero()) {
         super(owner)
         this.size = size
         this.offset = offset
     }
 
-    public AABB(): Rect
-    {
+    public AABB(): Rect {
         const position = this._ownerTransform.position
         return new Rect(position.add(this.offset), this.size)
     }

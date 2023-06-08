@@ -5,23 +5,20 @@ import Matrix from "../types/Matrix"
 
 class Canvas
 {
-    private static _renderers: Renderer[] = []
     public static _canvasContext: CanvasRenderingContext2D
     public static _worldToCameraMatrix: Matrix
-
     public static canvasSize: Vector = new Vector(400, 600)
     public static backgroundColor: Color = Color.white()
+    private static _renderers: Renderer[] = []
 
-    public static _init(canvasContext: CanvasRenderingContext2D): void
-    {
+    public static _init(canvasContext: CanvasRenderingContext2D): void {
         Canvas._canvasContext = canvasContext
         const translationMatrix = Matrix.translate(Canvas.canvasSize.x / 2, Canvas.canvasSize.y / 2)
         const scaleMatrix = Matrix.scale(1, -1)
         this._worldToCameraMatrix = translationMatrix.multiplyMatrix(scaleMatrix)
     }
 
-    public static _draw(): void
-    {
+    public static _draw(): void {
         Canvas._canvasContext.clearRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
         Canvas._canvasContext.fillStyle = 'white'
         Canvas._canvasContext.fillRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
@@ -43,8 +40,7 @@ class Canvas
         }
     }
 
-    public static _registerRenderer(sprite: Renderer): void
-    {
+    public static _registerRenderer(sprite: Renderer): void {
         this._renderers.push(sprite)
     }
 }

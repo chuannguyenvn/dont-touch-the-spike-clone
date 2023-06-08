@@ -12,16 +12,14 @@ class Tween<T extends number | Vector> extends TweenBase
                 retrieveStartValue: () => T,
                 duration: number,
                 delay: number,
-                ease: Ease)
-    {
+                ease: Ease) {
         super(duration, delay, ease)
         this.evaluate = evaluateFunction
         this._retrieveStartValue = retrieveStartValue
         this._start = this._start.bind(this)
     }
 
-    public _start()
-    {
+    public _start() {
         this._startValue = this._retrieveStartValue()
         super._start()
     }

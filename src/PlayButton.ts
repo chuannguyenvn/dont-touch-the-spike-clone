@@ -17,18 +17,17 @@ class PlayButton extends Node
     public button: Button
     public text: Text
 
-    init(): void
-    {
+    init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.position = new Vector(0, -100)
 
-        let rectangle = new Rectangle(new Vector(200, 100), Color.white())
+        const rectangle = new Rectangle(new Vector(200, 100), Color.white())
         this.button = this.addComponent(ComponentType.BUTTON) as Button
         this.button.elementSize = new Vector(200, 100)
         this.button.setDrawable(rectangle)
         this.button.pivot = Alignment.MID_CENTER
 
-        let textContent = new TextContent("Play", Color.grey())
+        const textContent = new TextContent("Play", Color.grey())
         textContent.font = "30px open sans"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(textContent)
@@ -37,22 +36,19 @@ class PlayButton extends Node
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
-    private gameStateChangedHandler(gameState: GameState): void
-    {
+    private gameStateChangedHandler(gameState: GameState): void {
         if (gameState == GameState.WELCOME)
         {
             this.isVisible = true
             this.isActive = true
-        }
-        else
+        } else
         {
             this.isVisible = false
             this.isActive = false
         }
     }
-    
-    private changeToPlayState(): void
-    {
+
+    private changeToPlayState(): void {
         BirdGame.changeState(GameState.PLAY)
     }
 }

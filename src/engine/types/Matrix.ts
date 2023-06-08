@@ -3,8 +3,19 @@ import Maths from "../utility/Maths"
 
 class Matrix
 {
-    public static zero()
-    {
+    public values: number[][] = []
+
+    constructor(x0y0 = 0, x0y1 = 0, x0y2 = 0,
+                x1y0 = 0, x1y1 = 0, x1y2 = 0,
+                x2y0 = 0, x2y1 = 0, x2y2 = 0) {
+        this.values = [
+            [x0y0, x0y1, x0y2],
+            [x1y0, x1y1, x1y2],
+            [x2y0, x2y1, x2y2],
+        ]
+    }
+
+    public static zero() {
         return new Matrix(
             0, 0, 0,
             0, 0, 0,
@@ -12,8 +23,7 @@ class Matrix
         )
     }
 
-    public static identity()
-    {
+    public static identity() {
         return new Matrix(
             1, 0, 0,
             0, 1, 0,
@@ -21,16 +31,14 @@ class Matrix
         )
     }
 
-    public static translate(x: number, y: number): Matrix
-    {
+    public static translate(x: number, y: number): Matrix {
         const translationMatrix = Matrix.identity()
         translationMatrix.values[0][2] = x
         translationMatrix.values[1][2] = y
         return translationMatrix
     }
 
-    public static rotate(angle: number): Matrix
-    {
+    public static rotate(angle: number): Matrix {
         const rotationMatrix = Matrix.identity()
         const cosTheta = Math.cos(angle * Maths.deg2Rad)
         const sinTheta = Math.sin(angle * Maths.deg2Rad)
@@ -41,29 +49,14 @@ class Matrix
         return rotationMatrix
     }
 
-    public static scale(x: number, y: number): Matrix
-    {
+    public static scale(x: number, y: number): Matrix {
         const scaleMatrix = Matrix.identity()
         scaleMatrix.values[0][0] = x
         scaleMatrix.values[1][1] = y
         return scaleMatrix
     }
 
-    public values: number[][] = []
-
-    constructor(x0y0 = 0, x0y1 = 0, x0y2 = 0,
-                x1y0 = 0, x1y1 = 0, x1y2 = 0,
-                x2y0 = 0, x2y1 = 0, x2y2 = 0)
-    {
-        this.values = [
-            [x0y0, x0y1, x0y2],
-            [x1y0, x1y1, x1y2],
-            [x2y0, x2y1, x2y2],
-        ]
-    }
-
-    public determinant(): number
-    {
+    public determinant(): number {
         const a = this.values[0][0]
         const b = this.values[0][1]
         const c = this.values[0][2]
@@ -79,8 +72,7 @@ class Matrix
         return det
     }
 
-    public inverse(): Matrix
-    {
+    public inverse(): Matrix {
         const determinant = this.determinant()
         if (determinant === 0)
         {
@@ -105,8 +97,7 @@ class Matrix
         return inverseMatrix
     }
 
-    public transpose(): Matrix
-    {
+    public transpose(): Matrix {
         const transposeMatrix = new Matrix()
 
         for (let i = 0; i < 3; i++)
@@ -120,8 +111,7 @@ class Matrix
         return transposeMatrix
     }
 
-    public multiplyMatrix(other: Matrix)
-    {
+    public multiplyMatrix(other: Matrix) {
         const result = new Matrix()
 
         const a = this.values
@@ -151,8 +141,7 @@ class Matrix
         return result
     }
 
-    public matrixMultiplyComponentWise(other: Matrix)
-    {
+    public matrixMultiplyComponentWise(other: Matrix) {
         const result = new Matrix()
 
         for (let i = 0; i < 3; i++)
@@ -166,8 +155,7 @@ class Matrix
         return result
     }
 
-    public multiplyVector(vector: Vector): Vector
-    {
+    public multiplyVector(vector: Vector): Vector {
         return new Vector(
             this.values[0][0] * vector.x + this.values[0][1] * vector.y + this.values[0][2] * vector.z,
             this.values[1][0] * vector.x + this.values[1][1] * vector.y + this.values[1][2] * vector.z,

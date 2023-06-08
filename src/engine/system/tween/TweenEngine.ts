@@ -6,31 +6,28 @@ class TweenEngine
 {
     private static _tweens: TweenBase[] = []
 
-    public static _registerTween(tween: TweenBase): void
-    {
+    public static _registerTween(tween: TweenBase): void {
         this._tweens.push(tween)
     }
 
-    public static _unregisterTween(tween: TweenBase): void
-    {
+    public static _unregisterTween(tween: TweenBase): void {
         TweenEngine._tweens = TweenEngine._tweens.filter(x => x != tween)
     }
 
-    public static _handleTween(): void
-    {
+    public static _handleTween(): void {
         const finishedTweens: TweenBase[] = []
 
         for (const tween of TweenEngine._tweens)
         {
             if (!tween._isStarted) tween._start()
-            
+
             if (tween._startTime + tween._delay < Time.timeSinceGameStart())
             {
                 const x = (Time.timeSinceGameStart() - tween._startTime) / tween._duration
                 const easedX = easeDictionary[tween._ease](x)
                 tween.evaluate(easedX)
             }
-            
+
             if (tween._startTime + tween._duration < Time.timeSinceGameStart())
             {
                 finishedTweens.push(tween)

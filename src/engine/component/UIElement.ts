@@ -19,19 +19,16 @@ class UIElement extends Renderer
     public color: Color
     public elementSize: Vector
 
-    get rect(): Rect
-    {
-        let transform = this.owner.getComponent(ComponentType.TRANSFORM) as Transform
-        return new Rect(transform.position, this.elementSize)
-    }
-
-    constructor(owner: Node)
-    {
+    constructor(owner: Node) {
         super(owner)
     }
 
-    public _draw(): void
-    {
+    get rect(): Rect {
+        const transform = this.owner.getComponent(ComponentType.TRANSFORM) as Transform
+        return new Rect(transform.position, this.elementSize)
+    }
+
+    public _draw(): void {
         if (!this.owner.isVisible) return
 
         let normalizedCoordinate = Vector.zero()

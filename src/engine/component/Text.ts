@@ -6,13 +6,11 @@ import Vector from "../types/Vector"
 
 class Text extends UIElement
 {
-    constructor(owner: Node)
-    {
+    constructor(owner: Node) {
         super(owner)
     }
-    
-    setDrawable(drawable: TextContent): void
-    {
+
+    setDrawable(drawable: TextContent): void {
         super.setDrawable(drawable)
 
         const metrics = Canvas._canvasContext.measureText(drawable.text)

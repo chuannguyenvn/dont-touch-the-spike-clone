@@ -11,14 +11,13 @@ class ScoreBackground extends Node
 {
     public transform: Transform
     public renderer: Renderer
-    
-    constructor(name: string)
-    {
+
+    constructor(name: string) {
         super(name)
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
-        let circle = new Circle(100, new Color(0.9, 0.9, 0.9))
+        const circle = new Circle(100, new Color(0.9, 0.9, 0.9))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(circle)
         this.renderer.drawOrder = -2
@@ -26,14 +25,12 @@ class ScoreBackground extends Node
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
-    private gameStateChangedHandler(gameState: GameState): void
-    {
+    private gameStateChangedHandler(gameState: GameState): void {
         if (gameState == GameState.PLAY)
         {
             this.isVisible = true
             this.isActive = true
-        }
-        else
+        } else
         {
             this.isVisible = false
             this.isActive = false

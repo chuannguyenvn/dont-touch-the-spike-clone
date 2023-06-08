@@ -10,44 +10,37 @@ class Collider extends Component
 {
     // COMPONENT METADATA //
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
-
-    // COMPONENT PROPERTIES //
-    private _currentFrameCollidingColliders: Collider[] = []
-    private _lastFrameCollidingColliders: Collider[] = []
-    protected _ownerTransform: Transform
-    
     public collisionStarted: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionHappening: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionEnded: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public offset: Vector
+    protected _ownerTransform: Transform
+    // COMPONENT PROPERTIES //
+    private _currentFrameCollidingColliders: Collider[] = []
+    private _lastFrameCollidingColliders: Collider[] = []
 
-    constructor(owner: Node)
-    {
+    constructor(owner: Node) {
         super(owner)
         Physics._registerCollider(this)
         this._ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
     }
 
-    public _getWorldPosition(): Vector
-    {
+    public _getWorldPosition(): Vector {
         return this._ownerTransform.position.add(this.offset)
     }
 
-    public _addCollidingCollider(collider: Collider): void
-    {
+    public _addCollidingCollider(collider: Collider): void {
         this._currentFrameCollidingColliders.push(collider)
         if (this._lastFrameCollidingColliders.findIndex(c => c === collider) === -1)
         {
             this.collisionStarted.invoke(collider)
-        }
-        else
+        } else
         {
             this.collisionHappening.invoke(collider)
         }
     }
 
-    public _confirmCollidingColliders(): void
-    {
+    public _confirmCollidingColliders(): void {
         for (const collider of this._lastFrameCollidingColliders)
         {
             if (this._currentFrameCollidingColliders.findIndex(c => c === collider) === -1)

@@ -23,24 +23,23 @@ class Bird extends Node
     public collider: RectangleCollider
     public renderer: Renderer
 
-    private isLocked: boolean = true
-    private isAlive: boolean = true
-    private lastJumpTime: number = 0
+    private isLocked = true
+    private isAlive = true
+    private lastJumpTime = 0
     private lastJumpPosY: number
-    private isMovingRight: boolean = true
-    private moveSpeed: number = 200
-    private jumpCurveXCoeff: number = 2.7
-    private jumpCurveYCoeff: number = 100
+    private isMovingRight = true
+    private moveSpeed = 200
+    private jumpCurveXCoeff = 2.7
+    private jumpCurveYCoeff = 100
     private jumpSprite: Sprite
     private glideSprite: Sprite
 
-    private jumpSpriteTimeout: number = 0.4
-    private jumpSpriteTimer: number = 0.4
-    private trailDotSpawnTimeout: number = 0.1
-    private trailDotSpawnTimer: number = 0.1
+    private jumpSpriteTimeout = 0.4
+    private jumpSpriteTimer = 0.4
+    private trailDotSpawnTimeout = 0.1
+    private trailDotSpawnTimer = 0.1
 
-    public init()
-    {
+    public init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.position = new Vector(50, 100)
         this.lastJumpTime = Time.timeSinceGameStart()
@@ -50,7 +49,7 @@ class Bird extends Node
         this.collider.size = new Vector(15, 15)
         this.collider.collisionStarted.subscribe(this.handleCollisionStart.bind(this))
 
-        let sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
+        const sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(sprite)
         this.renderer.drawOrder = 5
@@ -76,36 +75,17 @@ class Bird extends Node
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
-    private gameStateChangedHandler(gameState: GameState): void
-    {
-        if (gameState === GameState.WELCOME)
-        {
-            this.isLocked = true
-            this.transform.position.x = 0
-        }
-        else if (gameState === GameState.PLAY)
-        {
-            this.isAlive = true
-            this.isLocked = false
-            this.jump()
-        }
-        else if (gameState === GameState.RESULT)
-        {
-        }
-    }
-
-    public update()
-    {
+    public update(): void {
         if (this.isLocked)
         {
             this.playIdleAnimation()
             return
         }
-        
+
         this.move()
         if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
 
-        let elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
+        const elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
         this.transform.position.y = this.jumpYFunction(elapsedJumpTime)
 
         this.jumpSpriteTimer -= Time.deltaTime()
@@ -114,40 +94,50 @@ class Bird extends Node
         this.trailDotSpawnTimer -= Time.deltaTime()
         if (this.trailDotSpawnTimer < 0)
         {
-            let trailDot = new TrailDot("Dot", this.transform.position)
+            const trailDot = new TrailDot("Dot", this.transform.position)
             trailDot.start()
             this.trailDotSpawnTimer = this.trailDotSpawnTimeout
         }
     }
 
-    private move(): void
-    {
-        if (this.isMovingRight)
-        {
-            this.transform.position.x += Time.deltaTime() * this.moveSpeed
-        }
-        else
-        {
-            this.transform.position.x -= Time.deltaTime() * this.moveSpeed
-        }
-    }
-
-    public turnLeft(): void
-    {
+    public turnLeft(): void {
         this.isMovingRight = false
         this.jumpSprite.flipX = false
         this.glideSprite.flipX = false
     }
 
-    public turnRight(): void
-    {
+    public turnRight(): void {
         this.isMovingRight = true
         this.jumpSprite.flipX = true
         this.glideSprite.flipX = true
     }
 
-    private jump(): void
-    {
+    private gameStateChangedHandler(gameState: GameState): void {
+        if (gameState === GameState.WELCOME)
+        {
+            this.isLocked = true
+            this.transform.position.x = 0
+        } else if (gameState === GameState.PLAY)
+        {
+            this.isAlive = true
+            this.isLocked = false
+            this.jump()
+        } else if (gameState === GameState.RESULT)
+        {
+        }
+    }
+
+    private move(): void {
+        if (this.isMovingRight)
+        {
+            this.transform.position.x += Time.deltaTime() * this.moveSpeed
+        } else
+        {
+            this.transform.position.x -= Time.deltaTime() * this.moveSpeed
+        }
+    }
+
+    private jump(): void {
         if (!this.isAlive) return
         this.renderer.setDrawable(this.jumpSprite)
         this.lastJumpTime = Time.timeSinceGameStart()
@@ -155,34 +145,29 @@ class Bird extends Node
         this.jumpSpriteTimer = this.jumpSpriteTimeout
     }
 
-    private jumpYFunction(elapsedTime: number): number
-    {
-        let x = elapsedTime * this.jumpCurveXCoeff
+    private jumpYFunction(elapsedTime: number): number {
+        const x = elapsedTime * this.jumpCurveXCoeff
         return (-(Math.pow(x - 1, 2)) + 1) * this.jumpCurveYCoeff + this.lastJumpPosY
     }
 
-    private handleCollisionStart(collider: Collider)
-    {
+    private handleCollisionStart(collider: Collider): void {
         if (collider.owner.name === "Wall")
         {
             if (this.isMovingRight) this.touchedRightWall.invoke()
             else this.touchedLeftWall.invoke()
-        }
-        else if (collider.owner.name === "Spike")
+        } else if (collider.owner.name === "Spike")
         {
             this.isAlive = false
             BirdGame.changeState(GameState.RESULT)
         }
     }
 
-    private wallTouchedHandler()
-    {
+    private wallTouchedHandler(): void {
         if (!this.isAlive) return
         BirdGame.currentScore++
     }
 
-    private playIdleAnimation()
-    {
+    private playIdleAnimation(): void {
         if (Math.round(Time.timeSinceGameStart()) % 2 === 0) this.renderer.setDrawable(this.glideSprite)
         else this.renderer.setDrawable(this.jumpSprite)
 

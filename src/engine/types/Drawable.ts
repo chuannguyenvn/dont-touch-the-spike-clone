@@ -6,6 +6,7 @@ interface Drawable
     drawOrder: number
     color: Color
     offSet: Vector
+
     _draw(): void
 }
 

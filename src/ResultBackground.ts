@@ -13,28 +13,25 @@ class ResultBackground extends Node
     public transform: Transform
     public renderer: Renderer
 
-    constructor(name: string)
-    {
+    constructor(name: string) {
         super(name)
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
-        let rectangle = new Rectangle(new Vector(400, 150), new Color(0.5, 0.5, 0.5, 0.5))
+        const rectangle = new Rectangle(new Vector(400, 150), new Color(0.5, 0.5, 0.5, 0.5))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(rectangle)
         this.renderer.drawOrder = 1
-        
+
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
-    private gameStateChangedHandler(gameState: GameState): void
-    {
+    private gameStateChangedHandler(gameState: GameState): void {
         if (gameState === GameState.RESULT)
         {
             this.isActive = true
             this.isVisible = true
-        }
-        else
+        } else
         {
             this.isActive = false
             this.isVisible = false

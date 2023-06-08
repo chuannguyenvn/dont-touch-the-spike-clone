@@ -10,13 +10,11 @@ class Freeform implements Drawable
     public _points: Vector[]
     public offSet: Vector
 
-    constructor(color: Color)
-    {
+    constructor(color: Color) {
         this.color = color
     }
 
-    public _draw(): void
-    {
+    public _draw(): void {
         Canvas._canvasContext.fillStyle = this.color.toString()
 
         Canvas._canvasContext.beginPath()
@@ -26,9 +24,8 @@ class Freeform implements Drawable
         }
         Canvas._canvasContext.fill()
     }
-    
-    public setPoints(points: Vector[])
-    {
+
+    public setPoints(points: Vector[]) {
         this._points = points
     }
 }

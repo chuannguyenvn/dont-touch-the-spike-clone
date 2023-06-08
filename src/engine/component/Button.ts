@@ -10,19 +10,16 @@ class Button extends UIElement implements MouseInteractable
     public clicked: GameEvent = new GameEvent()
     public hovered: GameEvent = new GameEvent()
 
-    constructor(owner: Node)
-    {
+    constructor(owner: Node) {
         super(owner)
         Input.registerMouseInteractable(this)
     }
 
-    _click(position: Vector): void
-    {
+    _click(position: Vector): void {
         if (this.rect.isPointInside(position) && Input.getMouseDown()) this.clicked.invoke()
     }
 
-    _hover(position: Vector): void
-    {
+    _hover(position: Vector): void {
         if (this.rect.isPointInside(position)) this.hovered.invoke()
     }
 }

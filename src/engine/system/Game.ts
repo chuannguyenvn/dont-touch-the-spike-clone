@@ -12,8 +12,7 @@ abstract class Game
     private static _nodes: Node[] = []
     private static _lastFrameTimestamp = -1
 
-    public static init(canvasContext: CanvasRenderingContext2D): void
-    {
+    public static init(canvasContext: CanvasRenderingContext2D): void {
         Debug.assert(!Game._isInitialized, "Game is already initialized.")
 
         Time._init()
@@ -23,8 +22,15 @@ abstract class Game
         window.requestAnimationFrame(Game._gameLoop)
     }
 
-    private static _gameLoop(): void
-    {
+    public static _registerNode(node: Node): void {
+        Game._nodes.push(node)
+    }
+
+    public static _unregisterNode(node: Node): void {
+        Game._nodes = Game._nodes.filter((node) => node !== node)
+    }
+
+    private static _gameLoop(): void {
         const currentTimestamp = Date.now()
         Time._lastFrameTime = Game._lastFrameTimestamp
 
@@ -39,23 +45,12 @@ abstract class Game
         window.requestAnimationFrame(Game._gameLoop)
     }
 
-    private static _update(): void
-    {
+    private static _update(): void {
         for (let i = 0; i < this._nodes.length; i++)
         {
             if (this._nodes[i].parentNode !== null || !this._nodes[i].isActive) continue
             this._nodes[i]._executeUpdate()
         }
-    }
-
-    public static _registerNode(node: Node): void
-    {
-        Game._nodes.push(node)
-    }
-
-    public static _unregisterNode(node: Node): void
-    {
-        Game._nodes = Game._nodes.filter((node) => node !== node)
     }
 }
 
