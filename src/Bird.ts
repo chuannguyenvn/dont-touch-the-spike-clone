@@ -29,7 +29,7 @@ class Bird extends Node
     private lastJumpPosY: number
     private isMovingRight: boolean = true
     private moveSpeed: number = 200
-    private jumpCurveXCoeff: number = 3
+    private jumpCurveXCoeff: number = 2.7
     private jumpCurveYCoeff: number = 100
     private jumpSprite: Sprite
     private glideSprite: Sprite
@@ -101,7 +101,7 @@ class Bird extends Node
             this.playIdleAnimation()
             return
         }
-
+        
         this.move()
         if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
 
@@ -148,6 +148,7 @@ class Bird extends Node
 
     private jump(): void
     {
+        if (!this.isAlive) return
         this.renderer.setDrawable(this.jumpSprite)
         this.lastJumpTime = Time.timeSinceGameStart()
         this.lastJumpPosY = this.transform.position.y

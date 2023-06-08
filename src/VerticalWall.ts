@@ -39,12 +39,11 @@ class VerticalWall extends Wall
 
     public showSpike()
     {
-        for (let i = 0; i < this.spikes.length; i++)
+        let spikeCount = this.difficultyFunction(BirdGame.currentScore)
+        let spikeIndices = Maths.randomIntBag(0, this.spikes.length, spikeCount)
+        for (let i = 0; i < spikeIndices.length; i++)
         {
-            if (Maths.randomRangeInt(0, 2) == 0)
-            {
-                this.spikes[i].show()
-            }
+            this.spikes[spikeIndices[i]].show()
         }
     }
 
@@ -54,6 +53,11 @@ class VerticalWall extends Wall
         {
             this.spikes[i].hide()
         }
+    }
+    
+    private difficultyFunction(x: number)
+    {
+        return Math.floor(Math.log(x + 2) / Math.log(1.6))
     }
 }
 
