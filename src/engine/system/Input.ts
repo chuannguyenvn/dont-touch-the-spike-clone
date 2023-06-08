@@ -43,6 +43,8 @@ class Input
     {
         for (let i = 0; i < this._mouseInteractables.length; i++)
         {
+            if (!this._mouseInteractables[i].owner.isActive) continue
+
             this._mouseInteractables[i]._click(Input.getMousePosition())
             this._mouseInteractables[i]._hover(Input.getMousePosition())
         }

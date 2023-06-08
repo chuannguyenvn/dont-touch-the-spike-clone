@@ -8,6 +8,8 @@ import Rectangle from "./engine/types/Rectangle"
 import Color from "./engine/types/Color"
 import Spike from "./Spike"
 import Maths from "./engine/utility/Maths"
+import BirdGame from "./BirdGame"
+import GameState from "./GameState"
 
 class Wall extends Node
 {
@@ -20,6 +22,22 @@ class Wall extends Node
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
+    
+        // BirdGame.gameStateChanged.subscribe(this.stateChangedHandler.bind(this))
+    }
+    
+    private stateChangedHandler(gameState: GameState)
+    {
+        if (gameState === GameState.PLAY)
+        {
+            this.isActive = true
+            this.isVisible = true
+        }
+        else
+        {
+            this.isActive = false
+            this.isVisible = false
+        }
     }
 }
 

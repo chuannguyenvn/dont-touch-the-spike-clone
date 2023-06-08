@@ -18,6 +18,8 @@ class Physics
         {
             for (let j = i + 1; j < this._colliders.length; j++)
             {
+                if (!this._colliders[i].owner.isActive) continue
+                
                 if (this._colliders[i] instanceof RectangleCollider)
                 {
                     const collider1 = this._colliders[i] as RectangleCollider

@@ -38,6 +38,7 @@ class Renderer extends Component
 
     public _draw(): void
     {
+        if (!this.owner.isVisible) return 
         this.drawable._draw()
     }
 }

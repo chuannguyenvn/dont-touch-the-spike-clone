@@ -12,6 +12,8 @@ import Text from '../component/Text'
 class Node
 {
     public name: string
+    public isActive: boolean = true
+    public isVisible: boolean = true
     public parentNode: Node | null = null
     public childNodes: Node[] = []
     private components: Component[] = []
@@ -46,7 +48,9 @@ class Node
 
     public _executeUpdate(): void
     {
+        if (!this.isActive) return
         this.update()
+        
         for (let i = 0; i < this.childNodes.length; i++)
         {
             this.childNodes[i]._executeUpdate()

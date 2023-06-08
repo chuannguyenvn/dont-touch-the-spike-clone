@@ -7,9 +7,10 @@ import Vector from "./engine/types/Vector"
 import Input from "./engine/system/Input"
 import Time from "./engine/system/Time"
 import RectangleCollider from "./engine/component/RectangleCollider"
-import Maths from "./engine/utility/Maths"
 import Collider from "./engine/component/Collider"
 import {GameEvent, ParamGameEvent} from "./engine/types/Event"
+import BirdGame from "./BirdGame"
+import GameState from "./GameState"
 
 class Bird extends Node
 {
@@ -22,6 +23,7 @@ class Bird extends Node
     public collider: RectangleCollider
     public renderer: Renderer
 
+    private isLocked: boolean = true
     private lastJumpTime: number = 0
     private lastJumpPosY: number
     private isMovingRight: boolean = true
@@ -56,27 +58,45 @@ class Bird extends Node
         this.touchedRightWall.subscribe(() => this.score++)
         this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(this.score))
         this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(this.score))
-        
+
         this.jumpSprite = new Sprite("assets/Jump.png")
         this.jumpSprite.scale = Vector.one().multiply(0.1)
         this.glideSprite = new Sprite("assets/Glide.png")
         this.glideSprite.scale = Vector.one().multiply(0.1)
-        
+
         this.scoreChanged = new ParamGameEvent<number>()
-        
+
         this.turnRight()
+
+        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
+    }
+
+    private gameStateChangedHandler(gameState: GameState): void
+    {
+        if (gameState === GameState.WELCOME)
+        {
+            this.transform.position.x = 0
+        }
+        else if (gameState === GameState.PLAY)
+        {
+            this.isLocked = false
+            this.jump()
+        }
     }
 
     public update()
     {
+        if (this.isLocked)
+        {
+            this.playIdleAnimation()
+            return
+        }
+
         this.move()
         if (Input.getKeyDown(' ')) this.jump()
 
         let elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
         this.transform.position.y = this.jumpYFunction(elapsedJumpTime)
-
-        // this.transform.position.x = Maths.clamp(this.transform.position.x, -200, 200)
-        // this.transform.position.y = Maths.clamp(this.transform.position.y, -300, 300)
 
         this.jumpSpriteTimer -= Time.deltaTime()
         if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
@@ -133,6 +153,14 @@ class Bird extends Node
         {
             // alert("You lose")
         }
+    }
+    
+    private playIdleAnimation()
+    {
+        if (Math.round(Time.timeSinceGameStart()) % 2 === 0) this.renderer.setDrawable(this.glideSprite)
+        else this.renderer.setDrawable(this.jumpSprite)
+        
+        this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20
     }
 }
 

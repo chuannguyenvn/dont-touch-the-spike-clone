@@ -43,7 +43,7 @@ abstract class Game
     {
         for (let i = 0; i < this._nodes.length; i++)
         {
-            if (this._nodes[i].parentNode !== null) continue
+            if (this._nodes[i].parentNode !== null || !this._nodes[i].isActive) continue
             this._nodes[i]._executeUpdate()
         }
     }

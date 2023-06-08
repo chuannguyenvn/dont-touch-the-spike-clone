@@ -18,6 +18,7 @@ class UIElement extends Renderer
     public drawOrder: number
     public color: Color
     public elementSize: Vector
+
     get rect(): Rect
     {
         let transform = this.owner.getComponent(ComponentType.TRANSFORM) as Transform
@@ -31,6 +32,8 @@ class UIElement extends Renderer
 
     public _draw(): void
     {
+        if (!this.owner.isVisible) return
+
         let normalizedCoordinate = Vector.zero()
         switch (this.pivot)
         {

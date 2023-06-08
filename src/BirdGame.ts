@@ -1,21 +1,26 @@
 ﻿import Game from "./engine/system/Game"
 import Bird from "./Bird"
-import Wall from "./Wall"
 import Vector from "./engine/types/Vector"
 import PlayButton from "./PlayButton"
-import Node from "./engine/node/Node"
-import ComponentType from "./engine/component/ComponentType"
-import Renderer from "./engine/component/Renderer"
-import Circle from "./engine/types/Circle"
-import Color from "./engine/types/Color"
-import Transform from "./engine/component/Transform"
 import VerticalWall from "./VerticalWall"
 import HorizontalWall from "./HorizontalWall"
 import ScoreText from "./ScoreText"
 import ScoreBackground from "./ScoreBackground"
+import {ParamGameEvent} from "./engine/types/Event"
+import GameState from "./GameState"
+
 
 class BirdGame extends Game
 {
+    public static gameState: GameState = GameState.WELCOME
+    public static gameStateChanged: ParamGameEvent<GameState> = new ParamGameEvent<GameState>()
+
+    public static changeState(newState: GameState)
+    {
+        BirdGame.gameState = newState
+        BirdGame.gameStateChanged.invoke(newState)
+    }
+
     public static init(ctx: CanvasRenderingContext2D)
     {
         super.init(ctx)
@@ -60,7 +65,10 @@ class BirdGame extends Game
 
         let playButton = new PlayButton("Play Button")
         playButton.start()
+        
+        this.changeState(GameState.WELCOME)
     }
 }
+
 
 export default BirdGame
