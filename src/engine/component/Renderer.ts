@@ -14,6 +14,7 @@ class Renderer extends Component
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
+    public drawOrder: number = 0
     protected drawable: Drawable
     private ownerTransform: Transform
 

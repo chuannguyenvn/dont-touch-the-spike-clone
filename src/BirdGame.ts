@@ -11,6 +11,8 @@ import Color from "./engine/types/Color"
 import Transform from "./engine/component/Transform"
 import VerticalWall from "./VerticalWall"
 import HorizontalWall from "./HorizontalWall"
+import ScoreText from "./ScoreText"
+import ScoreBackground from "./ScoreBackground"
 
 class BirdGame extends Game
 {
@@ -48,6 +50,13 @@ class BirdGame extends Game
         let bottomWall = new HorizontalWall("Wall")
         bottomWall.transform.position = new Vector(0, -300)
         bottomWall.start()
+
+        let scoreBackground = new ScoreBackground("Score Background")
+        scoreBackground.start()
+
+        let scoreText = new ScoreText("Score Text")
+        bird.scoreChanged.subscribe(scoreText.changeScore.bind(scoreText))
+        scoreText.start()
 
         // let playButton = new PlayButton("Play Button")
         // playButton.start()

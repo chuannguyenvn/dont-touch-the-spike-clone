@@ -9,6 +9,7 @@ class TextContent implements Drawable
     public color: Color
     public drawOrder: number
     public offSet: Vector
+    public font: string
     
     constructor(text: string, color: Color = Color.black())
     {
@@ -18,7 +19,9 @@ class TextContent implements Drawable
     
     _draw(): void 
     {
-        Canvas._canvasContext.font = "30px Verdana"
+        Canvas._canvasContext.font = this.font
+        Canvas._canvasContext.textAlign = "center"
+        Canvas._canvasContext.textBaseline = "middle"
         Canvas._canvasContext.fillStyle = this.color.toHex()
         Canvas._canvasContext.fillText(this.text, this.offSet.x, this.offSet.y)
         const metrics = Canvas._canvasContext.measureText(this.text)

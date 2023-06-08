@@ -5,10 +5,10 @@ import Matrix from "../types/Matrix"
 
 class Canvas
 {
-    private static _sprites: Renderer[] = []
+    private static _renderers: Renderer[] = []
     public static _canvasContext: CanvasRenderingContext2D
     public static _worldToCameraMatrix: Matrix
-    
+
     public static canvasSize: Vector = new Vector(400, 600)
     public static backgroundColor: Color = Color.white()
 
@@ -26,7 +26,9 @@ class Canvas
         Canvas._canvasContext.fillStyle = 'white'
         Canvas._canvasContext.fillRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
 
-        for (const renderer of this._sprites)
+        this._renderers = this._renderers.sort((a, b) => a.drawOrder > b.drawOrder ? 1 : -1)
+
+        for (const renderer of this._renderers)
         {
             const localToWorld = renderer._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
             const worldToCamera = Canvas._worldToCameraMatrix
@@ -43,7 +45,7 @@ class Canvas
 
     public static _registerRenderer(sprite: Renderer): void
     {
-        this._sprites.push(sprite)
+        this._renderers.push(sprite)
     }
 }
 

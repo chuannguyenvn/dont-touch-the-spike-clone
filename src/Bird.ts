@@ -9,17 +9,19 @@ import Time from "./engine/system/Time"
 import RectangleCollider from "./engine/component/RectangleCollider"
 import Maths from "./engine/utility/Maths"
 import Collider from "./engine/component/Collider"
-import {GameEvent} from "./engine/types/Event"
+import {GameEvent, ParamGameEvent} from "./engine/types/Event"
 
 class Bird extends Node
 {
+    public score: number = 0
     public touchedLeftWall: GameEvent
     public touchedRightWall: GameEvent
-    
+    public scoreChanged: ParamGameEvent<number>
+
     public transform: Transform
     public collider: RectangleCollider
     public renderer: Renderer
-    
+
     private lastJumpTime: number = 0
     private lastJumpPosY: number
     private isMovingRight: boolean = true
@@ -45,16 +47,22 @@ class Bird extends Node
         let sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(sprite)
- 
+
         this.touchedLeftWall = new GameEvent()
         this.touchedRightWall = new GameEvent()
-        this.touchedRightWall.subscribe(this.turnLeft.bind(this))
         this.touchedLeftWall.subscribe(this.turnRight.bind(this))
-
+        this.touchedRightWall.subscribe(this.turnLeft.bind(this))
+        this.touchedLeftWall.subscribe(() => this.score++)
+        this.touchedRightWall.subscribe(() => this.score++)
+        this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(this.score))
+        this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(this.score))
+        
         this.jumpSprite = new Sprite("assets/Jump.png")
         this.jumpSprite.scale = Vector.one().multiply(0.1)
         this.glideSprite = new Sprite("assets/Glide.png")
         this.glideSprite.scale = Vector.one().multiply(0.1)
+        
+        this.scoreChanged = new ParamGameEvent<number>()
     }
 
     public update()
@@ -121,7 +129,7 @@ class Bird extends Node
         }
         else if (collider.owner.name === "Spike")
         {
-            console.log("lose")
+            alert("fuck")
         }
     }
 }
