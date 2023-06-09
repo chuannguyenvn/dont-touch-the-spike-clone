@@ -21,7 +21,7 @@ class HighScore extends Node
         this.transform.position = new Vector(0, -30)
 
         this.textContent = new TextContent("00", Color.WHITE)
-        this.textContent.font = "30px open sans"
+        this.textContent.font = "30px tahoma"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER

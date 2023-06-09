@@ -28,7 +28,7 @@ class PlayButton extends Node
         this.button.pivot = Alignment.MID_CENTER
 
         const textContent = new TextContent("Play", Color.GREY)
-        textContent.font = "30px open sans"
+        textContent.font = "30px tahoma"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(textContent)
 

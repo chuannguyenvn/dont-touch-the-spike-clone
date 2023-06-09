@@ -19,7 +19,7 @@ class ScoreText extends Node
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
         this.textContent = new TextContent("00", new Color(1, 1, 1, 0.5))
-        this.textContent.font = "100px Courier New"
+        this.textContent.font = "100px tahoma"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
