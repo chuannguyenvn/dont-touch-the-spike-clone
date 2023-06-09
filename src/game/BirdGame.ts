@@ -14,6 +14,7 @@ import HighScore from "./result/HighScore"
 import RetryButton from "./result/RetryButton"
 import Matrix from "../engine/types/Matrix"
 import GameBackground from "./GameBackground"
+import {Title, TitleBottom} from "./welcome/Title";
 
 
 class BirdGame extends Game
@@ -62,6 +63,12 @@ class BirdGame extends Game
 
         const gameBackground = new GameBackground("Game Background")
         gameBackground.start()
+
+        const titleTop = new Title("Title")
+        titleTop.start()
+
+        const titleBottom = new TitleBottom("Title")
+        titleBottom.start()
 
         const bird = new Bird("Main Bird")
         bird.start()

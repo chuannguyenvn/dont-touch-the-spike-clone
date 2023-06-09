@@ -177,7 +177,7 @@ class Bird extends Node
         if (Math.round(Time.timeSinceGameStart()) % 2 === 0) this.renderer.setDrawable(this.glideSprite)
         else this.renderer.setDrawable(this.jumpSprite)
 
-        this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20
+        this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20 - 10
     }
     
     private handleSpawnTrailDot(): void{
