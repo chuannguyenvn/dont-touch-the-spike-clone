@@ -12,7 +12,7 @@ class CircleCollider extends Collider
     // COMPONENT PROPERTIES //
     public size: number
 
-    constructor(owner: Node, size = 1, offset: Vector = Vector.zero()) {
+    constructor(owner: Node, size = 1, offset: Vector = Vector.ZERO) {
         super(owner)
         this.size = size
         this.offset = offset
@@ -20,7 +20,7 @@ class CircleCollider extends Collider
 
     public AABB(): Rect {
         const position = this._ownerTransform.position
-        return new Rect(position.add(this.offset), Vector.one().multiply(2))
+        return new Rect(position.add(this.offset), Vector.ONE.multiply(2))
     }
 }
 

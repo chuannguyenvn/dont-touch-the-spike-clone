@@ -8,7 +8,7 @@ class Canvas
     public static _canvasContext: CanvasRenderingContext2D
     public static _worldToCameraMatrix: Matrix
     public static canvasSize: Vector = new Vector(400, 600)
-    public static backgroundColor: Color = Color.white()
+    public static backgroundColor: Color = Color.WHITE
     private static _renderers: Renderer[] = []
 
     public static _init(canvasContext: CanvasRenderingContext2D): void {

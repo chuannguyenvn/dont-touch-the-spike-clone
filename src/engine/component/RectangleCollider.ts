@@ -12,7 +12,7 @@ class RectangleCollider extends Collider
     // COMPONENT PROPERTIES //
     public size: Vector
 
-    constructor(owner: Node, size: Vector = Vector.one(), offset: Vector = Vector.zero()) {
+    constructor(owner: Node, size: Vector = Vector.ONE, offset: Vector = Vector.ZERO) {
         super(owner)
         this.size = size
         this.offset = offset

@@ -18,7 +18,7 @@ class ScoreText extends Node
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
-        this.textContent = new TextContent("00", Color.white())
+        this.textContent = new TextContent("00", Color.WHITE)
         this.textContent.font = "100px Courier New"
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)

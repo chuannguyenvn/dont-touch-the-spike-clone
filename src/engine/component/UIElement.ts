@@ -31,7 +31,7 @@ class UIElement extends Renderer
     public _draw(): void {
         if (!this.owner.isVisible) return
 
-        let normalizedCoordinate = Vector.zero()
+        let normalizedCoordinate = Vector.ZERO
         switch (this.pivot)
         {
             case Alignment.TOP_LEFT:

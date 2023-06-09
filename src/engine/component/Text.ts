@@ -16,7 +16,7 @@ class Text extends UIElement
         const metrics = Canvas._canvasContext.measureText(drawable.text)
         const fontHeight = metrics.fontBoundingBoxAscent + metrics.fontBoundingBoxDescent
         const actualHeight = metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent
-        this.elementSize = Vector.zero() // new Vector(metrics.width, actualHeight)
+        this.elementSize = Vector.ZERO // new Vector(metrics.width, actualHeight)
     }
 }
 

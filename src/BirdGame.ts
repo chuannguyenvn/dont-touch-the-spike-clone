@@ -12,6 +12,8 @@ import ResultBackground from "./ResultBackground"
 import ResultScore from "./ResultScore"
 import HighScore from "./HighScore"
 import RetryButton from "./RetryButton"
+import {Logger} from "javascript-obfuscator/typings/src/logger/Logger";
+import Matrix from "./engine/types/Matrix";
 
 
 class BirdGame extends Game
@@ -108,6 +110,8 @@ class BirdGame extends Game
         retryButton.start()
 
         BirdGame.changeState(GameState.WELCOME)
+
+        console.log(Matrix.IDENTITY)
     }
 }
 

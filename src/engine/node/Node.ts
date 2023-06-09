@@ -25,6 +25,7 @@ class Node
     }
 
     public init(): void {
+        
     }
 
     public start(): void {

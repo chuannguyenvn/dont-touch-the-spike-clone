@@ -70,7 +70,7 @@ class Input
         if (this._lastMousePosition)
             return Canvas._worldToCameraMatrix.inverse().multiplyVector(this._lastMousePosition)
         else
-            return Vector.zero()
+            return Vector.ZERO
     }
 }
 

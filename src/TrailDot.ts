@@ -15,7 +15,7 @@ class TrailDot extends Node
     constructor(name: string, position: Vector) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.tweenScale(Vector.zero(), 0.2, 0, Ease.IN_EXPO, false)
+        this.transform.tweenScale(Vector.ZERO, 0.2, 0, Ease.IN_EXPO, false)
         // Why?
         this.transform.position = new Vector(position.x, position.y)
 

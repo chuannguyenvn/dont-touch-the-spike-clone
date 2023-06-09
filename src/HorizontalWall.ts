@@ -33,7 +33,7 @@ class HorizontalWall extends Wall
             this.spikes.push(spike)
         }
 
-        const rectangle = new Rectangle(new Vector(400, 100), Color.grey())
+        const rectangle = new Rectangle(new Vector(400, 100), Color.GREY)
         this.renderer.setDrawable(rectangle)
     }
 }

@@ -64,9 +64,9 @@ class Bird extends Node
         this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
 
         this.jumpSprite = new Sprite("assets/Jump.png")
-        this.jumpSprite.scale = Vector.one().multiply(0.1)
+        this.jumpSprite.scale = Vector.ONE.multiply(0.12)
         this.glideSprite = new Sprite("assets/Glide.png")
-        this.glideSprite.scale = Vector.one().multiply(0.1)
+        this.glideSprite.scale = Vector.ONE.multiply(0.12)
 
         this.scoreChanged = new ParamGameEvent<number>()
 

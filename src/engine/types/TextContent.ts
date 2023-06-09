@@ -11,7 +11,7 @@ class TextContent implements Drawable
     public offSet: Vector
     public font: string
 
-    constructor(text: string, color: Color = Color.black()) {
+    constructor(text: string, color: Color = Color.BLACK) {
         this.text = text
         this.color = color
     }

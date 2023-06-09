@@ -1,5 +1,6 @@
 ﻿class Color
 {
+    // MEMBER VARIABLES //
     public r: number
     public g: number
     public b: number
@@ -12,43 +13,44 @@
         this.a = a
     }
 
-    public static black() {
+    // CONSTANTS //
+    public static get BLACK(): Color {
         return new Color(0, 0, 0, 0)
     }
 
-    public static white() {
+    public static get WHITE(): Color {
         return new Color(1, 1, 1, 1)
     }
 
-    public static red(): Color {
+    public static get RED(): Color {
         return new Color(1, 0, 0, 1)
     }
 
-    public static green(): Color {
+    public static get GREEN(): Color {
         return new Color(0, 1, 0, 1)
     }
 
-    public static blue(): Color {
+    public static get BLUE(): Color {
         return new Color(0, 0, 1, 1)
     }
 
-    public static yellow(): Color {
+    public static get YELLOW(): Color {
         return new Color(1, 1, 0, 1)
     }
 
-    public static cyan(): Color {
+    public static get CYAN(): Color {
         return new Color(0, 1, 1, 1)
     }
 
-    public static magenta(): Color {
+    public static get MAGENTA(): Color {
         return new Color(1, 0, 1, 1)
     }
 
-    public static grey(): Color {
+    public static get GREY(): Color {
         return new Color(0.5, 0.5, 0.5, 1)
     }
 
-    public static clear() {
+    public static get CLEAR(): Color {
         return new Color(1, 1, 1, 0)
     }
 

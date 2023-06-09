@@ -27,7 +27,7 @@ class Spike extends Node
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
         this.collider.size = new Vector(50, 50)
 
-        this.triangle = new Freeform(Color.grey())
+        this.triangle = new Freeform(Color.GREY)
         this.triangle.setPoints([new Vector(25, 0), new Vector(0, 25),
             new Vector(-25, 0), new Vector(0, -25)])
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer

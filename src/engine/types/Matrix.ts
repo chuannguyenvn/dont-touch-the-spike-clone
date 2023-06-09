@@ -3,6 +3,7 @@ import Maths from "../utility/Maths"
 
 class Matrix
 {
+    // MEMBER VARIABLES //
     public values: number[][] = []
 
     constructor(x0y0 = 0, x0y1 = 0, x0y2 = 0,
@@ -15,7 +16,8 @@ class Matrix
         ]
     }
 
-    public static zero() {
+    // CONSTANTS //
+    public static get ZERO(): Matrix {
         return new Matrix(
             0, 0, 0,
             0, 0, 0,
@@ -23,7 +25,8 @@ class Matrix
         )
     }
 
-    public static identity() {
+
+    public static get IDENTITY(): Matrix {
         return new Matrix(
             1, 0, 0,
             0, 1, 0,
@@ -31,15 +34,16 @@ class Matrix
         )
     }
 
+    // OTHER METHODS //
     public static translate(x: number, y: number): Matrix {
-        const translationMatrix = Matrix.identity()
+        const translationMatrix = Matrix.IDENTITY
         translationMatrix.values[0][2] = x
         translationMatrix.values[1][2] = y
         return translationMatrix
     }
 
     public static rotate(angle: number): Matrix {
-        const rotationMatrix = Matrix.identity()
+        const rotationMatrix = Matrix.IDENTITY
         const cosTheta = Math.cos(angle * Maths.deg2Rad)
         const sinTheta = Math.sin(angle * Maths.deg2Rad)
         rotationMatrix.values[0][0] = cosTheta
@@ -50,7 +54,7 @@ class Matrix
     }
 
     public static scale(x: number, y: number): Matrix {
-        const scaleMatrix = Matrix.identity()
+        const scaleMatrix = Matrix.IDENTITY
         scaleMatrix.values[0][0] = x
         scaleMatrix.values[1][1] = y
         return scaleMatrix

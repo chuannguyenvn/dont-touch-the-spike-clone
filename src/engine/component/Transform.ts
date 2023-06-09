@@ -17,7 +17,7 @@ class Transform extends Component
     public rotation: number
     public scale: Vector
 
-    constructor(owner: Node, position: Vector = Vector.zero(), rotation = 0, scale: Vector = Vector.one()) {
+    constructor(owner: Node, position: Vector = Vector.ZERO, rotation = 0, scale: Vector = Vector.ONE) {
         super(owner)
         this.position = position
         this.rotation = rotation

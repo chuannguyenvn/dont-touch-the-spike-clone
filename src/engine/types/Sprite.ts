@@ -11,7 +11,7 @@ class Sprite implements Drawable
     public maxHeight = 100
     public flipX = false
     public flipY = false
-    public scale: Vector = Vector.one()
+    public scale: Vector = Vector.ONE
     public offSet: Vector
     private _image: HTMLImageElement
 

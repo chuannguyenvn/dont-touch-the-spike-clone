@@ -2,7 +2,7 @@
 
 class Vector
 {
-    // MEMBER METHODS //
+    // MEMBER VARIABLES //
     public x: number
     public y: number
     public z: number
@@ -13,35 +13,36 @@ class Vector
         this.z = z
     }
 
-    // STATIC FUNCTIONS //
-    public static left(): Vector {
+    // CONSTANTS //
+    public static get LEFT(): Vector {
         return new Vector(-1, 0, 0)
     }
 
-    public static right(): Vector {
+    public static get RIGHT(): Vector {
         return new Vector(1, 0, 0)
     }
 
-    public static up(): Vector {
+    public static get UP(): Vector {
         return new Vector(0, 1, 0)
     }
 
-    public static down(): Vector {
+    public static get DOWN(): Vector {
         return new Vector(0, -1, 0)
     }
 
-    public static zero(): Vector {
+    public static get ZERO(): Vector {
         return new Vector(0, 0, 0)
     }
 
-    public static one(): Vector {
+    public static get ONE(): Vector {
         return new Vector(1, 1, 1)
     }
 
-    public static randomUnit(): Vector {
+    public static get RANDOM_UNIT(): Vector {
         return (new Vector(Maths.randomRange(-1, 1), Maths.randomRange(-1, 1))).normalized()
     }
 
+    // OTHER METHODS //
     public static distance(v1: Vector, v2: Vector): number {
         return v1.subtract(v2).length()
     }
@@ -70,7 +71,6 @@ class Vector
         return new Vector(resultX, resultY, resultZ)
     }
 
-    // Return the angle in degrees between this vector and toVector.
     public angle(toVector: Vector): number {
         const dotProduct = this.dot(toVector)
         const lengthProduct = this.length() * toVector.length()
