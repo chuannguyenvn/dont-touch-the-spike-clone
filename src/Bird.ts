@@ -28,8 +28,8 @@ class Bird extends Node
     private lastJumpTime = 0
     private lastJumpPosY: number
     private isMovingRight = true
-    private moveSpeed = 200
-    private jumpCurveXCoeff = 2.7
+    private moveSpeed = 235
+    private jumpCurveXCoeff = 2.6
     private jumpCurveYCoeff = 100
     private jumpSprite: Sprite
     private glideSprite: Sprite

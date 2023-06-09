@@ -21,7 +21,7 @@ class ResultBackground extends Node
         const rectangle = new Rectangle(new Vector(400, 150), new Color(0.5, 0.5, 0.5, 0.5))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(rectangle)
-        this.renderer.drawOrder = 1
+        this.renderer.drawOrder = 100
 
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }

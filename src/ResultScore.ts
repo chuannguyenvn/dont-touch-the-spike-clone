@@ -25,7 +25,7 @@ class ResultScore extends Node
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
-        this.text.drawOrder = 10
+        this.text.drawOrder = 200
 
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }

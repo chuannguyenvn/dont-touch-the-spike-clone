@@ -9,7 +9,8 @@ import Freeform from "./engine/types/Freeform"
 import Ease from "./engine/system/tween/Ease"
 import Maths from "./engine/utility/Maths"
 import BirdGame from "./BirdGame"
-import getColor from "./ScoreColorMap"
+import getColor from "./ThemeManager"
+import ThemeManager from "./ThemeManager";
 
 
 class Spike extends Node
@@ -44,7 +45,6 @@ class Spike extends Node
 
     public show(): void {
         this.transform.tweenPositionX(this.showingPosX, 0.2, 0, Ease.LINEAR, false)
-        this.renderer.tweenColor(Color.RED, 1, 0, Ease.IN_EXPO, false)
     }
 
     public hide(): void {
@@ -52,7 +52,7 @@ class Spike extends Node
     }
 
     private scoreChangedHandler(score: number): void {
-        this.triangle.color = getColor(score)
+        this.renderer.tweenColor(ThemeManager.getPrimaryColor(score), 0.3, 0, Ease.OUT_CUBIC, false)
     }
 }
 

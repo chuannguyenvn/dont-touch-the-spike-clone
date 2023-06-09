@@ -54,6 +54,24 @@
         return new Color(1, 1, 1, 0)
     }
 
+    public static fromHex(hex: string): Color {
+        if (hex.startsWith("#"))
+        {
+            hex = hex.substring(1)
+        }
+
+        const hexValue = parseInt(hex, 16)
+        const r = (hexValue >> 16) & 255
+        const g = (hexValue >> 8) & 255
+        const b = hexValue & 255
+
+        const normalizedR = r / 255
+        const normalizedG = g / 255
+        const normalizedB = b / 255
+
+        return new Color(normalizedR, normalizedG, normalizedB)
+    }
+
     public toString() {
         function componentToHex(c: number) {
             const hex = Math.round(c * 255)

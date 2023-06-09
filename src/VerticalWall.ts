@@ -51,7 +51,7 @@ class VerticalWall extends Wall
     }
 
     private difficultyFunction(x: number): number {
-        return Math.floor(Math.log(x + 2) / Math.log(1.6))
+        return Math.floor(Math.log(x + 2) / Math.log(1.6) * 0.8)
     }
 }
 

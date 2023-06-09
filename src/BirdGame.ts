@@ -12,8 +12,8 @@ import ResultBackground from "./ResultBackground"
 import ResultScore from "./ResultScore"
 import HighScore from "./HighScore"
 import RetryButton from "./RetryButton"
-import {Logger} from "javascript-obfuscator/typings/src/logger/Logger";
 import Matrix from "./engine/types/Matrix";
+import GameBackground from "./GameBackground";
 
 
 class BirdGame extends Game
@@ -42,11 +42,13 @@ class BirdGame extends Game
     public static stateChangeHandler(gameState: GameState): void {
         if (gameState === GameState.WELCOME)
         {
-            BirdGame._currentScore = 0
-        } else if (gameState === GameState.PLAY)
+            BirdGame.currentScore = 0
+        }
+        else if (gameState === GameState.PLAY)
         {
             //
-        } else if (gameState === GameState.RESULT)
+        }
+        else if (gameState === GameState.RESULT)
         {
             if (BirdGame.highScore < BirdGame._currentScore)
                 BirdGame.highScore = BirdGame._currentScore
@@ -57,6 +59,9 @@ class BirdGame extends Game
         super.init(ctx)
 
         BirdGame.gameStateChanged.subscribe(BirdGame.stateChangeHandler.bind(BirdGame))
+
+        const gameBackground = new GameBackground("Game Background")
+        gameBackground.start()
 
         const bird = new Bird("Main Bird")
         bird.start()

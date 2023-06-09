@@ -20,7 +20,7 @@ class Canvas
 
     public static _draw(): void {
         Canvas._canvasContext.clearRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
-        Canvas._canvasContext.fillStyle = 'white'
+        Canvas._canvasContext.fillStyle = Canvas.backgroundColor.toString()
         Canvas._canvasContext.fillRect(0, 0, Canvas.canvasSize.x, Canvas.canvasSize.y)
 
         this._renderers = this._renderers.sort((a, b) => a.drawOrder > b.drawOrder ? 1 : -1)
