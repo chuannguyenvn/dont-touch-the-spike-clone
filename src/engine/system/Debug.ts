@@ -12,9 +12,7 @@
     }
 
     public static log(message: string): void {
-        if (Debug._isDebugging)
-            // Can save the logged message into a txt
-            console.log(message)
+        if (Debug._isDebugging) console.log(message)
     }
 
     public static logError(message: string): void {

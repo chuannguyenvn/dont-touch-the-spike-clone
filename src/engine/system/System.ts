@@ -11,7 +11,7 @@ abstract class System {
     public static game: Game
 
     private static _isInitialized = false
-    private static _nodes: Node[] = []
+    private static _rootNodes: Node[] = []
     private static _lastFrameTimestamp = -1
 
     public static _init(): void {
@@ -22,12 +22,12 @@ abstract class System {
         Debug.log('Game is running.')
     }
 
-    public static _registerNode(node: Node): void {
-        System._nodes.push(node)
+    public static _registerRootNode(node: Node): void {
+        System._rootNodes.push(node)
     }
 
-    public static _unregisterNode(node: Node): void {
-        System._nodes = System._nodes.filter((node) => node !== node)
+    public static _unregisterRootNode(node: Node): void {
+        System._rootNodes = System._rootNodes.filter((n) => n !== node)
     }
 
     private static _gameLoop(): void {
@@ -46,9 +46,9 @@ abstract class System {
     }
 
     private static _update(): void {
-        for (let i = 0; i < this._nodes.length; i++) {
-            if (this._nodes[i].parentNode !== null || !this._nodes[i].isActive) continue
-            this._nodes[i]._executeUpdate()
+        for (let i = 0; i < this._rootNodes.length; i++) {
+            if (this._rootNodes[i].parentNode !== null || !this._rootNodes[i].isActive) continue
+            this._rootNodes[i]._executeUpdate()
         }
     }
 }

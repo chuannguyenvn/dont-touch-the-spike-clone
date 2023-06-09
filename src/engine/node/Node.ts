@@ -23,7 +23,7 @@ class Node {
     constructor(name: string) {
         this.guid = GUID.getId()
         this.name = name
-        System._registerNode(this)
+        System._registerRootNode(this)
         this.init()
     }
 
@@ -119,12 +119,14 @@ class Node {
     }
 
     public setParent(parentNode: Node) {
+        System._unregisterRootNode(this)
         parentNode.setChild(this)
     }
 
     public removeParent() {
         if (this.parentNode === null) return
         else this.parentNode.removeChild(this)
+        System._registerRootNode(this)
     }
 }
 
