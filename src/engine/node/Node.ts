@@ -8,9 +8,12 @@ import RectangleCollider from '../component/RectangleCollider'
 import CircleCollider from '../component/CircleCollider'
 import Button from '../component/Button'
 import Text from '../component/Text'
+import GUID from "../system/GUID"
 
 class Node
 {
+    public readonly guid: number
+    
     public name: string
     public isActive = true
     public isVisible = true
@@ -19,6 +22,7 @@ class Node
     private components: Component[] = []
 
     constructor(name: string) {
+        this.guid = GUID.getId()
         this.name = name
         System._registerNode(this)
         this.init()
