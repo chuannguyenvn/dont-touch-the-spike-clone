@@ -1,5 +1,5 @@
-﻿import Vector from "../types/Vector"
-import Color from "../types/Color"
+﻿import Vector from "./Vector"
+import Color from "./Color"
 
 class Maths
 {

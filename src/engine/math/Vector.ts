@@ -1,4 +1,4 @@
-﻿import Maths from "../utility/Maths"
+﻿import Maths from "./Maths"
 
 class Vector
 {

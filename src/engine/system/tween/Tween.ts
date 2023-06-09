@@ -1,7 +1,7 @@
 ﻿import Ease from "./Ease"
-import Vector from "../../types/Vector"
+import Vector from "../../math/Vector"
 import TweenBase from "./TweenBase"
-import Color from "../../types/Color"
+import Color from "../../math/Color"
 
 
 class Tween<T extends number | Vector | Color> extends TweenBase

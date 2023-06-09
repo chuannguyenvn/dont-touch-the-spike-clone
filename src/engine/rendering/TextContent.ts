@@ -1,6 +1,6 @@
 ﻿import Drawable from "./Drawable"
-import Color from "./Color"
-import Vector from "./Vector"
+import Color from "../math/Color"
+import Vector from "../math/Vector"
 import Canvas from "../system/Canvas/Canvas"
 
 class TextContent implements Drawable

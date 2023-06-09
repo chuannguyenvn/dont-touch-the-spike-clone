@@ -1,4 +1,4 @@
-﻿import Vector from "../types/Vector"
+﻿import Vector from "../math/Vector"
 import Node from "../node/Node"
 
 interface MouseInteractable

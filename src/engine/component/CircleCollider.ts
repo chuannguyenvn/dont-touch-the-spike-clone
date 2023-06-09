@@ -1,8 +1,8 @@
 ﻿import ComponentType from "./ComponentType"
 import Node from "../node/Node"
 import Collider from "./Collider"
-import Vector from "../types/Vector"
-import Rect from "../types/Rect"
+import Vector from "../math/Vector"
+import Rect from "../math/Rect"
 
 class CircleCollider extends Collider
 {

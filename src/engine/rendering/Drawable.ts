@@ -1,5 +1,5 @@
-﻿import Color from "./Color"
-import Vector from "./Vector"
+﻿import Color from "../math/Color"
+import Vector from "../math/Vector"
 
 interface Drawable
 {

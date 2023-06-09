@@ -1,8 +1,8 @@
-﻿import {GameEvent} from "../types/Event"
+﻿import {GameEvent} from "../utility/Event"
 import {UIElement} from "./UIElement"
 import Node from "../node/Node"
 import MouseInteractable from "./MouseInteractable"
-import Vector from "../types/Vector"
+import Vector from "../math/Vector"
 import Input from "../system/Input/Input"
 
 class Button extends UIElement implements MouseInteractable

@@ -1,7 +1,7 @@
 ﻿import Renderer from '../../component/Renderer'
-import Vector from '../../types/Vector'
-import Color from '../../types/Color'
-import Matrix from '../../types/Matrix'
+import Vector from '../../math/Vector'
+import Color from '../../math/Color'
+import Matrix from '../../math/Matrix'
 import Debug from "../Debug"
 
 class Canvas {

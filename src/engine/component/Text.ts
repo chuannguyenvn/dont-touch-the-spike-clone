@@ -1,8 +1,8 @@
 ﻿import {UIElement} from "./UIElement"
 import Node from "../node/Node"
-import TextContent from "../types/TextContent"
+import TextContent from "../rendering/TextContent"
 import Canvas from "../system/Canvas/Canvas"
-import Vector from "../types/Vector"
+import Vector from "../math/Vector"
 
 class Text extends UIElement
 {

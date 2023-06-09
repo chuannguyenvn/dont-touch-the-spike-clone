@@ -2,8 +2,8 @@
 import ComponentType from "./ComponentType"
 import Node from "../node/Node"
 import Transform from "./Transform"
-import Vector from "../types/Vector"
-import {ParamGameEvent} from "../types/Event"
+import Vector from "../math/Vector"
+import {ParamGameEvent} from "../utility/Event"
 import Physics from "../system/Physics"
 
 class Collider extends Component

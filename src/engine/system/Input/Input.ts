@@ -1,4 +1,4 @@
-﻿import Vector from "../../types/Vector"
+﻿import Vector from "../../math/Vector"
 import Canvas from "../Canvas/Canvas"
 import MouseInteractable from "../../component/MouseInteractable"
 import { InputBuildOptions } from '../../builder/build-options/InputBuildOptions'

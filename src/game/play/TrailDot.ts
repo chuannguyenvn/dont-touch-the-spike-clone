@@ -2,9 +2,9 @@
 import Transform from "../../engine/component/Transform"
 import Renderer from "../../engine/component/Renderer"
 import ComponentType from "../../engine/component/ComponentType"
-import Vector from "../../engine/types/Vector"
-import Circle from "../../engine/types/Circle"
-import Color from "../../engine/types/Color"
+import Vector from "../../engine/math/Vector"
+import Circle from "../../engine/rendering/Circle"
+import Color from "../../engine/math/Color"
 import Ease from "../../engine/system/tween/Ease"
 
 class TrailDot extends Node

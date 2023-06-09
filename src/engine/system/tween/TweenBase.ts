@@ -1,6 +1,6 @@
 ﻿import Ease from "./Ease"
 import Time from "../Time"
-import {GameEvent} from "../../types/Event"
+import {GameEvent} from "../../utility/Event"
 import TweenEngine from "./TweenEngine"
 
 class TweenBase

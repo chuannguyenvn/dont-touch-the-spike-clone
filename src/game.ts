@@ -2,7 +2,7 @@ import BirdGame from "./game/BirdGame"
 import WebBuilder from "./engine/builder/WebBuilder"
 import DebugBuildOptions from "./engine/builder/build-options/DebugBuildOptions"
 import CanvasBuildOptions from "./engine/builder/build-options/CanvasBuildOptions"
-import Vector from "./engine/types/Vector"
+import Vector from "./engine/math/Vector"
 import {InputBuildOptions, InputOption} from "./engine/builder/build-options/InputBuildOptions"
 
 class Game

@@ -1,5 +1,5 @@
 ﻿import Vector from "./Vector"
-import Maths from "../utility/Maths"
+import Maths from "./Maths"
 
 class Matrix
 {

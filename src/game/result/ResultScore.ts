@@ -1,13 +1,13 @@
 ﻿import Node from "../../engine/node/Node"
 import Transform from "../../engine/component/Transform"
 import Text from "../../engine/component/Text"
-import TextContent from "../../engine/types/TextContent"
+import TextContent from "../../engine/rendering/TextContent"
 import ComponentType from "../../engine/component/ComponentType"
-import Color from "../../engine/types/Color"
+import Color from "../../engine/math/Color"
 import {Alignment} from "../../engine/component/UIElement"
 import BirdGame from "../BirdGame"
 import GameState from "../GameState"
-import Vector from "../../engine/types/Vector"
+import Vector from "../../engine/math/Vector"
 
 class ResultScore extends Node
 {

@@ -1,7 +1,7 @@
 ﻿import Wall from "./Wall"
 import Spike from "./Spike"
-import Vector from "../../engine/types/Vector"
-import Maths from "../../engine/utility/Maths"
+import Vector from "../../engine/math/Vector"
+import Maths from "../../engine/math/Maths"
 import BirdGame from "../BirdGame"
 import GameState from "../GameState"
 

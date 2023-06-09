@@ -2,9 +2,9 @@
 import Transform from "../../engine/component/Transform"
 import Renderer from "../../engine/component/Renderer"
 import ComponentType from "../../engine/component/ComponentType"
-import Rectangle from "../../engine/types/Rectangle"
-import Vector from "../../engine/types/Vector"
-import Color from "../../engine/types/Color"
+import Rectangle from "../../engine/rendering/Rectangle"
+import Vector from "../../engine/math/Vector"
+import Color from "../../engine/math/Color"
 import BirdGame from "../BirdGame"
 import GameState from "../GameState"
 
