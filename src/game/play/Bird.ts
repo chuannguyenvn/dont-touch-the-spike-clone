@@ -12,8 +12,7 @@ import {GameEvent, ParamGameEvent} from "../../engine/types/Event"
 import BirdGame from "../BirdGame"
 import GameState from "../GameState"
 import TrailDot from "./TrailDot"
-import Ease from "../../engine/system/tween/Ease";
-import Tween from "../../engine/system/tween/Tween";
+import Tween from "../../engine/system/tween/Tween"
 
 class Bird extends Node
 {

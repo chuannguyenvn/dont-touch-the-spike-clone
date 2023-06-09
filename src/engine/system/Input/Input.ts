@@ -1,6 +1,8 @@
 ﻿import Vector from "../../types/Vector"
 import Canvas from "../Canvas/Canvas"
 import MouseInteractable from "../../component/MouseInteractable"
+import { InputBuildOptions } from '../../builder/build-options/InputBuildOptions'
+import Debug from "../Debug"
 
 class Input
 {
@@ -11,7 +13,7 @@ class Input
     private static _lastKeyDownKey: string
     private static _lastMousePosition: Vector
 
-    public static _init(): void {
+    public static _init(inputBuildOptions: InputBuildOptions): void {
         const mouseDownHandler = (event: MouseEvent): void => {
             Input._isMouseClickedLastFrame = true
         }
@@ -32,6 +34,8 @@ class Input
         document.addEventListener('keyup', keyUpHandler, false)
         document.addEventListener('keydown', keyDownHandler, false)
         document.onmousemove = logMousePosition
+
+        Debug.log("Input initialized.")
     }
 
     public static _handleInput(): void {

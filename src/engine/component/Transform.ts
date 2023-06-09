@@ -5,7 +5,7 @@ import Node from "../node/Node"
 import Tween from "../system/tween/Tween"
 import Ease from "../system/tween/Ease"
 import Matrix from "../types/Matrix"
-import Maths from "../utility/Maths";
+import Maths from "../utility/Maths"
 
 class Transform extends Component
 {

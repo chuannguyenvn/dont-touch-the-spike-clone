@@ -5,11 +5,10 @@ import Transform from "./Transform"
 import Canvas from "../system/Canvas/Canvas"
 import Drawable from "../types/Drawable"
 import Matrix from "../types/Matrix"
-import Vector from "../types/Vector";
-import Ease from "../system/tween/Ease";
-import Tween from "../system/tween/Tween";
-import Maths from "../utility/Maths";
-import Color from "../types/Color";
+import Ease from "../system/tween/Ease"
+import Tween from "../system/tween/Tween"
+import Maths from "../utility/Maths"
+import Color from "../types/Color"
 
 class Renderer extends Component
 {

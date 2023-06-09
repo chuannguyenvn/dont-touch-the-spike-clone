@@ -5,44 +5,45 @@ import Physics from "./Physics"
 import TweenEngine from "./tween/TweenEngine"
 import Time from "./Time"
 import Node from "../node/Node"
+import Game from "../Game"
 
-abstract class Game
+abstract class System
 {
+    public static game: Game
+    
     private static _isInitialized = false
     private static _nodes: Node[] = []
     private static _lastFrameTimestamp = -1
 
-    public static init(canvasContext: CanvasRenderingContext2D): void {
-        Debug.assert(!Game._isInitialized, "Game is already initialized.")
-
-        Time._init()
-        Input._init()
-        Canvas._init(canvasContext)
-        Game._lastFrameTimestamp = Date.now()
-        window.requestAnimationFrame(Game._gameLoop)
+    public static _init(): void {
+        Debug.assert(!System._isInitialized, "Game is already initialized.")
+        
+        System._lastFrameTimestamp = Date.now()
+        window.requestAnimationFrame(System._gameLoop)
+        Debug.log("Game is running.")
     }
 
     public static _registerNode(node: Node): void {
-        Game._nodes.push(node)
+        System._nodes.push(node)
     }
 
     public static _unregisterNode(node: Node): void {
-        Game._nodes = Game._nodes.filter((node) => node !== node)
+        System._nodes = System._nodes.filter((node) => node !== node)
     }
 
     private static _gameLoop(): void {
         const currentTimestamp = Date.now()
-        Time._lastFrameTime = Game._lastFrameTimestamp
+        Time._lastFrameTime = System._lastFrameTimestamp
 
         Input._handleInput()
         Physics._handlePhysics()
-        Game._update()
+        System._update()
         TweenEngine._handleTween()
         Canvas._draw()
 
-        Game._lastFrameTimestamp = currentTimestamp
+        System._lastFrameTimestamp = currentTimestamp
         Input._resetInput()
-        window.requestAnimationFrame(Game._gameLoop)
+        window.requestAnimationFrame(System._gameLoop)
     }
 
     private static _update(): void {
@@ -54,4 +55,4 @@ abstract class Game
     }
 }
 
-export default Game
+export default System

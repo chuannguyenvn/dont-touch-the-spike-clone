@@ -1,16 +1,24 @@
-﻿class Debug
-{
+﻿class Debug {
+    public static _isDebugging: boolean
+
+    public static _init(isDebugging: boolean) {
+        Debug._isDebugging = isDebugging
+        
+        Debug.log("Debug initialized.")
+    }
+
     public static assert(condition: boolean, message: string): void {
-        console.assert(condition, message)
+        if (Debug._isDebugging) console.assert(condition, message)
     }
 
     public static log(message: string): void {
-        // Can save the logged message into a txt
-        console.log(message)
+        if (Debug._isDebugging)
+            // Can save the logged message into a txt
+            console.log(message)
     }
 
     public static logError(message: string): void {
-        console.error(message)
+        if (Debug._isDebugging) console.error(message)
     }
 }
 

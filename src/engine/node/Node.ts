@@ -1,4 +1,4 @@
-﻿import Game from '../system/Game'
+﻿import System from '../system/System'
 import Component from '../component/Component'
 import ComponentType from '../component/ComponentType'
 import Debug from '../system/Debug'
@@ -20,7 +20,7 @@ class Node
 
     constructor(name: string) {
         this.name = name
-        Game._registerNode(this)
+        System._registerNode(this)
         this.init()
     }
 

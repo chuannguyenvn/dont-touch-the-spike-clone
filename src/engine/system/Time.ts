@@ -1,10 +1,14 @@
-﻿class Time
+﻿import Debug from "./Debug"
+
+class Time
 {
     public static _lastFrameTime: number
     private static _startTime: number
 
     public static _init() {
         Time._startTime = Date.now()
+        
+        Debug.log("Time initialized.")
     }
 
     public static time() {

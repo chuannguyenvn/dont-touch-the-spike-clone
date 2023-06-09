@@ -1,5 +1,4 @@
-﻿import Game from "../engine/system/Game"
-import Bird from "./play/Bird"
+﻿import Bird from "./play/Bird"
 import Vector from "../engine/types/Vector"
 import PlayButton from "./welcome/PlayButton"
 import VerticalWall from "./play/VerticalWall"
@@ -14,7 +13,8 @@ import HighScore from "./result/HighScore"
 import RetryButton from "./result/RetryButton"
 import Matrix from "../engine/types/Matrix"
 import GameBackground from "./GameBackground"
-import {Title, TitleBottom} from "./welcome/Title";
+import {Title, TitleBottom} from "./welcome/Title"
+import Game from "../engine/Game"
 
 
 class BirdGame extends Game
@@ -56,9 +56,7 @@ class BirdGame extends Game
         }
     }
 
-    public static init(ctx: CanvasRenderingContext2D): void {
-        super.init(ctx)
-
+    public static init(): void {
         BirdGame.gameStateChanged.subscribe(BirdGame.stateChangeHandler.bind(BirdGame))
 
         const gameBackground = new GameBackground("Game Background")

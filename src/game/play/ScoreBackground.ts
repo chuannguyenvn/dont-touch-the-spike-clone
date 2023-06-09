@@ -6,9 +6,6 @@ import Color from "../../engine/types/Color"
 import Transform from "../../engine/component/Transform"
 import BirdGame from "../BirdGame"
 import GameState from "../GameState"
-import ThemeManager from "../ThemeManager";
-import Ease from "../../engine/system/tween/Ease";
-import Maths from "../../engine/utility/Maths";
 
 class ScoreBackground extends Node
 {

@@ -2,14 +2,14 @@
 import Canvas from "../system/Canvas/Canvas"
 import Color from "./Color"
 import Vector from "./Vector"
-import Ease from "../system/tween/Ease";
-import Tween from "../system/tween/Tween";
-import Maths from "../utility/Maths";
+import Ease from "../system/tween/Ease"
+import Tween from "../system/tween/Tween"
+import Maths from "../utility/Maths"
 
 class Sprite implements Drawable
 {
     public color: Color
-    public saturation: number = 70
+    public saturation = 70
     public drawOrder: number
     public maxWidth = 100
     public maxHeight = 100
