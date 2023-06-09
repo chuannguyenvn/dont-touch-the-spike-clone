@@ -1,4 +1,7 @@
-﻿class Maths
+﻿import Vector from "../types/Vector";
+import Color from "../types/Color";
+
+class Maths
 {
     public static rad2Deg: number = 180 / Math.PI
     public static deg2Rad: number = Math.PI / 180
@@ -36,6 +39,23 @@
         }
 
         return shuffledRange
+    }
+
+    public static lerpNumber(x: number, start: number, end: number) {
+        return (end - start) * x + start
+    }
+
+    public static lerpVector(x: number, start: Vector, end: Vector) {
+        return (end.subtract(start)).multiply(x).add(start)
+    }
+
+    public static lerpColor(x: number, start: Color, end: Color) {
+        return new Color(
+            Maths.lerpNumber(x, start.r, end.r),
+            Maths.lerpNumber(x, start.g, end.g),
+            Maths.lerpNumber(x, start.b, end.b),
+            Maths.lerpNumber(x, start.a, end.a),
+        )
     }
 }
 

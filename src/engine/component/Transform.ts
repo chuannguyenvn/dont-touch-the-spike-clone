@@ -5,6 +5,7 @@ import Node from "../node/Node"
 import Tween from "../system/tween/Tween"
 import Ease from "../system/tween/Ease"
 import Matrix from "../types/Matrix"
+import Maths from "../utility/Maths";
 
 class Transform extends Component
 {
@@ -35,7 +36,7 @@ class Transform extends Component
     public tweenPosition(to: Vector, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Vector> {
         const evaluate = (x: number) => {
             if (relative) to.add(tween._startValue)
-            this.position = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue)
+            this.position = Maths.lerpVector(x, tween._startValue, to)
         }
 
         const tween = new Tween<Vector>(evaluate, () => this.position, duration, delay, ease)
@@ -45,7 +46,7 @@ class Transform extends Component
     public tweenPositionX(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
-            this.position.x = (to - tween._startValue) * x + tween._startValue
+            this.position.x = Maths.lerpNumber(x, tween._startValue, to)
         }
 
         const tween = new Tween<number>(evaluate, () => this.position.x, duration, delay, ease)
@@ -55,7 +56,7 @@ class Transform extends Component
     public tweenPositionY(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
-            this.position.y = (to - tween._startValue) * x + tween._startValue
+            this.position.y = Maths.lerpNumber(x, tween._startValue, to)
         }
 
         const tween = new Tween<number>(evaluate, () => this.position.y, duration, delay, ease)
@@ -65,7 +66,7 @@ class Transform extends Component
     public tweenScale(to: Vector, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Vector> {
         const evaluate = (x: number) => {
             if (relative) to.add(tween._startValue)
-            this.scale = (to.subtract(tween._startValue)).multiply(x).add(tween._startValue)
+            this.scale = Maths.lerpVector(x, tween._startValue, to)
         }
 
         const tween = new Tween<Vector>(evaluate, () => this.scale, duration, delay, ease)
