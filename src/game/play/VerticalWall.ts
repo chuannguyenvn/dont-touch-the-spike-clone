@@ -1,9 +1,9 @@
 ﻿import Wall from "./Wall"
 import Spike from "./Spike"
-import Vector from "./engine/types/Vector"
-import Maths from "./engine/utility/Maths"
-import BirdGame from "./BirdGame"
-import GameState from "./GameState"
+import Vector from "../../engine/types/Vector"
+import Maths from "../../engine/utility/Maths"
+import BirdGame from "../BirdGame"
+import GameState from "../GameState"
 
 class VerticalWall extends Wall
 {

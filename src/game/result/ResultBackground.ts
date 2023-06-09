@@ -1,12 +1,12 @@
-﻿import Node from "./engine/node/Node"
-import Transform from "./engine/component/Transform"
-import Renderer from "./engine/component/Renderer"
-import ComponentType from "./engine/component/ComponentType"
-import Rectangle from "./engine/types/Rectangle"
-import Vector from "./engine/types/Vector"
-import Color from "./engine/types/Color"
-import BirdGame from "./BirdGame"
-import GameState from "./GameState"
+﻿import Node from "../../engine/node/Node"
+import Transform from "../../engine/component/Transform"
+import Renderer from "../../engine/component/Renderer"
+import ComponentType from "../../engine/component/ComponentType"
+import Rectangle from "../../engine/types/Rectangle"
+import Vector from "../../engine/types/Vector"
+import Color from "../../engine/types/Color"
+import BirdGame from "../BirdGame"
+import GameState from "../GameState"
 
 class ResultBackground extends Node
 {

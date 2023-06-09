@@ -1,10 +1,8 @@
-import BirdGame from "./BirdGame"
+import BirdGame from "./game/BirdGame"
 
 class Game
 {
     constructor() {
-        console.log('Game created')
-
         const game = document.getElementById("game")
         const canvas = document.createElement("canvas")
         canvas.id = "canvas"

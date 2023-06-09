@@ -1,19 +1,19 @@
-﻿import Node from "./engine/node/Node"
-import ComponentType from "./engine/component/ComponentType"
-import Sprite from "./engine/types/Sprite"
-import Renderer from "./engine/component/Renderer"
-import Transform from "./engine/component/Transform"
-import Vector from "./engine/types/Vector"
-import Input from "./engine/system/Input"
-import Time from "./engine/system/Time"
-import RectangleCollider from "./engine/component/RectangleCollider"
-import Collider from "./engine/component/Collider"
-import {GameEvent, ParamGameEvent} from "./engine/types/Event"
-import BirdGame from "./BirdGame"
-import GameState from "./GameState"
+﻿import Node from "../../engine/node/Node"
+import ComponentType from "../../engine/component/ComponentType"
+import Sprite from "../../engine/types/Sprite"
+import Renderer from "../../engine/component/Renderer"
+import Transform from "../../engine/component/Transform"
+import Vector from "../../engine/types/Vector"
+import Input from "../../engine/system/Input"
+import Time from "../../engine/system/Time"
+import RectangleCollider from "../../engine/component/RectangleCollider"
+import Collider from "../../engine/component/Collider"
+import {GameEvent, ParamGameEvent} from "../../engine/types/Event"
+import BirdGame from "../BirdGame"
+import GameState from "../GameState"
 import TrailDot from "./TrailDot"
-import Ease from "./engine/system/tween/Ease";
-import Tween from "./engine/system/tween/Tween";
+import Ease from "../../engine/system/tween/Ease";
+import Tween from "../../engine/system/tween/Tween";
 
 class Bird extends Node
 {

@@ -1,14 +1,14 @@
-﻿import Node from "./engine/node/Node"
-import Transform from "./engine/component/Transform"
-import RectangleCollider from "./engine/component/RectangleCollider"
-import Renderer from "./engine/component/Renderer"
-import Rectangle from "./engine/types/Rectangle"
-import ComponentType from "./engine/component/ComponentType"
-import Color from "./engine/types/Color"
+﻿import Node from "../engine/node/Node"
+import Transform from "../engine/component/Transform"
+import RectangleCollider from "../engine/component/RectangleCollider"
+import Renderer from "../engine/component/Renderer"
+import Rectangle from "../engine/types/Rectangle"
+import ComponentType from "../engine/component/ComponentType"
+import Color from "../engine/types/Color"
 import BirdGame from "./BirdGame"
-import Canvas from "./engine/system/Canvas"
+import Canvas from "../engine/system/Canvas"
 import ThemeManager from "./ThemeManager"
-import Ease from "./engine/system/tween/Ease"
+import Ease from "../engine/system/tween/Ease"
 
 class GameBackground extends Node
 {

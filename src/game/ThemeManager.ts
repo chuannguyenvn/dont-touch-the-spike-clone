@@ -1,4 +1,4 @@
-﻿import Color from "./engine/types/Color"
+﻿import Color from "../engine/types/Color"
 
 
 class ThemeManager

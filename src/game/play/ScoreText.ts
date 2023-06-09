@@ -1,12 +1,12 @@
-﻿import Node from "./engine/node/Node"
-import Transform from "./engine/component/Transform"
-import ComponentType from "./engine/component/ComponentType"
-import TextContent from "./engine/types/TextContent"
-import Color from "./engine/types/Color"
-import {Alignment} from "./engine/component/UIElement"
-import Text from "./engine/component/Text"
-import BirdGame from "./BirdGame"
-import GameState from "./GameState"
+﻿import Node from "../../engine/node/Node"
+import Transform from "../../engine/component/Transform"
+import ComponentType from "../../engine/component/ComponentType"
+import TextContent from "../../engine/types/TextContent"
+import Color from "../../engine/types/Color"
+import {Alignment} from "../../engine/component/UIElement"
+import Text from "../../engine/component/Text"
+import BirdGame from "../BirdGame"
+import GameState from "../GameState"
 
 class ScoreText extends Node
 {
