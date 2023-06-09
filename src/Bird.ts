@@ -12,6 +12,8 @@ import {GameEvent, ParamGameEvent} from "./engine/types/Event"
 import BirdGame from "./BirdGame"
 import GameState from "./GameState"
 import TrailDot from "./TrailDot"
+import Ease from "./engine/system/tween/Ease";
+import Tween from "./engine/system/tween/Tween";
 
 class Bird extends Node
 {
@@ -38,6 +40,8 @@ class Bird extends Node
     private jumpSpriteTimer = 0.4
     private trailDotSpawnTimeout = 0.1
     private trailDotSpawnTimer = 0.1
+    private trailDotEffectiveTime = 0.4
+    private dieSaturationTween : Tween<number>
 
     public init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
@@ -91,13 +95,7 @@ class Bird extends Node
         this.jumpSpriteTimer -= Time.deltaTime()
         if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
 
-        this.trailDotSpawnTimer -= Time.deltaTime()
-        if (this.trailDotSpawnTimer < 0)
-        {
-            const trailDot = new TrailDot("Dot", this.transform.position)
-            trailDot.start()
-            this.trailDotSpawnTimer = this.trailDotSpawnTimeout
-        }
+        this.handleSpawnTrailDot()
     }
 
     public turnLeft(): void {
@@ -117,12 +115,16 @@ class Bird extends Node
         {
             this.isLocked = true
             this.transform.position.x = 0
-        } else if (gameState === GameState.PLAY)
+            if (this.dieSaturationTween) this.dieSaturationTween.end()
+            this.glideSprite.saturation = 70
+        }
+        else if (gameState === GameState.PLAY)
         {
             this.isAlive = true
             this.isLocked = false
             this.jump()
-        } else if (gameState === GameState.RESULT)
+        }
+        else if (gameState === GameState.RESULT)
         {
         }
     }
@@ -131,7 +133,8 @@ class Bird extends Node
         if (this.isMovingRight)
         {
             this.transform.position.x += Time.deltaTime() * this.moveSpeed
-        } else
+        }
+        else
         {
             this.transform.position.x -= Time.deltaTime() * this.moveSpeed
         }
@@ -155,10 +158,12 @@ class Bird extends Node
         {
             if (this.isMovingRight) this.touchedRightWall.invoke()
             else this.touchedLeftWall.invoke()
-        } else if (collider.owner.name === "Spike")
+        }
+        else if (collider.owner.name === "Spike")
         {
             this.isAlive = false
             BirdGame.changeState(GameState.RESULT)
+            this.dieSaturationTween = this.glideSprite.tweenSaturation(0, 0.3, 0, Ease.LINEAR, false)
         }
     }
 
@@ -172,6 +177,19 @@ class Bird extends Node
         else this.renderer.setDrawable(this.jumpSprite)
 
         this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20
+    }
+    
+    private handleSpawnTrailDot(): void{
+        if (!this.isAlive) return
+        if (Time.timeSinceGameStart() - this.lastJumpTime > this.trailDotEffectiveTime) return
+        
+        this.trailDotSpawnTimer -= Time.deltaTime()
+        if (this.trailDotSpawnTimer < 0)
+        {
+            const trailDot = new TrailDot("Dot", this.transform.position)
+            trailDot.start()
+            this.trailDotSpawnTimer = this.trailDotSpawnTimeout
+        }
     }
 }
 

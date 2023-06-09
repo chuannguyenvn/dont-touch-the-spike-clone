@@ -31,7 +31,7 @@ class TweenEngine
             if (tween._startTime + tween._duration < Time.timeSinceGameStart())
             {
                 finishedTweens.push(tween)
-                tween._end()
+                tween.end()
             }
         }
 

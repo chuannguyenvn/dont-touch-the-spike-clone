@@ -19,7 +19,7 @@ class Renderer extends Component
 
     // COMPONENT PROPERTIES //
     public drawOrder = 0
-    protected drawable: Drawable
+    public drawable: Drawable
     private ownerTransform: Transform
 
     constructor(owner: Node) {

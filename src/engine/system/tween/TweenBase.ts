@@ -28,7 +28,7 @@ class TweenBase
         this.tweenStarted.invoke()
     }
 
-    public _end(): void {
+    public end(): void {
         TweenEngine._unregisterTween(this)
         this.evaluate(1)
         this.tweenEnded.invoke()
