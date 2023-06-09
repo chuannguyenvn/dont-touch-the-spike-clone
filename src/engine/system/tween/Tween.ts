@@ -1,9 +1,10 @@
 ﻿import Ease from "./Ease"
 import Vector from "../../types/Vector"
 import TweenBase from "./TweenBase"
+import Color from "../../types/Color";
 
 
-class Tween<T extends number | Vector> extends TweenBase
+class Tween<T extends number | Vector | Color> extends TweenBase
 {
     public _retrieveStartValue: () => T
     public _startValue: T

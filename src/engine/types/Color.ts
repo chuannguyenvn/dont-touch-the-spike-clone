@@ -62,6 +62,20 @@
 
         return `rgba(${componentToHex(this.r)}, ${componentToHex(this.g)}, ${componentToHex(this.b)}, ${this.a})`
     }
+
+    public add(other: Color): Color {
+        const r = this.r + other.r
+        const g = this.g + other.g
+        const b = this.b + other.b
+        const a = this.a + other.a
+
+        const clampedR = Math.max(0, Math.min(1, r))
+        const clampedG = Math.max(0, Math.min(1, g))
+        const clampedB = Math.max(0, Math.min(1, b))
+        const clampedA = Math.max(0, Math.min(1, a))
+
+        return new Color(clampedR, clampedG, clampedB, clampedA)
+    }
 }
 
 export default Color

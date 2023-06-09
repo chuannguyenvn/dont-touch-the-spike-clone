@@ -5,6 +5,11 @@ import Transform from "./Transform"
 import Canvas from "../system/Canvas"
 import Drawable from "../types/Drawable"
 import Matrix from "../types/Matrix"
+import Vector from "../types/Vector";
+import Ease from "../system/tween/Ease";
+import Tween from "../system/tween/Tween";
+import Maths from "../utility/Maths";
+import Color from "../types/Color";
 
 class Renderer extends Component
 {
@@ -35,6 +40,16 @@ class Renderer extends Component
     public _draw(): void {
         if (!this.owner.isVisible) return
         this.drawable._draw()
+    }
+
+    public tweenColor(to: Color, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Color> {
+        const evaluate = (x: number) => {
+            if (relative) to.add(tween._startValue)
+            this.drawable.color = Maths.lerpColor(x, tween._startValue, to)
+        }
+
+        const tween = new Tween<Color>(evaluate, () => this.drawable.color, duration, delay, ease)
+        return tween
     }
 }
 

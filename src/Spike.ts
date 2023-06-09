@@ -44,6 +44,7 @@ class Spike extends Node
 
     public show(): void {
         this.transform.tweenPositionX(this.showingPosX, 0.2, 0, Ease.LINEAR, false)
+        this.renderer.tweenColor(Color.RED, 1, 0, Ease.IN_EXPO, false)
     }
 
     public hide(): void {
