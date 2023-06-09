@@ -1,18 +1,17 @@
-﻿import Wall from "./Wall"
-import Spike from "./Spike"
-import Vector from "../../engine/math/Vector"
-import Renderer from "../../engine/component/Renderer"
-import ComponentType from "../../engine/component/ComponentType"
-import Rectangle from "../../engine/rendering/Rectangle"
-import Color from "../../engine/math/Color"
-import Maths from "../../engine/math/Maths"
-import ThemeManager from "../ThemeManager"
-import Drawable from "../../engine/rendering/Drawable"
-import BirdGame from "../BirdGame"
-import Ease from "../../engine/system/tween/Ease"
+﻿import Wall from './Wall'
+import Spike from './Spike'
+import Vector from '../../engine/math/Vector'
+import Renderer from '../../engine/component/Renderer'
+import ComponentType from '../../engine/component/ComponentType'
+import Rectangle from '../../engine/rendering/Rectangle'
+import Color from '../../engine/math/Color'
+import Maths from '../../engine/math/Maths'
+import ThemeManager from '../ThemeManager'
+import Drawable from '../../engine/rendering/Drawable'
+import BirdGame from '../BirdGame'
+import Ease from '../../engine/system/tween/Ease'
 
-class HorizontalWall extends Wall
-{
+class HorizontalWall extends Wall {
     private renderer: Renderer
     private rectangle: Drawable
 
@@ -29,10 +28,8 @@ class HorizontalWall extends Wall
     }
 
     public start(): void {
-
-        for (let x = -200; x <= 200; x += 50)
-        {
-            const spike = new Spike("Spike")
+        for (let x = -200; x <= 200; x += 50) {
+            const spike = new Spike('Spike')
             spike.setParent(this)
 
             const spikeXPos = x

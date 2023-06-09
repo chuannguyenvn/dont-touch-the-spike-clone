@@ -1,15 +1,14 @@
-﻿import Node from "../../engine/node/Node"
-import Transform from "../../engine/component/Transform"
-import ComponentType from "../../engine/component/ComponentType"
-import TextContent from "../../engine/rendering/TextContent"
-import Color from "../../engine/math/Color"
-import {Alignment} from "../../engine/component/UIElement"
-import Text from "../../engine/component/Text"
-import BirdGame from "../BirdGame"
-import GameState from "../GameState"
+﻿import Node from '../../engine/node/Node'
+import Transform from '../../engine/component/Transform'
+import ComponentType from '../../engine/component/ComponentType'
+import TextContent from '../../engine/rendering/TextContent'
+import Color from '../../engine/math/Color'
+import { Alignment } from '../../engine/component/UIElement'
+import Text from '../../engine/component/Text'
+import BirdGame from '../BirdGame'
+import GameState from '../GameState'
 
-class ScoreText extends Node
-{
+class ScoreText extends Node {
     public transform: Transform
     public text: Text
     private textContent: TextContent
@@ -18,8 +17,8 @@ class ScoreText extends Node
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
-        this.textContent = new TextContent("00", new Color(1, 1, 1, 0.5))
-        this.textContent.font = "100px tahoma"
+        this.textContent = new TextContent('00', new Color(1, 1, 1, 0.5))
+        this.textContent.font = '100px tahoma'
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
@@ -32,13 +31,11 @@ class ScoreText extends Node
     }
 
     private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.PLAY)
-        {
-            this.textContent.text = "0"
+        if (gameState === GameState.PLAY) {
+            this.textContent.text = '0'
             this.isVisible = true
             this.isActive = true
-        } else
-        {
+        } else {
             this.isVisible = false
             this.isActive = false
         }

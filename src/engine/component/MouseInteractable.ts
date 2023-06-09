@@ -1,8 +1,7 @@
-﻿import Vector from "../math/Vector"
-import Node from "../node/Node"
+﻿import Vector from '../math/Vector'
+import Node from '../node/Node'
 
-interface MouseInteractable
-{
+interface MouseInteractable {
     owner: Node
 
     _click(position: Vector): void

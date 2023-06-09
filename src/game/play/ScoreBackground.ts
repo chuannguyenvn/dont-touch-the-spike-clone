@@ -1,14 +1,13 @@
-﻿import Node from "../../engine/node/Node"
-import ComponentType from "../../engine/component/ComponentType"
-import Renderer from "../../engine/component/Renderer"
-import Circle from "../../engine/rendering/Circle"
-import Color from "../../engine/math/Color"
-import Transform from "../../engine/component/Transform"
-import BirdGame from "../BirdGame"
-import GameState from "../GameState"
+﻿import Node from '../../engine/node/Node'
+import ComponentType from '../../engine/component/ComponentType'
+import Renderer from '../../engine/component/Renderer'
+import Circle from '../../engine/rendering/Circle'
+import Color from '../../engine/math/Color'
+import Transform from '../../engine/component/Transform'
+import BirdGame from '../BirdGame'
+import GameState from '../GameState'
 
-class ScoreBackground extends Node
-{
+class ScoreBackground extends Node {
     public transform: Transform
     public renderer: Renderer
 
@@ -25,15 +24,11 @@ class ScoreBackground extends Node
         BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
     }
 
-
     private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.PLAY)
-        {
+        if (gameState == GameState.PLAY) {
             this.isVisible = true
             this.isActive = true
-        }
-        else
-        {
+        } else {
             this.isVisible = false
             this.isActive = false
         }

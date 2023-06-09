@@ -1,11 +1,10 @@
-﻿import Node from "../../engine/node/Node"
-import Transform from "../../engine/component/Transform"
-import ComponentType from "../../engine/component/ComponentType"
-import RectangleCollider from "../../engine/component/RectangleCollider"
-import Spike from "./Spike"
+﻿import Node from '../../engine/node/Node'
+import Transform from '../../engine/component/Transform'
+import ComponentType from '../../engine/component/ComponentType'
+import RectangleCollider from '../../engine/component/RectangleCollider'
+import Spike from './Spike'
 
-class Wall extends Node
-{
+class Wall extends Node {
     public transform: Transform
     public collider: RectangleCollider
     protected spikes: Spike[] = []

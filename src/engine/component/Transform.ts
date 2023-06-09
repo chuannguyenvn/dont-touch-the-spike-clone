@@ -1,14 +1,13 @@
-﻿import Vector from "../math/Vector"
-import ComponentType from "./ComponentType"
-import Component from "./Component"
-import Node from "../node/Node"
-import Tween from "../system/tween/Tween"
-import Ease from "../system/tween/Ease"
-import Matrix from "../math/Matrix"
-import Maths from "../math/Maths"
+﻿import Vector from '../math/Vector'
+import ComponentType from './ComponentType'
+import Component from './Component'
+import Node from '../node/Node'
+import Tween from '../system/tween/Tween'
+import Ease from '../system/tween/Ease'
+import Matrix from '../math/Matrix'
+import Maths from '../math/Maths'
 
-class Transform extends Component
-{
+class Transform extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.TRANSFORM
     public readonly _componentRequirements: ComponentType[] = []
@@ -18,7 +17,12 @@ class Transform extends Component
     public rotation: number
     public scale: Vector
 
-    constructor(owner: Node, position: Vector = Vector.ZERO, rotation = 0, scale: Vector = Vector.ONE) {
+    constructor(
+        owner: Node,
+        position: Vector = Vector.ZERO,
+        rotation = 0,
+        scale: Vector = Vector.ONE
+    ) {
         super(owner)
         this.position = position
         this.rotation = rotation
@@ -33,9 +37,15 @@ class Transform extends Component
         return translationMatrix.multiplyMatrix(rotationMatrix).multiplyMatrix(scaleMatrix)
     }
 
-    public tweenPosition(to: Vector, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Vector> {
+    public tweenPosition(
+        to: Vector,
+        duration: number,
+        delay: number,
+        ease: Ease,
+        relative: boolean
+    ): Tween<Vector> {
         const evaluate = (x: number) => {
-            if (relative) to.add(tween._startValue)
+            // if (relative) to.add(tween._startValue)
             this.position = Maths.lerpVector(x, tween._startValue, to)
         }
 
@@ -43,7 +53,13 @@ class Transform extends Component
         return tween
     }
 
-    public tweenPositionX(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number> {
+    public tweenPositionX(
+        to: number,
+        duration: number,
+        delay: number,
+        ease: Ease,
+        relative: boolean
+    ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
             this.position.x = Maths.lerpNumber(x, tween._startValue, to)
@@ -53,7 +69,13 @@ class Transform extends Component
         return tween
     }
 
-    public tweenPositionY(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number> {
+    public tweenPositionY(
+        to: number,
+        duration: number,
+        delay: number,
+        ease: Ease,
+        relative: boolean
+    ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
             this.position.y = Maths.lerpNumber(x, tween._startValue, to)
@@ -63,7 +85,13 @@ class Transform extends Component
         return tween
     }
 
-    public tweenScale(to: Vector, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Vector> {
+    public tweenScale(
+        to: Vector,
+        duration: number,
+        delay: number,
+        ease: Ease,
+        relative: boolean
+    ): Tween<Vector> {
         const evaluate = (x: number) => {
             if (relative) to.add(tween._startValue)
             this.scale = Maths.lerpVector(x, tween._startValue, to)

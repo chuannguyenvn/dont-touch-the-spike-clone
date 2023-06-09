@@ -1,5 +1,4 @@
-﻿enum Ease
-{
+﻿enum Ease {
     LINEAR,
     IN_SINE,
     OUT_SINE,

@@ -1,6 +1,3 @@
-﻿class KeyboardInput
-{
-
-}
+﻿class KeyboardInput {}
 
 export default KeyboardInput

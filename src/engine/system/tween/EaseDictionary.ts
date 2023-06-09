@@ -1,4 +1,4 @@
-﻿import Ease from "./Ease"
+﻿import Ease from './Ease'
 
 const pow = Math.pow
 const sqrt = Math.sqrt
@@ -11,9 +11,7 @@ const c3 = c1 + 1
 const c4 = (2 * PI) / 3
 const c5 = (2 * PI) / 4.5
 
-
-const easeDictionary
-    = {
+const easeDictionary = {
     [Ease.LINEAR]: (x: number) => x,
     [Ease.IN_QUAD]: function (x: number) {
         return x * x
@@ -70,10 +68,10 @@ const easeDictionary
         return x === 0
             ? 0
             : x === 1
-                ? 1
-                : x < 0.5
-                    ? pow(2, 20 * x - 10) / 2
-                    : (2 - pow(2, -20 * x + 10)) / 2
+            ? 1
+            : x < 0.5
+            ? pow(2, 20 * x - 10) / 2
+            : (2 - pow(2, -20 * x + 10)) / 2
     },
     [Ease.IN_CIRC]: function (x: number) {
         return 1 - sqrt(1 - pow(x, 2))
@@ -82,9 +80,7 @@ const easeDictionary
         return sqrt(1 - pow(x - 1, 2))
     },
     [Ease.IN_OUT_CIRC]: function (x: number) {
-        return x < 0.5
-            ? (1 - sqrt(1 - pow(2 * x, 2))) / 2
-            : (sqrt(1 - pow(-2 * x + 2, 2)) + 1) / 2
+        return x < 0.5 ? (1 - sqrt(1 - pow(2 * x, 2))) / 2 : (sqrt(1 - pow(-2 * x + 2, 2)) + 1) / 2
     },
     [Ease.IN_BACK]: function (x: number) {
         return c3 * x * x * x - c1 * x * x
@@ -98,27 +94,19 @@ const easeDictionary
             : (pow(2 * x - 2, 2) * ((c2 + 1) * (x * 2 - 2) + c2) + 2) / 2
     },
     [Ease.IN_ELASTIC]: function (x: number) {
-        return x === 0
-            ? 0
-            : x === 1
-                ? 1
-                : -pow(2, 10 * x - 10) * sin((x * 10 - 10.75) * c4)
+        return x === 0 ? 0 : x === 1 ? 1 : -pow(2, 10 * x - 10) * sin((x * 10 - 10.75) * c4)
     },
     [Ease.OUT_ELASTIC]: function (x: number) {
-        return x === 0
-            ? 0
-            : x === 1
-                ? 1
-                : pow(2, -10 * x) * sin((x * 10 - 0.75) * c4) + 1
+        return x === 0 ? 0 : x === 1 ? 1 : pow(2, -10 * x) * sin((x * 10 - 0.75) * c4) + 1
     },
     [Ease.IN_OUT_ELASTIC]: function (x: number) {
         return x === 0
             ? 0
             : x === 1
-                ? 1
-                : x < 0.5
-                    ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2
-                    : (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2 + 1
+            ? 1
+            : x < 0.5
+            ? -(pow(2, 20 * x - 10) * sin((20 * x - 11.125) * c5)) / 2
+            : (pow(2, -20 * x + 10) * sin((20 * x - 11.125) * c5)) / 2 + 1
     },
 }
 

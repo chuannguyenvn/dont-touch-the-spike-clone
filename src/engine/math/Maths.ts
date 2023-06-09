@@ -1,8 +1,7 @@
-﻿import Vector from "./Vector"
-import Color from "./Color"
+﻿import Vector from './Vector'
+import Color from './Color'
 
-class Maths
-{
+class Maths {
     public static rad2Deg: number = 180 / Math.PI
     public static deg2Rad: number = Math.PI / 180
 
@@ -27,12 +26,13 @@ class Maths
     }
 
     public static randomIntBag(minInclusive: number, maxExclusive: number, drawCount: number) {
-        const range = Array.from({length: maxExclusive - minInclusive},
-            (_, index) => index + minInclusive)
+        const range = Array.from(
+            { length: maxExclusive - minInclusive },
+            (_, index) => index + minInclusive
+        )
         const shuffledRange: number[] = []
 
-        while (shuffledRange.length < drawCount && range.length > 0)
-        {
+        while (shuffledRange.length < drawCount && range.length > 0) {
             const randomIndex = Math.floor(Math.random() * range.length)
             shuffledRange.push(range[randomIndex])
             range.splice(randomIndex, 1)
@@ -46,7 +46,7 @@ class Maths
     }
 
     public static lerpVector(x: number, start: Vector, end: Vector) {
-        return (end.subtract(start)).multiply(x).add(start)
+        return end.subtract(start).multiply(x).add(start)
     }
 
     public static lerpColor(x: number, start: Color, end: Color) {
@@ -54,7 +54,7 @@ class Maths
             Maths.lerpNumber(x, start.r, end.r),
             Maths.lerpNumber(x, start.g, end.g),
             Maths.lerpNumber(x, start.b, end.b),
-            Maths.lerpNumber(x, start.a, end.a),
+            Maths.lerpNumber(x, start.a, end.a)
         )
     }
 }

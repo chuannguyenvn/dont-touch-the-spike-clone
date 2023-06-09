@@ -1,13 +1,12 @@
-﻿import Component from "./Component"
-import ComponentType from "./ComponentType"
-import Node from "../node/Node"
-import Transform from "./Transform"
-import Vector from "../math/Vector"
-import {ParamGameEvent} from "../utility/Event"
-import Physics from "../system/Physics"
+﻿import Component from './Component'
+import ComponentType from './ComponentType'
+import Node from '../node/Node'
+import Transform from './Transform'
+import Vector from '../math/Vector'
+import { ParamGameEvent } from '../utility/Event'
+import Physics from '../system/Physics'
 
-class Collider extends Component
-{
+class Collider extends Component {
     // COMPONENT METADATA //
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
     public collisionStarted: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
@@ -31,20 +30,16 @@ class Collider extends Component
 
     public _addCollidingCollider(collider: Collider): void {
         this._currentFrameCollidingColliders.push(collider)
-        if (this._lastFrameCollidingColliders.findIndex(c => c === collider) === -1)
-        {
+        if (this._lastFrameCollidingColliders.findIndex((c) => c === collider) === -1) {
             this.collisionStarted.invoke(collider)
-        } else
-        {
+        } else {
             this.collisionHappening.invoke(collider)
         }
     }
 
     public _confirmCollidingColliders(): void {
-        for (const collider of this._lastFrameCollidingColliders)
-        {
-            if (this._currentFrameCollidingColliders.findIndex(c => c === collider) === -1)
-            {
+        for (const collider of this._lastFrameCollidingColliders) {
+            if (this._currentFrameCollidingColliders.findIndex((c) => c === collider) === -1) {
                 this.collisionEnded.invoke(collider)
             }
         }

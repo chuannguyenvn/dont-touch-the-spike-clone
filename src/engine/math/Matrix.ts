@@ -1,14 +1,21 @@
-﻿import Vector from "./Vector"
-import Maths from "./Maths"
+﻿import Vector from './Vector'
+import Maths from './Maths'
 
-class Matrix
-{
+class Matrix {
     // MEMBER VARIABLES //
     public values: number[][] = []
 
-    constructor(x0y0 = 0, x0y1 = 0, x0y2 = 0,
-                x1y0 = 0, x1y1 = 0, x1y2 = 0,
-                x2y0 = 0, x2y1 = 0, x2y2 = 0) {
+    constructor(
+        x0y0 = 0,
+        x0y1 = 0,
+        x0y2 = 0,
+        x1y0 = 0,
+        x1y1 = 0,
+        x1y2 = 0,
+        x2y0 = 0,
+        x2y1 = 0,
+        x2y2 = 0
+    ) {
         this.values = [
             [x0y0, x0y1, x0y2],
             [x1y0, x1y1, x1y2],
@@ -18,20 +25,11 @@ class Matrix
 
     // CONSTANTS //
     public static get ZERO(): Matrix {
-        return new Matrix(
-            0, 0, 0,
-            0, 0, 0,
-            0, 0, 0,
-        )
+        return new Matrix(0, 0, 0, 0, 0, 0, 0, 0, 0)
     }
 
-
     public static get IDENTITY(): Matrix {
-        return new Matrix(
-            1, 0, 0,
-            0, 1, 0,
-            0, 0, 1,
-        )
+        return new Matrix(1, 0, 0, 0, 1, 0, 0, 0, 1)
     }
 
     // OTHER METHODS //
@@ -78,25 +76,42 @@ class Matrix
 
     public inverse(): Matrix {
         const determinant = this.determinant()
-        if (determinant === 0)
-        {
-            throw new Error("Matrix is not invertible.")
+        if (determinant === 0) {
+            throw new Error('Matrix is not invertible.')
         }
 
         const inverseMatrix = new Matrix()
         const invDeterminant = 1 / determinant
 
-        inverseMatrix.values[0][0] = (this.values[1][1] * this.values[2][2] - this.values[1][2] * this.values[2][1]) * invDeterminant
-        inverseMatrix.values[0][1] = (this.values[0][2] * this.values[2][1] - this.values[0][1] * this.values[2][2]) * invDeterminant
-        inverseMatrix.values[0][2] = (this.values[0][1] * this.values[1][2] - this.values[0][2] * this.values[1][1]) * invDeterminant
+        inverseMatrix.values[0][0] =
+            (this.values[1][1] * this.values[2][2] - this.values[1][2] * this.values[2][1]) *
+            invDeterminant
+        inverseMatrix.values[0][1] =
+            (this.values[0][2] * this.values[2][1] - this.values[0][1] * this.values[2][2]) *
+            invDeterminant
+        inverseMatrix.values[0][2] =
+            (this.values[0][1] * this.values[1][2] - this.values[0][2] * this.values[1][1]) *
+            invDeterminant
 
-        inverseMatrix.values[1][0] = (this.values[1][2] * this.values[2][0] - this.values[1][0] * this.values[2][2]) * invDeterminant
-        inverseMatrix.values[1][1] = (this.values[0][0] * this.values[2][2] - this.values[0][2] * this.values[2][0]) * invDeterminant
-        inverseMatrix.values[1][2] = (this.values[0][2] * this.values[1][0] - this.values[0][0] * this.values[1][2]) * invDeterminant
+        inverseMatrix.values[1][0] =
+            (this.values[1][2] * this.values[2][0] - this.values[1][0] * this.values[2][2]) *
+            invDeterminant
+        inverseMatrix.values[1][1] =
+            (this.values[0][0] * this.values[2][2] - this.values[0][2] * this.values[2][0]) *
+            invDeterminant
+        inverseMatrix.values[1][2] =
+            (this.values[0][2] * this.values[1][0] - this.values[0][0] * this.values[1][2]) *
+            invDeterminant
 
-        inverseMatrix.values[2][0] = (this.values[1][0] * this.values[2][1] - this.values[1][1] * this.values[2][0]) * invDeterminant
-        inverseMatrix.values[2][1] = (this.values[0][1] * this.values[2][0] - this.values[0][0] * this.values[2][1]) * invDeterminant
-        inverseMatrix.values[2][2] = (this.values[0][0] * this.values[1][1] - this.values[0][1] * this.values[1][0]) * invDeterminant
+        inverseMatrix.values[2][0] =
+            (this.values[1][0] * this.values[2][1] - this.values[1][1] * this.values[2][0]) *
+            invDeterminant
+        inverseMatrix.values[2][1] =
+            (this.values[0][1] * this.values[2][0] - this.values[0][0] * this.values[2][1]) *
+            invDeterminant
+        inverseMatrix.values[2][2] =
+            (this.values[0][0] * this.values[1][1] - this.values[0][1] * this.values[1][0]) *
+            invDeterminant
 
         return inverseMatrix
     }
@@ -104,10 +119,8 @@ class Matrix
     public transpose(): Matrix {
         const transposeMatrix = new Matrix()
 
-        for (let i = 0; i < 3; i++)
-        {
-            for (let j = 0; j < 3; j++)
-            {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
                 transposeMatrix.values[i][j] = this.values[j][i]
             }
         }
@@ -122,13 +135,25 @@ class Matrix
         const b = other.values
         const r = result.values
 
-        const a00 = a[0][0], a01 = a[0][1], a02 = a[0][2]
-        const a10 = a[1][0], a11 = a[1][1], a12 = a[1][2]
-        const a20 = a[2][0], a21 = a[2][1], a22 = a[2][2]
+        const a00 = a[0][0],
+            a01 = a[0][1],
+            a02 = a[0][2]
+        const a10 = a[1][0],
+            a11 = a[1][1],
+            a12 = a[1][2]
+        const a20 = a[2][0],
+            a21 = a[2][1],
+            a22 = a[2][2]
 
-        const b00 = b[0][0], b01 = b[0][1], b02 = b[0][2]
-        const b10 = b[1][0], b11 = b[1][1], b12 = b[1][2]
-        const b20 = b[2][0], b21 = b[2][1], b22 = b[2][2]
+        const b00 = b[0][0],
+            b01 = b[0][1],
+            b02 = b[0][2]
+        const b10 = b[1][0],
+            b11 = b[1][1],
+            b12 = b[1][2]
+        const b20 = b[2][0],
+            b21 = b[2][1],
+            b22 = b[2][2]
 
         r[0][0] = a00 * b00 + a01 * b10 + a02 * b20
         r[0][1] = a00 * b01 + a01 * b11 + a02 * b21
@@ -148,10 +173,8 @@ class Matrix
     public matrixMultiplyComponentWise(other: Matrix) {
         const result = new Matrix()
 
-        for (let i = 0; i < 3; i++)
-        {
-            for (let j = 0; j < 3; j++)
-            {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
                 result.values[i][j] = this.values[i][j] * other.values[i][j]
             }
         }
@@ -161,9 +184,15 @@ class Matrix
 
     public multiplyVector(vector: Vector): Vector {
         return new Vector(
-            this.values[0][0] * vector.x + this.values[0][1] * vector.y + this.values[0][2] * vector.z,
-            this.values[1][0] * vector.x + this.values[1][1] * vector.y + this.values[1][2] * vector.z,
-            this.values[2][0] * vector.x + this.values[2][1] * vector.y + this.values[2][2] * vector.z
+            this.values[0][0] * vector.x +
+                this.values[0][1] * vector.y +
+                this.values[0][2] * vector.z,
+            this.values[1][0] * vector.x +
+                this.values[1][1] * vector.y +
+                this.values[1][2] * vector.z,
+            this.values[2][0] * vector.x +
+                this.values[2][1] * vector.y +
+                this.values[2][2] * vector.z
         )
     }
 }

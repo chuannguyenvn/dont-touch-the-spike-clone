@@ -1,6 +1,3 @@
-﻿class MouseInput
-{
-    
-}
+﻿class MouseInput {}
 
 export default MouseInput

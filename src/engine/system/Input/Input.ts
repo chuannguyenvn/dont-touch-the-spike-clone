@@ -1,11 +1,10 @@
-﻿import Vector from "../../math/Vector"
-import Canvas from "../Canvas/Canvas"
-import MouseInteractable from "../../component/MouseInteractable"
+﻿import Vector from '../../math/Vector'
+import Canvas from '../Canvas/Canvas'
+import MouseInteractable from '../../component/MouseInteractable'
 import { InputBuildOptions } from '../../builder/build-options/InputBuildOptions'
-import Debug from "../Debug"
+import Debug from '../Debug'
 
-class Input
-{
+class Input {
     private static _mouseInteractables: MouseInteractable[] = []
 
     private static _isMouseClickedLastFrame = false
@@ -35,12 +34,11 @@ class Input
         document.addEventListener('keydown', keyDownHandler, false)
         document.onmousemove = logMousePosition
 
-        Debug.log("Input initialized.")
+        Debug.log('Input initialized.')
     }
 
     public static _handleInput(): void {
-        for (let i = 0; i < this._mouseInteractables.length; i++)
-        {
+        for (let i = 0; i < this._mouseInteractables.length; i++) {
             if (!this._mouseInteractables[i].owner.isActive) continue
 
             this._mouseInteractables[i]._click(Input.getMousePosition())
@@ -50,8 +48,8 @@ class Input
 
     public static _resetInput(): void {
         Input._isMouseClickedLastFrame = false
-        Input._lastKeyUpKey = ""
-        Input._lastKeyDownKey = ""
+        Input._lastKeyUpKey = ''
+        Input._lastKeyDownKey = ''
     }
 
     public static registerMouseInteractable(mouseInteractable: MouseInteractable): void {
@@ -73,8 +71,7 @@ class Input
     public static getMousePosition(): Vector {
         if (this._lastMousePosition)
             return Canvas._worldToCameraMatrix.inverse().multiplyVector(this._lastMousePosition)
-        else
-            return Vector.ZERO
+        else return Vector.ZERO
     }
 }
 

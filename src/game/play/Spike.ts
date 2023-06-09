@@ -1,19 +1,17 @@
-﻿import Node from "../../engine/node/Node"
-import Transform from "../../engine/component/Transform"
-import RectangleCollider from "../../engine/component/RectangleCollider"
-import Renderer from "../../engine/component/Renderer"
-import ComponentType from "../../engine/component/ComponentType"
-import Vector from "../../engine/math/Vector"
-import Color from "../../engine/math/Color"
-import Freeform from "../../engine/rendering/Freeform"
-import Ease from "../../engine/system/tween/Ease"
-import Maths from "../../engine/math/Maths"
-import BirdGame from "../BirdGame"
-import ThemeManager from "../ThemeManager"
+﻿import Node from '../../engine/node/Node'
+import Transform from '../../engine/component/Transform'
+import RectangleCollider from '../../engine/component/RectangleCollider'
+import Renderer from '../../engine/component/Renderer'
+import ComponentType from '../../engine/component/ComponentType'
+import Vector from '../../engine/math/Vector'
+import Color from '../../engine/math/Color'
+import Freeform from '../../engine/rendering/Freeform'
+import Ease from '../../engine/system/tween/Ease'
+import Maths from '../../engine/math/Maths'
+import BirdGame from '../BirdGame'
+import ThemeManager from '../ThemeManager'
 
-
-class Spike extends Node
-{
+class Spike extends Node {
     public transform: Transform
     public collider: RectangleCollider
     public renderer: Renderer
@@ -28,8 +26,12 @@ class Spike extends Node
         this.collider.size = new Vector(50, 40)
 
         this.triangle = new Freeform(Color.GREY)
-        this.triangle.setPoints([new Vector(25, 0), new Vector(0, 25),
-            new Vector(-25, 0), new Vector(0, -25)])
+        this.triangle.setPoints([
+            new Vector(25, 0),
+            new Vector(0, 25),
+            new Vector(-25, 0),
+            new Vector(0, -25),
+        ])
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(this.triangle)
         this.renderer.drawOrder = 100

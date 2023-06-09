@@ -44,8 +44,7 @@ class WebBuilder extends Builder {
         Input._init(inputBuildOptions)
     }
 
-    buildSystem(): void
-    {
+    buildSystem(): void {
         System._init()
     }
 }

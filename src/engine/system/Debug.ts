@@ -3,8 +3,8 @@
 
     public static _init(isDebugging: boolean) {
         Debug._isDebugging = isDebugging
-        
-        Debug.log("Debug initialized.")
+
+        Debug.log('Debug initialized.')
     }
 
     public static assert(condition: boolean, message: string): void {

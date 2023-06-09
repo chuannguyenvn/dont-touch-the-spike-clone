@@ -1,6 +1,3 @@
-﻿class TouchInput
-{
-
-}
+﻿class TouchInput {}
 
 export default TouchInput

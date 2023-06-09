@@ -4,6 +4,7 @@ import CanvasBuildOptions from './engine/builder/build-options/CanvasBuildOption
 import Vector from './engine/math/Vector'
 import { InputBuildOptions, InputOption } from './engine/builder/build-options/InputBuildOptions'
 import StateMachine from './engine/utility/StateMachine'
+import BirdGame from './game/BirdGame'
 
 class Game {
     constructor() {
@@ -30,7 +31,7 @@ class Game {
     public stateMachine: StateMachine<GameState> = new StateMachine<GameState>(GameState.NONE)
 
     protected initGame(): void {
-        // BirdGame.init()
+        BirdGame.init()
 
         console.log('a')
         this.stateMachine

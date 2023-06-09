@@ -8,12 +8,11 @@ import RectangleCollider from '../component/RectangleCollider'
 import CircleCollider from '../component/CircleCollider'
 import Button from '../component/Button'
 import Text from '../component/Text'
-import GUID from "../system/GUID"
+import GUID from '../system/GUID'
 
-class Node
-{
+class Node {
     public readonly guid: number
-    
+
     public name: string
     public isActive = true
     public isVisible = true
@@ -28,24 +27,17 @@ class Node
         this.init()
     }
 
-    public init(): void {
-        
-    }
+    public init(): void {}
 
-    public start(): void {
-    }
+    public start(): void {}
 
-    public update(): void {
-    }
+    public update(): void {}
 
-    public destroy(): void {
-
-    }
+    public destroy(): void {}
 
     public _executeStart(): void {
         this.start()
-        for (let i = 0; i < this.childNodes.length; i++)
-        {
+        for (let i = 0; i < this.childNodes.length; i++) {
             this.childNodes[i]._executeStart()
         }
     }
@@ -54,29 +46,29 @@ class Node
         if (!this.isActive) return
         this.update()
 
-        for (let i = 0; i < this.childNodes.length; i++)
-        {
+        for (let i = 0; i < this.childNodes.length; i++) {
             this.childNodes[i]._executeUpdate()
         }
     }
 
     public getComponent(componentType: ComponentType): Component {
-        const result = this.components.filter(component => component.type === componentType)
-        if (result.length === 0) Debug.logError(`Component of type ${componentType} not found on actor ${this.name}`)
+        const result = this.components.filter((component) => component.type === componentType)
+        if (result.length === 0)
+            Debug.logError(`Component of type ${componentType} not found on actor ${this.name}`)
         return result[0]
     }
 
     public addComponent(componentType: ComponentType): Component | undefined {
-        const i = this.components.findIndex(component => component.type === componentType)
-        if (i !== -1)
-        {
-            Debug.logError(`Component of type ${componentType} already exists on actor ${this.name}.`)
+        const i = this.components.findIndex((component) => component.type === componentType)
+        if (i !== -1) {
+            Debug.logError(
+                `Component of type ${componentType} already exists on actor ${this.name}.`
+            )
             return this.components[i]
         }
 
         let newComponent: Component
-        switch (componentType)
-        {
+        switch (componentType) {
             case ComponentType.TRANSFORM:
                 newComponent = new Transform(this)
                 break
@@ -97,11 +89,11 @@ class Node
                 break
         }
 
-        for (const requirement of newComponent._componentRequirements)
-        {
-            if (this.components.findIndex(component => component.type == requirement) == -1)
-            {
-                Debug.logError(`Component of type ${newComponent} requires component of type ${requirement}.`)
+        for (const requirement of newComponent._componentRequirements) {
+            if (this.components.findIndex((component) => component.type == requirement) == -1) {
+                Debug.logError(
+                    `Component of type ${newComponent} requires component of type ${requirement}.`
+                )
                 return
             }
         }
@@ -131,12 +123,9 @@ class Node
     }
 
     public removeParent() {
-        if (this.parentNode === null)
-            return
-        else
-            this.parentNode.removeChild(this)
+        if (this.parentNode === null) return
+        else this.parentNode.removeChild(this)
     }
 }
-
 
 export default Node

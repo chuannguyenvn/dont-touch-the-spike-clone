@@ -1,21 +1,20 @@
-﻿import Node from "../../engine/node/Node"
-import ComponentType from "../../engine/component/ComponentType"
-import Sprite from "../../engine/rendering/Sprite"
-import Renderer from "../../engine/component/Renderer"
-import Transform from "../../engine/component/Transform"
-import Vector from "../../engine/math/Vector"
-import Input from "../../engine/system/Input/Input"
-import Time from "../../engine/system/Time"
-import RectangleCollider from "../../engine/component/RectangleCollider"
-import Collider from "../../engine/component/Collider"
-import {GameEvent, ParamGameEvent} from "../../engine/utility/Event"
-import BirdGame from "../BirdGame"
-import GameState from "../GameState"
-import TrailDot from "./TrailDot"
-import Tween from "../../engine/system/tween/Tween"
+﻿import Node from '../../engine/node/Node'
+import ComponentType from '../../engine/component/ComponentType'
+import Sprite from '../../engine/rendering/Sprite'
+import Renderer from '../../engine/component/Renderer'
+import Transform from '../../engine/component/Transform'
+import Vector from '../../engine/math/Vector'
+import Input from '../../engine/system/Input/Input'
+import Time from '../../engine/system/Time'
+import RectangleCollider from '../../engine/component/RectangleCollider'
+import Collider from '../../engine/component/Collider'
+import { GameEvent, ParamGameEvent } from '../../engine/utility/Event'
+import BirdGame from '../BirdGame'
+import GameState from '../GameState'
+import TrailDot from './TrailDot'
+import Tween from '../../engine/system/tween/Tween'
 
-class Bird extends Node
-{
+class Bird extends Node {
     public touchedLeftWall: GameEvent
     public touchedRightWall: GameEvent
     public scoreChanged: ParamGameEvent<number>
@@ -40,7 +39,7 @@ class Bird extends Node
     private trailDotSpawnTimeout = 0.07
     private trailDotSpawnTimer = 0.07
     private trailDotEffectiveTime = 0.4
-    private dieSaturationTween : Tween<number>
+    private dieSaturationTween: Tween<number>
 
     public init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
@@ -52,7 +51,7 @@ class Bird extends Node
         this.collider.size = new Vector(20, 20)
         this.collider.collisionStarted.subscribe(this.handleCollisionStart.bind(this))
 
-        const sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
+        const sprite = new Sprite('./assets/kenney/Characters/character_0000.png')
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(sprite)
         this.renderer.drawOrder = 5
@@ -66,9 +65,9 @@ class Bird extends Node
         this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
         this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
 
-        this.jumpSprite = new Sprite("assets/Jump.png")
+        this.jumpSprite = new Sprite('assets/Jump.png')
         this.jumpSprite.scale = Vector.ONE.multiply(0.12)
-        this.glideSprite = new Sprite("assets/Glide.png")
+        this.glideSprite = new Sprite('assets/Glide.png')
         this.glideSprite.scale = Vector.ONE.multiply(0.12)
 
         this.scoreChanged = new ParamGameEvent<number>()
@@ -79,8 +78,7 @@ class Bird extends Node
     }
 
     public update(): void {
-        if (this.isLocked)
-        {
+        if (this.isLocked) {
             this.playIdleAnimation()
             return
         }
@@ -110,32 +108,24 @@ class Bird extends Node
     }
 
     private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.WELCOME)
-        {
+        if (gameState === GameState.WELCOME) {
             this.isLocked = true
             this.transform.position.x = 0
             if (this.dieSaturationTween) this.dieSaturationTween.end()
             this.glideSprite.saturation = 70
-        }
-        else if (gameState === GameState.PLAY)
-        {
+        } else if (gameState === GameState.PLAY) {
             this.glideSprite.saturation = 70
             this.isAlive = true
             this.isLocked = false
             this.jump()
-        }
-        else if (gameState === GameState.RESULT)
-        {
+        } else if (gameState === GameState.RESULT) {
         }
     }
 
     private move(): void {
-        if (this.isMovingRight)
-        {
+        if (this.isMovingRight) {
             this.transform.position.x += Time.deltaTime() * this.moveSpeed
-        }
-        else
-        {
+        } else {
             this.transform.position.x -= Time.deltaTime() * this.moveSpeed
         }
     }
@@ -150,17 +140,14 @@ class Bird extends Node
 
     private jumpYFunction(elapsedTime: number): number {
         const x = elapsedTime * this.jumpCurveXCoeff
-        return (-(Math.pow(x - 1, 2)) + 1) * this.jumpCurveYCoeff + this.lastJumpPosY
+        return (-Math.pow(x - 1, 2) + 1) * this.jumpCurveYCoeff + this.lastJumpPosY
     }
 
     private handleCollisionStart(collider: Collider): void {
-        if (collider.owner.name === "Wall")
-        {
+        if (collider.owner.name === 'Wall') {
             if (this.isMovingRight) this.touchedRightWall.invoke()
             else this.touchedLeftWall.invoke()
-        }
-        else if (collider.owner.name === "Spike")
-        {
+        } else if (collider.owner.name === 'Spike') {
             this.isAlive = false
             BirdGame.changeState(GameState.RESULT)
             // this.dieSaturationTween = this.glideSprite.tweenSaturation(0, 0.2, 0, Ease.LINEAR, false)
@@ -173,20 +160,20 @@ class Bird extends Node
     }
 
     private playIdleAnimation(): void {
-        if (Math.round(Time.timeSinceGameStart()) % 2 === 0) this.renderer.setDrawable(this.glideSprite)
+        if (Math.round(Time.timeSinceGameStart()) % 2 === 0)
+            this.renderer.setDrawable(this.glideSprite)
         else this.renderer.setDrawable(this.jumpSprite)
 
         this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20 - 10
     }
-    
-    private handleSpawnTrailDot(): void{
+
+    private handleSpawnTrailDot(): void {
         if (!this.isAlive) return
         if (Time.timeSinceGameStart() - this.lastJumpTime > this.trailDotEffectiveTime) return
-        
+
         this.trailDotSpawnTimer -= Time.deltaTime()
-        if (this.trailDotSpawnTimer < 0)
-        {
-            const trailDot = new TrailDot("Dot", this.transform.position)
+        if (this.trailDotSpawnTimer < 0) {
+            const trailDot = new TrailDot('Dot', this.transform.position)
             trailDot.start()
             this.trailDotSpawnTimer = this.trailDotSpawnTimeout
         }

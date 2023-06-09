@@ -1,19 +1,19 @@
-﻿import Ease from "./Ease"
-import Vector from "../../math/Vector"
-import TweenBase from "./TweenBase"
-import Color from "../../math/Color"
+﻿import Ease from './Ease'
+import Vector from '../../math/Vector'
+import TweenBase from './TweenBase'
+import Color from '../../math/Color'
 
-
-class Tween<T extends number | Vector | Color> extends TweenBase
-{
+class Tween<T extends number | Vector | Color> extends TweenBase {
     public _retrieveStartValue: () => T
     public _startValue: T
 
-    constructor(evaluateFunction: (x: number) => void,
-                retrieveStartValue: () => T,
-                duration: number,
-                delay: number,
-                ease: Ease) {
+    constructor(
+        evaluateFunction: (x: number) => void,
+        retrieveStartValue: () => T,
+        duration: number,
+        delay: number,
+        ease: Ease
+    ) {
         super(duration, delay, ease)
         this.evaluate = evaluateFunction
         this._retrieveStartValue = retrieveStartValue
@@ -25,6 +25,5 @@ class Tween<T extends number | Vector | Color> extends TweenBase
         super._start()
     }
 }
-
 
 export default Tween

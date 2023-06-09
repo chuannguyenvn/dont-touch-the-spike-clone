@@ -2,7 +2,7 @@
 import Vector from '../../math/Vector'
 import Color from '../../math/Color'
 import Matrix from '../../math/Matrix'
-import Debug from "../Debug"
+import Debug from '../Debug'
 
 class Canvas {
     public static _canvasContext: CanvasRenderingContext2D
@@ -25,8 +25,8 @@ class Canvas {
         )
         const scaleMatrix = Matrix.scale(1, -1)
         this._worldToCameraMatrix = translationMatrix.multiplyMatrix(scaleMatrix)
-        
-        Debug.log("Canvas initialized.")
+
+        Debug.log('Canvas initialized.')
     }
 
     public static _draw(): void {

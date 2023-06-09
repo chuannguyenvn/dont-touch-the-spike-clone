@@ -1,12 +1,11 @@
-﻿import Wall from "./Wall"
-import Spike from "./Spike"
-import Vector from "../../engine/math/Vector"
-import Maths from "../../engine/math/Maths"
-import BirdGame from "../BirdGame"
-import GameState from "../GameState"
+﻿import Wall from './Wall'
+import Spike from './Spike'
+import Vector from '../../engine/math/Vector'
+import Maths from '../../engine/math/Maths'
+import BirdGame from '../BirdGame'
+import GameState from '../GameState'
 
-class VerticalWall extends Wall
-{
+class VerticalWall extends Wall {
     constructor(name: string) {
         super(name)
         BirdGame.gameStateChanged.subscribe(this.stateChangedHandler.bind(this))
@@ -15,9 +14,8 @@ class VerticalWall extends Wall
     public start(): void {
         this.collider.size = new Vector(100, 600)
 
-        for (let y = -200; y <= 200; y += 50)
-        {
-            const spike = new Spike("Spike")
+        for (let y = -200; y <= 200; y += 50) {
+            const spike = new Spike('Spike')
             spike.setParent(this)
             spike.transform.position = new Vector(this.transform.position.x, y)
             spike.start()
@@ -30,23 +28,20 @@ class VerticalWall extends Wall
         this.collider.isActive = true
         const spikeCount = this.difficultyFunction(BirdGame.currentScore)
         const spikeIndices = Maths.randomIntBag(0, this.spikes.length, spikeCount)
-        for (let i = 0; i < spikeIndices.length; i++)
-        {
+        for (let i = 0; i < spikeIndices.length; i++) {
             this.spikes[spikeIndices[i]].show()
         }
     }
 
     public hideSpike(): void {
         this.collider.isActive = false
-        for (let i = 0; i < this.spikes.length; i++)
-        {
+        for (let i = 0; i < this.spikes.length; i++) {
             this.spikes[i].hide()
         }
     }
 
     private stateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.WELCOME)
-        {
+        if (gameState === GameState.WELCOME) {
             this.hideSpike()
             this.showSpike()
         }
@@ -54,7 +49,7 @@ class VerticalWall extends Wall
 
     private difficultyFunction(x: number): number {
         if (x == 0) return 0
-        return Math.floor(Math.log(x + 2) / Math.log(1.6) * 0.8)
+        return Math.floor((Math.log(x + 2) / Math.log(1.6)) * 0.8)
     }
 }
 

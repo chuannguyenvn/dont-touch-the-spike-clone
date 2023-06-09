@@ -12,4 +12,4 @@ enum InputOption {
     TOUCH,
 }
 
-export {InputBuildOptions, InputOption}
+export { InputBuildOptions, InputOption }

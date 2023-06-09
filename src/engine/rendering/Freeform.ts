@@ -1,10 +1,9 @@
-﻿import Drawable from "./Drawable"
-import Canvas from "../system/Canvas/Canvas"
-import Color from "../math/Color"
-import Vector from "../math/Vector"
+﻿import Drawable from './Drawable'
+import Canvas from '../system/Canvas/Canvas'
+import Color from '../math/Color'
+import Vector from '../math/Vector'
 
-class Freeform implements Drawable
-{
+class Freeform implements Drawable {
     public drawOrder: number
     public color: Color
     public _points: Vector[]
@@ -18,8 +17,7 @@ class Freeform implements Drawable
         Canvas._canvasContext.fillStyle = this.color.toString()
 
         Canvas._canvasContext.beginPath()
-        for (let i = 0; i < this._points.length; i++)
-        {
+        for (let i = 0; i < this._points.length; i++) {
             Canvas._canvasContext.lineTo(this._points[i].x, this._points[i].y)
         }
         Canvas._canvasContext.fill()

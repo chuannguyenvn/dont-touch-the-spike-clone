@@ -1,5 +1,4 @@
-﻿class Color
-{
+﻿class Color {
     // MEMBER VARIABLES //
     public r: number
     public g: number
@@ -55,8 +54,7 @@
     }
 
     public static fromHex(hex: string): Color {
-        if (hex.startsWith("#"))
-        {
+        if (hex.startsWith('#')) {
             hex = hex.substring(1)
         }
 
@@ -78,7 +76,9 @@
             return hex
         }
 
-        return `rgba(${componentToHex(this.r)}, ${componentToHex(this.g)}, ${componentToHex(this.b)}, ${this.a})`
+        return `rgba(${componentToHex(this.r)}, ${componentToHex(this.g)}, ${componentToHex(
+            this.b
+        )}, ${this.a})`
     }
 
     public add(other: Color): Color {

@@ -1,8 +1,6 @@
-﻿class DebugBuildOptions
-{
-    public isDebugging : boolean
-    constructor(isDebugging: boolean)
-    {
+﻿class DebugBuildOptions {
+    public isDebugging: boolean
+    constructor(isDebugging: boolean) {
         this.isDebugging = isDebugging
     }
 }

@@ -1,6 +1,6 @@
 ﻿import CanvasBuildOptions from './build-options/CanvasBuildOptions'
-import {InputBuildOptions} from "./build-options/InputBuildOptions"
-import DebugBuildOptions from "./build-options/DebugBuildOptions"
+import { InputBuildOptions } from './build-options/InputBuildOptions'
+import DebugBuildOptions from './build-options/DebugBuildOptions'
 
 abstract class Builder {
     public abstract buildDebug(debugBuildOptions: DebugBuildOptions): void

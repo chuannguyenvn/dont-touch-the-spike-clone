@@ -1,13 +1,12 @@
-﻿import ComponentType from "./ComponentType"
-import Color from "../math/Color"
-import Renderer from "./Renderer"
-import Vector from "../math/Vector"
-import Node from "../node/Node"
-import Rect from "../math/Rect"
-import Transform from "./Transform"
+﻿import ComponentType from './ComponentType'
+import Color from '../math/Color'
+import Renderer from './Renderer'
+import Vector from '../math/Vector'
+import Node from '../node/Node'
+import Rect from '../math/Rect'
+import Transform from './Transform'
 
-class UIElement extends Renderer
-{
+class UIElement extends Renderer {
     // COMPONENT METADATA //
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
@@ -32,8 +31,7 @@ class UIElement extends Renderer
         if (!this.owner.isVisible) return
 
         let normalizedCoordinate = Vector.ZERO
-        switch (this.pivot)
-        {
+        switch (this.pivot) {
             case Alignment.TOP_LEFT:
                 normalizedCoordinate = new Vector(0, 0)
                 break
@@ -61,17 +59,14 @@ class UIElement extends Renderer
             case Alignment.BOTTOM_RIGHT:
                 normalizedCoordinate = new Vector(-1, -1)
                 break
-
         }
 
         this.drawable.offSet = this.elementSize.multiplyComp(normalizedCoordinate)
         this.drawable._draw()
     }
-
 }
 
-enum Alignment
-{
+enum Alignment {
     TOP_LEFT,
     TOP_CENTER,
     TOP_RIGHT,
@@ -83,4 +78,4 @@ enum Alignment
     BOTTOM_RIGHT,
 }
 
-export {UIElement, Alignment}
+export { UIElement, Alignment }

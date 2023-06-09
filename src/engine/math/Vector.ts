@@ -1,7 +1,6 @@
-﻿import Maths from "./Maths"
+﻿import Maths from './Maths'
 
-class Vector
-{
+class Vector {
     // MEMBER VARIABLES //
     public x: number
     public y: number
@@ -39,7 +38,7 @@ class Vector
     }
 
     public static get RANDOM_UNIT(): Vector {
-        return (new Vector(Maths.randomRange(-1, 1), Maths.randomRange(-1, 1))).normalized()
+        return new Vector(Maths.randomRange(-1, 1), Maths.randomRange(-1, 1)).normalized()
     }
 
     // OTHER METHODS //
@@ -53,8 +52,7 @@ class Vector
 
     public normalized(): Vector {
         const l = this.length()
-        if (l !== 0)
-        {
+        if (l !== 0) {
             return new Vector(this.x / l, this.y / l, 0)
         }
         return new Vector(0, 0, 0)

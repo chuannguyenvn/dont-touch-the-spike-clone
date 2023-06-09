@@ -1,10 +1,9 @@
-﻿import Ease from "./Ease"
-import Time from "../Time"
-import {GameEvent} from "../../utility/Event"
-import TweenEngine from "./TweenEngine"
+﻿import Ease from './Ease'
+import Time from '../Time'
+import { GameEvent } from '../../utility/Event'
+import TweenEngine from './TweenEngine'
 
-class TweenBase
-{
+class TweenBase {
     public evaluate: (x: number) => void
     public _startTime: number
     public _duration: number
@@ -33,7 +32,6 @@ class TweenBase
         this.evaluate(1)
         this.tweenEnded.invoke()
     }
-
 
     public chain(tween: TweenBase): TweenBase {
         TweenEngine._unregisterTween(tween)

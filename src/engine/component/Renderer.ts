@@ -1,17 +1,16 @@
-﻿import Component from "./Component"
-import ComponentType from "./ComponentType"
-import Node from "../node/Node"
-import Transform from "./Transform"
-import Canvas from "../system/Canvas/Canvas"
-import Drawable from "../rendering/Drawable"
-import Matrix from "../math/Matrix"
-import Ease from "../system/tween/Ease"
-import Tween from "../system/tween/Tween"
-import Maths from "../math/Maths"
-import Color from "../math/Color"
+﻿import Component from './Component'
+import ComponentType from './ComponentType'
+import Node from '../node/Node'
+import Transform from './Transform'
+import Canvas from '../system/Canvas/Canvas'
+import Drawable from '../rendering/Drawable'
+import Matrix from '../math/Matrix'
+import Ease from '../system/tween/Ease'
+import Tween from '../system/tween/Tween'
+import Maths from '../math/Maths'
+import Color from '../math/Color'
 
-class Renderer extends Component
-{
+class Renderer extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RENDERER
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
@@ -41,7 +40,13 @@ class Renderer extends Component
         this.drawable._draw()
     }
 
-    public tweenColor(to: Color, duration: number, delay: number, ease: Ease, relative: boolean): Tween<Color> {
+    public tweenColor(
+        to: Color,
+        duration: number,
+        delay: number,
+        ease: Ease,
+        relative: boolean
+    ): Tween<Color> {
         const evaluate = (x: number) => {
             if (relative) to.add(tween._startValue)
             this.drawable.color = Maths.lerpColor(x, tween._startValue, to)

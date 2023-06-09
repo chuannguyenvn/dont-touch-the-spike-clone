@@ -1,5 +1,4 @@
-﻿enum ComponentType
-{
+﻿enum ComponentType {
     TRANSFORM,
     RENDERER,
     RECTANGLE_COLLIDER,

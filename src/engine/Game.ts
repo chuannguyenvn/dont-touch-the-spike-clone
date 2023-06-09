@@ -1,5 +1,4 @@
-﻿
-abstract class Game {
+﻿abstract class Game {
     // constructor() {
     //     this.buildGame()
     //     this.initGame()

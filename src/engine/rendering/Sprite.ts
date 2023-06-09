@@ -1,13 +1,12 @@
-﻿import Drawable from "./Drawable"
-import Canvas from "../system/Canvas/Canvas"
-import Color from "../math/Color"
-import Vector from "../math/Vector"
-import Ease from "../system/tween/Ease"
-import Tween from "../system/tween/Tween"
-import Maths from "../math/Maths"
+﻿import Drawable from './Drawable'
+import Canvas from '../system/Canvas/Canvas'
+import Color from '../math/Color'
+import Vector from '../math/Vector'
+import Ease from '../system/tween/Ease'
+import Tween from '../system/tween/Tween'
+import Maths from '../math/Maths'
 
-class Sprite implements Drawable
-{
+class Sprite implements Drawable {
     public color: Color
     public saturation = 70
     public drawOrder: number
@@ -19,14 +18,20 @@ class Sprite implements Drawable
     public offSet: Vector
     private _image: HTMLImageElement
 
-
-    constructor(imagePath = "") {
+    constructor(imagePath = '') {
         this.setImage(imagePath)
     }
 
     _draw() {
-        Canvas._canvasContext.scale(this.scale.x * (this.flipX ? -1 : 1), this.scale.y * (this.flipY ? -1 : 1))
-        Canvas._canvasContext.drawImage(this._image, -this._image.width / 2, -this._image.height / 2)
+        Canvas._canvasContext.scale(
+            this.scale.x * (this.flipX ? -1 : 1),
+            this.scale.y * (this.flipY ? -1 : 1)
+        )
+        Canvas._canvasContext.drawImage(
+            this._image,
+            -this._image.width / 2,
+            -this._image.height / 2
+        )
         // Canvas._canvasContext.globalCompositeOperation = "saturation"
         // Canvas._canvasContext.fillStyle = `hsl(0,${this.saturation}%,50%)`
         // Canvas._canvasContext.fillRect(-this._image.width / 2, -this._image.height / 2, this._image.width, this._image.height);  // apply the comp filter
@@ -38,7 +43,13 @@ class Sprite implements Drawable
         this._image.src = imagePath
     }
 
-    public tweenSaturation(to: number, duration: number, delay: number, ease: Ease, relative: boolean): Tween<number> {
+    public tweenSaturation(
+        to: number,
+        duration: number,
+        delay: number,
+        ease: Ease,
+        relative: boolean
+    ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
             this.saturation = Maths.lerpNumber(x, tween._startValue, to)

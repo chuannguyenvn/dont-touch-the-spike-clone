@@ -1,8 +1,7 @@
-﻿import ComponentType from "./ComponentType"
-import Node from "../node/Node"
+﻿import ComponentType from './ComponentType'
+import Node from '../node/Node'
 
-class Component
-{
+class Component {
     public isActive = true
     public readonly type: ComponentType
     public readonly _componentRequirements: ComponentType[] = []

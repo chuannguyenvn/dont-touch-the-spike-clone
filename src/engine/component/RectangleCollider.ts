@@ -1,11 +1,10 @@
-﻿import ComponentType from "./ComponentType"
-import Node from "../node/Node"
-import Collider from "./Collider"
-import Vector from "../math/Vector"
-import Rect from "../math/Rect"
+﻿import ComponentType from './ComponentType'
+import Node from '../node/Node'
+import Collider from './Collider'
+import Vector from '../math/Vector'
+import Rect from '../math/Rect'
 
-class RectangleCollider extends Collider
-{
+class RectangleCollider extends Collider {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RECTANGLE_COLLIDER
 

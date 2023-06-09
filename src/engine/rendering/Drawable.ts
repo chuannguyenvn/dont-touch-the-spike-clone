@@ -1,8 +1,7 @@
-﻿import Color from "../math/Color"
-import Vector from "../math/Vector"
+﻿import Color from '../math/Color'
+import Vector from '../math/Vector'
 
-interface Drawable
-{
+interface Drawable {
     drawOrder: number
     color: Color
     offSet: Vector

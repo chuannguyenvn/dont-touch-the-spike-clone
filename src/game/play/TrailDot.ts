@@ -1,14 +1,13 @@
-﻿import Node from "../../engine/node/Node"
-import Transform from "../../engine/component/Transform"
-import Renderer from "../../engine/component/Renderer"
-import ComponentType from "../../engine/component/ComponentType"
-import Vector from "../../engine/math/Vector"
-import Circle from "../../engine/rendering/Circle"
-import Color from "../../engine/math/Color"
-import Ease from "../../engine/system/tween/Ease"
+﻿import Node from '../../engine/node/Node'
+import Transform from '../../engine/component/Transform'
+import Renderer from '../../engine/component/Renderer'
+import ComponentType from '../../engine/component/ComponentType'
+import Vector from '../../engine/math/Vector'
+import Circle from '../../engine/rendering/Circle'
+import Color from '../../engine/math/Color'
+import Ease from '../../engine/system/tween/Ease'
 
-class TrailDot extends Node
-{
+class TrailDot extends Node {
     public transform: Transform
     public renderer: Renderer
 

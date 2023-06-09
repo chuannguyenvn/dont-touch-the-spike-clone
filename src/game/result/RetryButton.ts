@@ -1,18 +1,17 @@
-﻿import Node from "../../engine/node/Node"
-import Transform from "../../engine/component/Transform"
-import Button from "../../engine/component/Button"
-import Text from "../../engine/component/Text"
-import ComponentType from "../../engine/component/ComponentType"
-import Vector from "../../engine/math/Vector"
-import Rectangle from "../../engine/rendering/Rectangle"
-import Color from "../../engine/math/Color"
-import {Alignment} from "../../engine/component/UIElement"
-import TextContent from "../../engine/rendering/TextContent"
-import BirdGame from "../BirdGame"
-import GameState from "../GameState"
+﻿import Node from '../../engine/node/Node'
+import Transform from '../../engine/component/Transform'
+import Button from '../../engine/component/Button'
+import Text from '../../engine/component/Text'
+import ComponentType from '../../engine/component/ComponentType'
+import Vector from '../../engine/math/Vector'
+import Rectangle from '../../engine/rendering/Rectangle'
+import Color from '../../engine/math/Color'
+import { Alignment } from '../../engine/component/UIElement'
+import TextContent from '../../engine/rendering/TextContent'
+import BirdGame from '../BirdGame'
+import GameState from '../GameState'
 
-class RetryButton extends Node
-{
+class RetryButton extends Node {
     public transform: Transform
     public button: Button
     public text: Text
@@ -27,8 +26,8 @@ class RetryButton extends Node
         this.button.setDrawable(rectangle)
         this.button.pivot = Alignment.MID_CENTER
 
-        const textContent = new TextContent("Retry", Color.GREY)
-        textContent.font = "30px tahoma"
+        const textContent = new TextContent('Retry', Color.GREY)
+        textContent.font = '30px tahoma'
         this.text = this.addComponent(ComponentType.TEXT) as Text
         this.text.setDrawable(textContent)
 
@@ -37,12 +36,10 @@ class RetryButton extends Node
     }
 
     private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.RESULT)
-        {
+        if (gameState == GameState.RESULT) {
             this.isVisible = true
             this.isActive = true
-        } else
-        {
+        } else {
             this.isVisible = false
             this.isActive = false
         }
