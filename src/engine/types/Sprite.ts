@@ -1,5 +1,5 @@
 ﻿import Drawable from "./Drawable"
-import Canvas from "../system/Canvas"
+import Canvas from "../system/Canvas/Canvas"
 import Color from "./Color"
 import Vector from "./Vector"
 import Ease from "../system/tween/Ease";

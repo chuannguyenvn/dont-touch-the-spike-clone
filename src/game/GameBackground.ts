@@ -6,7 +6,7 @@ import Rectangle from "../engine/types/Rectangle"
 import ComponentType from "../engine/component/ComponentType"
 import Color from "../engine/types/Color"
 import BirdGame from "./BirdGame"
-import Canvas from "../engine/system/Canvas"
+import Canvas from "../engine/system/Canvas/Canvas"
 import ThemeManager from "./ThemeManager"
 import Ease from "../engine/system/tween/Ease"
 

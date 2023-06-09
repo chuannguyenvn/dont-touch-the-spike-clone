@@ -1,6 +1,6 @@
-﻿import Vector from "../types/Vector"
-import Canvas from "./Canvas"
-import MouseInteractable from "../component/MouseInteractable"
+﻿import Vector from "../../types/Vector"
+import Canvas from "../Canvas/Canvas"
+import MouseInteractable from "../../component/MouseInteractable"
 
 class Input
 {

@@ -1,6 +1,6 @@
 ﻿import Drawable from "./Drawable"
 import Color from "./Color"
-import Canvas from "../system/Canvas"
+import Canvas from "../system/Canvas/Canvas"
 import Vector from "./Vector"
 
 class Circle implements Drawable

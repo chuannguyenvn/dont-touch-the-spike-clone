@@ -15,7 +15,6 @@ class Rect
             point.x <= this.center.x + this.size.x / 2 &&
             point.y >= this.center.y - this.size.y / 2 &&
             point.y <= this.center.y + this.size.y / 2
-
     }
 }
 
