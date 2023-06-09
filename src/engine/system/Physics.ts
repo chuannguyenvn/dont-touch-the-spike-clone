@@ -16,7 +16,8 @@ class Physics
         {
             for (let j = i + 1; j < this._colliders.length; j++)
             {
-                if (!this._colliders[i].owner.isActive) continue
+                if (!this._colliders[i].isActive || !this._colliders[i].owner.isActive) continue
+                if (!this._colliders[j].isActive || !this._colliders[j].owner.isActive) continue
 
                 if (this._colliders[i] instanceof RectangleCollider)
                 {
@@ -35,12 +36,14 @@ class Physics
                         {
                             Physics._broadcastCollision(collider1, collider2)
                         }
-                    } else if (this._colliders[j] instanceof CircleCollider)
+                    }
+                    else if (this._colliders[j] instanceof CircleCollider)
                     {
                         const collider2 = this._colliders[j] as CircleCollider
 
                     }
-                } else if (this._colliders[i] instanceof CircleCollider)
+                }
+                else if (this._colliders[i] instanceof CircleCollider)
                 {
                     const collider1 = this._colliders[i] as CircleCollider
 
@@ -48,7 +51,8 @@ class Physics
                     {
                         const collider2 = this._colliders[j] as RectangleCollider
 
-                    } else if (this._colliders[j] instanceof CircleCollider)
+                    }
+                    else if (this._colliders[j] instanceof CircleCollider)
                     {
                         const collider2 = this._colliders[j] as CircleCollider
 

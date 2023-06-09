@@ -3,6 +3,7 @@ import Node from "../node/Node"
 
 class Component
 {
+    public isActive: boolean = true
     public readonly type: ComponentType
     public readonly _componentRequirements: ComponentType[] = []
     public readonly owner: Node

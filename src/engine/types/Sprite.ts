@@ -27,10 +27,10 @@ class Sprite implements Drawable
     _draw() {
         Canvas._canvasContext.scale(this.scale.x * (this.flipX ? -1 : 1), this.scale.y * (this.flipY ? -1 : 1))
         Canvas._canvasContext.drawImage(this._image, -this._image.width / 2, -this._image.height / 2)
-        Canvas._canvasContext.globalCompositeOperation = "saturation"
-        Canvas._canvasContext.fillStyle = `hsl(0,${this.saturation}%,50%)`
-        Canvas._canvasContext.fillRect(-this._image.width / 2, -this._image.height / 2, this._image.width, this._image.height);  // apply the comp filter
-        Canvas._canvasContext.globalCompositeOperation = "source-over"
+        // Canvas._canvasContext.globalCompositeOperation = "saturation"
+        // Canvas._canvasContext.fillStyle = `hsl(0,${this.saturation}%,50%)`
+        // Canvas._canvasContext.fillRect(-this._image.width / 2, -this._image.height / 2, this._image.width, this._image.height);  // apply the comp filter
+        // Canvas._canvasContext.globalCompositeOperation = "source-over"
     }
 
     public setImage(imagePath: string): void {

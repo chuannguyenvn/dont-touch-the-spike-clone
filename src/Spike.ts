@@ -9,8 +9,7 @@ import Freeform from "./engine/types/Freeform"
 import Ease from "./engine/system/tween/Ease"
 import Maths from "./engine/utility/Maths"
 import BirdGame from "./BirdGame"
-import getColor from "./ThemeManager"
-import ThemeManager from "./ThemeManager";
+import ThemeManager from "./ThemeManager"
 
 
 class Spike extends Node
@@ -26,7 +25,7 @@ class Spike extends Node
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
-        this.collider.size = new Vector(50, 50)
+        this.collider.size = new Vector(50, 40)
 
         this.triangle = new Freeform(Color.GREY)
         this.triangle.setPoints([new Vector(25, 0), new Vector(0, 25),
@@ -44,11 +43,13 @@ class Spike extends Node
     }
 
     public show(): void {
-        this.transform.tweenPositionX(this.showingPosX, 0.2, 0, Ease.LINEAR, false)
+        this.collider.isActive = true
+        this.transform.tweenPositionX(this.showingPosX, 0.15, 0, Ease.LINEAR, false)
     }
 
     public hide(): void {
-        this.transform.tweenPositionX(this.hidingPosX, 0.2, 0, Ease.LINEAR, false)
+        this.collider.isActive = false
+        this.transform.tweenPositionX(this.hidingPosX, 0.15, 0, Ease.LINEAR, false)
     }
 
     private scoreChangedHandler(score: number): void {

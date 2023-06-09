@@ -50,7 +50,7 @@ class Bird extends Node
         this.lastJumpPosY = this.transform.position.y
 
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
-        this.collider.size = new Vector(15, 15)
+        this.collider.size = new Vector(20, 20)
         this.collider.collisionStarted.subscribe(this.handleCollisionStart.bind(this))
 
         const sprite = new Sprite("./assets/kenney/Characters/character_0000.png")
@@ -86,7 +86,7 @@ class Bird extends Node
             return
         }
 
-        this.move()
+        if (this.isAlive) this.move()
         if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
 
         const elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
@@ -120,6 +120,7 @@ class Bird extends Node
         }
         else if (gameState === GameState.PLAY)
         {
+            this.glideSprite.saturation = 70
             this.isAlive = true
             this.isLocked = false
             this.jump()
@@ -163,7 +164,7 @@ class Bird extends Node
         {
             this.isAlive = false
             BirdGame.changeState(GameState.RESULT)
-            this.dieSaturationTween = this.glideSprite.tweenSaturation(0, 0.3, 0, Ease.LINEAR, false)
+            // this.dieSaturationTween = this.glideSprite.tweenSaturation(0, 0.2, 0, Ease.LINEAR, false)
         }
     }
 
