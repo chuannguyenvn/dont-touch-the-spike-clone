@@ -15,7 +15,7 @@ class TrailDot extends Node
     constructor(name: string, position: Vector) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.tweenScale(Vector.ZERO, 0.2, 0, Ease.IN_EXPO, false)
+        this.transform.tweenScale(Vector.ONE.multiply(0.2), 0.2, 0, Ease.IN_EXPO, false)
         // Why?
         this.transform.position = new Vector(position.x, position.y)
 
@@ -23,6 +23,7 @@ class TrailDot extends Node
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(circle)
         this.renderer.drawOrder = 0
+        this.renderer.tweenColor(Color.CLEAR, 0.2, 0, Ease.IN_EXPO, false)
     }
 }
 

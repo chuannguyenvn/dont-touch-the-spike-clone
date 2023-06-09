@@ -38,8 +38,8 @@ class Bird extends Node
 
     private jumpSpriteTimeout = 0.4
     private jumpSpriteTimer = 0.4
-    private trailDotSpawnTimeout = 0.1
-    private trailDotSpawnTimer = 0.1
+    private trailDotSpawnTimeout = 0.07
+    private trailDotSpawnTimer = 0.07
     private trailDotEffectiveTime = 0.4
     private dieSaturationTween : Tween<number>
 
