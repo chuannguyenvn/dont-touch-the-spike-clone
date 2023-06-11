@@ -8,6 +8,7 @@ abstract class Builder {
     public abstract buildCanvas(canvasBuildOptions: CanvasBuildOptions): void
     public abstract buildInput(inputBuildOptions: InputBuildOptions): void
     public abstract buildSystem(): void
+    public abstract loadResource(): void
 }
 
 export default Builder

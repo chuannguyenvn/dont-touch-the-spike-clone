@@ -47,6 +47,10 @@ class WebBuilder extends Builder {
     buildSystem(): void {
         System._init()
     }
+
+    loadResource(): void {
+        //
+    }
 }
 
 export default WebBuilder
