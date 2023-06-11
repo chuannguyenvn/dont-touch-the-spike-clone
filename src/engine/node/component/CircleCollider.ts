@@ -1,17 +1,17 @@
 ﻿import ComponentType from './ComponentType'
-import Node from '../node/Node'
+import Node from '../Node'
 import Collider from './Collider'
-import Vector from '../math/Vector'
-import Rect from '../math/Rect'
+import Vector from '../../math/Vector'
+import Rect from '../../math/Rect'
 
-class RectangleCollider extends Collider {
+class CircleCollider extends Collider {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RECTANGLE_COLLIDER
 
     // COMPONENT PROPERTIES //
-    public size: Vector
+    public size: number
 
-    constructor(owner: Node, size: Vector = Vector.ONE, offset: Vector = Vector.ZERO) {
+    constructor(owner: Node, size = 1, offset: Vector = Vector.ZERO) {
         super(owner)
         this.size = size
         this.offset = offset
@@ -19,8 +19,8 @@ class RectangleCollider extends Collider {
 
     public AABB(): Rect {
         const position = this._ownerTransform.position
-        return new Rect(position.add(this.offset), this.size)
+        return new Rect(position.add(this.offset), Vector.ONE.multiply(2))
     }
 }
 
-export default RectangleCollider
+export default CircleCollider

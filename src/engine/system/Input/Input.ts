@@ -1,6 +1,6 @@
 ﻿import Vector from '../../math/Vector'
 import Canvas from '../Canvas/Canvas'
-import MouseInteractable from '../../component/MouseInteractable'
+import MouseInteractable from '../../node/component/MouseInteractable'
 import { InputBuildOptions } from '../../builder/build-options/InputBuildOptions'
 import Debug from '../Debug'
 

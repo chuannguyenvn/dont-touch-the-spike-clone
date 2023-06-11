@@ -1,9 +1,9 @@
 ﻿import ComponentType from './ComponentType'
-import Color from '../math/Color'
+import Color from '../../math/Color'
 import Renderer from './Renderer'
-import Vector from '../math/Vector'
-import Node from '../node/Node'
-import Rect from '../math/Rect'
+import Vector from '../../math/Vector'
+import Node from '../Node'
+import Rect from '../../math/Rect'
 import Transform from './Transform'
 
 class UIElement extends Renderer {

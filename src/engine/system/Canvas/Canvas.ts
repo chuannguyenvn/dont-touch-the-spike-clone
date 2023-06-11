@@ -1,4 +1,4 @@
-﻿import Renderer from '../../component/Renderer'
+﻿import Renderer from '../../node/component/Renderer'
 import Vector from '../../math/Vector'
 import Color from '../../math/Color'
 import Matrix from '../../math/Matrix'

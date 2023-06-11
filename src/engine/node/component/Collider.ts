@@ -1,10 +1,10 @@
 ﻿import Component from './Component'
 import ComponentType from './ComponentType'
-import Node from '../node/Node'
+import Node from '../Node'
 import Transform from './Transform'
-import Vector from '../math/Vector'
-import { ParamGameEvent } from '../utility/Event'
-import Physics from '../system/Physics'
+import Vector from '../../math/Vector'
+import { ParamGameEvent } from '../../utility/Event'
+import Physics from '../../system/Physics'
 
 class Collider extends Component {
     // COMPONENT METADATA //

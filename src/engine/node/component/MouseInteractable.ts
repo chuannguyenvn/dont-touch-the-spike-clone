@@ -1,5 +1,5 @@
-﻿import Vector from '../math/Vector'
-import Node from '../node/Node'
+﻿import Vector from '../../math/Vector'
+import Node from '../Node'
 
 interface MouseInteractable {
     owner: Node

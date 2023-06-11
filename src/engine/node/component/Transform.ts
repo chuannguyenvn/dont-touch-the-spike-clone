@@ -1,11 +1,11 @@
-﻿import Vector from '../math/Vector'
+﻿import Vector from '../../math/Vector'
 import ComponentType from './ComponentType'
 import Component from './Component'
-import Node from '../node/Node'
-import Tween from '../system/tween/Tween'
-import Ease from '../system/tween/Ease'
-import Matrix from '../math/Matrix'
-import Maths from '../math/Maths'
+import Node from '../Node'
+import Tween from '../../system/tween/Tween'
+import Ease from '../../system/tween/Ease'
+import Matrix from '../../math/Matrix'
+import Maths from '../../math/Maths'
 
 class Transform extends Component {
     // COMPONENT METADATA //

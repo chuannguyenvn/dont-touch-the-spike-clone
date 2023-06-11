@@ -1,6 +1,6 @@
-﻿import Collider from '../component/Collider'
-import RectangleCollider from '../component/RectangleCollider'
-import CircleCollider from '../component/CircleCollider'
+﻿import Collider from '../node/component/Collider'
+import RectangleCollider from '../node/component/RectangleCollider'
+import CircleCollider from '../node/component/CircleCollider'
 import Vector from '../math/Vector'
 
 class Physics {

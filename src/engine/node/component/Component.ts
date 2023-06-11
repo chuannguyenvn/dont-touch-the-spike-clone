@@ -1,5 +1,5 @@
 ﻿import ComponentType from './ComponentType'
-import Node from '../node/Node'
+import Node from '../Node'
 
 class Component {
     public isActive = true

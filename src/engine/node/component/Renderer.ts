@@ -1,14 +1,14 @@
 ﻿import Component from './Component'
 import ComponentType from './ComponentType'
-import Node from '../node/Node'
+import Node from '../Node'
 import Transform from './Transform'
-import Canvas from '../system/Canvas/Canvas'
-import Drawable from '../rendering/Drawable'
-import Matrix from '../math/Matrix'
-import Ease from '../system/tween/Ease'
-import Tween from '../system/tween/Tween'
-import Maths from '../math/Maths'
-import Color from '../math/Color'
+import Canvas from '../../system/Canvas/Canvas'
+import Drawable from '../../rendering/Drawable'
+import Matrix from '../../math/Matrix'
+import Ease from '../../system/tween/Ease'
+import Tween from '../../system/tween/Tween'
+import Maths from '../../math/Maths'
+import Color from '../../math/Color'
 
 class Renderer extends Component {
     // COMPONENT METADATA //

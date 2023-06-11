@@ -1,9 +1,9 @@
 ﻿import Node from '../../engine/node/Node'
-import ComponentType from '../../engine/component/ComponentType'
-import Renderer from '../../engine/component/Renderer'
+import ComponentType from '../../engine/node/component/ComponentType'
+import Renderer from '../../engine/node/component/Renderer'
 import Circle from '../../engine/rendering/Circle'
 import Color from '../../engine/math/Color'
-import Transform from '../../engine/component/Transform'
+import Transform from '../../engine/node/component/Transform'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 
