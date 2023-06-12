@@ -1,10 +1,8 @@
 ﻿// Top values get rendered behind
 enum DrawLayer
 {
-    RED,
     DEFAULT,
-    GREEN,
-    BLUE,
+    UI,
 }
 
 export default DrawLayer

@@ -9,9 +9,6 @@ import Vector from '../engine/math/Vector'
 import Timer from '../engine/utility/Timer'
 import ObjectPool from '../engine/utility/ObjectPool'
 import Ease from '../engine/system/tween/Ease'
-import DrawLayer from '../engine/config/DrawLayers'
-import Maths from '../engine/math/Maths'
-import CollisionLayers from '../engine/config/CollisionLayers'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -135,27 +132,12 @@ class BirdGame extends Game {
     private static spawnBall(ball: Ball) {
         const hue = (Time.timeSinceGameStart() % 20) / 20
 
+        ball.setColor(Color.fromHsv(hue, 0.6, 0.5))
         ball.setPosition(Vector.UP.multiply(200))
         ball.setSize((Math.sin(Time.timeSinceGameStart()) + 3) * 5)
         ball.setVelocity(
             Vector.ANGLE_UNIT(Math.sin(Time.timeSinceGameStart()) * 90 - 90).multiply(200)
         )
-
-        const a = Maths.randomRangeInt(0, 3)
-        
-        if (a === 0) {
-            ball.setColor(Color.RED)
-            ball.renderer.drawLayer = DrawLayer.RED
-            ball.rigidbody.collisionLayer = CollisionLayers.IGNORE
-        } else if (a === 1) {
-            ball.setColor(Color.GREEN)
-            ball.renderer.drawLayer = DrawLayer.GREEN
-            ball.rigidbody.collisionLayer = CollisionLayers.IGNORE
-        } else {
-            ball.setColor(Color.BLUE)
-            ball.renderer.drawLayer = DrawLayer.BLUE
-            ball.rigidbody.collisionLayer = CollisionLayers.IGNORE
-        }
     }
 }
 
