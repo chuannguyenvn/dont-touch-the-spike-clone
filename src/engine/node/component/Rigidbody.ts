@@ -4,6 +4,7 @@ import Node from '../Node'
 import Transform from './Transform'
 import Physics from '../../system/Physics'
 import Vector from '../../math/Vector'
+import Time from "../../system/Time"
 
 class Rigidbody extends Component {
     // COMPONENT METADATA //
@@ -44,6 +45,11 @@ class Rigidbody extends Component {
 
     public accelerate(acc: Vector): void {
         this.acceleration = this.acceleration.add(acc)
+    }
+    
+    public setVelocity(vel: Vector): void
+    {
+        this.lastPosition = this.ownerTransform.position.subtract(vel.multiply(Time.deltaTime()))
     }
 }
 

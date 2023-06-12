@@ -19,20 +19,21 @@ class Ball extends Node {
     constructor(name: string) {
         super(name)
 
-        const radius = Maths.randomRange(10, 20)
+        const radius = Maths.randomRange(10, 15)
         
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        
+        this.transform.position = Vector.UP.multiply(150)
+
         this.collider = this.addComponent(ComponentType.CIRCLE_COLLIDER) as CircleCollider
         this.collider.radius = radius
         
         this.rigidbody = this.addComponent(ComponentType.RIGIDBODY) as Rigidbody
-
+        this.rigidbody.setVelocity(Vector.RANDOM_UNIT.multiply(100))
+        
         this.circle = new Circle(radius, Color.RANDOM_OPAQUE)
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(this.circle)
 
-        this.transform.position = Vector.RANDOM_UNIT.multiply(175 - this.collider.radius)
     }
 }
 
