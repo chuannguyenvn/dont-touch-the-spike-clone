@@ -8,7 +8,7 @@ class Time {
     private static _timers: Map<number, Timer> = new Map<number, Timer>()
 
     public static _init() {
-        Time._startTime = Date.now()
+        Time._startTime = performance.now()
 
         Debug.log('Time initialized.')
     }
@@ -18,11 +18,11 @@ class Time {
     }
 
     public static timeSinceGameStart() {
-        return (Date.now() - Time._startTime) / 1000
+        return (performance.now() - Time._startTime) / 1000
     }
 
     public static deltaTime() {
-        return (Date.now() - Time._lastFrameTime) / 1000
+        return (performance.now() - Time._lastFrameTime) / 1000
     }
 
     public static _handleTimer() {

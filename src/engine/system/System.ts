@@ -17,7 +17,7 @@ abstract class System {
     public static _init(): void {
         Debug.assert(!System._isInitialized, 'Game is already initialized.')
 
-        System._lastFrameTimestamp = Date.now()
+        System._lastFrameTimestamp = performance.now()
         window.requestAnimationFrame(System._gameLoop)
         Debug.log('Game is running.')
     }
@@ -31,7 +31,7 @@ abstract class System {
     }
 
     private static _gameLoop(): void {
-        const currentTimestamp = Date.now()
+        const currentTimestamp = performance.now()
         Time._lastFrameTime = System._lastFrameTimestamp
 
         Input._handleInput()
