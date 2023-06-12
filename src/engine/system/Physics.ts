@@ -5,6 +5,7 @@ import Vector from '../math/Vector'
 import Rigidbody from '../node/component/Rigidbody'
 import Time from './Time'
 import ComponentType from '../node/component/ComponentType'
+import CollisionLayers from "../config/CollisionLayers"
 
 class Physics {
     public static gravity: Vector = new Vector(0, -9.8)
@@ -58,12 +59,16 @@ class Physics {
         for (let i = 0; i < this._rigidbodies.length; i++) {
             if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
                 continue
+            
             const rigidbody1 = this._rigidbodies[i]
+            if (rigidbody1.collisionLayer === CollisionLayers.IGNORE) continue
 
             for (let j = i + 1; j < this._rigidbodies.length; j++) {
                 if (!Physics._rigidbodies[j].isActive || !Physics._rigidbodies[j].owner.isActive)
                     continue
+                
                 const rigidbody2 = this._rigidbodies[j]
+                if (rigidbody1.collisionLayer !==rigidbody2.collisionLayer) continue
 
                 const circleCollider1 = rigidbody1.owner.getComponent(
                     ComponentType.CIRCLE_COLLIDER

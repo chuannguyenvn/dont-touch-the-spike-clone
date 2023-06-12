@@ -5,6 +5,8 @@ import Transform from './Transform'
 import Physics from '../../system/Physics'
 import Vector from '../../math/Vector'
 import Time from "../../system/Time"
+import CollisionLayer from "../../config/CollisionLayers"
+import CollisionLayers from "../../config/CollisionLayers"
 
 class Rigidbody extends Component {
     // COMPONENT METADATA //
@@ -13,6 +15,8 @@ class Rigidbody extends Component {
 
     // COMPONENT PROPERTIES //
     public ownerTransform: Transform
+    public collisionLayer: CollisionLayer = CollisionLayers.DEFAULT
+
     private lastPosition: Vector
     private acceleration: Vector
     private isMovable: boolean = true
