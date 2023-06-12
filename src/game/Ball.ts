@@ -22,8 +22,7 @@ class Ball extends Node {
         const radius = Maths.randomRange(10, 15)
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = Vector.UP.multiply(200)
-        
+
         this.collider = this.addComponent(ComponentType.CIRCLE_COLLIDER) as CircleCollider
         this.collider.radius = radius
 
@@ -32,6 +31,10 @@ class Ball extends Node {
         this.circle = new Circle(radius, Color.RANDOM_OPAQUE)
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(this.circle)
+    }
+
+    public setPosition(pos: Vector): void {
+        this.transform.position = pos
     }
 
     public setColor(color: Color): void {

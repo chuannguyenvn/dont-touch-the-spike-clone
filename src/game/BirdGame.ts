@@ -3,10 +3,11 @@ import GameState from './GameState'
 import Game from '../engine/Game'
 import Ball from './Ball'
 import CollisionBackground from './CollisionBackground'
-import Timer from '../engine/utility/Timer'
-import Color from '../engine/math/Color'
 import Time from '../engine/system/Time'
+import Color from '../engine/math/Color'
 import Vector from '../engine/math/Vector'
+import Timer from '../engine/utility/Timer'
+import ObjectPool from '../engine/utility/ObjectPool'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -106,13 +107,26 @@ class BirdGame extends Game {
         //
         // BirdGame.changeState(GameState.WELCOME)
 
-        new Timer(BirdGame.spawnBall, 0, -1, 0.2)
+        const pool = new ObjectPool<Ball>(() => new Ball('Ball'), 500)
+        new Timer(
+            () => {
+                const ball = pool.getObject()
+                BirdGame.spawnBall(ball)
+                new Timer(() => {
+                    pool.returnObject(ball)
+                }, 15)
+            },
+            0,
+            -1,
+            0.05
+        )
+
         new CollisionBackground('A')
     }
 
-    private static spawnBall() {
-        const ball = new Ball('Ball')
+    private static spawnBall(ball: Ball) {
         const hue = (Time.timeSinceGameStart() % 20) / 20
+        ball.setPosition(Vector.UP.multiply(200))
         ball.setColor(Color.fromHsv(hue, 0.6, 0.5))
         ball.setSize((Math.sin(Time.timeSinceGameStart()) + 3) * 5)
         ball.setVelocity(

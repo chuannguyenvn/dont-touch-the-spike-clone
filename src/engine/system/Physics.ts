@@ -42,20 +42,25 @@ class Physics {
 
     private static _updatePosition(physicDeltaTime: number): void {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
             Physics._rigidbodies[i]._updatePosition(physicDeltaTime)
         }
     }
 
     private static _applyGravity(): void {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
             Physics._rigidbodies[i].accelerate(Physics.gravity)
         }
     }
 
     private static _solveCollision(deltaTime: number): void {
         for (let i = 0; i < this._rigidbodies.length; i++) {
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
             const rigidbody1 = this._rigidbodies[i]
+            
             for (let j = i + 1; j < this._rigidbodies.length; j++) {
+                if (!Physics._rigidbodies[j].isActive || !Physics._rigidbodies[j].owner.isActive) continue
                 const rigidbody2 = this._rigidbodies[j]
 
                 const circleCollider1 = rigidbody1.owner.getComponent(
@@ -90,6 +95,8 @@ class Physics {
 
     private static _applyConstraint(): void {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
+
             const position = Physics._rigidbodies[i].ownerTransform.position.copy()
             const radius = (
                 Physics._rigidbodies[i].owner.getComponent(

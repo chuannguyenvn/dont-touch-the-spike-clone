@@ -9,10 +9,18 @@ import CircleCollider from './component/CircleCollider'
 import Button from './component/Button'
 import Text from './component/Text'
 import GUID from '../system/GUID'
-import Rigidbody from "./component/Rigidbody"
+import Rigidbody from './component/Rigidbody'
 
 class Node {
-    public readonly guid: number
+    private _guid: number
+
+    public getGuid(): number {
+        return this._guid
+    }
+
+    public _setGuid(): void {
+        this._guid = GUID.getId()
+    }
 
     public name: string
     public isActive = true
@@ -22,7 +30,7 @@ class Node {
     private components: Component[] = []
 
     constructor(name: string) {
-        this.guid = GUID.getId()
+        this._guid = GUID.getId()
         this.name = name
         System._registerRootNode(this)
         this.init()
