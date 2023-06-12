@@ -10,7 +10,7 @@ import CollisionLayers from "../config/CollisionLayers"
 class Physics {
     public static gravity: Vector = new Vector(0, -9.8)
     public static positionScale: number = 10
-    public static substep: number = 8
+    public static substep: number = 4
     public static constraintRadius: number = 300
 
     private static _colliders: Collider[] = []

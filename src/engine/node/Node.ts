@@ -20,7 +20,7 @@ class Node {
     }
 
     public _setGuid(): void {
-        this._guid = GUID.getId()
+        this._guid = GUID.generate()
     }
 
     public name: string
@@ -31,7 +31,7 @@ class Node {
     private components: Component[] = []
 
     constructor(name: string) {
-        this._guid = GUID.getId()
+        this._guid = GUID.generate()
         this.name = name
         System._registerRootNode(this)
         this.init()

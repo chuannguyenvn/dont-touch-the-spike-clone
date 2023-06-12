@@ -4,6 +4,8 @@ import Color from '../../math/Color'
 import Matrix from '../../math/Matrix'
 import Debug from '../Debug'
 import Time from '../Time'
+import DrawLayer from '../../config/DrawLayers'
+import DrawLayers from '../../config/DrawLayers'
 
 class Canvas {
     public static _canvasContext: CanvasRenderingContext2D
@@ -15,7 +17,7 @@ class Canvas {
 
     private static _canvasSize: Vector = new Vector(400, 600)
     public static backgroundColor: Color = Color.WHITE
-    private static _renderers: Renderer[] = []
+    private static _renderers: Map<DrawLayer, Renderer[]> = new Map<DrawLayer, Renderer[]>()
 
     public static _init(canvasContext: CanvasRenderingContext2D, canvasSize: Vector): void {
         Canvas._canvasContext = canvasContext
@@ -27,6 +29,10 @@ class Canvas {
         const scaleMatrix = Matrix.scale(1, -1)
         this._worldToCameraMatrix = translationMatrix.multiplyMatrix(scaleMatrix)
 
+        for (const layer in DrawLayers) {
+            Canvas._renderers.set(DrawLayer[layer as keyof typeof DrawLayer], [])
+        }
+
         Debug.log('Canvas initialized.')
     }
 
@@ -35,24 +41,16 @@ class Canvas {
         Canvas._canvasContext.fillStyle = Canvas.backgroundColor.toString()
         Canvas._canvasContext.fillRect(0, 0, Canvas._canvasSize.x, Canvas._canvasSize.y)
 
-        this._renderers = this._renderers.sort((a, b) => (a.drawOrder > b.drawOrder ? 1 : -1))
+        for (const layer in DrawLayers) {
+            const actualLayer = DrawLayer[layer as keyof typeof DrawLayer] as DrawLayer
 
-        for (const renderer of this._renderers) {
-            const localToWorld = renderer._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
-            const worldToCamera = Canvas._worldToCameraMatrix
-            const res = worldToCamera.multiplyMatrix(localToWorld)
+            const renderersInLayerSorted: Renderer[] = (
+                Canvas._renderers.get(actualLayer) as Renderer[]
+            ).sort((a: Renderer, b: Renderer) => (a.drawOrder > b.drawOrder ? 1 : -1))
 
-            Canvas._canvasContext.setTransform(
-                res.values[0][0],
-                res.values[1][0],
-                res.values[0][1],
-                res.values[1][1],
-                res.values[0][2],
-                res.values[1][2]
-            )
-
-            renderer._draw(Time.deltaTime())
-            Canvas._canvasContext.resetTransform()
+            for (let i = 0; i < renderersInLayerSorted.length; i++) {
+                Canvas._drawRenderer(renderersInLayerSorted[i])
+            }
         }
 
         if (Debug._drawFps) {
@@ -63,8 +61,33 @@ class Canvas {
         }
     }
 
-    public static _registerRenderer(sprite: Renderer): void {
-        this._renderers.push(sprite)
+    private static _drawRenderer(renderer: Renderer) {
+        const localToWorld = renderer._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
+        const worldToCamera = Canvas._worldToCameraMatrix
+        const res = worldToCamera.multiplyMatrix(localToWorld)
+
+        Canvas._canvasContext.setTransform(
+            res.values[0][0],
+            res.values[1][0],
+            res.values[0][1],
+            res.values[1][1],
+            res.values[0][2],
+            res.values[1][2]
+        )
+
+        renderer._draw(Time.deltaTime())
+        Canvas._canvasContext.resetTransform()
+    }
+
+    public static _registerRenderer(renderer: Renderer): void {
+        this._renderers.get(renderer.drawLayer)?.push(renderer)
+    }
+
+    public static _unregisterRenderer(renderer: Renderer): void {
+        this._renderers.set(
+            renderer.drawLayer,
+            (this._renderers.get(renderer.drawLayer) as Renderer[]).filter((r) => r !== renderer)
+        )
     }
 }
 

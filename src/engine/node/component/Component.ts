@@ -1,7 +1,10 @@
 ﻿import ComponentType from './ComponentType'
 import Node from '../Node'
+import GUID from "../../system/GUID"
 
 class Component {
+    public readonly guid: number
+    
     public isActive = true
     public readonly type: ComponentType
     public readonly _componentRequirements: ComponentType[] = []
@@ -9,6 +12,7 @@ class Component {
 
     constructor(owner: Node) {
         this.owner = owner
+        this.guid = GUID.generate()
     }
 }
 

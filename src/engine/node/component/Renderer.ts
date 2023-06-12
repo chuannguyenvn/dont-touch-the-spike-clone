@@ -9,6 +9,7 @@ import Ease from '../../system/tween/Ease'
 import Tween from '../../system/tween/Tween'
 import Maths from '../../math/Maths'
 import Color from '../../math/Color'
+import DrawLayer from '../../config/DrawLayers'
 
 class Renderer extends Component {
     // COMPONENT METADATA //
@@ -16,6 +17,18 @@ class Renderer extends Component {
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
+    public get drawLayer(): DrawLayer {
+        return this._drawLayer
+    }
+    public set drawLayer(value: DrawLayer) {
+
+        
+        Canvas._unregisterRenderer(this)
+        this._drawLayer = value
+        Canvas._registerRenderer(this)
+    }
+
+    private _drawLayer: DrawLayer = DrawLayer.DEFAULT
     public drawOrder = 0
     public drawable: Drawable
     private ownerTransform: Transform

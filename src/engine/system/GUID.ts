@@ -1,7 +1,7 @@
 ﻿class GUID {
     private static currentId = 0
 
-    public static getId(): number {
+    public static generate(): number {
         return this.currentId++
     }
 }

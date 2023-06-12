@@ -22,7 +22,7 @@ class Timer {
         this.repeatCountdown = repeat
         this.intervalCountdown = -1
 
-        this.guid = GUID.getId()
+        this.guid = GUID.generate()
 
         Time._registerTimer(this)
     }
