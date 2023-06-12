@@ -3,9 +3,8 @@ import DebugBuildOptions from './engine/builder/build-options/DebugBuildOptions'
 import CanvasBuildOptions from './engine/builder/build-options/CanvasBuildOptions'
 import Vector from './engine/math/Vector'
 import { InputBuildOptions, InputOption } from './engine/builder/build-options/InputBuildOptions'
-import StateMachine from './engine/utility/StateMachine'
 import BirdGame from './game/BirdGame'
-import Color from "./engine/math/Color"
+import Color from './engine/math/Color'
 
 class Game {
     constructor() {
@@ -20,7 +19,7 @@ class Game {
         webBuilder.buildDebug(debugBuildOptions)
 
         webBuilder.buildTime()
-        
+
         const canvasBuildOptions = new CanvasBuildOptions()
         canvasBuildOptions.canvasSize = new Vector(1300, 800)
         canvasBuildOptions.canvasColor = new Color(0.2, 0.2, 0.2, 1)
@@ -31,7 +30,7 @@ class Game {
 
         webBuilder.buildSystem()
     }
-    
+
     protected initGame(): void {
         BirdGame.init()
     }

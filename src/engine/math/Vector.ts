@@ -110,6 +110,14 @@ class Vector {
         return new Vector(this.x * other.x, this.y * other.y, this.z * other.z)
     }
 
+    public equal(other: Vector, includeZ: boolean = false): boolean {
+        return (
+            Math.abs(this.x - other.x) < Number.EPSILON &&
+            Math.abs(this.y - other.y) < Number.EPSILON &&
+            (!includeZ || Math.abs(this.z - other.z) < Number.EPSILON)
+        )
+    }
+
     public xx(): Vector {
         return new Vector(this.x, this.x, this.z)
     }

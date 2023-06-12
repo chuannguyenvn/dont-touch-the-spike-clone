@@ -85,7 +85,7 @@ class Color {
         let r, g, b: number
 
         if (s == 0) {
-            r = g = b = l 
+            r = g = b = l
         } else {
             const hue2rgb = function hue2rgb(p: number, q: number, t: number) {
                 if (t < 0) t += 1
@@ -101,14 +101,8 @@ class Color {
             r = hue2rgb(p, q, h + 1 / 3)
             g = hue2rgb(p, q, h)
             b = hue2rgb(p, q, h - 1 / 3)
-
-            console.log(p)
-            console.log(q)
-            console.log(h)
         }
 
-
-        
         return new Color(r, g, b, alpha)
     }
 
