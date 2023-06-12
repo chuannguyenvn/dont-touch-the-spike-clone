@@ -14,7 +14,7 @@
 
     // CONSTANTS //
     public static get BLACK(): Color {
-        return new Color(0, 0, 0, 0)
+        return new Color(0, 0, 0, 1)
     }
 
     public static get WHITE(): Color {

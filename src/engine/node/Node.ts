@@ -9,6 +9,7 @@ import CircleCollider from './component/CircleCollider'
 import Button from './component/Button'
 import Text from './component/Text'
 import GUID from '../system/GUID'
+import Rigidbody from "./component/Rigidbody"
 
 class Node {
     public readonly guid: number
@@ -80,6 +81,9 @@ class Node {
                 break
             case ComponentType.CIRCLE_COLLIDER:
                 newComponent = new CircleCollider(this)
+                break
+            case ComponentType.RIGIDBODY:
+                newComponent = new Rigidbody(this)
                 break
             case ComponentType.BUTTON:
                 newComponent = new Button(this)

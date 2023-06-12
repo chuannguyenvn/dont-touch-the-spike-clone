@@ -2,15 +2,60 @@
 import RectangleCollider from '../node/component/RectangleCollider'
 import CircleCollider from '../node/component/CircleCollider'
 import Vector from '../math/Vector'
+import Rigidbody from '../node/component/Rigidbody'
+import Time from './Time'
 
 class Physics {
+    public static gravity: Vector = new Vector(0, -9.8)
+    public static positionScale: Vector = new Vector(10, 10)
+    
     private static _colliders: Collider[] = []
+    private static _rigidbodies: Rigidbody[] = []
 
-    public static _registerCollider(collider: Collider) {
+    public static _registerCollider(collider: Collider): void {
         this._colliders.push(collider)
     }
 
-    public static _handlePhysics() {
+    public static _registerRigidbody(rigidbody: Rigidbody): void {
+        this._rigidbodies.push(rigidbody)
+    }
+
+    public static _handlePhysics(): void {
+        Physics._handleRigidbodies()
+        // Physics._handleColliders()
+    }
+
+    private static _handleRigidbodies(): void {
+        Physics._applyGravity()
+        Physics._updatePosition(Time.deltaTime())
+    }
+
+    private static _updatePosition(physicDeltaTime: number): void {
+        for (let i = 0; i < Physics._rigidbodies.length; i++) {
+            Physics._rigidbodies[i]._updatePosition(physicDeltaTime)
+        }
+    }
+
+    private static _applyGravity(): void {
+        for (let i = 0; i < Physics._rigidbodies.length; i++) {
+            Physics._rigidbodies[i].accelerate(Physics.gravity)
+        }
+    }
+    
+    private static solveCollision(): void{
+        for (let i = 0; i < this._rigidbodies.length; i++)
+        {
+            const rigidbody1 = this._rigidbodies[i]
+            for (let j = i + 1; j < this._rigidbodies.length; j++)
+            {
+                const rigidbody2 = this._rigidbodies[j]
+                
+                
+            }
+        }
+    }
+
+    private static _handleColliders(): void {
         for (let i = 0; i < this._colliders.length; i++) {
             for (let j = i + 1; j < this._colliders.length; j++) {
                 if (!this._colliders[i].isActive || !this._colliders[i].owner.isActive) continue

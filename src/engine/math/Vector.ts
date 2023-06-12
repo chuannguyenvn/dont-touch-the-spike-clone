@@ -6,7 +6,7 @@ class Vector {
     public y: number
     public z: number
 
-    constructor(x: number, y: number, z = 0) {
+    constructor(x: number, y: number, z: number = 1) {
         this.x = x
         this.y = y
         this.z = z
@@ -73,6 +73,14 @@ class Vector {
         const dotProduct = this.dot(toVector)
         const lengthProduct = this.length() * toVector.length()
         return Math.acos(dotProduct / lengthProduct) * (180 / Math.PI)
+    }
+
+    public copy(): Vector {
+        return new Vector(this.x, this.y, this.z)
+    }
+
+    public toString(): string {
+        return `Vector(${this.x}, ${this.y}, ${this.z})`
     }
 
     public add(other: Vector): Vector {

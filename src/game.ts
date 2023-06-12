@@ -27,24 +27,9 @@ class Game {
 
         webBuilder.buildSystem()
     }
-
-    public stateMachine: StateMachine<GameState> = new StateMachine<GameState>(GameState.NONE)
-
+    
     protected initGame(): void {
         BirdGame.init()
-
-        console.log('a')
-        this.stateMachine
-            .configure(GameState.WELCOME)
-            .onEntry(1, () => console.log('entered welcome'))
-        this.stateMachine.configure(GameState.RESULT).onExit(2, () => console.log('exited result'))
-        this.stateMachine
-            .configure(GameState.RESULT)
-            .onEntry(3, () => console.log('entered result'))
-
-        this.stateMachine.changeState(GameState.WELCOME)
-        this.stateMachine.changeState(GameState.RESULT)
-        this.stateMachine.changeState(GameState.WELCOME)
     }
 }
 
