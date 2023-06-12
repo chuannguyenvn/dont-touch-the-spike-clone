@@ -9,7 +9,9 @@ import ComponentType from '../node/component/ComponentType'
 class Physics {
     public static gravity: Vector = new Vector(0, -9.8)
     public static positionScale: number = 10
-
+    public static substep: number = 8
+    public static constraintRadius: number = 300
+    
     private static _colliders: Collider[] = []
     private static _rigidbodies: Rigidbody[] = []
 
@@ -27,10 +29,15 @@ class Physics {
     }
 
     private static _handleRigidbodies(): void {
-        Physics._applyGravity()
-        Physics._solveCollision()
-        Physics._applyConstraint()
-        Physics._updatePosition(Time.deltaTime())
+        
+        for (let i = 0; i <Physics.substep; i++)
+        {
+            const subDeltaTime = Time.deltaTime() / Physics.substep
+            Physics._applyGravity()
+            Physics._solveCollision(subDeltaTime)
+            Physics._applyConstraint()
+            Physics._updatePosition(subDeltaTime)
+        }
     }
 
     private static _updatePosition(physicDeltaTime: number): void {
@@ -45,7 +52,7 @@ class Physics {
         }
     }
 
-    private static _solveCollision(): void {
+    private static _solveCollision(deltaTime: number): void {
         for (let i = 0; i < this._rigidbodies.length; i++) {
             const rigidbody1 = this._rigidbodies[i]
             for (let j = i + 1; j < this._rigidbodies.length; j++) {
@@ -90,11 +97,11 @@ class Physics {
                 ) as CircleCollider
             ).radius
 
-            if (position.length() + radius <= 175) continue
+            if (position.length() + radius <= Physics.constraintRadius) continue
 
             Physics._rigidbodies[i].ownerTransform.position = position
                 .normalized()
-                .multiply(175 - radius)
+                .multiply(Physics.constraintRadius - radius)
         }
     }
 

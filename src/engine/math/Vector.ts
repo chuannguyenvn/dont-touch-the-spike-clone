@@ -41,6 +41,17 @@ class Vector {
         return new Vector(Maths.randomRange(-1, 1), Maths.randomRange(-1, 1)).normalized()
     }
 
+    public static ANGLE_UNIT(angle: number): Vector {
+        const cosAngle = Math.cos(angle * Maths.deg2Rad)
+        const sinAngle = Math.sin(angle * Maths.deg2Rad)
+
+        const unitX = cosAngle
+        const unitY = sinAngle
+        const unitZ = 0
+
+        return new Vector(unitX, unitY, unitZ)
+    }
+
     // OTHER METHODS //
     public static distance(v1: Vector, v2: Vector): number {
         return v1.subtract(v2).length()

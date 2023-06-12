@@ -6,8 +6,8 @@ import CircleCollider from '../engine/node/component/CircleCollider'
 import Renderer from '../engine/node/component/Renderer'
 import Circle from '../engine/rendering/Circle'
 import Color from '../engine/math/Color'
-import Vector from "../engine/math/Vector"
-import Maths from "../engine/math/Maths"
+import Vector from '../engine/math/Vector'
+import Maths from '../engine/math/Maths'
 
 class Ball extends Node {
     public transform: Transform
@@ -20,20 +20,31 @@ class Ball extends Node {
         super(name)
 
         const radius = Maths.randomRange(10, 15)
-        
-        this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = Vector.UP.multiply(150)
 
+        this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
+        this.transform.position = Vector.UP.multiply(200)
+        
         this.collider = this.addComponent(ComponentType.CIRCLE_COLLIDER) as CircleCollider
         this.collider.radius = radius
-        
+
         this.rigidbody = this.addComponent(ComponentType.RIGIDBODY) as Rigidbody
-        this.rigidbody.setVelocity(Vector.RANDOM_UNIT.multiply(100))
-        
+
         this.circle = new Circle(radius, Color.RANDOM_OPAQUE)
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(this.circle)
+    }
 
+    public setColor(color: Color): void {
+        this.circle.color = color
+    }
+
+    public setSize(size: number): void {
+        this.collider.radius = size
+        this.circle.size = size
+    }
+
+    public setVelocity(vel: Vector) {
+        this.rigidbody.setVelocity(vel)
     }
 }
 

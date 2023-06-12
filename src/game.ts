@@ -22,7 +22,7 @@ class Game {
         webBuilder.buildTime()
         
         const canvasBuildOptions = new CanvasBuildOptions()
-        canvasBuildOptions.canvasSize = new Vector(400, 600)
+        canvasBuildOptions.canvasSize = new Vector(1300, 800)
         canvasBuildOptions.canvasColor = new Color(0.2, 0.2, 0.2, 1)
         webBuilder.buildCanvas(canvasBuildOptions)
 

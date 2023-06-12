@@ -8,6 +8,7 @@ import Canvas from "../engine/system/Canvas/Canvas"
 import Color from "../engine/math/Color"
 import BirdGame from "./BirdGame"
 import Circle from "../engine/rendering/Circle"
+import Physics from "../engine/system/Physics"
 
 class CollisionBackground extends Node
 {
@@ -21,7 +22,7 @@ class CollisionBackground extends Node
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
-        this.circle = new Circle(175, new Color(0.1, 0.1, 0.1, 1))
+        this.circle = new Circle(Physics.constraintRadius, new Color(0.1, 0.1, 0.1, 1))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(this.circle)
         this.renderer.drawOrder = -100
