@@ -1,9 +1,5 @@
 ﻿class InputBuildOptions {
-    public readonly inputOptions: InputOption[]
-
-    constructor(inputOptions: InputOption[]) {
-        this.inputOptions = inputOptions
-    }
+    public inputOptions: InputOption[]
 }
 
 enum InputOption {

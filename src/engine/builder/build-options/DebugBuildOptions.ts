@@ -1,8 +1,6 @@
 ﻿class DebugBuildOptions {
     public isDebugging: boolean
-    constructor(isDebugging: boolean) {
-        this.isDebugging = isDebugging
-    }
+    public showFps: boolean
 }
 
 export default DebugBuildOptions

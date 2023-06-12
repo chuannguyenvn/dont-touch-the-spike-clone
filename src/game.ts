@@ -15,7 +15,9 @@ class Game {
     protected buildGame(): void {
         const webBuilder = new WebBuilder(this)
 
-        const debugBuildOptions = new DebugBuildOptions(true)
+        const debugBuildOptions = new DebugBuildOptions()
+        debugBuildOptions.isDebugging = true
+        debugBuildOptions.showFps = true
         webBuilder.buildDebug(debugBuildOptions)
 
         webBuilder.buildTime()
@@ -25,7 +27,8 @@ class Game {
         canvasBuildOptions.canvasColor = new Color(0.2, 0.2, 0.2, 1)
         webBuilder.buildCanvas(canvasBuildOptions)
 
-        const inputBuildOptions = new InputBuildOptions([InputOption.KEYBOARD, InputOption.MOUSE])
+        const inputBuildOptions = new InputBuildOptions()
+        inputBuildOptions.inputOptions = [InputOption.KEYBOARD, InputOption.MOUSE]
         webBuilder.buildInput(inputBuildOptions)
 
         webBuilder.buildSystem()
