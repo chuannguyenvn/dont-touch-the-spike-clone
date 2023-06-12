@@ -1,21 +1,8 @@
-﻿import Bird from './play/Bird'
-import Vector from '../engine/math/Vector'
-import PlayButton from './welcome/PlayButton'
-import VerticalWall from './play/VerticalWall'
-import HorizontalWall from './play/HorizontalWall'
-import ScoreText from './play/ScoreText'
-import ScoreBackground from './play/ScoreBackground'
-import { ParamGameEvent } from '../engine/utility/Event'
+﻿import { ParamGameEvent } from '../engine/utility/Event'
 import GameState from './GameState'
-import ResultBackground from './result/ResultBackground'
-import ResultScore from './result/ResultScore'
-import HighScore from './result/HighScore'
-import RetryButton from './result/RetryButton'
-import Matrix from '../engine/math/Matrix'
-import GameBackground from './GameBackground'
-import { Title, TitleBottom } from './welcome/Title'
 import Game from '../engine/Game'
-import Ball from "./Ball"
+import Ball from './Ball'
+import CollisionBackground from './CollisionBackground'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -114,8 +101,22 @@ class BirdGame extends Game {
         // retryButton.start()
         //
         // BirdGame.changeState(GameState.WELCOME)
-        
-        new Ball("Ball")
+
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new Ball('Ball')
+        new CollisionBackground('A')
     }
 }
 

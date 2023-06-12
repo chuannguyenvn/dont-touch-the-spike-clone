@@ -1,4 +1,6 @@
-﻿class Color {
+﻿import Maths from './Maths'
+
+class Color {
     // MEMBER VARIABLES //
     public r: number
     public g: number
@@ -51,6 +53,15 @@
 
     public static get CLEAR(): Color {
         return new Color(1, 1, 1, 0)
+    }
+
+    public static get RANDOM_OPAQUE(): Color {
+        return new Color(
+            Maths.randomRange(0, 1),
+            Maths.randomRange(0, 1),
+            Maths.randomRange(0, 1),
+            1
+        )
     }
 
     public static fromHex(hex: string): Color {

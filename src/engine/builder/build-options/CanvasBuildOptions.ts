@@ -1,11 +1,9 @@
 ﻿import Vector from '../../math/Vector'
+import Color from '../../math/Color'
 
 class CanvasBuildOptions {
-    public readonly canvasSize: Vector
-
-    constructor(canvasSize: Vector) {
-        this.canvasSize = canvasSize
-    }
+    public canvasSize: Vector
+    public canvasColor: Color
 }
 
 export default CanvasBuildOptions

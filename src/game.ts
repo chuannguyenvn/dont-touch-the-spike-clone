@@ -5,6 +5,7 @@ import Vector from './engine/math/Vector'
 import { InputBuildOptions, InputOption } from './engine/builder/build-options/InputBuildOptions'
 import StateMachine from './engine/utility/StateMachine'
 import BirdGame from './game/BirdGame'
+import Color from "./engine/math/Color"
 
 class Game {
     constructor() {
@@ -19,7 +20,10 @@ class Game {
         webBuilder.buildDebug(debugBuildOptions)
 
         webBuilder.buildTime()
-        const canvasBuildOptions = new CanvasBuildOptions(new Vector(400, 600))
+        
+        const canvasBuildOptions = new CanvasBuildOptions()
+        canvasBuildOptions.canvasSize = new Vector(400, 600)
+        canvasBuildOptions.canvasColor = new Color(0.2, 0.2, 0.2, 1)
         webBuilder.buildCanvas(canvasBuildOptions)
 
         const inputBuildOptions = new InputBuildOptions([InputOption.KEYBOARD, InputOption.MOUSE])

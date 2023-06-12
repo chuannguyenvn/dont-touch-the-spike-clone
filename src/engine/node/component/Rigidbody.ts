@@ -11,9 +11,11 @@ class Rigidbody extends Component {
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
-    private ownerTransform: Transform
+    public ownerTransform: Transform
     private lastPosition: Vector
     private acceleration: Vector
+    private isMovable: boolean = true
+    public mass: number = 1
 
     constructor(owner: Node) {
         super(owner)
@@ -29,15 +31,19 @@ class Rigidbody extends Component {
         this.lastPosition = this.ownerTransform.position.copy()
         this.ownerTransform.position = this.ownerTransform.position
             .add(velocity)
-            .add(this.acceleration.multiply(physicDeltaTime * physicDeltaTime))
+            .add(
+                this.acceleration.multiply(
+                    physicDeltaTime *
+                        physicDeltaTime *
+                        Physics.positionScale *
+                        Physics.positionScale
+                )
+            )
         this.acceleration = Vector.ZERO
     }
 
     public accelerate(acc: Vector): void {
-        this.acceleration = this.acceleration
-            .add(acc)
-            .multiplyComp(Physics.positionScale)
-            .multiplyComp(Physics.positionScale)
+        this.acceleration = this.acceleration.add(acc)
     }
 }
 

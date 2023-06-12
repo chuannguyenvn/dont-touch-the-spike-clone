@@ -34,6 +34,7 @@ class WebBuilder extends Builder {
 
         const ctx = canvas.getContext('2d')
         if (ctx) {
+            Canvas.backgroundColor = canvasBuildOptions.canvasColor
             Canvas._init(ctx, canvasBuildOptions.canvasSize)
         } else {
             Debug.logError('Canvas context not found.')

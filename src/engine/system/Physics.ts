@@ -4,11 +4,12 @@ import CircleCollider from '../node/component/CircleCollider'
 import Vector from '../math/Vector'
 import Rigidbody from '../node/component/Rigidbody'
 import Time from './Time'
+import ComponentType from '../node/component/ComponentType'
 
 class Physics {
     public static gravity: Vector = new Vector(0, -9.8)
-    public static positionScale: Vector = new Vector(10, 10)
-    
+    public static positionScale: number = 10
+
     private static _colliders: Collider[] = []
     private static _rigidbodies: Rigidbody[] = []
 
@@ -27,6 +28,8 @@ class Physics {
 
     private static _handleRigidbodies(): void {
         Physics._applyGravity()
+        Physics._solveCollision()
+        Physics._applyConstraint()
         Physics._updatePosition(Time.deltaTime())
     }
 
@@ -41,17 +44,57 @@ class Physics {
             Physics._rigidbodies[i].accelerate(Physics.gravity)
         }
     }
-    
-    private static solveCollision(): void{
-        for (let i = 0; i < this._rigidbodies.length; i++)
-        {
+
+    private static _solveCollision(): void {
+        for (let i = 0; i < this._rigidbodies.length; i++) {
             const rigidbody1 = this._rigidbodies[i]
-            for (let j = i + 1; j < this._rigidbodies.length; j++)
-            {
+            for (let j = i + 1; j < this._rigidbodies.length; j++) {
                 const rigidbody2 = this._rigidbodies[j]
+
+                const circleCollider1 = rigidbody1.owner.getComponent(
+                    ComponentType.CIRCLE_COLLIDER
+                ) as CircleCollider
+                const circleCollider2 = rigidbody2.owner.getComponent(
+                    ComponentType.CIRCLE_COLLIDER
+                ) as CircleCollider
+
                 
-                
+                const position1 = circleCollider1._ownerTransform.position.copy()
+                const position2 = circleCollider2._ownerTransform.position.copy()
+                const distance = Vector.distance(position1, position2)
+                const minDistance = circleCollider1.radius + circleCollider2.radius
+
+                if (distance > minDistance) continue
+
+                const axis = position1.subtract(position2).normalized()
+                const massRatio1 = rigidbody1.mass / (rigidbody1.mass + rigidbody2.mass)
+                const massRatio2 = rigidbody2.mass / (rigidbody1.mass + rigidbody2.mass)
+                const responseCoef = (minDistance - distance) * 0.5
+
+                circleCollider1._ownerTransform.position = position1.add(
+                    axis.multiply(massRatio2 * responseCoef)
+                )
+                circleCollider2._ownerTransform.position = position2.subtract(
+                    axis.multiply(massRatio1 * responseCoef)
+                )
             }
+        }
+    }
+
+    private static _applyConstraint(): void {
+        for (let i = 0; i < Physics._rigidbodies.length; i++) {
+            const position = Physics._rigidbodies[i].ownerTransform.position.copy()
+            const radius = (
+                Physics._rigidbodies[i].owner.getComponent(
+                    ComponentType.CIRCLE_COLLIDER
+                ) as CircleCollider
+            ).radius
+
+            if (position.length() + radius <= 175) continue
+
+            Physics._rigidbodies[i].ownerTransform.position = position
+                .normalized()
+                .multiply(175 - radius)
         }
     }
 
@@ -90,8 +133,8 @@ class Physics {
 
                         const pos1 = collider1._getWorldPosition()
                         const pos2 = collider2._getWorldPosition()
-                        const size1 = collider1.size
-                        const size2 = collider2.size
+                        const size1 = collider1.radius
+                        const size2 = collider2.radius
                         if (Vector.distance(pos1, pos2) > size1 + size2) {
                             Physics._broadcastCollision(collider1, collider2)
                         }

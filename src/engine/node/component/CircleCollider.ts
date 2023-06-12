@@ -6,14 +6,14 @@ import Rect from '../../math/Rect'
 
 class CircleCollider extends Collider {
     // COMPONENT METADATA //
-    public readonly type: ComponentType = ComponentType.RECTANGLE_COLLIDER
+    public readonly type: ComponentType = ComponentType.CIRCLE_COLLIDER
 
     // COMPONENT PROPERTIES //
-    public size: number
+    public radius: number
 
-    constructor(owner: Node, size = 1, offset: Vector = Vector.ZERO) {
+    constructor(owner: Node, radius = 1, offset: Vector = Vector.ZERO) {
         super(owner)
-        this.size = size
+        this.radius = radius
         this.offset = offset
     }
 

@@ -9,15 +9,16 @@ import Physics from '../../system/Physics'
 class Collider extends Component {
     // COMPONENT METADATA //
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
+    
+    // COMPONENT PROPERTIES //
+    private _currentFrameCollidingColliders: Collider[] = []
+    private _lastFrameCollidingColliders: Collider[] = []
     public collisionStarted: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionHappening: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionEnded: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public offset: Vector
-    protected _ownerTransform: Transform
-    // COMPONENT PROPERTIES //
-    private _currentFrameCollidingColliders: Collider[] = []
-    private _lastFrameCollidingColliders: Collider[] = []
-
+    public _ownerTransform: Transform
+    
     constructor(owner: Node) {
         super(owner)
         Physics._registerCollider(this)
