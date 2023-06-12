@@ -35,7 +35,7 @@ class Renderer extends Component {
         this.drawable = drawable
     }
 
-    public _draw(): void {
+    public _draw(deltaTime: number): void {
         if (!this.owner.isVisible) return
         this.drawable._draw()
     }

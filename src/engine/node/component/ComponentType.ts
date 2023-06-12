@@ -6,6 +6,7 @@
     RIGIDBODY,
     BUTTON,
     TEXT,
+    ANIMATOR,
 }
 
 export default ComponentType

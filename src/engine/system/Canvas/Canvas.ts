@@ -3,6 +3,7 @@ import Vector from '../../math/Vector'
 import Color from '../../math/Color'
 import Matrix from '../../math/Matrix'
 import Debug from '../Debug'
+import Time from "../Time"
 
 class Canvas {
     public static _canvasContext: CanvasRenderingContext2D
@@ -50,7 +51,7 @@ class Canvas {
                 res.values[1][2]
             )
 
-            renderer._draw()
+            renderer._draw(Time.deltaTime())
             Canvas._canvasContext.resetTransform()
         }
     }

@@ -10,6 +10,7 @@ import Button from './component/Button'
 import Text from './component/Text'
 import GUID from '../system/GUID'
 import Rigidbody from './component/Rigidbody'
+import Animator from "./component/Animator"
 
 class Node {
     private _guid: number
@@ -98,6 +99,9 @@ class Node {
                 break
             case ComponentType.TEXT:
                 newComponent = new Text(this)
+                break
+            case ComponentType.ANIMATOR:
+                newComponent = new Animator(this)
                 break
         }
 

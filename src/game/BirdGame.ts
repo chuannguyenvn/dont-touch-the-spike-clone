@@ -9,6 +9,7 @@ import Vector from '../engine/math/Vector'
 import Timer from '../engine/utility/Timer'
 import ObjectPool from '../engine/utility/ObjectPool'
 import Ease from '../engine/system/tween/Ease'
+import BirdAnimator from "./BirdAnimator"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -108,21 +109,23 @@ class BirdGame extends Game {
         //
         // BirdGame.changeState(GameState.WELCOME)
 
-        const pool = new ObjectPool<Ball>(() => new Ball('Ball'), 500)
-        new Timer(
-            () => {
-                const ball = pool.getObject()
-                BirdGame.spawnBall(ball)
-                new Timer(() => {
-                    ball.transform.tweenScale(Vector.ZERO, 1, 0, Ease.IN_SINE, false, () => pool.returnObject(ball))
-                }, 15)
-            },
-            0,
-            -1,
-            0.05
-        )
-
-        new CollisionBackground('A')
+        // const pool = new ObjectPool<Ball>(() => new Ball('Ball'), 500)
+        // new Timer(
+        //     () => {
+        //         const ball = pool.getObject()
+        //         BirdGame.spawnBall(ball)
+        //         new Timer(() => {
+        //             ball.transform.tweenScale(Vector.ZERO, 1, 0, Ease.IN_SINE, false, () => pool.returnObject(ball))
+        //         }, 15)
+        //     },
+        //     0,
+        //     -1,
+        //     0.05
+        // )
+        //
+        // new CollisionBackground('A')
+        
+        new BirdAnimator("Byrd")
     }
 
     private static spawnBall(ball: Ball) {
