@@ -9,7 +9,8 @@ class TweenBase {
     public _duration: number
     public _delay: number
     public _ease: Ease
-
+    public _callback: () => void | null
+    
     public _isStarted = false
     public tweenStarted: GameEvent = new GameEvent()
     public tweenEnded: GameEvent = new GameEvent()
@@ -31,6 +32,7 @@ class TweenBase {
         TweenEngine._unregisterTween(this)
         this.evaluate(1)
         this.tweenEnded.invoke()
+        if (this._callback) this._callback()
     }
 
     public chain(tween: TweenBase): TweenBase {

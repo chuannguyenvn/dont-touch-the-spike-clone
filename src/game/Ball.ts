@@ -42,6 +42,7 @@ class Ball extends Node {
     }
 
     public setSize(size: number): void {
+        this.transform.scale = Vector.ONE
         this.collider.radius = size
         this.circle.size = size
     }

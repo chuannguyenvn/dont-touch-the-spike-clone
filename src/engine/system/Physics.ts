@@ -11,7 +11,7 @@ class Physics {
     public static positionScale: number = 10
     public static substep: number = 8
     public static constraintRadius: number = 300
-    
+
     private static _colliders: Collider[] = []
     private static _rigidbodies: Rigidbody[] = []
 
@@ -29,9 +29,7 @@ class Physics {
     }
 
     private static _handleRigidbodies(): void {
-        
-        for (let i = 0; i <Physics.substep; i++)
-        {
+        for (let i = 0; i < Physics.substep; i++) {
             const subDeltaTime = Time.deltaTime() / Physics.substep
             Physics._applyGravity()
             Physics._solveCollision(subDeltaTime)
@@ -42,25 +40,29 @@ class Physics {
 
     private static _updatePosition(physicDeltaTime: number): void {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
-            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
+                continue
             Physics._rigidbodies[i]._updatePosition(physicDeltaTime)
         }
     }
 
     private static _applyGravity(): void {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
-            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
+                continue
             Physics._rigidbodies[i].accelerate(Physics.gravity)
         }
     }
 
     private static _solveCollision(deltaTime: number): void {
         for (let i = 0; i < this._rigidbodies.length; i++) {
-            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
+                continue
             const rigidbody1 = this._rigidbodies[i]
-            
+
             for (let j = i + 1; j < this._rigidbodies.length; j++) {
-                if (!Physics._rigidbodies[j].isActive || !Physics._rigidbodies[j].owner.isActive) continue
+                if (!Physics._rigidbodies[j].isActive || !Physics._rigidbodies[j].owner.isActive)
+                    continue
                 const rigidbody2 = this._rigidbodies[j]
 
                 const circleCollider1 = rigidbody1.owner.getComponent(
@@ -70,11 +72,12 @@ class Physics {
                     ComponentType.CIRCLE_COLLIDER
                 ) as CircleCollider
 
-                
                 const position1 = circleCollider1._ownerTransform.position.copy()
                 const position2 = circleCollider2._ownerTransform.position.copy()
                 const distance = Vector.distance(position1, position2)
-                const minDistance = circleCollider1.radius + circleCollider2.radius
+                const minDistance =
+                    circleCollider1.radius * circleCollider1._ownerTransform.scale.x +
+                    circleCollider2.radius * circleCollider2._ownerTransform.scale.x
 
                 if (distance > minDistance) continue
 
@@ -95,7 +98,8 @@ class Physics {
 
     private static _applyConstraint(): void {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
-            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive) continue
+            if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
+                continue
 
             const position = Physics._rigidbodies[i].ownerTransform.position.copy()
             const radius = (

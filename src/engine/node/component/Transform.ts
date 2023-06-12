@@ -42,14 +42,16 @@ class Transform extends Component {
         duration: number,
         delay: number,
         ease: Ease,
-        relative: boolean
+        relative: boolean,
+        callback: (() => void) | undefined = undefined
     ): Tween<Vector> {
         const evaluate = (x: number) => {
-            // if (relative) to.add(tween._startValue)
+            if (relative) to.add(tween._startValue)
             this.position = Maths.lerpVector(x, tween._startValue, to)
         }
 
         const tween = new Tween<Vector>(evaluate, () => this.position, duration, delay, ease)
+        if (callback) tween._callback = callback 
         return tween
     }
 
@@ -58,7 +60,8 @@ class Transform extends Component {
         duration: number,
         delay: number,
         ease: Ease,
-        relative: boolean
+        relative: boolean,
+        callback: (() => void) | undefined = undefined
     ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
@@ -74,7 +77,8 @@ class Transform extends Component {
         duration: number,
         delay: number,
         ease: Ease,
-        relative: boolean
+        relative: boolean,
+        callback: (() => void) | undefined = undefined
     ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
@@ -82,6 +86,7 @@ class Transform extends Component {
         }
 
         const tween = new Tween<number>(evaluate, () => this.position.y, duration, delay, ease)
+        if (callback) tween._callback = callback
         return tween
     }
 
@@ -90,7 +95,8 @@ class Transform extends Component {
         duration: number,
         delay: number,
         ease: Ease,
-        relative: boolean
+        relative: boolean,
+        callback: (() => void) | undefined = undefined
     ): Tween<Vector> {
         const evaluate = (x: number) => {
             if (relative) to.add(tween._startValue)
@@ -98,6 +104,7 @@ class Transform extends Component {
         }
 
         const tween = new Tween<Vector>(evaluate, () => this.scale, duration, delay, ease)
+        if (callback) tween._callback = callback
         return tween
     }
 }

@@ -8,6 +8,7 @@ import Color from '../engine/math/Color'
 import Vector from '../engine/math/Vector'
 import Timer from '../engine/utility/Timer'
 import ObjectPool from '../engine/utility/ObjectPool'
+import Ease from '../engine/system/tween/Ease'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -113,7 +114,7 @@ class BirdGame extends Game {
                 const ball = pool.getObject()
                 BirdGame.spawnBall(ball)
                 new Timer(() => {
-                    pool.returnObject(ball)
+                    ball.transform.tweenScale(Vector.ZERO, 1, 0, Ease.IN_SINE, false, () => pool.returnObject(ball))
                 }, 15)
             },
             0,
