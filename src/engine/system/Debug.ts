@@ -1,6 +1,9 @@
-﻿class Debug {
-    public static _isDebugging: boolean
+﻿import Canvas from "./Canvas/Canvas"
 
+class Debug {
+    public static _isDebugging: boolean
+    public static _drawFps: boolean = true
+    
     public static _init(isDebugging: boolean) {
         Debug._isDebugging = isDebugging
 

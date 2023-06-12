@@ -3,7 +3,7 @@ import Vector from '../../math/Vector'
 import Color from '../../math/Color'
 import Matrix from '../../math/Matrix'
 import Debug from '../Debug'
-import Time from "../Time"
+import Time from '../Time'
 
 class Canvas {
     public static _canvasContext: CanvasRenderingContext2D
@@ -53,6 +53,13 @@ class Canvas {
 
             renderer._draw(Time.deltaTime())
             Canvas._canvasContext.resetTransform()
+        }
+
+        if (Debug._drawFps) {
+            Canvas._canvasContext.font = '30px verdana'
+            Canvas._canvasContext.textAlign = 'left'
+            Canvas._canvasContext.fillStyle = Color.MAGENTA.toString()
+            Canvas._canvasContext.fillText('FPS: ' + Math.round(1 / Time.deltaTime()), 50, 50)
         }
     }
 

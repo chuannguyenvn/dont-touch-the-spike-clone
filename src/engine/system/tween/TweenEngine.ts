@@ -14,8 +14,6 @@ class TweenEngine {
     }
 
     public static _handleTween(): void {
-        console.log(TweenEngine._tweens.length)
-        
         const finishedTweens: TweenBase[] = []
 
         for (const tween of TweenEngine._tweens) {
