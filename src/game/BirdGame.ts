@@ -3,6 +3,7 @@ import GameState from './GameState'
 import Game from '../engine/Game'
 import Ball from './Ball'
 import CollisionBackground from './CollisionBackground'
+import Timer from "../engine/utility/Timer"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -102,20 +103,7 @@ class BirdGame extends Game {
         //
         // BirdGame.changeState(GameState.WELCOME)
 
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
-        new Ball('Ball')
+        new Timer(() => new Ball("Ball"), 0, -1, 0.5)
         new CollisionBackground('A')
     }
 }

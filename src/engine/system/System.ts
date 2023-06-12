@@ -36,6 +36,7 @@ abstract class System {
 
         Input._handleInput()
         Physics._handlePhysics()
+        Time._handleTimer()
         System._update()
         TweenEngine._handleTween()
         Canvas._draw()
