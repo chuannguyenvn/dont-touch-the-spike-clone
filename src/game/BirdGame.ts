@@ -151,6 +151,7 @@ class BirdGame extends Game {
         renderer.setDrawable(circle)
 
         const textContent = new TextContent('Yo')
+        textContent.font = "25px verdana"
         const text = childNode.addComponent(ComponentType.TEXT) as Text
         text.setDrawable(textContent)
         text.drawOrder = 1000

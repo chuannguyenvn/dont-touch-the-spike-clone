@@ -20,7 +20,7 @@ class WebBuilder extends Builder {
     }
 
     buildDebug(debugBuildOptions: DebugBuildOptions): void {
-        Debug._init(debugBuildOptions.isDebugging)
+        Debug._init(debugBuildOptions.isDebugging, debugBuildOptions.showFps)
     }
 
     buildTime(): void {

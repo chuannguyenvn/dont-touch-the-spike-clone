@@ -2,10 +2,11 @@
 
 class Debug {
     public static _isDebugging: boolean
-    public static _drawFps: boolean = true
+    public static _showFps: boolean = true
     
-    public static _init(isDebugging: boolean) {
+    public static _init(isDebugging: boolean, showFps: boolean) {
         Debug._isDebugging = isDebugging
+        Debug._showFps = showFps
 
         Debug.log('Debug initialized.')
     }

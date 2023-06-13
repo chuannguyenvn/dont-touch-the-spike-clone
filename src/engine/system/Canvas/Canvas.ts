@@ -53,7 +53,7 @@ class Canvas {
             }
         }
 
-        if (Debug._drawFps) {
+        if (Debug._showFps) {
             Canvas._canvasContext.font = '30px verdana'
             Canvas._canvasContext.textAlign = 'left'
             Canvas._canvasContext.fillStyle = Color.MAGENTA.toString()
