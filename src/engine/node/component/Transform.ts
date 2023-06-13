@@ -34,7 +34,23 @@ class Transform extends Component {
         const rotationMatrix = Matrix.rotate(this.rotation)
         const scaleMatrix = Matrix.scale(this.scale.x, this.scale.y)
 
-        return translationMatrix.multiplyMatrix(rotationMatrix).multiplyMatrix(scaleMatrix)
+        let resultMatrix = translationMatrix
+            .multiplyMatrix(rotationMatrix)
+            .multiplyMatrix(scaleMatrix)
+
+        if (this.owner.parentNode) {
+            let node: Node | null = this.owner.parentNode
+            while (node) {
+                if (node.hasComponent(ComponentType.TRANSFORM)) {
+                    const nodeTransform = node.getComponent(ComponentType.TRANSFORM) as Transform
+                    resultMatrix = nodeTransform._localToWorldMatrix().multiplyMatrix(resultMatrix)
+                }
+
+                node = node.parentNode
+            }
+        }
+
+        return resultMatrix
     }
 
     public tweenPosition(
@@ -51,7 +67,7 @@ class Transform extends Component {
         }
 
         const tween = new Tween<Vector>(evaluate, () => this.position, duration, delay, ease)
-        if (callback) tween._callback = callback 
+        if (callback) tween._callback = callback
         return tween
     }
 

@@ -9,7 +9,7 @@ class Text extends UIElement {
         super(owner)
     }
 
-    setDrawable(drawable: TextContent): void {
+    public setDrawable(drawable: TextContent): void {
         super.setDrawable(drawable)
 
         const metrics = Canvas._canvasContext.measureText(drawable.text)

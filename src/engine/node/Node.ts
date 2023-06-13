@@ -10,7 +10,7 @@ import Button from './component/Button'
 import Text from './component/Text'
 import GUID from '../system/GUID'
 import Rigidbody from './component/Rigidbody'
-import Animator from "./component/Animator"
+import Animator from './component/Animator'
 
 class Node {
     private _guid: number
@@ -59,6 +59,12 @@ class Node {
         for (let i = 0; i < this.childNodes.length; i++) {
             this.childNodes[i]._executeUpdate()
         }
+    }
+
+    public hasComponent(componentType: ComponentType): boolean {
+        return (
+            this.components.findIndex((component, _1, _2) => component.type === componentType) !== -1
+        )
     }
 
     public getComponent(componentType: ComponentType): Component {
@@ -122,7 +128,7 @@ class Node {
         // TODO
     }
 
-    public setChild(childNode: Node) {
+    public addChild(childNode: Node) {
         if (this.childNodes.includes(childNode)) return
         this.childNodes.push(childNode)
         childNode.parentNode = this
@@ -136,7 +142,7 @@ class Node {
 
     public setParent(parentNode: Node) {
         System._unregisterRootNode(this)
-        parentNode.setChild(this)
+        parentNode.addChild(this)
     }
 
     public removeParent() {

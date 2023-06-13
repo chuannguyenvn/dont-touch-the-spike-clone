@@ -9,9 +9,13 @@ import Vector from '../engine/math/Vector'
 import Timer from '../engine/utility/Timer'
 import ObjectPool from '../engine/utility/ObjectPool'
 import Ease from '../engine/system/tween/Ease'
-import Sound from '../engine/system/Sound'
-import { SoundClip } from '../engine/system/Resource'
-import BirdAnimator from "./BirdAnimator"
+import Node from '../engine/node/Node'
+import ComponentType from '../engine/node/component/ComponentType'
+import TextContent from '../engine/rendering/TextContent'
+import Text from '../engine/node/component/Text'
+import Renderer from '../engine/node/component/Renderer'
+import Circle from '../engine/rendering/Circle'
+import CircleCollider from '../engine/node/component/CircleCollider'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -129,7 +133,29 @@ class BirdGame extends Game {
 
         new CollisionBackground('A')
 
-        new BirdAnimator("Byrd")
+        // new BirdAnimator('Byrd')
+
+        const parentNode = new Node('Yo')
+        const childNode = new Node('AAAA')
+        parentNode.addChild(childNode)
+
+        const transform = parentNode.addComponent(ComponentType.TRANSFORM)
+        const transform2 = childNode.addComponent(ComponentType.TRANSFORM)
+
+        const circle = new Circle(30, Color.WHITE)
+        const renderer = parentNode.addComponent(ComponentType.RENDERER) as Renderer
+        renderer.setDrawable(circle)
+
+        const textContent = new TextContent('Yo')
+        const text = childNode.addComponent(ComponentType.TEXT) as Text
+        text.setDrawable(textContent)
+        text.drawOrder = 1000
+
+        const circleCollider = parentNode.addComponent(
+            ComponentType.CIRCLE_COLLIDER
+        ) as CircleCollider
+        circleCollider.radius = 30
+        parentNode.addComponent(ComponentType.RIGIDBODY)
     }
 
     private static spawnBall(ball: Ball) {
