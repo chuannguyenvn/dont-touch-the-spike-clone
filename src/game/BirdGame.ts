@@ -9,8 +9,8 @@ import Vector from '../engine/math/Vector'
 import Timer from '../engine/utility/Timer'
 import ObjectPool from '../engine/utility/ObjectPool'
 import Ease from '../engine/system/tween/Ease'
-import SoundClip from '../engine/config/SoundClip'
 import Sound from '../engine/system/Sound'
+import { SoundClip } from '../engine/system/Resource'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -129,8 +129,6 @@ class BirdGame extends Game {
         new CollisionBackground('A')
 
         // new BirdAnimator("Byrd")
-        Sound.setGlobalVolume(100)
-        Sound.playOnce(SoundClip.POP)
     }
 
     private static spawnBall(ball: Ball) {

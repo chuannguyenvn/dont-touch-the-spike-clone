@@ -8,6 +8,7 @@ import { InputBuildOptions } from './build-options/InputBuildOptions'
 import Input from '../system/Input/Input'
 import System from '../system/System'
 import Sound from "../system/Sound"
+import SoundBuildOptions from "./build-options/SoundBuildOptions"
 
 class WebBuilder extends Builder {
     private game: System
@@ -46,8 +47,8 @@ class WebBuilder extends Builder {
         Input._init(inputBuildOptions)
     }
 
-    buildSound(): void {
-        Sound.init()
+    buildSound(soundBuildOptions: SoundBuildOptions): void {
+        Sound._init(soundBuildOptions.globalVolume)
     }
 
     buildSystem(): void {

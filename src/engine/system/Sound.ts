@@ -1,59 +1,60 @@
-﻿import SoundClip from '../config/SoundClip'
+﻿import { Resource, SoundClip } from './Resource'
 
 class Sound {
-    private static _sounds: Map<SoundClip, HTMLAudioElement> = new Map<
-        SoundClip,
-        HTMLAudioElement
-    >()
+    // -1 means at least one clip's volume is different form global volume
+    public static globalVolume: number = 1
 
-    public static init() {
-        Object.values(SoundClip).forEach((value, _) => {
-            Sound._sounds.set(value as SoundClip, new Audio(value))
-        })
+    public static _init(globalVolume: number): void {
+        this.globalVolume = globalVolume
     }
 
-    public static playOnce(clip: SoundClip) {
-        const audio = Sound._sounds.get(clip) as HTMLAudioElement
+    public static playOnce(clip: SoundClip): void {
+        const audio = Resource._sounds.get(clip) as HTMLAudioElement
         audio.loop = false
         audio.play()
     }
 
-    public static playLoop(clip: SoundClip) {
-        const audio = Sound._sounds.get(clip) as HTMLAudioElement
+    public static playLoop(clip: SoundClip): void {
+        const audio = Resource._sounds.get(clip) as HTMLAudioElement
         audio.loop = true
         audio.play()
     }
 
-    public static pause(clip: SoundClip) {
-        const audio = Sound._sounds.get(clip) as HTMLAudioElement
+    public static pause(clip: SoundClip): void {
+        const audio = Resource._sounds.get(clip) as HTMLAudioElement
         audio.pause()
     }
 
-    public static end(clip: SoundClip) {
-        const audio = Sound._sounds.get(clip) as HTMLAudioElement
+    public static end(clip: SoundClip): void {
+        const audio = Resource._sounds.get(clip) as HTMLAudioElement
         audio.loop = false
         audio.pause()
         audio.currentTime = 0
     }
 
-    public static setClipVolume(clip: SoundClip, volume: number) {
-        const audio = Sound._sounds.get(clip) as HTMLAudioElement
-        audio.volume = volume
+    public static getClipVolume(clip: SoundClip): number {
+        const audio = Resource._sounds.get(clip) as HTMLAudioElement
+        return audio.volume
     }
 
-    public static setGlobalVolume(volume: number) {
-        Sound._sounds.forEach((audio, _) => {
+    public static setClipVolume(clip: SoundClip, volume: number): void {
+        const audio = Resource._sounds.get(clip) as HTMLAudioElement
+        audio.volume = volume
+        Sound.globalVolume = -1
+    }
+
+    public static setGlobalVolume(volume: number): void {
+        Resource._sounds.forEach((audio, _) => {
             audio.volume = volume
         })
+        Sound.globalVolume = volume
     }
-    
-    public static setMaxVolume()
-    {
+
+    public static setMaxVolume(): void {
         Sound.setGlobalVolume(1)
     }
-    
-    public static mute()
-    {
+
+    public static mute(): void {
         Sound.setGlobalVolume(0)
     }
 }

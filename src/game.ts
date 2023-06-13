@@ -5,6 +5,7 @@ import Vector from './engine/math/Vector'
 import { InputBuildOptions, InputOption } from './engine/builder/build-options/InputBuildOptions'
 import BirdGame from './game/BirdGame'
 import Color from './engine/math/Color'
+import SoundBuildOptions from "./engine/builder/build-options/SoundBuildOptions"
 
 class Game {
     constructor() {
@@ -31,7 +32,9 @@ class Game {
         inputBuildOptions.inputOptions = [InputOption.KEYBOARD, InputOption.MOUSE]
         webBuilder.buildInput(inputBuildOptions)
 
-        webBuilder.buildSound()
+        const soundBuildOptions = new SoundBuildOptions()
+        soundBuildOptions.globalVolume = 1
+        webBuilder.buildSound(soundBuildOptions)
         
         webBuilder.buildSystem()
     }
