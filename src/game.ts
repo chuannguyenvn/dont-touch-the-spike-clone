@@ -31,6 +31,8 @@ class Game {
         inputBuildOptions.inputOptions = [InputOption.KEYBOARD, InputOption.MOUSE]
         webBuilder.buildInput(inputBuildOptions)
 
+        webBuilder.buildSound()
+        
         webBuilder.buildSystem()
     }
 

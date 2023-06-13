@@ -7,6 +7,7 @@ abstract class Builder {
     public abstract buildTime(): void
     public abstract buildCanvas(canvasBuildOptions: CanvasBuildOptions): void
     public abstract buildInput(inputBuildOptions: InputBuildOptions): void
+    public abstract buildSound(): void
     public abstract buildSystem(): void
     public abstract loadResource(): void
 }
