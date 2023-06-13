@@ -16,6 +16,7 @@ import Text from '../engine/node/component/Text'
 import Renderer from '../engine/node/component/Renderer'
 import Circle from '../engine/rendering/Circle'
 import CircleCollider from '../engine/node/component/CircleCollider'
+import BirdAnimator from "./BirdAnimator"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -133,7 +134,7 @@ class BirdGame extends Game {
 
         new CollisionBackground('A')
 
-        // new BirdAnimator('Byrd')
+        new BirdAnimator('Byrd')
 
         const parentNode = new Node('Yo')
         const childNode = new Node('AAAA')

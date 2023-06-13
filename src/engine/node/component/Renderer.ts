@@ -9,7 +9,7 @@ import Ease from '../../system/tween/Ease'
 import Tween from '../../system/tween/Tween'
 import Maths from '../../math/Maths'
 import Color from '../../math/Color'
-import DrawLayer from '../../config/DrawLayers'
+import DrawLayer from '../../configs-and-resources/DrawLayers'
 
 class Renderer extends Component {
     // COMPONENT METADATA //

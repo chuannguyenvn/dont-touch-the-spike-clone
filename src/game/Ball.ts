@@ -8,7 +8,7 @@ import Circle from '../engine/rendering/Circle'
 import Color from '../engine/math/Color'
 import Vector from '../engine/math/Vector'
 import Maths from '../engine/math/Maths'
-import CollisionLayers from '../engine/config/CollisionLayers'
+import CollisionLayers from '../engine/configs-and-resources/CollisionLayers'
 
 class Ball extends Node {
     public transform: Transform

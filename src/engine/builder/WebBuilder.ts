@@ -9,7 +9,7 @@ import Input from '../system/Input/Input'
 import System from '../system/System'
 import Sound from "../system/Sound"
 import SoundBuildOptions from "./build-options/SoundBuildOptions"
-import {Resource} from "../system/Resource"
+import Resource from "../system/Resource"
 
 class WebBuilder extends Builder {
     private game: System

@@ -5,8 +5,8 @@ import Transform from './Transform'
 import Vector from '../../math/Vector'
 import { ParamGameEvent } from '../../utility/Event'
 import Physics from '../../system/Physics'
-import CollisionLayer from '../../config/CollisionLayers'
-import CollisionLayers from '../../config/CollisionLayers'
+import CollisionLayer from '../../configs-and-resources/CollisionLayers'
+import CollisionLayers from '../../configs-and-resources/CollisionLayers'
 
 class Collider extends Component {
     // COMPONENT METADATA //

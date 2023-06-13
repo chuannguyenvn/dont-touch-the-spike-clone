@@ -4,8 +4,8 @@ import Color from '../../math/Color'
 import Matrix from '../../math/Matrix'
 import Debug from '../Debug'
 import Time from '../Time'
-import DrawLayer from '../../config/DrawLayers'
-import DrawLayers from '../../config/DrawLayers'
+import DrawLayer from '../../configs-and-resources/DrawLayers'
+import DrawLayers from '../../configs-and-resources/DrawLayers'
 
 class Canvas {
     public static _canvasContext: CanvasRenderingContext2D

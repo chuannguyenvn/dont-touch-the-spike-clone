@@ -5,7 +5,7 @@ import Vector from '../math/Vector'
 import Rigidbody from '../node/component/Rigidbody'
 import Time from './Time'
 import ComponentType from '../node/component/ComponentType'
-import CollisionLayers from "../config/CollisionLayers"
+import CollisionLayers from "../configs-and-resources/CollisionLayers"
 
 class Physics {
     public static gravity: Vector = new Vector(0, -9.8)

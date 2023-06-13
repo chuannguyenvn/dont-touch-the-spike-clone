@@ -1,5 +1,7 @@
 ﻿import Sprite from '../rendering/Sprite'
 import Sound from './Sound'
+import SoundClip from '../configs-and-resources/SoundClips'
+import SpriteType from '../configs-and-resources/SpriteTypes'
 
 class Resource {
     public static _sprites: Map<SpriteType, Sprite> = new Map<SpriteType, Sprite>()
@@ -27,13 +29,4 @@ class Resource {
     }
 }
 
-enum SoundClip {
-    POP = 'https://cdn.pixabay.com/audio/2022/03/17/audio_bc9b676777.mp3',
-}
-
-enum SpriteType {
-    BIRD_JUMP = 'assets/Jump.png',
-    BIRD_GLIDE = 'assets/Glide.png',
-}
-
-export { Resource, SoundClip, SpriteType }
+export default Resource

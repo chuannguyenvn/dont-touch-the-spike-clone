@@ -1,4 +1,5 @@
-﻿import { Resource, SoundClip } from './Resource'
+﻿import Resource from './Resource'
+import SoundClip from '../configs-and-resources/SoundClips'
 
 class Sound {
     // -1 means at least one clip's volume is different form global volume

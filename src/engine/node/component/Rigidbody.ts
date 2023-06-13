@@ -5,8 +5,8 @@ import Transform from './Transform'
 import Physics from '../../system/Physics'
 import Vector from '../../math/Vector'
 import Time from "../../system/Time"
-import CollisionLayer from "../../config/CollisionLayers"
-import CollisionLayers from "../../config/CollisionLayers"
+import CollisionLayer from "../../configs-and-resources/CollisionLayers"
+import CollisionLayers from "../../configs-and-resources/CollisionLayers"
 
 class Rigidbody extends Component {
     // COMPONENT METADATA //
