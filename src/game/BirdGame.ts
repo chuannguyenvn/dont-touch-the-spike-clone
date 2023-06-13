@@ -119,6 +119,7 @@ class BirdGame extends Game {
         //
         // BirdGame.changeState(GameState.WELCOME)
 
+        let activeObjectCount = 0
         const pool = new ObjectPool<Ball>(() => new Ball('Ball'), 500)
         new Timer(
             () => {
@@ -126,9 +127,13 @@ class BirdGame extends Game {
                 BirdGame.spawnBall(ball)
                 new Timer(() => {
                     ball.transform.tweenScale(Vector.ZERO, 1, 0, Ease.IN_SINE, false, () =>
-                        pool.returnObject(ball)
+                        {
+                            pool.returnObject(ball)
+                            activeObjectCount--
+                        }
                     )
                 }, 15)
+                activeObjectCount++
             },
             0,
             -1,
@@ -156,6 +161,12 @@ class BirdGame extends Game {
         text.setDrawable(textContent)
         text.drawOrder = 1000
 
+        parentNode.update = () =>
+        {
+            textContent.text = activeObjectCount.toString()
+        }
+        
+        
         const circleCollider = parentNode.addComponent(
             ComponentType.CIRCLE_COLLIDER
         ) as CircleCollider
