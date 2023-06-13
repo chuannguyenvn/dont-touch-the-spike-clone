@@ -20,6 +20,7 @@ import CircleCollider from '../engine/node/component/CircleCollider'
 import RectangleShape from '../engine/rendering/RectangleShape'
 import RectangleCollider from '../engine/node/component/RectangleCollider'
 import UIText from '../engine/node/component/UIText'
+import LineShape from '../engine/rendering/LineShape'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -209,6 +210,16 @@ class BirdGame extends Game {
             ComponentType.RENDERER
         ) as Renderer
         staticRectangleRenderer.setDrawable(rectangle)
+
+        const node = new Node('A')
+        node.addComponent(ComponentType.TRANSFORM)
+        ;(node.addComponent(ComponentType.RENDERER) as Renderer).setDrawable(
+            new LineShape(
+                [new Vector(0, 0), new Vector(100, 0), new Vector(100, 100)],
+                Color.BLACK,
+                10
+            )
+        )
 
         // const parent = new Node('Parent')
         // const child = new Node('Child')
