@@ -37,6 +37,8 @@ class Game {
         webBuilder.buildSound(soundBuildOptions)
         
         webBuilder.buildSystem()
+        
+        webBuilder.loadResource()
     }
 
     protected initGame(): void {

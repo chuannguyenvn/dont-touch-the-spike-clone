@@ -11,6 +11,7 @@ import ObjectPool from '../engine/utility/ObjectPool'
 import Ease from '../engine/system/tween/Ease'
 import Sound from '../engine/system/Sound'
 import { SoundClip } from '../engine/system/Resource'
+import BirdAnimator from "./BirdAnimator"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -128,7 +129,7 @@ class BirdGame extends Game {
 
         new CollisionBackground('A')
 
-        // new BirdAnimator("Byrd")
+        new BirdAnimator("Byrd")
     }
 
     private static spawnBall(ball: Ball) {

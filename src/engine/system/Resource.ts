@@ -1,8 +1,30 @@
 ﻿import Sprite from '../rendering/Sprite'
+import Sound from './Sound'
 
 class Resource {
-    public static _sprites: Sprite[]
+    public static _sprites: Map<SpriteType, Sprite> = new Map<SpriteType, Sprite>()
     public static _sounds: Map<SoundClip, HTMLAudioElement> = new Map<SoundClip, HTMLAudioElement>()
+
+    public static _init() {
+        Object.values(SpriteType).forEach((value, _) => {
+            const sprite = new Sprite(value)
+            Resource._sprites.set(value as SpriteType, sprite)
+        })
+
+        Object.values(SoundClip).forEach((value, _) => {
+            const audio = new Audio(value)
+            audio.volume = Sound.globalVolume
+            Resource._sounds.set(value as SoundClip, audio)
+        })
+    }
+
+    public static getSprite(spriteType: SpriteType): Sprite {
+        return Resource._sprites.get(spriteType) as Sprite
+    }
+
+    public static getSoundClip(soundClip: SoundClip): HTMLAudioElement {
+        return Resource._sounds.get(soundClip) as HTMLAudioElement
+    }
 }
 
 enum SoundClip {
@@ -14,4 +36,4 @@ enum SpriteType {
     BIRD_GLIDE = 'assets/Glide.png',
 }
 
-export { Resource, SoundClip }
+export { Resource, SoundClip, SpriteType }
