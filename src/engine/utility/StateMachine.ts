@@ -1,17 +1,18 @@
 ﻿import Debug from '../system/Debug'
 
 class StateMachine<E> {
-    public get currentState(): E {
-        return this._currentState
-    }
-
-    private _currentState: E
     private configuringState: E
     private onEntryCallbacks: StateMachineCallbackUnit<E>[] = []
     private onExitCallbacks: StateMachineCallbackUnit<E>[] = []
 
     constructor(initState: E) {
         this._currentState = initState
+    }
+
+    private _currentState: E
+
+    public get currentState(): E {
+        return this._currentState
     }
 
     public changeState(state: E): void {

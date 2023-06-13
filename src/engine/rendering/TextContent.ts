@@ -1,7 +1,7 @@
 ﻿import Drawable from './Drawable'
 import Color from '../math/Color'
 import Vector from '../math/Vector'
-import Canvas from '../system/Canvas/Canvas'
+import Canvas from '../system/Canvas'
 
 class TextContent implements Drawable {
     public text: string

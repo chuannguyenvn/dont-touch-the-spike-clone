@@ -139,7 +139,8 @@ class Physics {
                     const rectangleCollider = Physics._colliders[j] as RectangleCollider
 
                     const circlePosition = circleCollider._ownerTransform.globalPosition.copy()
-                    const rectanglePosition = rectangleCollider._ownerTransform.globalPosition.copy()
+                    const rectanglePosition =
+                        rectangleCollider._ownerTransform.globalPosition.copy()
 
                     const rectangleRotation = rectangleCollider._ownerTransform.rotation
                     const circlePositionRelative = Matrix.rotate(-rectangleRotation).multiplyVector(

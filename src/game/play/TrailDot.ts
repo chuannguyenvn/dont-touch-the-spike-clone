@@ -3,9 +3,9 @@ import Transform from '../../engine/node/component/Transform'
 import Renderer from '../../engine/node/component/Renderer'
 import ComponentType from '../../engine/node/component/ComponentType'
 import Vector from '../../engine/math/Vector'
-import Circle from '../../engine/rendering/Circle'
+import CircleShape from '../../engine/rendering/CircleShape'
 import Color from '../../engine/math/Color'
-import Ease from '../../engine/system/tween/Ease'
+import Ease from '../../engine/utility/tween/Ease'
 
 class TrailDot extends Node {
     public transform: Transform
@@ -18,7 +18,7 @@ class TrailDot extends Node {
         // Why?
         this.transform.globalPosition = new Vector(position.x, position.y)
 
-        const circle = new Circle(8, new Color(0.93, 0.2, 0.38))
+        const circle = new CircleShape(8, new Color(0.93, 0.2, 0.38))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(circle)
         this.renderer.drawOrder = 0

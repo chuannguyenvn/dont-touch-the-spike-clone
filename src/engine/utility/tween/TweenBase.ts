@@ -1,6 +1,6 @@
 ﻿import Ease from './Ease'
-import Time from '../Time'
-import { GameEvent } from '../../utility/Event'
+import Time from '../../system/Time'
+import { GameEvent } from '../Event'
 import TweenEngine from './TweenEngine'
 
 class TweenBase {
@@ -10,7 +10,7 @@ class TweenBase {
     public _delay: number
     public _ease: Ease
     public _callback: () => void | null
-    
+
     public _isStarted = false
     public tweenStarted: GameEvent = new GameEvent()
     public tweenEnded: GameEvent = new GameEvent()

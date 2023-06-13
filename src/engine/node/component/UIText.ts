@@ -1,10 +1,10 @@
 ﻿import { UIElement } from './UIElement'
 import Node from '../Node'
 import TextContent from '../../rendering/TextContent'
-import Canvas from '../../system/Canvas/Canvas'
+import Canvas from '../../system/Canvas'
 import Vector from '../../math/Vector'
 
-class Text extends UIElement {
+class UIText extends UIElement {
     constructor(owner: Node) {
         super(owner)
     }
@@ -19,4 +19,4 @@ class Text extends UIElement {
     }
 }
 
-export default Text
+export default UIText

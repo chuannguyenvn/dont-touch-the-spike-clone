@@ -4,18 +4,17 @@ import Rigidbody from '../engine/node/component/Rigidbody'
 import ComponentType from '../engine/node/component/ComponentType'
 import CircleCollider from '../engine/node/component/CircleCollider'
 import Renderer from '../engine/node/component/Renderer'
-import Circle from '../engine/rendering/Circle'
+import CircleShape from '../engine/rendering/CircleShape'
 import Color from '../engine/math/Color'
 import Vector from '../engine/math/Vector'
 import Maths from '../engine/math/Maths'
-import CollisionLayers from '../engine/configs-and-resources/CollisionLayers'
 
 class Ball extends Node {
     public transform: Transform
     public collider: CircleCollider
     public rigidbody: Rigidbody
     public renderer: Renderer
-    public circle: Circle
+    public circle: CircleShape
 
     constructor(name: string) {
         super(name)
@@ -29,7 +28,7 @@ class Ball extends Node {
 
         this.rigidbody = this.addComponent(ComponentType.RIGIDBODY) as Rigidbody
 
-        this.circle = new Circle(radius, Color.RANDOM_OPAQUE)
+        this.circle = new CircleShape(radius, Color.RANDOM_OPAQUE)
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(this.circle)
     }

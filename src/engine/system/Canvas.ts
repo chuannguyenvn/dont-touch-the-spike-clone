@@ -1,23 +1,23 @@
-﻿import Renderer from '../../node/component/Renderer'
-import Vector from '../../math/Vector'
-import Color from '../../math/Color'
-import Matrix from '../../math/Matrix'
-import Debug from '../Debug'
-import Time from '../Time'
-import DrawLayer from '../../configs-and-resources/DrawLayers'
-import DrawLayers from '../../configs-and-resources/DrawLayers'
+﻿import Renderer from '../node/component/Renderer'
+import Vector from '../math/Vector'
+import Color from '../math/Color'
+import Matrix from '../math/Matrix'
+import Debug from './Debug'
+import Time from './Time'
+import DrawLayer from '../configs-and-resources/DrawLayers'
+import DrawLayers from '../configs-and-resources/DrawLayers'
 
 class Canvas {
     public static _canvasContext: CanvasRenderingContext2D
     public static _worldToCameraMatrix: Matrix
+    public static backgroundColor: Color = Color.WHITE
+    private static _renderers: Map<DrawLayer, Renderer[]> = new Map<DrawLayer, Renderer[]>()
+
+    private static _canvasSize: Vector = new Vector(400, 600)
 
     public static get canvasSize(): Vector {
         return this._canvasSize
     }
-
-    private static _canvasSize: Vector = new Vector(400, 600)
-    public static backgroundColor: Color = Color.WHITE
-    private static _renderers: Map<DrawLayer, Renderer[]> = new Map<DrawLayer, Renderer[]>()
 
     public static _init(canvasContext: CanvasRenderingContext2D, canvasSize: Vector): void {
         Canvas._canvasContext = canvasContext
@@ -61,6 +61,17 @@ class Canvas {
         }
     }
 
+    public static _registerRenderer(renderer: Renderer): void {
+        this._renderers.get(renderer.drawLayer)?.push(renderer)
+    }
+
+    public static _unregisterRenderer(renderer: Renderer): void {
+        this._renderers.set(
+            renderer.drawLayer,
+            (this._renderers.get(renderer.drawLayer) as Renderer[]).filter((r) => r !== renderer)
+        )
+    }
+
     private static _drawRenderer(renderer: Renderer) {
         const localToWorld = renderer._localToWorldMatrix().multiplyMatrix(Matrix.scale(1, -1))
         const worldToCamera = Canvas._worldToCameraMatrix
@@ -77,17 +88,6 @@ class Canvas {
 
         renderer._draw(Time.deltaTime())
         Canvas._canvasContext.resetTransform()
-    }
-
-    public static _registerRenderer(renderer: Renderer): void {
-        this._renderers.get(renderer.drawLayer)?.push(renderer)
-    }
-
-    public static _unregisterRenderer(renderer: Renderer): void {
-        this._renderers.set(
-            renderer.drawLayer,
-            (this._renderers.get(renderer.drawLayer) as Renderer[]).filter((r) => r !== renderer)
-        )
     }
 }
 

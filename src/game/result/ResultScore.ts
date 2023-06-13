@@ -1,6 +1,6 @@
 ﻿import Node from '../../engine/node/Node'
 import Transform from '../../engine/node/component/Transform'
-import Text from '../../engine/node/component/Text'
+import UIText from '../../engine/node/component/UIText'
 import TextContent from '../../engine/rendering/TextContent'
 import ComponentType from '../../engine/node/component/ComponentType'
 import Color from '../../engine/math/Color'
@@ -11,7 +11,7 @@ import Vector from '../../engine/math/Vector'
 
 class ResultScore extends Node {
     public transform: Transform
-    public text: Text
+    public text: UIText
     private textContent: TextContent
 
     constructor(name: string) {
@@ -21,7 +21,7 @@ class ResultScore extends Node {
 
         this.textContent = new TextContent('', Color.WHITE)
         this.textContent.font = '30px tahoma'
-        this.text = this.addComponent(ComponentType.TEXT) as Text
+        this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = 200

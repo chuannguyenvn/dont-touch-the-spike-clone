@@ -1,9 +1,9 @@
 ﻿import Drawable from './Drawable'
-import Canvas from '../system/Canvas/Canvas'
+import Canvas from '../system/Canvas'
 import Color from '../math/Color'
 import Vector from '../math/Vector'
-import Ease from '../system/tween/Ease'
-import Tween from '../system/tween/Tween'
+import Ease from '../utility/tween/Ease'
+import Tween from '../utility/tween/Tween'
 import Maths from '../math/Maths'
 
 class Sprite implements Drawable {

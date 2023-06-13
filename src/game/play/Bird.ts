@@ -4,7 +4,7 @@ import Sprite from '../../engine/rendering/Sprite'
 import Renderer from '../../engine/node/component/Renderer'
 import Transform from '../../engine/node/component/Transform'
 import Vector from '../../engine/math/Vector'
-import Input from '../../engine/system/Input/Input'
+import Input from "../../engine/system/Input"
 import Time from '../../engine/system/Time'
 import RectangleCollider from '../../engine/node/component/RectangleCollider'
 import Collider from '../../engine/node/component/Collider'
@@ -12,7 +12,7 @@ import { GameEvent, ParamGameEvent } from '../../engine/utility/Event'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 import TrailDot from './TrailDot'
-import Tween from '../../engine/system/tween/Tween'
+import Tween from '../../engine/utility/tween/Tween'
 
 class Bird extends Node {
     public touchedLeftWall: GameEvent

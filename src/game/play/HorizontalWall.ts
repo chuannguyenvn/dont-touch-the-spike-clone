@@ -3,13 +3,13 @@ import Spike from './Spike'
 import Vector from '../../engine/math/Vector'
 import Renderer from '../../engine/node/component/Renderer'
 import ComponentType from '../../engine/node/component/ComponentType'
-import Rectangle from '../../engine/rendering/Rectangle'
+import RectangleShape from '../../engine/rendering/RectangleShape'
 import Color from '../../engine/math/Color'
 import Maths from '../../engine/math/Maths'
 import ThemeManager from '../ThemeManager'
 import Drawable from '../../engine/rendering/Drawable'
 import BirdGame from '../BirdGame'
-import Ease from '../../engine/system/tween/Ease'
+import Ease from '../../engine/utility/tween/Ease'
 
 class HorizontalWall extends Wall {
     private renderer: Renderer
@@ -21,7 +21,7 @@ class HorizontalWall extends Wall {
 
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.drawOrder = 100
-        this.rectangle = new Rectangle(new Vector(400, 100), Color.GREY)
+        this.rectangle = new RectangleShape(new Vector(400, 100), Color.GREY)
         this.renderer.setDrawable(this.rectangle)
 
         BirdGame.scoreChanged.subscribe(this.scoreChangedHandler.bind(this))

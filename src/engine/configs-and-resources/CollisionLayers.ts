@@ -1,5 +1,4 @@
-﻿enum CollisionLayers
-{
+﻿enum CollisionLayers {
     DEFAULT,
     IGNORE,
 }

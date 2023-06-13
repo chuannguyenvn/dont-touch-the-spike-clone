@@ -5,22 +5,18 @@ import Transform from './Transform'
 import Vector from '../../math/Vector'
 import { ParamGameEvent } from '../../utility/Event'
 import Physics from '../../system/Physics'
-import CollisionLayer from '../../configs-and-resources/CollisionLayers'
-import CollisionLayers from '../../configs-and-resources/CollisionLayers'
 
 class Collider extends Component {
     // COMPONENT METADATA //
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
-
-    // COMPONENT PROPERTIES //
-    private _currentFrameCollidingColliders: Collider[] = []
-    private _lastFrameCollidingColliders: Collider[] = []
-
     public collisionStarted: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionHappening: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public collisionEnded: ParamGameEvent<Collider> = new ParamGameEvent<Collider>()
     public offset: Vector
     public _ownerTransform: Transform
+    // COMPONENT PROPERTIES //
+    private _currentFrameCollidingColliders: Collider[] = []
+    private _lastFrameCollidingColliders: Collider[] = []
 
     constructor(owner: Node) {
         super(owner)

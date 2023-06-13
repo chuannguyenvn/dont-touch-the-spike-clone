@@ -6,29 +6,20 @@ import Transform from './component/Transform'
 import Renderer from './component/Renderer'
 import RectangleCollider from './component/RectangleCollider'
 import CircleCollider from './component/CircleCollider'
-import Button from './component/Button'
-import Text from './component/Text'
-import GUID from '../system/GUID'
+import UIButton from './component/UIButton'
+import UIText from './component/UIText'
+import GUID from '../utility/GUID'
 import Rigidbody from './component/Rigidbody'
 import Animator from './component/Animator'
-import ParticleEmitter from "./component/ParticleEmiter"
+import ParticleEmitter from './component/ParticleEmiter'
 
 class Node {
-    private _guid: number
-
-    public getGuid(): number {
-        return this._guid
-    }
-
-    public _setGuid(): void {
-        this._guid = GUID.generate()
-    }
-
     public name: string
     public isActive = true
     public isVisible = true
     public parentNode: Node | null = null
     public childNodes: Node[] = []
+    private _guid: number
     private components: Component[] = []
 
     constructor(name: string) {
@@ -36,6 +27,14 @@ class Node {
         this.name = name
         System._registerRootNode(this)
         this.init()
+    }
+
+    public getGuid(): number {
+        return this._guid
+    }
+
+    public _setGuid(): void {
+        this._guid = GUID.generate()
     }
 
     public init(): void {}
@@ -103,10 +102,10 @@ class Node {
                 newComponent = new Rigidbody(this)
                 break
             case ComponentType.BUTTON:
-                newComponent = new Button(this)
+                newComponent = new UIButton(this)
                 break
             case ComponentType.TEXT:
-                newComponent = new Text(this)
+                newComponent = new UIText(this)
                 break
             case ComponentType.ANIMATOR:
                 newComponent = new Animator(this)

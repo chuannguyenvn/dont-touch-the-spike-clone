@@ -1,25 +1,24 @@
 ﻿import Drawable from './Drawable'
+import Canvas from '../system/Canvas'
 import Color from '../math/Color'
-import Canvas from '../system/Canvas/Canvas'
 import Vector from '../math/Vector'
 
-class Circle implements Drawable {
+class RectangleShape implements Drawable {
     public drawOrder: number
     public color: Color
-    public size: number
+    public size: Vector
     public offSet: Vector
 
-    constructor(size: number, color: Color) {
+    constructor(size: Vector, color: Color) {
         this.color = color
         this.size = size
+        this.offSet = new Vector(-this.size.x / 2, -this.size.y / 2)
     }
 
     public _draw(): void {
         Canvas._canvasContext.fillStyle = this.color.toString()
-        Canvas._canvasContext.beginPath()
-        Canvas._canvasContext.arc(0, 0, this.size, 0, 2 * Math.PI)
-        Canvas._canvasContext.fill()
+        Canvas._canvasContext.fillRect(this.offSet.x, this.offSet.y, this.size.x, this.size.y)
     }
 }
 
-export default Circle
+export default RectangleShape

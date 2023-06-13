@@ -1,10 +1,10 @@
 ﻿import Node from '../../engine/node/Node'
 import Transform from '../../engine/node/component/Transform'
-import Button from '../../engine/node/component/Button'
-import Text from '../../engine/node/component/Text'
+import UIButton from '../../engine/node/component/UIButton'
+import UIText from '../../engine/node/component/UIText'
 import ComponentType from '../../engine/node/component/ComponentType'
 import Vector from '../../engine/math/Vector'
-import Rectangle from '../../engine/rendering/Rectangle'
+import RectangleShape from '../../engine/rendering/RectangleShape'
 import Color from '../../engine/math/Color'
 import { Alignment } from '../../engine/node/component/UIElement'
 import TextContent from '../../engine/rendering/TextContent'
@@ -13,22 +13,22 @@ import GameState from '../GameState'
 
 class RetryButton extends Node {
     public transform: Transform
-    public button: Button
-    public text: Text
+    public button: UIButton
+    public text: UIText
 
     init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.globalPosition = new Vector(0, -150)
 
-        const rectangle = new Rectangle(new Vector(200, 100), Color.WHITE)
-        this.button = this.addComponent(ComponentType.BUTTON) as Button
+        const rectangle = new RectangleShape(new Vector(200, 100), Color.WHITE)
+        this.button = this.addComponent(ComponentType.BUTTON) as UIButton
         this.button.elementSize = new Vector(200, 100)
         this.button.setDrawable(rectangle)
         this.button.pivot = Alignment.MID_CENTER
 
         const textContent = new TextContent('Retry', Color.GREY)
         textContent.font = '30px tahoma'
-        this.text = this.addComponent(ComponentType.TEXT) as Text
+        this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(textContent)
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))

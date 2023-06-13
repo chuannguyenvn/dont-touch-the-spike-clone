@@ -14,6 +14,10 @@ class Animator extends Renderer {
     private frameCountdown: number
     private frameTime: number
 
+    constructor(owner: Node) {
+        super(owner)
+    }
+
     get secondsPerFrame(): number {
         return this.frameTime
     }
@@ -32,20 +36,10 @@ class Animator extends Renderer {
         this.frameCountdown = this.frameTime
     }
 
-    constructor(owner: Node) {
-        super(owner)
-    }
-
     public setSprites(sprites: Sprite[]) {
         this.sprites = sprites
         this.currentIndex = 0
         this.setDrawable(this._getNextSprite())
-    }
-
-    private _getNextSprite(): Sprite {
-        const index = this.currentIndex
-        this.currentIndex = (this.currentIndex + 1) % this.sprites.length
-        return this.sprites[index]
     }
 
     public override _draw(deltaTime: number): void {
@@ -58,6 +52,12 @@ class Animator extends Renderer {
 
         this.setDrawable(this._getNextSprite())
         this.frameCountdown = this.frameTime
+    }
+
+    private _getNextSprite(): Sprite {
+        const index = this.currentIndex
+        this.currentIndex = (this.currentIndex + 1) % this.sprites.length
+        return this.sprites[index]
     }
 }
 

@@ -5,8 +5,8 @@ import Renderer from '../../engine/node/component/Renderer'
 import ComponentType from '../../engine/node/component/ComponentType'
 import Vector from '../../engine/math/Vector'
 import Color from '../../engine/math/Color'
-import Freeform from '../../engine/rendering/Freeform'
-import Ease from '../../engine/system/tween/Ease'
+import FreeformShape from '../../engine/rendering/FreeformShape'
+import Ease from '../../engine/utility/tween/Ease'
 import Maths from '../../engine/math/Maths'
 import BirdGame from '../BirdGame'
 import ThemeManager from '../ThemeManager'
@@ -15,7 +15,7 @@ class Spike extends Node {
     public transform: Transform
     public collider: RectangleCollider
     public renderer: Renderer
-    private triangle: Freeform
+    private triangle: FreeformShape
     private showingPosX: number
     private hidingPosX: number
 
@@ -25,7 +25,7 @@ class Spike extends Node {
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
         this.collider.size = new Vector(50, 40)
 
-        this.triangle = new Freeform(Color.GREY)
+        this.triangle = new FreeformShape(Color.GREY)
         this.triangle.setPoints([
             new Vector(25, 0),
             new Vector(0, 25),

@@ -2,8 +2,8 @@
 import ComponentType from './ComponentType'
 import Component from './Component'
 import Node from '../Node'
-import Tween from '../../system/tween/Tween'
-import Ease from '../../system/tween/Ease'
+import Tween from '../../utility/tween/Tween'
+import Ease from '../../utility/tween/Ease'
 import Matrix from '../../math/Matrix'
 import Maths from '../../math/Maths'
 
@@ -11,6 +11,12 @@ class Transform extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.TRANSFORM
     public readonly _componentRequirements: ComponentType[] = []
+    public rotation: number = 0
+    public scale: Vector = Vector.ONE
+
+    constructor(owner: Node) {
+        super(owner)
+    }
 
     // COMPONENT PROPERTIES //
     private _localPosition: Vector = Vector.ZERO
@@ -30,13 +36,6 @@ class Transform extends Component {
 
     set globalPosition(value: Vector) {
         this._localPosition = this._localToWorldMatrix(true).inverse().multiplyVector(value)
-    }
-
-    public rotation: number = 0
-    public scale: Vector = Vector.ONE
-
-    constructor(owner: Node) {
-        super(owner)
     }
 
     public _localToWorldMatrix(excludeChild: boolean = false): Matrix {

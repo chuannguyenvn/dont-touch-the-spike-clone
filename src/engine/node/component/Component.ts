@@ -1,10 +1,10 @@
 ﻿import ComponentType from './ComponentType'
 import Node from '../Node'
-import GUID from "../../system/GUID"
+import GUID from '../../utility/GUID'
 
 class Component {
     public readonly guid: number
-    
+
     public isActive = true
     public readonly type: ComponentType
     public readonly _componentRequirements: ComponentType[] = []

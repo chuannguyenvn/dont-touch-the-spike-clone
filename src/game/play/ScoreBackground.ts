@@ -1,7 +1,7 @@
 ﻿import Node from '../../engine/node/Node'
 import ComponentType from '../../engine/node/component/ComponentType'
 import Renderer from '../../engine/node/component/Renderer'
-import Circle from '../../engine/rendering/Circle'
+import CircleShape from '../../engine/rendering/CircleShape'
 import Color from '../../engine/math/Color'
 import Transform from '../../engine/node/component/Transform'
 import BirdGame from '../BirdGame'
@@ -16,7 +16,7 @@ class ScoreBackground extends Node {
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
 
-        const circle = new Circle(100, new Color(0.1, 0.1, 0.1, 0.15))
+        const circle = new CircleShape(100, new Color(0.1, 0.1, 0.1, 0.15))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(circle)
         this.renderer.drawOrder = -2

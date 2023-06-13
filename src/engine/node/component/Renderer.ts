@@ -2,11 +2,11 @@
 import ComponentType from './ComponentType'
 import Node from '../Node'
 import Transform from './Transform'
-import Canvas from '../../system/Canvas/Canvas'
+import Canvas from '../../system/Canvas'
 import Drawable from '../../rendering/Drawable'
 import Matrix from '../../math/Matrix'
-import Ease from '../../system/tween/Ease'
-import Tween from '../../system/tween/Tween'
+import Ease from '../../utility/tween/Ease'
+import Tween from '../../utility/tween/Tween'
 import Maths from '../../math/Maths'
 import Color from '../../math/Color'
 import DrawLayer from '../../configs-and-resources/DrawLayers'
@@ -15,20 +15,6 @@ class Renderer extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RENDERER
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
-
-    // COMPONENT PROPERTIES //
-    public get drawLayer(): DrawLayer {
-        return this._drawLayer
-    }
-    public set drawLayer(value: DrawLayer) {
-
-        
-        Canvas._unregisterRenderer(this)
-        this._drawLayer = value
-        Canvas._registerRenderer(this)
-    }
-
-    private _drawLayer: DrawLayer = DrawLayer.DEFAULT
     public drawOrder = 0
     public drawable: Drawable
     private ownerTransform: Transform
@@ -37,6 +23,19 @@ class Renderer extends Component {
         super(owner)
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
 
+        Canvas._registerRenderer(this)
+    }
+
+    private _drawLayer: DrawLayer = DrawLayer.DEFAULT
+
+    // COMPONENT PROPERTIES //
+    public get drawLayer(): DrawLayer {
+        return this._drawLayer
+    }
+
+    public set drawLayer(value: DrawLayer) {
+        Canvas._unregisterRenderer(this)
+        this._drawLayer = value
         Canvas._registerRenderer(this)
     }
 

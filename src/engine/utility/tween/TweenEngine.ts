@@ -1,5 +1,5 @@
 ﻿import TweenBase from './TweenBase'
-import Time from '../Time'
+import Time from '../../system/Time'
 import easeDictionary from './EaseDictionary'
 
 class TweenEngine {

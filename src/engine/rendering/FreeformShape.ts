@@ -1,9 +1,9 @@
 ﻿import Drawable from './Drawable'
-import Canvas from '../system/Canvas/Canvas'
+import Canvas from '../system/Canvas'
 import Color from '../math/Color'
 import Vector from '../math/Vector'
 
-class Freeform implements Drawable {
+class FreeformShape implements Drawable {
     public drawOrder: number
     public color: Color
     public _points: Vector[]
@@ -28,4 +28,4 @@ class Freeform implements Drawable {
     }
 }
 
-export default Freeform
+export default FreeformShape

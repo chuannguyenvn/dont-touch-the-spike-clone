@@ -4,9 +4,9 @@ import Node from '../Node'
 import Transform from './Transform'
 import Physics from '../../system/Physics'
 import Vector from '../../math/Vector'
-import Time from "../../system/Time"
-import CollisionLayer from "../../configs-and-resources/CollisionLayers"
-import CollisionLayers from "../../configs-and-resources/CollisionLayers"
+import Time from '../../system/Time'
+import CollisionLayer from '../../configs-and-resources/CollisionLayers'
+import CollisionLayers from '../../configs-and-resources/CollisionLayers'
 
 class Rigidbody extends Component {
     // COMPONENT METADATA //
@@ -16,11 +16,10 @@ class Rigidbody extends Component {
     // COMPONENT PROPERTIES //
     public ownerTransform: Transform
     public collisionLayer: CollisionLayer = CollisionLayers.DEFAULT
-
+    public mass: number = 1
     private lastPosition: Vector
     private acceleration: Vector
     private isMovable: boolean = true
-    public mass: number = 1
 
     constructor(owner: Node) {
         super(owner)
@@ -50,10 +49,11 @@ class Rigidbody extends Component {
     public accelerate(acc: Vector): void {
         this.acceleration = this.acceleration.add(acc)
     }
-    
-    public setVelocity(vel: Vector): void
-    {
-        this.lastPosition = this.ownerTransform.globalPosition.subtract(vel.multiply(Time.deltaTime()))
+
+    public setVelocity(vel: Vector): void {
+        this.lastPosition = this.ownerTransform.globalPosition.subtract(
+            vel.multiply(Time.deltaTime())
+        )
     }
 }
 

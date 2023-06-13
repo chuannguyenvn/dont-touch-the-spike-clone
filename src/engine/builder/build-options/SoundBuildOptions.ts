@@ -1,5 +1,4 @@
-﻿class SoundBuildOptions
-{
+﻿class SoundBuildOptions {
     public globalVolume: number
 }
 

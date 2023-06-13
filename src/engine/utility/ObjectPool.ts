@@ -14,6 +14,22 @@ class ObjectPool<T extends Node> {
         }
     }
 
+    public getObject(): T {
+        for (let i = 0; i < this._pool.length; i++) {
+            if (this._pool[i].isActive) continue
+
+            this._pool[i].isActive = this._pool[i].isVisible = true
+            return this._pool[i]
+        }
+
+        console.log('new')
+        return this.createNewObjects(this._pool.length)
+    }
+
+    public returnObject(poolable: T): void {
+        poolable.isActive = poolable.isVisible = false
+    }
+
     private createNewObjects(count: number): T {
         const object = this.createFunction()
         object.isActive = object.isVisible = false
@@ -24,22 +40,6 @@ class ObjectPool<T extends Node> {
 
         this._pool[count].isActive = this._pool[count].isVisible = true
         return this._pool[count]
-    }
-
-    public getObject(): T {
-        for (let i = 0; i < this._pool.length; i++) {
-            if (this._pool[i].isActive) continue
-
-            this._pool[i].isActive = this._pool[i].isVisible = true
-            return this._pool[i]
-        }
-
-        console.log("new")
-        return this.createNewObjects(this._pool.length)
-    }
-
-    public returnObject(poolable: T): void {
-        poolable.isActive = poolable.isVisible = false
     }
 }
 

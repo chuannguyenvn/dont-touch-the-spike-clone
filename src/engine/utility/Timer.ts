@@ -1,15 +1,14 @@
 ﻿import Time from '../system/Time'
-import GUID from '../system/GUID'
+import GUID from './GUID'
 
 class Timer {
     public readonly guid: number
-
-    private callback: () => void
     public readonly delay: number
-    private delayCountdown: number
     public readonly repeat: number
-    private repeatCountdown: number
     public readonly interval: number
+    private callback: () => void
+    private delayCountdown: number
+    private repeatCountdown: number
     private intervalCountdown: number
 
     constructor(callback: () => void, delay: number, repeat: number = 1, interval: number = 1) {

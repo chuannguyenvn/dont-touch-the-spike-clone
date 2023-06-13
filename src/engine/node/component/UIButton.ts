@@ -3,9 +3,9 @@ import { UIElement } from './UIElement'
 import Node from '../Node'
 import MouseInteractable from './MouseInteractable'
 import Vector from '../../math/Vector'
-import Input from '../../system/Input/Input'
+import Input from '../../system/Input'
 
-class Button extends UIElement implements MouseInteractable {
+class UIButton extends UIElement implements MouseInteractable {
     public clicked: GameEvent = new GameEvent()
     public hovered: GameEvent = new GameEvent()
 
@@ -23,4 +23,4 @@ class Button extends UIElement implements MouseInteractable {
     }
 }
 
-export default Button
+export default UIButton

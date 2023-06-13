@@ -1,15 +1,15 @@
 ﻿import Builder from './Builder'
 import CanvasBuildOptions from './build-options/CanvasBuildOptions'
-import Canvas from '../system/Canvas/Canvas'
+import Canvas from '../system/Canvas'
 import Debug from '../system/Debug'
 import Time from '../system/Time'
 import DebugBuildOptions from './build-options/DebugBuildOptions'
 import { InputBuildOptions } from './build-options/InputBuildOptions'
-import Input from '../system/Input/Input'
+import Input from '../system/Input'
 import System from '../system/System'
-import Sound from "../system/Sound"
-import SoundBuildOptions from "./build-options/SoundBuildOptions"
-import Resource from "../system/Resource"
+import Sound from '../system/Sound'
+import SoundBuildOptions from './build-options/SoundBuildOptions'
+import Resource from '../system/Resource'
 
 class WebBuilder extends Builder {
     private game: System

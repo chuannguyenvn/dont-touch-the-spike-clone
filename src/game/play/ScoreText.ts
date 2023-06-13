@@ -4,13 +4,13 @@ import ComponentType from '../../engine/node/component/ComponentType'
 import TextContent from '../../engine/rendering/TextContent'
 import Color from '../../engine/math/Color'
 import { Alignment } from '../../engine/node/component/UIElement'
-import Text from '../../engine/node/component/Text'
+import UIText from '../../engine/node/component/UIText'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 
 class ScoreText extends Node {
     public transform: Transform
-    public text: Text
+    public text: UIText
     private textContent: TextContent
 
     constructor(name: string) {
@@ -19,7 +19,7 @@ class ScoreText extends Node {
 
         this.textContent = new TextContent('00', new Color(1, 1, 1, 0.5))
         this.textContent.font = '100px tahoma'
-        this.text = this.addComponent(ComponentType.TEXT) as Text
+        this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = -1

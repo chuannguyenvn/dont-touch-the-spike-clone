@@ -1,8 +1,8 @@
-﻿import Vector from '../../math/Vector'
-import Canvas from '../Canvas/Canvas'
-import MouseInteractable from '../../node/component/MouseInteractable'
-import { InputBuildOptions } from '../../builder/build-options/InputBuildOptions'
-import Debug from '../Debug'
+﻿import Vector from '../math/Vector'
+import Canvas from './Canvas'
+import MouseInteractable from '../node/component/MouseInteractable'
+import { InputBuildOptions } from '../builder/build-options/InputBuildOptions'
+import Debug from './Debug'
 
 class Input {
     private static _mouseInteractables: MouseInteractable[] = []

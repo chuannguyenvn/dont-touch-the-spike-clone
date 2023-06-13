@@ -7,11 +7,11 @@ import { Alignment } from '../../engine/node/component/UIElement'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 import Transform from '../../engine/node/component/Transform'
-import Text from '../../engine/node/component/Text'
+import UIText from '../../engine/node/component/UIText'
 
 class Title extends Node {
     public transform: Transform
-    public text: Text
+    public text: UIText
     private textContent: TextContent
 
     constructor(name: string) {
@@ -21,7 +21,7 @@ class Title extends Node {
 
         this.textContent = new TextContent("DON'T TOUCH", Color.GREY)
         this.textContent.font = '60px tahoma'
-        this.text = this.addComponent(ComponentType.TEXT) as Text
+        this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = 200
@@ -42,7 +42,7 @@ class Title extends Node {
 
 class TitleBottom extends Node {
     public transform: Transform
-    public text: Text
+    public text: UIText
     private textContent: TextContent
 
     constructor(name: string) {
@@ -52,7 +52,7 @@ class TitleBottom extends Node {
 
         this.textContent = new TextContent('THE SPIKE', Color.GREY)
         this.textContent.font = '60px tahoma'
-        this.text = this.addComponent(ComponentType.TEXT) as Text
+        this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = 200
@@ -71,4 +71,4 @@ class TitleBottom extends Node {
     }
 }
 
-export { Title, TitleBottom }
+export {Title, TitleBottom}
