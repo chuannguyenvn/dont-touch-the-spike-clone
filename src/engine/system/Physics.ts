@@ -30,7 +30,7 @@ class Physics {
 
     public static _handlePhysics(): void {
         Physics._handleRigidbodies()
-        // Physics._handleColliders()
+        Physics._handleColliders()
     }
 
     private static _handleRigidbodies(): void {
@@ -168,7 +168,7 @@ class Physics {
                     }
 
                     axis = Matrix.rotate(rectangleRotation).multiplyVector(axis)
-                    
+
                     circleCollider._ownerTransform.position = circlePosition.add(
                         axis.multiply(responseCoef)
                     )
