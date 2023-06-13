@@ -118,6 +118,14 @@ class Vector {
         )
     }
 
+    public withX(newX: number): Vector {
+        return new Vector(newX, this.y, this.z)
+    }
+
+    public withY(newY: number): Vector {
+        return new Vector(this.x, newY, this.z)
+    }
+
     public xx(): Vector {
         return new Vector(this.x, this.x, this.z)
     }

@@ -82,8 +82,8 @@ class Physics {
                     ComponentType.CIRCLE_COLLIDER
                 ) as CircleCollider
 
-                const position1 = circleCollider1._ownerTransform.position.copy()
-                const position2 = circleCollider2._ownerTransform.position.copy()
+                const position1 = circleCollider1._ownerTransform.globalPosition.copy()
+                const position2 = circleCollider2._ownerTransform.globalPosition.copy()
                 const distance = Vector.distance(position1, position2)
                 const minDistance =
                     circleCollider1.radius * circleCollider1._ownerTransform.scale.x +
@@ -96,10 +96,10 @@ class Physics {
                 const massRatio2 = rigidbody2.mass / (rigidbody1.mass + rigidbody2.mass)
                 const responseCoef = (minDistance - distance) * 0.5
 
-                circleCollider1._ownerTransform.position = position1.add(
+                circleCollider1._ownerTransform.globalPosition = position1.add(
                     axis.multiply(massRatio2 * responseCoef)
                 )
-                circleCollider2._ownerTransform.position = position2.subtract(
+                circleCollider2._ownerTransform.globalPosition = position2.subtract(
                     axis.multiply(massRatio1 * responseCoef)
                 )
 
@@ -114,8 +114,8 @@ class Physics {
                     ) as CircleCollider
                     const circleCollider2 = Physics._colliders[j] as CircleCollider
 
-                    const position1 = circleCollider1._ownerTransform.position.copy()
-                    const position2 = circleCollider2._ownerTransform.position.copy()
+                    const position1 = circleCollider1._ownerTransform.globalPosition.copy()
+                    const position2 = circleCollider2._ownerTransform.globalPosition.copy()
                     const distance = Vector.distance(position1, position2)
                     const minDistance =
                         circleCollider1.radius * circleCollider1._ownerTransform.scale.x +
@@ -127,7 +127,7 @@ class Physics {
 
                     const responseCoef = (minDistance - distance) * 0.5
 
-                    circleCollider1._ownerTransform.position = position1.add(
+                    circleCollider1._ownerTransform.globalPosition = position1.add(
                         axis.multiply(responseCoef)
                     )
 
@@ -138,8 +138,8 @@ class Physics {
                     ) as CircleCollider
                     const rectangleCollider = Physics._colliders[j] as RectangleCollider
 
-                    const circlePosition = circleCollider._ownerTransform.position.copy()
-                    const rectanglePosition = rectangleCollider._ownerTransform.position.copy()
+                    const circlePosition = circleCollider._ownerTransform.globalPosition.copy()
+                    const rectanglePosition = rectangleCollider._ownerTransform.globalPosition.copy()
 
                     const rectangleRotation = rectangleCollider._ownerTransform.rotation
                     const circlePositionRelative = Matrix.rotate(-rectangleRotation).multiplyVector(
@@ -169,7 +169,7 @@ class Physics {
 
                     axis = Matrix.rotate(rectangleRotation).multiplyVector(axis)
 
-                    circleCollider._ownerTransform.position = circlePosition.add(
+                    circleCollider._ownerTransform.globalPosition = circlePosition.add(
                         axis.multiply(responseCoef)
                     )
 
@@ -184,7 +184,7 @@ class Physics {
             if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
                 continue
 
-            const position = Physics._rigidbodies[i].ownerTransform.position.copy()
+            const position = Physics._rigidbodies[i].ownerTransform.globalPosition.copy()
             const radius = (
                 Physics._rigidbodies[i].owner.getComponent(
                     ComponentType.CIRCLE_COLLIDER
@@ -193,7 +193,7 @@ class Physics {
 
             if (position.length() + radius <= Physics.constraintRadius) continue
 
-            Physics._rigidbodies[i].ownerTransform.position = position
+            Physics._rigidbodies[i].ownerTransform.globalPosition = position
                 .normalized()
                 .multiply(Physics.constraintRadius - radius)
         }

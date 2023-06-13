@@ -35,7 +35,7 @@ class Ball extends Node {
     }
 
     public setPosition(pos: Vector): void {
-        this.transform.position = pos
+        this.transform.globalPosition = pos
     }
 
     public setColor(color: Color): void {

@@ -13,30 +13,42 @@ class Transform extends Component {
     public readonly _componentRequirements: ComponentType[] = []
 
     // COMPONENT PROPERTIES //
-    public position: Vector
-    public rotation: number
-    public scale: Vector
+    private _localPosition: Vector = Vector.ZERO
 
-    constructor(
-        owner: Node,
-        position: Vector = Vector.ZERO,
-        rotation = 0,
-        scale: Vector = Vector.ONE
-    ) {
-        super(owner)
-        this.position = position
-        this.rotation = rotation
-        this.scale = scale
+    get localPosition(): Vector {
+        return this._localPosition
     }
 
-    public _localToWorldMatrix(): Matrix {
-        const translationMatrix = Matrix.translate(this.position.x, this.position.y)
+    set localPosition(value: Vector) {
+        this._localPosition = value
+    }
+
+    get globalPosition(): Vector {
+        const ctm = this._localToWorldMatrix()
+        return new Vector(ctm.values[0][2], ctm.values[1][2])
+    }
+
+    set globalPosition(value: Vector) {
+        this._localPosition = this._localToWorldMatrix(true).inverse().multiplyVector(value)
+    }
+
+    public rotation: number = 0
+    public scale: Vector = Vector.ONE
+
+    constructor(owner: Node) {
+        super(owner)
+    }
+
+    public _localToWorldMatrix(excludeChild: boolean = false): Matrix {
+        const translationMatrix = Matrix.translate(this._localPosition.x, this._localPosition.y)
         const rotationMatrix = Matrix.rotate(this.rotation)
         const scaleMatrix = Matrix.scale(this.scale.x, this.scale.y)
 
         let resultMatrix = translationMatrix
             .multiplyMatrix(rotationMatrix)
             .multiplyMatrix(scaleMatrix)
+
+        if (excludeChild) resultMatrix = Matrix.IDENTITY
 
         if (this.owner.parentNode) {
             let node: Node | null = this.owner.parentNode
@@ -63,10 +75,10 @@ class Transform extends Component {
     ): Tween<Vector> {
         const evaluate = (x: number) => {
             if (relative) to.add(tween._startValue)
-            this.position = Maths.lerpVector(x, tween._startValue, to)
+            this.globalPosition = Maths.lerpVector(x, tween._startValue, to)
         }
 
-        const tween = new Tween<Vector>(evaluate, () => this.position, duration, delay, ease)
+        const tween = new Tween<Vector>(evaluate, () => this.globalPosition, duration, delay, ease)
         if (callback) tween._callback = callback
         return tween
     }
@@ -81,10 +93,18 @@ class Transform extends Component {
     ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
-            this.position.x = Maths.lerpNumber(x, tween._startValue, to)
+            this.globalPosition = this.globalPosition.withX(
+                Maths.lerpNumber(x, tween._startValue, to)
+            )
         }
 
-        const tween = new Tween<number>(evaluate, () => this.position.x, duration, delay, ease)
+        const tween = new Tween<number>(
+            evaluate,
+            () => this.globalPosition.x,
+            duration,
+            delay,
+            ease
+        )
         return tween
     }
 
@@ -98,10 +118,18 @@ class Transform extends Component {
     ): Tween<number> {
         const evaluate = (x: number) => {
             if (relative) to += tween._startValue
-            this.position.y = Maths.lerpNumber(x, tween._startValue, to)
+            this.globalPosition = this.globalPosition.withY(
+                Maths.lerpNumber(x, tween._startValue, to)
+            )
         }
 
-        const tween = new Tween<number>(evaluate, () => this.position.y, duration, delay, ease)
+        const tween = new Tween<number>(
+            evaluate,
+            () => this.globalPosition.y,
+            duration,
+            delay,
+            ease
+        )
         if (callback) tween._callback = callback
         return tween
     }

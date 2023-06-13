@@ -17,7 +17,7 @@ class VerticalWall extends Wall {
         for (let y = -200; y <= 200; y += 50) {
             const spike = new Spike('Spike')
             spike.setParent(this)
-            spike.transform.position = new Vector(this.transform.position.x, y)
+            spike.transform.globalPosition = new Vector(this.transform.globalPosition.x, y)
             spike.start()
 
             this.spikes.push(spike)

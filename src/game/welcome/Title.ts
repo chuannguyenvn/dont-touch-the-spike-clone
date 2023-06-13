@@ -17,7 +17,7 @@ class Title extends Node {
     constructor(name: string) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, 150)
+        this.transform.globalPosition = new Vector(0, 150)
 
         this.textContent = new TextContent("DON'T TOUCH", Color.GREY)
         this.textContent.font = '60px tahoma'
@@ -48,7 +48,7 @@ class TitleBottom extends Node {
     constructor(name: string) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, 80)
+        this.transform.globalPosition = new Vector(0, 80)
 
         this.textContent = new TextContent('THE SPIKE', Color.GREY)
         this.textContent.font = '60px tahoma'

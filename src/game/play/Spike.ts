@@ -40,8 +40,8 @@ class Spike extends Node {
     }
 
     start(): void {
-        this.showingPosX = Maths.sign(this.transform.position.x) * 200
-        this.hidingPosX = Maths.sign(this.transform.position.x) * 250
+        this.showingPosX = Maths.sign(this.transform.globalPosition.x) * 200
+        this.hidingPosX = Maths.sign(this.transform.globalPosition.x) * 250
     }
 
     public show(): void {

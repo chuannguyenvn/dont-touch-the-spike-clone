@@ -33,8 +33,8 @@ class HorizontalWall extends Wall {
             spike.setParent(this)
 
             const spikeXPos = x
-            const spikeYPos = Maths.sign(this.transform.position.y) * 250
-            spike.transform.position = new Vector(spikeXPos, spikeYPos)
+            const spikeYPos = Maths.sign(this.transform.globalPosition.y) * 250
+            spike.transform.globalPosition = new Vector(spikeXPos, spikeYPos)
             spike.start()
 
             this.spikes.push(spike)

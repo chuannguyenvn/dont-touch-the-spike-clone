@@ -7,6 +7,7 @@
     BUTTON,
     TEXT,
     ANIMATOR,
+    PARTICLE_EMITTER,
 }
 
 export default ComponentType

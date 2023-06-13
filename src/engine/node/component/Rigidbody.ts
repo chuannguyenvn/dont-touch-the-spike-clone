@@ -27,14 +27,14 @@ class Rigidbody extends Component {
         this.ownerTransform = owner.getComponent(ComponentType.TRANSFORM) as Transform
         Physics._registerRigidbody(this)
 
-        this.lastPosition = this.ownerTransform.position.copy()
+        this.lastPosition = this.ownerTransform.globalPosition.copy()
         this.acceleration = Vector.ZERO
     }
 
     public _updatePosition(physicDeltaTime: number): void {
-        const velocity = this.ownerTransform.position.subtract(this.lastPosition)
-        this.lastPosition = this.ownerTransform.position.copy()
-        this.ownerTransform.position = this.ownerTransform.position
+        const velocity = this.ownerTransform.globalPosition.subtract(this.lastPosition)
+        this.lastPosition = this.ownerTransform.globalPosition.copy()
+        this.ownerTransform.globalPosition = this.ownerTransform.globalPosition
             .add(velocity)
             .add(
                 this.acceleration.multiply(
@@ -53,7 +53,7 @@ class Rigidbody extends Component {
     
     public setVelocity(vel: Vector): void
     {
-        this.lastPosition = this.ownerTransform.position.subtract(vel.multiply(Time.deltaTime()))
+        this.lastPosition = this.ownerTransform.globalPosition.subtract(vel.multiply(Time.deltaTime()))
     }
 }
 

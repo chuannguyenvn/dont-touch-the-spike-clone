@@ -16,7 +16,7 @@ class TrailDot extends Node {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.tweenScale(Vector.ONE.multiply(0.2), 0.2, 0, Ease.IN_EXPO, false)
         // Why?
-        this.transform.position = new Vector(position.x, position.y)
+        this.transform.globalPosition = new Vector(position.x, position.y)
 
         const circle = new Circle(8, new Color(0.93, 0.2, 0.38))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer

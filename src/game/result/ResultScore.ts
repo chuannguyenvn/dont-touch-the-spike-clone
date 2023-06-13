@@ -17,7 +17,7 @@ class ResultScore extends Node {
     constructor(name: string) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, 30)
+        this.transform.globalPosition = new Vector(0, 30)
 
         this.textContent = new TextContent('', Color.WHITE)
         this.textContent.font = '30px tahoma'

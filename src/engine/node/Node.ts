@@ -11,6 +11,7 @@ import Text from './component/Text'
 import GUID from '../system/GUID'
 import Rigidbody from './component/Rigidbody'
 import Animator from './component/Animator'
+import ParticleEmitter from "./component/ParticleEmiter"
 
 class Node {
     private _guid: number
@@ -63,7 +64,8 @@ class Node {
 
     public hasComponent(componentType: ComponentType): boolean {
         return (
-            this.components.findIndex((component, _1, _2) => component.type === componentType) !== -1
+            this.components.findIndex((component, _1, _2) => component.type === componentType) !==
+            -1
         )
     }
 
@@ -108,6 +110,9 @@ class Node {
                 break
             case ComponentType.ANIMATOR:
                 newComponent = new Animator(this)
+                break
+            case ComponentType.PARTICLE_EMITTER:
+                newComponent = new ParticleEmitter(this)
                 break
         }
 

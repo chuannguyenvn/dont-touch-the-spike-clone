@@ -18,7 +18,7 @@ class RetryButton extends Node {
 
     init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(0, -150)
+        this.transform.globalPosition = new Vector(0, -150)
 
         const rectangle = new Rectangle(new Vector(200, 100), Color.WHITE)
         this.button = this.addComponent(ComponentType.BUTTON) as Button

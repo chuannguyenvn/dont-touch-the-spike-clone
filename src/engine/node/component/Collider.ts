@@ -29,7 +29,7 @@ class Collider extends Component {
     }
 
     public _getWorldPosition(): Vector {
-        return this._ownerTransform.position.add(this.offset)
+        return this._ownerTransform.globalPosition.add(this.offset)
     }
 
     public _addCollidingCollider(collider: Collider): void {

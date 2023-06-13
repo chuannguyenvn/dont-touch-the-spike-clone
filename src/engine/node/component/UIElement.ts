@@ -24,7 +24,7 @@ class UIElement extends Renderer {
 
     get rect(): Rect {
         const transform = this.owner.getComponent(ComponentType.TRANSFORM) as Transform
-        return new Rect(transform.position, this.elementSize)
+        return new Rect(transform.globalPosition, this.elementSize)
     }
 
     public _draw(): void {

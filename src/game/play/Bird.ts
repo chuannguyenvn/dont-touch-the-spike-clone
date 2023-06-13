@@ -43,9 +43,9 @@ class Bird extends Node {
 
     public init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = new Vector(50, 100)
+        this.transform.globalPosition = new Vector(0, 0)
         this.lastJumpTime = Time.timeSinceGameStart()
-        this.lastJumpPosY = this.transform.position.y
+        this.lastJumpPosY = this.transform.globalPosition.y
 
         this.collider = this.addComponent(ComponentType.RECTANGLE_COLLIDER) as RectangleCollider
         this.collider.size = new Vector(20, 20)
@@ -87,7 +87,9 @@ class Bird extends Node {
         if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
 
         const elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
-        this.transform.position.y = this.jumpYFunction(elapsedJumpTime)
+        this.transform.globalPosition = this.transform.globalPosition.withY(
+            this.jumpYFunction(elapsedJumpTime)
+        )
 
         this.jumpSpriteTimer -= Time.deltaTime()
         if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
@@ -110,7 +112,7 @@ class Bird extends Node {
     private gameStateChangedHandler(gameState: GameState): void {
         if (gameState === GameState.WELCOME) {
             this.isLocked = true
-            this.transform.position.x = 0
+            this.transform.globalPosition = this.transform.globalPosition.withX(0)
             if (this.dieSaturationTween) this.dieSaturationTween.end()
             this.glideSprite.saturation = 70
         } else if (gameState === GameState.PLAY) {
@@ -124,9 +126,13 @@ class Bird extends Node {
 
     private move(): void {
         if (this.isMovingRight) {
-            this.transform.position.x += Time.deltaTime() * this.moveSpeed
+            this.transform.globalPosition = this.transform.globalPosition.withX(
+                this.transform.globalPosition.x + Time.deltaTime() * this.moveSpeed
+            )
         } else {
-            this.transform.position.x -= Time.deltaTime() * this.moveSpeed
+            this.transform.globalPosition = this.transform.globalPosition.withX(
+                this.transform.globalPosition.x - Time.deltaTime() * this.moveSpeed
+            )
         }
     }
 
@@ -134,7 +140,7 @@ class Bird extends Node {
         if (!this.isAlive) return
         this.renderer.setDrawable(this.jumpSprite)
         this.lastJumpTime = Time.timeSinceGameStart()
-        this.lastJumpPosY = this.transform.position.y
+        this.lastJumpPosY = this.transform.globalPosition.y
         this.jumpSpriteTimer = this.jumpSpriteTimeout
     }
 
@@ -164,7 +170,9 @@ class Bird extends Node {
             this.renderer.setDrawable(this.glideSprite)
         else this.renderer.setDrawable(this.jumpSprite)
 
-        this.transform.position.y = Math.sin(Time.timeSinceGameStart()) * 20 - 10
+        this.transform.globalPosition = this.transform.globalPosition.withY(
+            Math.sin(Time.timeSinceGameStart()) * 20 - 10
+        )
     }
 
     private handleSpawnTrailDot(): void {
@@ -173,7 +181,7 @@ class Bird extends Node {
 
         this.trailDotSpawnTimer -= Time.deltaTime()
         if (this.trailDotSpawnTimer < 0) {
-            const trailDot = new TrailDot('Dot', this.transform.position)
+            const trailDot = new TrailDot('Dot', this.transform.globalPosition)
             trailDot.start()
             this.trailDotSpawnTimer = this.trailDotSpawnTimeout
         }

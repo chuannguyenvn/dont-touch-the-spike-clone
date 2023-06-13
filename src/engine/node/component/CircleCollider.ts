@@ -18,7 +18,7 @@ class CircleCollider extends Collider {
     }
 
     public AABB(): Rect {
-        const position = this._ownerTransform.position
+        const position = this._ownerTransform.globalPosition
         return new Rect(position.add(this.offset), Vector.ONE.multiply(2))
     }
 }
