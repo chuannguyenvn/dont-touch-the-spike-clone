@@ -217,7 +217,8 @@ class BirdGame extends Game {
             new LineShape(
                 [new Vector(0, 0), new Vector(100, 0), new Vector(100, 100)],
                 Color.BLACK,
-                10
+                10,
+                [5, 15]
             )
         )
 

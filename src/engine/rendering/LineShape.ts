@@ -9,16 +9,19 @@ class LineShape implements Drawable {
     public width: number
     public offSet: Vector
     public path: Vector[]
+    public dashPattern: number[]
 
-    constructor(path: Vector[], color: Color, width: number) {
+    constructor(path: Vector[], color: Color, width: number, dashPattern: number[] = []) {
         this.path = path
         this.color = color
         this.width = width
+        this.dashPattern = dashPattern
     }
 
     public _draw(): void {
         Canvas._canvasContext.strokeStyle = this.color.toString()
         Canvas._canvasContext.lineWidth = this.width
+        Canvas._canvasContext.setLineDash(this.dashPattern)
 
         Canvas._canvasContext.beginPath()
         Canvas._canvasContext.moveTo(this.path[0].x, this.path[0].y)
