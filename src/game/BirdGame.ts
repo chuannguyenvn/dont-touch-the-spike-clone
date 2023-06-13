@@ -16,7 +16,10 @@ import Text from '../engine/node/component/Text'
 import Renderer from '../engine/node/component/Renderer'
 import Circle from '../engine/rendering/Circle'
 import CircleCollider from '../engine/node/component/CircleCollider'
-import BirdAnimator from "./BirdAnimator"
+import BirdAnimator from './BirdAnimator'
+import Maths from '../engine/math/Maths'
+import DrawLayer from '../engine/configs-and-resources/DrawLayers'
+import CollisionLayers from '../engine/configs-and-resources/CollisionLayers'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -162,12 +165,26 @@ class BirdGame extends Game {
     private static spawnBall(ball: Ball) {
         const hue = (Time.timeSinceGameStart() % 20) / 20
 
-        ball.setColor(Color.fromHsv(hue, 0.6, 0.5))
         ball.setPosition(Vector.UP.multiply(200))
-        ball.setSize((Math.sin(Time.timeSinceGameStart()) + 3) * 5)
+        ball.setSize((Math.sin(Time.timeSinceGameStart() * 2.5) + 3) * 5)
         ball.setVelocity(
             Vector.ANGLE_UNIT(Math.sin(Time.timeSinceGameStart()) * 90 - 90).multiply(200)
         )
+
+        ball.setColor(Color.fromHsv(hue, 0.6, 0.5))
+
+        // ball.rigidbody.collisionLayer = CollisionLayers.IGNORE
+        // const rand = Maths.randomRangeInt(0, 3)
+        // if (rand === 0) {
+        //     ball.setColor(Color.RED)
+        //     ball.renderer.drawLayer = DrawLayer.RED
+        // } else if (rand === 1) {
+        //     ball.setColor(Color.GREEN)
+        //     ball.renderer.drawLayer = DrawLayer.GREEN
+        // } else {
+        //     ball.setColor(Color.BLUE)
+        //     ball.renderer.drawLayer = DrawLayer.BLUE
+        // }
     }
 }
 

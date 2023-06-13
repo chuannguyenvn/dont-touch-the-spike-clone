@@ -14,12 +14,12 @@ class BirdAnimator extends Node {
         super(name)
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.position = Vector.LEFT.multiply(200)
+        this.transform.position = Vector.LEFT.multiply(500)
         
         const jumpSprite = Resource.getSprite(SpriteType.BIRD_JUMP)
         const glideSprite = Resource.getSprite(SpriteType.BIRD_GLIDE)
-        jumpSprite.scale = Vector.ONE.multiply(0.5)
-        glideSprite.scale = Vector.ONE.multiply(0.5)
+        jumpSprite.scale = Vector.ONE.multiply(0.3)
+        glideSprite.scale = Vector.ONE.multiply(0.3)
         this.animator = this.addComponent(ComponentType.ANIMATOR) as Animator
         this.animator.setSprites([jumpSprite, glideSprite])
         this.animator.framesPerSecond = 10
