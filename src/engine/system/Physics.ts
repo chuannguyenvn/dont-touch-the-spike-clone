@@ -5,7 +5,8 @@ import Vector from '../math/Vector'
 import Rigidbody from '../node/component/Rigidbody'
 import Time from './Time'
 import ComponentType from '../node/component/ComponentType'
-import CollisionLayers from "../configs-and-resources/CollisionLayers"
+import CollisionLayers from '../configs-and-resources/CollisionLayers'
+import Matrix from '../math/Matrix'
 
 class Physics {
     public static gravity: Vector = new Vector(0, -9.8)
@@ -21,6 +22,9 @@ class Physics {
     }
 
     public static _registerRigidbody(rigidbody: Rigidbody): void {
+        this._colliders = this._colliders.filter(
+            (collider) => collider.owner.getGuid() !== rigidbody.owner.getGuid()
+        )
         this._rigidbodies.push(rigidbody)
     }
 
@@ -56,19 +60,20 @@ class Physics {
     }
 
     private static _solveCollision(deltaTime: number): void {
-        for (let i = 0; i < this._rigidbodies.length; i++) {
+        for (let i = 0; i < Physics._rigidbodies.length; i++) {
             if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
                 continue
-            
-            const rigidbody1 = this._rigidbodies[i]
+
+            const rigidbody1 = Physics._rigidbodies[i]
             if (rigidbody1.collisionLayer === CollisionLayers.IGNORE) continue
 
-            for (let j = i + 1; j < this._rigidbodies.length; j++) {
+            // Rigidbody - rigidbody solution
+            for (let j = i + 1; j < Physics._rigidbodies.length; j++) {
                 if (!Physics._rigidbodies[j].isActive || !Physics._rigidbodies[j].owner.isActive)
                     continue
-                
-                const rigidbody2 = this._rigidbodies[j]
-                if (rigidbody1.collisionLayer !==rigidbody2.collisionLayer) continue
+
+                const rigidbody2 = Physics._rigidbodies[j]
+                if (rigidbody1.collisionLayer !== rigidbody2.collisionLayer) continue
 
                 const circleCollider1 = rigidbody1.owner.getComponent(
                     ComponentType.CIRCLE_COLLIDER
@@ -97,6 +102,79 @@ class Physics {
                 circleCollider2._ownerTransform.position = position2.subtract(
                     axis.multiply(massRatio1 * responseCoef)
                 )
+
+                this._broadcastCollision(circleCollider1, circleCollider2)
+            }
+
+            // Rigidbody - collider solution
+            for (let j = 0; j < Physics._colliders.length; j++) {
+                if (Physics._colliders[j].type === ComponentType.CIRCLE_COLLIDER) {
+                    const circleCollider1 = rigidbody1.owner.getComponent(
+                        ComponentType.CIRCLE_COLLIDER
+                    ) as CircleCollider
+                    const circleCollider2 = Physics._colliders[j] as CircleCollider
+
+                    const position1 = circleCollider1._ownerTransform.position.copy()
+                    const position2 = circleCollider2._ownerTransform.position.copy()
+                    const distance = Vector.distance(position1, position2)
+                    const minDistance =
+                        circleCollider1.radius * circleCollider1._ownerTransform.scale.x +
+                        circleCollider2.radius * circleCollider2._ownerTransform.scale.x
+
+                    if (distance > minDistance) continue
+
+                    const axis = position1.subtract(position2).normalized()
+
+                    const responseCoef = (minDistance - distance) * 0.5
+
+                    circleCollider1._ownerTransform.position = position1.add(
+                        axis.multiply(responseCoef)
+                    )
+
+                    this._broadcastCollision(circleCollider1, circleCollider2)
+                } else if (Physics._colliders[j].type === ComponentType.RECTANGLE_COLLIDER) {
+                    const circleCollider = rigidbody1.owner.getComponent(
+                        ComponentType.CIRCLE_COLLIDER
+                    ) as CircleCollider
+                    const rectangleCollider = Physics._colliders[j] as RectangleCollider
+
+                    const circlePosition = circleCollider._ownerTransform.position.copy()
+                    const rectanglePosition = rectangleCollider._ownerTransform.position.copy()
+
+                    const rectangleRotation = rectangleCollider._ownerTransform.rotation
+                    const circlePositionRelative = Matrix.rotate(-rectangleRotation).multiplyVector(
+                        circlePosition.subtract(rectanglePosition)
+                    )
+
+                    const xDiff =
+                        Math.abs(circlePositionRelative.x) -
+                        circleCollider.radius -
+                        rectangleCollider.size.x / 2
+                    const yDiff =
+                        Math.abs(circlePositionRelative.y) -
+                        circleCollider.radius -
+                        rectangleCollider.size.y / 2
+
+                    if (xDiff >= 0 || yDiff >= 0) continue
+
+                    let axis = Vector.ZERO
+                    let responseCoef = 0
+                    if (xDiff < yDiff) {
+                        axis = circlePositionRelative.y > 0 ? Vector.UP : Vector.DOWN
+                        responseCoef = Math.abs(yDiff)
+                    } else {
+                        axis = circlePositionRelative.x > 0 ? Vector.RIGHT : Vector.LEFT
+                        responseCoef = Math.abs(xDiff)
+                    }
+
+                    axis = Matrix.rotate(rectangleRotation).multiplyVector(axis)
+                    
+                    circleCollider._ownerTransform.position = circlePosition.add(
+                        axis.multiply(responseCoef)
+                    )
+
+                    this._broadcastCollision(circleCollider, rectangleCollider)
+                }
             }
         }
     }

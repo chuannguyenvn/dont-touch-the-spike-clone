@@ -195,6 +195,13 @@ class Matrix {
                 this.values[2][2] * vector.z
         )
     }
+    
+    public toString(): string
+    {
+        return `[${this.values[0][0]}, ${this.values[0][1]}, ${this.values[0][2]}],
+            [${this.values[1][0]}, ${this.values[1][1]}, ${this.values[1][2]}],
+            [${this.values[2][0]}, ${this.values[2][1]}, ${this.values[2][2]}]`
+    }
 }
 
 export default Matrix

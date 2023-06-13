@@ -17,9 +17,9 @@ import Renderer from '../engine/node/component/Renderer'
 import Circle from '../engine/rendering/Circle'
 import CircleCollider from '../engine/node/component/CircleCollider'
 import BirdAnimator from './BirdAnimator'
-import Maths from '../engine/math/Maths'
-import DrawLayer from '../engine/configs-and-resources/DrawLayers'
-import CollisionLayers from '../engine/configs-and-resources/CollisionLayers'
+import Transform from '../engine/node/component/Transform'
+import Rectangle from '../engine/rendering/Rectangle'
+import RectangleCollider from '../engine/node/component/RectangleCollider'
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -146,12 +146,12 @@ class BirdGame extends Game {
         const transform = parentNode.addComponent(ComponentType.TRANSFORM)
         const transform2 = childNode.addComponent(ComponentType.TRANSFORM)
 
-        const circle = new Circle(30, Color.WHITE)
+        let circle = new Circle(30, Color.WHITE)
         const renderer = parentNode.addComponent(ComponentType.RENDERER) as Renderer
         renderer.setDrawable(circle)
 
         const textContent = new TextContent('Yo')
-        textContent.font = "25px verdana"
+        textContent.font = '25px verdana'
         const text = childNode.addComponent(ComponentType.TEXT) as Text
         text.setDrawable(textContent)
         text.drawOrder = 1000
@@ -161,6 +161,47 @@ class BirdGame extends Game {
         ) as CircleCollider
         circleCollider.radius = 30
         parentNode.addComponent(ComponentType.RIGIDBODY)
+
+        circle = new Circle(50, Color.WHITE)
+        const staticCircle = new Node('AAA')
+        const staticCircleTransform = staticCircle.addComponent(
+            ComponentType.TRANSFORM
+        ) as Transform
+        staticCircleTransform.position = new Vector(-200, -50)
+        const staticCircleCollider = staticCircle.addComponent(
+            ComponentType.CIRCLE_COLLIDER
+        ) as CircleCollider
+        staticCircleCollider.radius = 50
+        const staticCircleRenderer = staticCircle.addComponent(ComponentType.RENDERER) as Renderer
+        staticCircleRenderer.setDrawable(circle)
+
+        const staticCircle2 = new Node('AAA')
+        const staticCircle2Transform = staticCircle2.addComponent(
+            ComponentType.TRANSFORM
+        ) as Transform
+        staticCircle2Transform.position = new Vector(200, -50)
+        const staticCircle2Collider = staticCircle2.addComponent(
+            ComponentType.CIRCLE_COLLIDER
+        ) as CircleCollider
+        staticCircle2Collider.radius = 50
+        const staticCircle2Renderer = staticCircle2.addComponent(ComponentType.RENDERER) as Renderer
+        staticCircle2Renderer.setDrawable(circle)
+        
+        const rectangle = new Rectangle(new Vector(100, 100), Color.WHITE)
+        const staticRectangle = new Node('AAA')
+        const staticRectangleTransform = staticRectangle.addComponent(
+            ComponentType.TRANSFORM
+        ) as Transform
+        staticRectangleTransform.position = new Vector(0, -150)
+        staticRectangleTransform.rotation = 45
+        const staticRectangleCollider = staticRectangle.addComponent(
+            ComponentType.RECTANGLE_COLLIDER
+        ) as RectangleCollider
+        staticRectangleCollider.size = new Vector(100, 100)
+        const staticRectangleRenderer = staticRectangle.addComponent(
+            ComponentType.RENDERER
+        ) as Renderer
+        staticRectangleRenderer.setDrawable(rectangle)
     }
 
     private static spawnBall(ball: Ball) {
