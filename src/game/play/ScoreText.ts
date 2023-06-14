@@ -27,13 +27,13 @@ class ScoreText extends Node {
         this.isVisible = false
         this.isActive = false
         
-        BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
+        BirdGame.stateMachine.configure(GameState.WELCOME).onExit(this.getGuid(), () => {
             this.textContent.text = '0'
             this.isVisible = true
             this.isActive = true
         })
 
-        BirdGame.stateMachine.configure(GameState.PLAY).onExit(this.getGuid(), () => {
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = false
             this.isActive = false
         })
