@@ -1,6 +1,8 @@
 ﻿enum GameState {
+    INIT,
     WELCOME,
     PLAY,
+    PAUSE,
     RESULT,
 }
 

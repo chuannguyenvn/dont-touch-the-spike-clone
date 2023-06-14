@@ -82,7 +82,19 @@ class Bird extends Node {
 
         this.turnRight()
 
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
+            this.isLocked = true
+            this.transform.globalPosition = this.transform.globalPosition.withX(0)
+            if (this.dieSaturationTween) this.dieSaturationTween.end()
+            this.glideSprite.saturation = 70
+        })
+
+        BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
+            this.glideSprite.saturation = 70
+            this.isAlive = true
+            this.isLocked = false
+            this.jump()
+        })
     }
 
     public update(): void {
@@ -103,7 +115,7 @@ class Bird extends Node {
         if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
 
         this.handleSpawnTrailDot()
-        
+
         if (Input.getKeyDown('z')) Time.isPaused = true
         if (Input.getKeyUp('z')) Time.isPaused = false
     }
@@ -119,21 +131,7 @@ class Bird extends Node {
         this.jumpSprite.flipX = true
         this.glideSprite.flipX = true
     }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.WELCOME) {
-            this.isLocked = true
-            this.transform.globalPosition = this.transform.globalPosition.withX(0)
-            if (this.dieSaturationTween) this.dieSaturationTween.end()
-            this.glideSprite.saturation = 70
-        } else if (gameState === GameState.PLAY) {
-            this.glideSprite.saturation = 70
-            this.isAlive = true
-            this.isLocked = false
-            this.jump()
-        } else if (gameState === GameState.RESULT) {
-        }
-    }
+    
 
     private move(): void {
         if (this.isMovingRight) {
@@ -166,7 +164,7 @@ class Bird extends Node {
             else this.touchedLeftWall.invoke()
         } else if (collider.owner.name === 'Spike') {
             this.isAlive = false
-            BirdGame.changeState(GameState.RESULT)
+            BirdGame.stateMachine.changeState(GameState.RESULT)
             // this.dieSaturationTween = this.glideSprite.tweenSaturation(0, 0.2, 0, Ease.LINEAR, false)
         }
     }

@@ -1,8 +1,6 @@
 ﻿import { ParamGameEvent } from '../engine/utility/Event'
 import GameState from './GameState'
 import Game from '../engine/Game'
-import Time from '../engine/system/Time'
-import Color from '../engine/math/Color'
 import Vector from '../engine/math/Vector'
 import HorizontalWall from './play/HorizontalWall'
 import GameBackground from './GameBackground'
@@ -16,14 +14,16 @@ import ResultBackground from './result/ResultBackground'
 import ResultScore from './result/ResultScore'
 import HighScore from './result/HighScore'
 import RetryButton from './result/RetryButton'
+import PauseButton from './play/PauseButton'
+import StateMachine from '../engine/utility/StateMachine'
 
 class BirdGame extends Game {
     public static highScore = 0
     public static scoreChanged: ParamGameEvent<number> = new ParamGameEvent<number>()
-    public static gameState: GameState = GameState.WELCOME
-    public static gameStateChanged: ParamGameEvent<GameState> = new ParamGameEvent<GameState>()
-
     private static _currentScore = 0
+    public static stateMachine: StateMachine<GameState> = new StateMachine<GameState>(
+        GameState.INIT
+    )
 
     static get currentScore(): number {
         return BirdGame._currentScore
@@ -33,25 +33,13 @@ class BirdGame extends Game {
         BirdGame._currentScore = value
         BirdGame.scoreChanged.invoke(value)
     }
-
-    public static changeState(newState: GameState): void {
-        BirdGame.gameState = newState
-        BirdGame.gameStateChanged.invoke(newState)
-    }
-
-    public static stateChangeHandler(gameState: GameState): void {
-        if (gameState === GameState.WELCOME) {
-            BirdGame.currentScore = 0
-        } else if (gameState === GameState.PLAY) {
-            //
-        } else if (gameState === GameState.RESULT) {
+    
+    public static init(): void {
+        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(-1, () => BirdGame.currentScore = 0)
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(-1, () => {
             if (BirdGame.highScore < BirdGame._currentScore)
                 BirdGame.highScore = BirdGame._currentScore
-        }
-    }
-
-    public static init(): void {
-        BirdGame.gameStateChanged.subscribe(BirdGame.stateChangeHandler.bind(BirdGame))
+        })
 
         const gameBackground = new GameBackground('Game Background')
         gameBackground.start()
@@ -101,6 +89,9 @@ class BirdGame extends Game {
         const playButton = new PlayButton('Play Button')
         playButton.start()
 
+        const pauseButton = new PauseButton('Pause Button')
+        pauseButton.start()
+
         const resultBackground = new ResultBackground('Result Background')
         resultBackground.start()
 
@@ -113,7 +104,7 @@ class BirdGame extends Game {
         const retryButton = new RetryButton('Retry Button')
         retryButton.start()
 
-        BirdGame.changeState(GameState.WELCOME)
+        BirdGame.stateMachine.changeState(GameState.WELCOME)
     }
 }
 

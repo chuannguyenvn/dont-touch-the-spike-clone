@@ -22,17 +22,18 @@ class ResultBackground extends Node {
         this.renderer.setDrawable(rectangle)
         this.renderer.drawOrder = 100
 
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.RESULT) {
-            this.isActive = true
+        this.isVisible = false
+        this.isActive = false
+        
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
-        } else {
-            this.isActive = false
+            this.isActive = true
+        })
+
+        BirdGame.stateMachine.configure(GameState.RESULT).onExit(this.getGuid(), () => {
             this.isVisible = false
-        }
+            this.isActive = false
+        })
     }
 }
 

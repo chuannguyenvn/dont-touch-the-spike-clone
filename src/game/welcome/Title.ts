@@ -26,17 +26,15 @@ class Title extends Node {
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = 200
 
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.WELCOME) {
+        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true
-        } else {
+        })
+
+        BirdGame.stateMachine.configure(GameState.WELCOME).onExit(this.getGuid(), () => {
             this.isVisible = false
             this.isActive = false
-        }
+        })
     }
 }
 
@@ -57,18 +55,16 @@ class TitleBottom extends Node {
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = 200
 
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.WELCOME) {
+        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true
-        } else {
+        })
+
+        BirdGame.stateMachine.configure(GameState.WELCOME).onExit(this.getGuid(), () => {
             this.isVisible = false
             this.isActive = false
-        }
+        })
     }
 }
 
-export {Title, TitleBottom}
+export { Title, TitleBottom }

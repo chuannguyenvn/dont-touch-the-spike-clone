@@ -8,7 +8,10 @@ import GameState from '../GameState'
 class VerticalWall extends Wall {
     constructor(name: string) {
         super(name)
-        BirdGame.gameStateChanged.subscribe(this.stateChangedHandler.bind(this))
+        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
+            this.hideSpike()
+            this.showSpike()
+        })
     }
 
     public start(): void {
@@ -37,13 +40,6 @@ class VerticalWall extends Wall {
         this.collider.isActive = false
         for (let i = 0; i < this.spikes.length; i++) {
             this.spikes[i].hide()
-        }
-    }
-
-    private stateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.WELCOME) {
-            this.hideSpike()
-            this.showSpike()
         }
     }
 

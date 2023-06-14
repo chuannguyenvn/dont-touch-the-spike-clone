@@ -23,22 +23,24 @@ class ScoreText extends Node {
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = -1
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
+
+        this.isVisible = false
+        this.isActive = false
+        
+        BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
+            this.textContent.text = '0'
+            this.isVisible = true
+            this.isActive = true
+        })
+
+        BirdGame.stateMachine.configure(GameState.PLAY).onExit(this.getGuid(), () => {
+            this.isVisible = false
+            this.isActive = false
+        })
     }
 
     public changeScore(score: number): void {
         this.textContent.text = score.toString()
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState === GameState.PLAY) {
-            this.textContent.text = '0'
-            this.isVisible = true
-            this.isActive = true
-        } else {
-            this.isVisible = false
-            this.isActive = false
-        }
     }
 }
 

@@ -21,17 +21,17 @@ class ScoreBackground extends Node {
         this.renderer.setDrawable(circle)
         this.renderer.drawOrder = -2
 
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.PLAY) {
+        this.isVisible = false
+        this.isActive = false
+        
+        BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true
-        } else {
+        })
+        BirdGame.stateMachine.configure(GameState.PLAY).onExit(this.getGuid(), () => {
             this.isVisible = false
             this.isActive = false
-        }
+        })
     }
 }
 

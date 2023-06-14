@@ -31,22 +31,23 @@ class RetryButton extends Node {
         this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(textContent)
 
+        this.isVisible = false
+        this.isActive = false
+        
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.RESULT) {
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true
-        } else {
+        })
+
+        BirdGame.stateMachine.configure(GameState.RESULT).onExit(this.getGuid(), () => {
             this.isVisible = false
             this.isActive = false
-        }
+        })
     }
 
     private changeToPlayState(): void {
-        BirdGame.changeState(GameState.WELCOME)
+        BirdGame.stateMachine.changeState(GameState.WELCOME)
     }
 }
 

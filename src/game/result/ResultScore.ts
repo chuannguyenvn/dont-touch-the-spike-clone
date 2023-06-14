@@ -26,18 +26,19 @@ class ResultScore extends Node {
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = 200
 
-        BirdGame.gameStateChanged.subscribe(this.gameStateChangedHandler.bind(this))
-    }
-
-    private gameStateChangedHandler(gameState: GameState): void {
-        if (gameState == GameState.RESULT) {
+        this.isVisible = false
+        this.isActive = false
+        
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true
             this.textContent.text = `Current score: ${BirdGame.currentScore}`
-        } else {
+        })
+
+        BirdGame.stateMachine.configure(GameState.RESULT).onExit(this.getGuid(), () => {
             this.isVisible = false
             this.isActive = false
-        }
+        })
     }
 }
 
