@@ -10,21 +10,26 @@ import Resource from '../../engine/system/Resource'
 import SpriteType from '../../engine/configs-and-resources/SpriteTypes'
 import DrawLayer from '../../engine/configs-and-resources/DrawLayers'
 import Time from '../../engine/system/Time'
+import Sprite from '../../engine/rendering/Sprite'
 
 class PauseButton extends Node {
     public transform: Transform
     public button: UIButton
     private isPausing: boolean = false
+    private pauseSprite: Sprite
+    private playSprite: Sprite
 
     init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.globalPosition = new Vector(-175, 275)
 
-        const pauseSprite = Resource.getSprite(SpriteType.PAUSE)
-        pauseSprite.scale = Vector.ONE.multiply(0.2)
+        this.pauseSprite = Resource.getSprite(SpriteType.PAUSE)
+        this.pauseSprite.scale = Vector.ONE.multiply(0.2)
+        this.playSprite = Resource.getSprite(SpriteType.PLAY)
+        this.playSprite.scale = Vector.ONE.multiply(0.2)
         this.button = this.addComponent(ComponentType.BUTTON) as UIButton
         this.button.elementSize = new Vector(50, 50)
-        this.button.setDrawable(pauseSprite)
+        this.button.setDrawable(this.pauseSprite)
         this.button.pivot = Alignment.MID_CENTER
         this.button.drawLayer = DrawLayer.UI
 
@@ -52,8 +57,10 @@ class PauseButton extends Node {
         this.isPausing = !this.isPausing
         if (this.isPausing) {
             BirdGame.stateMachine.changeState(GameState.PAUSE)
+            this.button.setDrawable(this.playSprite)
         } else {
             BirdGame.stateMachine.changeState(GameState.PLAY)
+            this.button.setDrawable(this.pauseSprite)
         }
     }
 }
