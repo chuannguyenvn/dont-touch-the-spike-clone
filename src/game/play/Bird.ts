@@ -4,7 +4,7 @@ import Sprite from '../../engine/rendering/Sprite'
 import Renderer from '../../engine/node/component/Renderer'
 import Transform from '../../engine/node/component/Transform'
 import Vector from '../../engine/math/Vector'
-import Input from "../../engine/system/Input"
+import Input from '../../engine/system/Input'
 import Time from '../../engine/system/Time'
 import RectangleCollider from '../../engine/node/component/RectangleCollider'
 import Collider from '../../engine/node/component/Collider'
@@ -13,6 +13,7 @@ import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 import TrailDot from './TrailDot'
 import Tween from '../../engine/utility/tween/Tween'
+import ParticleEmitter from '../../engine/node/component/ParticleEmiter'
 
 class Bird extends Node {
     public touchedLeftWall: GameEvent
@@ -22,6 +23,7 @@ class Bird extends Node {
     public transform: Transform
     public collider: RectangleCollider
     public renderer: Renderer
+    public particleEmitter: ParticleEmitter
 
     private isLocked = true
     private isAlive = true
@@ -56,6 +58,12 @@ class Bird extends Node {
         this.renderer.setDrawable(sprite)
         this.renderer.drawOrder = 5
 
+        this.particleEmitter = this.addComponent(ComponentType.PARTICLE_EMITTER) as ParticleEmitter
+        // this.particleEmitter.init(100)
+        // this.particleEmitter.setCount(100)
+        // this.particleEmitter.setVelocityMagnitude(10)
+        // this.particleEmitter.play()
+        
         this.touchedLeftWall = new GameEvent()
         this.touchedRightWall = new GameEvent()
         this.touchedLeftWall.subscribe(this.turnRight.bind(this))

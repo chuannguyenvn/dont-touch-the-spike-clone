@@ -12,8 +12,9 @@ import GUID from '../utility/GUID'
 import Rigidbody from './component/Rigidbody'
 import Animator from './component/Animator'
 import ParticleEmitter from './component/ParticleEmiter'
+import GameElement from './GameElement'
 
-class Node {
+class Node implements GameElement {
     public name: string
     public isActive = true
     public isVisible = true

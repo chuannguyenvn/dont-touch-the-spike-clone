@@ -21,6 +21,18 @@ import RectangleShape from '../engine/rendering/RectangleShape'
 import RectangleCollider from '../engine/node/component/RectangleCollider'
 import UIText from '../engine/node/component/UIText'
 import LineShape from '../engine/rendering/LineShape'
+import HorizontalWall from "./play/HorizontalWall"
+import GameBackground from "./GameBackground"
+import {Title, TitleBottom} from "./welcome/Title"
+import Bird from "./play/Bird"
+import VerticalWall from "./play/VerticalWall"
+import ScoreBackground from "./play/ScoreBackground"
+import ScoreText from "./play/ScoreText"
+import PlayButton from "./welcome/PlayButton"
+import ResultBackground from "./result/ResultBackground"
+import ResultScore from "./result/ResultScore"
+import HighScore from "./result/HighScore"
+import RetryButton from "./result/RetryButton"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -56,171 +68,171 @@ class BirdGame extends Game {
     }
 
     public static init(): void {
-        // BirdGame.gameStateChanged.subscribe(BirdGame.stateChangeHandler.bind(BirdGame))
-        //
-        // const gameBackground = new GameBackground('Game Background')
-        // gameBackground.start()
-        //
-        // const titleTop = new Title('Title')
-        // titleTop.start()
-        //
-        // const titleBottom = new TitleBottom('Title')
-        // titleBottom.start()
-        //
-        // const bird = new Bird('Main Bird')
-        // bird.start()
-        //
-        // const leftWall = new VerticalWall('Wall')
-        // leftWall.transform.globalPosition = new Vector(-250, 0)
-        // leftWall.start()
-        //
-        // const rightWall = new VerticalWall('Wall')
-        // rightWall.transform.globalPosition = new Vector(250, 0)
-        // rightWall.start()
-        //
-        // bird.touchedLeftWall.subscribe(() => {
-        //     leftWall.hideSpike()
-        //     rightWall.showSpike()
-        // })
-        //
-        // bird.touchedRightWall.subscribe(() => {
-        //     rightWall.hideSpike()
-        //     leftWall.showSpike()
-        // })
-        //
-        // const topWall = new HorizontalWall('Top Wall')
-        // topWall.transform.globalPosition = new Vector(0, 300)
-        // topWall.start()
-        //
-        // const bottomWall = new HorizontalWall('Bottom Wall')
-        // bottomWall.transform.globalPosition = new Vector(0, -300)
-        // bottomWall.start()
-        //
-        // const scoreBackground = new ScoreBackground('Score Background')
-        // scoreBackground.start()
-        //
-        // const scoreText = new ScoreText('Score Text')
-        // bird.scoreChanged.subscribe(scoreText.changeScore.bind(scoreText))
-        // scoreText.start()
-        //
-        // const playButton = new PlayButton('Play Button')
-        // playButton.start()
-        //
-        // const resultBackground = new ResultBackground('Result Background')
-        // resultBackground.start()
-        //
-        // const resultScore = new ResultScore('Result Score')
-        // resultScore.start()
-        //
-        // const highScore = new HighScore('High Score')
-        // highScore.start()
-        //
-        // const retryButton = new RetryButton('Retry Button')
-        // retryButton.start()
-        //
-        // BirdGame.changeState(GameState.WELCOME)
+        BirdGame.gameStateChanged.subscribe(BirdGame.stateChangeHandler.bind(BirdGame))
 
-        let activeObjectCount = 0
-        const pool = new ObjectPool<Ball>(() => new Ball('Ball'), 500)
-        new Timer(
-            () => {
-                const ball = pool.getObject()
-                BirdGame.spawnBall(ball)
-                new Timer(() => {
-                    ball.transform.tweenScale(Vector.ZERO, 1, 0, Ease.IN_SINE, false, () => {
-                        pool.returnObject(ball)
-                        activeObjectCount--
-                    })
-                }, 15)
-                activeObjectCount++
-            },
-            0,
-            -1,
-            0.05
-        )
+        const gameBackground = new GameBackground('Game Background')
+        gameBackground.start()
 
-        new CollisionBackground('A')
+        const titleTop = new Title('Title')
+        titleTop.start()
 
-        new BirdAnimator('Byrd')
+        const titleBottom = new TitleBottom('Title')
+        titleBottom.start()
 
-        const parentNode = new Node('Yo')
-        const childNode = new Node('AAAA')
-        parentNode.addChild(childNode)
+        const bird = new Bird('Main Bird')
+        bird.start()
 
-        const transform = parentNode.addComponent(ComponentType.TRANSFORM)
-        const transform2 = childNode.addComponent(ComponentType.TRANSFORM)
+        const leftWall = new VerticalWall('Wall')
+        leftWall.transform.globalPosition = new Vector(-250, 0)
+        leftWall.start()
 
-        let circle = new CircleShape(30, Color.WHITE)
-        const renderer = parentNode.addComponent(ComponentType.RENDERER) as Renderer
-        renderer.setDrawable(circle)
+        const rightWall = new VerticalWall('Wall')
+        rightWall.transform.globalPosition = new Vector(250, 0)
+        rightWall.start()
 
-        const textContent = new TextContent('Yo')
-        textContent.font = '25px verdana'
-        const text = childNode.addComponent(ComponentType.TEXT) as UIText
-        text.setDrawable(textContent)
-        text.drawOrder = 1000
+        bird.touchedLeftWall.subscribe(() => {
+            leftWall.hideSpike()
+            rightWall.showSpike()
+        })
 
-        parentNode.update = () => {
-            textContent.text = activeObjectCount.toString()
-        }
+        bird.touchedRightWall.subscribe(() => {
+            rightWall.hideSpike()
+            leftWall.showSpike()
+        })
 
-        const circleCollider = parentNode.addComponent(
-            ComponentType.CIRCLE_COLLIDER
-        ) as CircleCollider
-        circleCollider.radius = 30
-        parentNode.addComponent(ComponentType.RIGIDBODY)
+        const topWall = new HorizontalWall('Top Wall')
+        topWall.transform.globalPosition = new Vector(0, 300)
+        topWall.start()
 
-        circle = new CircleShape(50, Color.WHITE)
-        const staticCircle = new Node('AAA')
-        const staticCircleTransform = staticCircle.addComponent(
-            ComponentType.TRANSFORM
-        ) as Transform
-        staticCircleTransform.globalPosition = new Vector(-200, -50)
-        const staticCircleCollider = staticCircle.addComponent(
-            ComponentType.CIRCLE_COLLIDER
-        ) as CircleCollider
-        staticCircleCollider.radius = 50
-        const staticCircleRenderer = staticCircle.addComponent(ComponentType.RENDERER) as Renderer
-        staticCircleRenderer.setDrawable(circle)
+        const bottomWall = new HorizontalWall('Bottom Wall')
+        bottomWall.transform.globalPosition = new Vector(0, -300)
+        bottomWall.start()
 
-        const staticCircle2 = new Node('AAA')
-        const staticCircle2Transform = staticCircle2.addComponent(
-            ComponentType.TRANSFORM
-        ) as Transform
-        staticCircle2Transform.globalPosition = new Vector(200, -50)
-        const staticCircle2Collider = staticCircle2.addComponent(
-            ComponentType.CIRCLE_COLLIDER
-        ) as CircleCollider
-        staticCircle2Collider.radius = 50
-        const staticCircle2Renderer = staticCircle2.addComponent(ComponentType.RENDERER) as Renderer
-        staticCircle2Renderer.setDrawable(circle)
+        const scoreBackground = new ScoreBackground('Score Background')
+        scoreBackground.start()
 
-        const rectangle = new RectangleShape(new Vector(100, 100), Color.WHITE)
-        const staticRectangle = new Node('AAA')
-        const staticRectangleTransform = staticRectangle.addComponent(
-            ComponentType.TRANSFORM
-        ) as Transform
-        staticRectangleTransform.globalPosition = new Vector(0, -150)
-        staticRectangleTransform.rotation = 45
-        const staticRectangleCollider = staticRectangle.addComponent(
-            ComponentType.RECTANGLE_COLLIDER
-        ) as RectangleCollider
-        staticRectangleCollider.size = new Vector(100, 100)
-        const staticRectangleRenderer = staticRectangle.addComponent(
-            ComponentType.RENDERER
-        ) as Renderer
-        staticRectangleRenderer.setDrawable(rectangle)
+        const scoreText = new ScoreText('Score Text')
+        bird.scoreChanged.subscribe(scoreText.changeScore.bind(scoreText))
+        scoreText.start()
 
-        const node = new Node('A')
-        node.addComponent(ComponentType.TRANSFORM)
-        ;(node.addComponent(ComponentType.RENDERER) as Renderer).setDrawable(
-            new LineShape(
-                [new Vector(0, 0), new Vector(100, 0), new Vector(100, 100)],
-                Color.BLACK,
-                10,
-                [5, 15]
-            )
-        )
+        const playButton = new PlayButton('Play Button')
+        playButton.start()
+
+        const resultBackground = new ResultBackground('Result Background')
+        resultBackground.start()
+
+        const resultScore = new ResultScore('Result Score')
+        resultScore.start()
+
+        const highScore = new HighScore('High Score')
+        highScore.start()
+
+        const retryButton = new RetryButton('Retry Button')
+        retryButton.start()
+
+        BirdGame.changeState(GameState.WELCOME)
+
+        // let activeObjectCount = 0
+        // const pool = new ObjectPool<Ball>(() => new Ball('Ball'), 500)
+        // new Timer(
+        //     () => {
+        //         const ball = pool.getObject()
+        //         BirdGame.spawnBall(ball)
+        //         new Timer(() => {
+        //             ball.transform.tweenScale(Vector.ZERO, 1, 0, Ease.IN_SINE, false, () => {
+        //                 pool.returnObject(ball)
+        //                 activeObjectCount--
+        //             })
+        //         }, 15)
+        //         activeObjectCount++
+        //     },
+        //     0,
+        //     -1,
+        //     0.05
+        // )
+        //
+        // new CollisionBackground('A')
+        //
+        // new BirdAnimator('Byrd')
+        //
+        // const parentNode = new Node('Yo')
+        // const childNode = new Node('AAAA')
+        // parentNode.addChild(childNode)
+        //
+        // const transform = parentNode.addComponent(ComponentType.TRANSFORM)
+        // const transform2 = childNode.addComponent(ComponentType.TRANSFORM)
+        //
+        // let circle = new CircleShape(30, Color.WHITE)
+        // const renderer = parentNode.addComponent(ComponentType.RENDERER) as Renderer
+        // renderer.setDrawable(circle)
+        //
+        // const textContent = new TextContent('Yo')
+        // textContent.font = '25px verdana'
+        // const text = childNode.addComponent(ComponentType.TEXT) as UIText
+        // text.setDrawable(textContent)
+        // text.drawOrder = 1000
+        //
+        // parentNode.update = () => {
+        //     textContent.text = activeObjectCount.toString()
+        // }
+        //
+        // const circleCollider = parentNode.addComponent(
+        //     ComponentType.CIRCLE_COLLIDER
+        // ) as CircleCollider
+        // circleCollider.radius = 30
+        // parentNode.addComponent(ComponentType.RIGIDBODY)
+        //
+        // circle = new CircleShape(50, Color.WHITE)
+        // const staticCircle = new Node('AAA')
+        // const staticCircleTransform = staticCircle.addComponent(
+        //     ComponentType.TRANSFORM
+        // ) as Transform
+        // staticCircleTransform.globalPosition = new Vector(-200, -50)
+        // const staticCircleCollider = staticCircle.addComponent(
+        //     ComponentType.CIRCLE_COLLIDER
+        // ) as CircleCollider
+        // staticCircleCollider.radius = 50
+        // const staticCircleRenderer = staticCircle.addComponent(ComponentType.RENDERER) as Renderer
+        // staticCircleRenderer.setDrawable(circle)
+        //
+        // const staticCircle2 = new Node('AAA')
+        // const staticCircle2Transform = staticCircle2.addComponent(
+        //     ComponentType.TRANSFORM
+        // ) as Transform
+        // staticCircle2Transform.globalPosition = new Vector(200, -50)
+        // const staticCircle2Collider = staticCircle2.addComponent(
+        //     ComponentType.CIRCLE_COLLIDER
+        // ) as CircleCollider
+        // staticCircle2Collider.radius = 50
+        // const staticCircle2Renderer = staticCircle2.addComponent(ComponentType.RENDERER) as Renderer
+        // staticCircle2Renderer.setDrawable(circle)
+        //
+        // const rectangle = new RectangleShape(new Vector(100, 100), Color.WHITE)
+        // const staticRectangle = new Node('AAA')
+        // const staticRectangleTransform = staticRectangle.addComponent(
+        //     ComponentType.TRANSFORM
+        // ) as Transform
+        // staticRectangleTransform.globalPosition = new Vector(0, -150)
+        // staticRectangleTransform.rotation = 45
+        // const staticRectangleCollider = staticRectangle.addComponent(
+        //     ComponentType.RECTANGLE_COLLIDER
+        // ) as RectangleCollider
+        // staticRectangleCollider.size = new Vector(100, 100)
+        // const staticRectangleRenderer = staticRectangle.addComponent(
+        //     ComponentType.RENDERER
+        // ) as Renderer
+        // staticRectangleRenderer.setDrawable(rectangle)
+        //
+        // const node = new Node('A')
+        // node.addComponent(ComponentType.TRANSFORM)
+        // ;(node.addComponent(ComponentType.RENDERER) as Renderer).setDrawable(
+        //     new LineShape(
+        //         [new Vector(0, 0), new Vector(100, 0), new Vector(100, 100)],
+        //         Color.BLACK,
+        //         10,
+        //         [5, 15]
+        //     )
+        // )
 
         // const parent = new Node('Parent')
         // const child = new Node('Child')

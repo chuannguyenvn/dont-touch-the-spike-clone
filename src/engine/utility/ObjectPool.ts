@@ -1,6 +1,6 @@
-﻿import Node from '../node/Node'
+﻿import GameElement from "../node/GameElement"
 
-class ObjectPool<T extends Node> {
+class ObjectPool<T extends GameElement> {
     private createFunction: () => T
     private _pool: T[] = []
 
@@ -22,7 +22,6 @@ class ObjectPool<T extends Node> {
             return this._pool[i]
         }
 
-        console.log('new')
         return this.createNewObjects(this._pool.length)
     }
 

@@ -55,7 +55,14 @@ class Physics {
         for (let i = 0; i < Physics._rigidbodies.length; i++) {
             if (!Physics._rigidbodies[i].isActive || !Physics._rigidbodies[i].owner.isActive)
                 continue
-            Physics._rigidbodies[i].accelerate(Physics.gravity)
+
+            if (Physics._rigidbodies[i].overrideGravity) {
+                Physics._rigidbodies[i].accelerate(
+                    Physics._rigidbodies[i].overrideGravity as Vector
+                )
+            } else {
+                Physics._rigidbodies[i].accelerate(Physics.gravity)
+            }
         }
     }
 

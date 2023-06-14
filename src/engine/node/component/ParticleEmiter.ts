@@ -3,55 +3,81 @@ import Component from './Component'
 import Node from '../Node'
 import Debug from '../../system/Debug'
 import ComponentType from './ComponentType'
-import Rigidbody from './Rigidbody'
 import Vector from '../../math/Vector'
-import Transform from './Transform'
+import Transform from "./Transform"
+import Renderer from "./Renderer"
+import CircleCollider from "./CircleCollider"
+import Rigidbody from "./Rigidbody"
+import Ball from "../../../game/Ball"
 
-class ParticleEmitter<T extends Node> extends Component {
+
+class ParticleEmitter extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.PARTICLE_EMITTER
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
     private _initialized: boolean = false
-    private _pool: ObjectPool<T>
+    private _pool: ObjectPool<Ball>
 
     private _count: number = 10
     private _velocityMagnitude: number = 10
+    public _gravity: Vector = Vector.ZERO
 
     constructor(owner: Node) {
         super(owner)
     }
 
-    public init(createFunction: () => T): ParticleEmitter<T> {
+    public init(maxCount: number): ParticleEmitter {
         Debug.assert(!this._initialized, 'Particle emitter is used before initialization.')
 
         this._initialized = true
-        this._pool = new ObjectPool<T>(createFunction)
-
+        const par = new ParticleUnit("A")
         return this
     }
 
-    public setCount(count: number): ParticleEmitter<T> {
+    public setCount(count: number): ParticleEmitter {
         this._count = count
         return this
     }
 
-    public setVelocityMagnitude(velMag: number): ParticleEmitter<T> {
+    public setVelocityMagnitude(velMag: number): ParticleEmitter {
         this._velocityMagnitude = velMag
+        return this
+    }
+
+    public setGravity(gravity: Vector): ParticleEmitter {
+        this._gravity = gravity
         return this
     }
 
     public play(): void {
         for (let i = 0; i < this._count; i++) {
             const particle = this._pool.getObject()
+            particle.transform.globalPosition = Vector.ZERO
 
-            const transform = particle.getComponent(ComponentType.TRANSFORM) as Transform
-            transform.globalPosition = Vector.ZERO
-
-            const rigidbody = particle.getComponent(ComponentType.RIGIDBODY) as Rigidbody
-            rigidbody.setVelocity(Vector.RANDOM_UNIT.multiply(this._velocityMagnitude))
+            particle.rigidbody.overrideGravity = this._gravity
+            particle.rigidbody.setVelocity(Vector.RANDOM_UNIT.multiply(this._velocityMagnitude))
         }
+    }
+}
+
+class ParticleUnit extends Node{
+    private emitter: ParticleEmitter
+
+    public transform: Transform
+    public renderer: Renderer
+    public collider: CircleCollider
+    public rigidbody: Rigidbody
+
+    constructor(name: string) {
+        super(name)
+
+
+        this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
+        this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
+        this.collider = this.addComponent(ComponentType.CIRCLE_COLLIDER) as CircleCollider
+        this.rigidbody = this.addComponent(ComponentType.RIGIDBODY) as Rigidbody
     }
 }
 

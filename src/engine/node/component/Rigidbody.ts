@@ -17,6 +17,7 @@ class Rigidbody extends Component {
     public ownerTransform: Transform
     public collisionLayer: CollisionLayer = CollisionLayers.DEFAULT
     public mass: number = 1
+    public overrideGravity: Vector | undefined = undefined
     private lastPosition: Vector
     private acceleration: Vector
     private isMovable: boolean = true
