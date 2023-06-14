@@ -7,6 +7,7 @@ import Rect from '../../math/Rect'
 class RectangleCollider extends Collider {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RECTANGLE_COLLIDER
+    public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
     public size: Vector

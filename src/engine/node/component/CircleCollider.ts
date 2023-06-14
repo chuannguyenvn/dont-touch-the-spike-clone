@@ -7,6 +7,7 @@ import Rect from '../../math/Rect'
 class CircleCollider extends Collider {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.CIRCLE_COLLIDER
+    public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
     public radius: number

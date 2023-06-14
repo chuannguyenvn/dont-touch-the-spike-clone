@@ -4,8 +4,14 @@ import Node from '../Node'
 import MouseInteractable from './MouseInteractable'
 import Vector from '../../math/Vector'
 import Input from '../../system/Input'
+import ComponentType from './ComponentType'
 
 class UIButton extends UIElement implements MouseInteractable {
+    // COMPONENT METADATA //
+    public readonly type: ComponentType = ComponentType.BUTTON
+    public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
+
+    // COMPONENT PROPERTIES //
     public clicked: GameEvent = new GameEvent()
     public hovered: GameEvent = new GameEvent()
 

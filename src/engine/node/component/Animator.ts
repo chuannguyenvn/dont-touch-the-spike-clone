@@ -6,7 +6,7 @@ import Renderer from './Renderer'
 class Animator extends Renderer {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.ANIMATOR
-    public readonly _componentRequirements: ComponentType[] = []
+    public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
     private sprites: Sprite[]

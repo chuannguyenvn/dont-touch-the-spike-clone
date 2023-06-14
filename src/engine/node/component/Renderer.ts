@@ -15,6 +15,8 @@ class Renderer extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.RENDERER
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
+
+    // COMPONENT PROPERTIES //
     public drawOrder = 0
     public drawable: Drawable
     private ownerTransform: Transform
@@ -28,7 +30,6 @@ class Renderer extends Component {
 
     private _drawLayer: DrawLayer = DrawLayer.DEFAULT
 
-    // COMPONENT PROPERTIES //
     public get drawLayer(): DrawLayer {
         return this._drawLayer
     }

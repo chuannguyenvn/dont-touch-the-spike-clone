@@ -6,7 +6,7 @@ import Node from '../Node'
 import Rect from '../../math/Rect'
 import Transform from './Transform'
 
-class UIElement extends Renderer {
+abstract class UIElement extends Renderer {
     // COMPONENT METADATA //
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
