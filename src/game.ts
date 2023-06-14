@@ -3,9 +3,10 @@ import DebugBuildOptions from './engine/builder/build-options/DebugBuildOptions'
 import CanvasBuildOptions from './engine/builder/build-options/CanvasBuildOptions'
 import Vector from './engine/math/Vector'
 import { InputBuildOptions, InputOption } from './engine/builder/build-options/InputBuildOptions'
-import BirdGame from './game/BirdGame'
 import Color from './engine/math/Color'
 import SoundBuildOptions from './engine/builder/build-options/SoundBuildOptions'
+import Test from './test/Test'
+import BirdGame from "./game/BirdGame"
 
 class Game {
     constructor() {
@@ -44,13 +45,6 @@ class Game {
     protected initGame(): void {
         BirdGame.init()
     }
-}
-
-enum GameState {
-    NONE,
-    WELCOME,
-    PLAY,
-    RESULT,
 }
 
 new Game()

@@ -8,7 +8,7 @@ import Transform from "./Transform"
 import Renderer from "./Renderer"
 import CircleCollider from "./CircleCollider"
 import Rigidbody from "./Rigidbody"
-import Ball from "../../../game/Ball"
+import Ball from "../../../test/Ball"
 
 
 class ParticleEmitter extends Component {
@@ -32,7 +32,6 @@ class ParticleEmitter extends Component {
         Debug.assert(!this._initialized, 'Particle emitter is used before initialization.')
 
         this._initialized = true
-        const par = new ParticleUnit("A")
         return this
     }
 
@@ -62,23 +61,23 @@ class ParticleEmitter extends Component {
     }
 }
 
-class ParticleUnit extends Node{
-    private emitter: ParticleEmitter
-
-    public transform: Transform
-    public renderer: Renderer
-    public collider: CircleCollider
-    public rigidbody: Rigidbody
-
-    constructor(name: string) {
-        super(name)
-
-
-        this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
-        this.collider = this.addComponent(ComponentType.CIRCLE_COLLIDER) as CircleCollider
-        this.rigidbody = this.addComponent(ComponentType.RIGIDBODY) as Rigidbody
-    }
-}
+// class ParticleUnit extends Node{
+//     private emitter: ParticleEmitter
+//
+//     public transform: Transform
+//     public renderer: Renderer
+//     public collider: CircleCollider
+//     public rigidbody: Rigidbody
+//
+//     constructor(name: string) {
+//         super(name)
+//
+//
+//         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
+//         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
+//         this.collider = this.addComponent(ComponentType.CIRCLE_COLLIDER) as CircleCollider
+//         this.rigidbody = this.addComponent(ComponentType.RIGIDBODY) as Rigidbody
+//     }
+// }
 
 export default ParticleEmitter
