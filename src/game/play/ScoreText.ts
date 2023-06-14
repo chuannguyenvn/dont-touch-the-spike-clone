@@ -7,6 +7,7 @@ import { Alignment } from '../../engine/node/component/UIElement'
 import UIText from '../../engine/node/component/UIText'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
+import DrawLayer from '../../engine/configs-and-resources/DrawLayers'
 
 class ScoreText extends Node {
     public transform: Transform
@@ -23,10 +24,11 @@ class ScoreText extends Node {
         this.text.setDrawable(this.textContent)
         this.text.pivot = Alignment.MID_CENTER
         this.text.drawOrder = -1
+        this.text.drawLayer = DrawLayer.DEFAULT
 
         this.isVisible = false
         this.isActive = false
-        
+
         BirdGame.stateMachine.configure(GameState.WELCOME).onExit(this.getGuid(), () => {
             this.textContent.text = '0'
             this.isVisible = true

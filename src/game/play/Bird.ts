@@ -90,10 +90,15 @@ class Bird extends Node {
         })
 
         BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
+            this.collider.isActive = true
             this.glideSprite.saturation = 70
             this.isAlive = true
             this.isLocked = false
             this.jump()
+        })
+
+        BirdGame.stateMachine.configure(GameState.PLAY).onExit(this.getGuid(), () => {
+            this.collider.isActive = false
         })
     }
 

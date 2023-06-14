@@ -10,6 +10,7 @@ import { Alignment } from '../../engine/node/component/UIElement'
 import TextContent from '../../engine/rendering/TextContent'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
+import DrawLayer from '../../engine/configs-and-resources/DrawLayers'
 
 class RetryButton extends Node {
     public transform: Transform
@@ -33,7 +34,7 @@ class RetryButton extends Node {
 
         this.isVisible = false
         this.isActive = false
-        
+
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true

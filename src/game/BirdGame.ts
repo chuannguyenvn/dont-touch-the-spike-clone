@@ -72,11 +72,11 @@ class BirdGame extends Game {
         })
 
         const topWall = new HorizontalWall('Top Wall')
-        topWall.transform.globalPosition = new Vector(0, 300)
+        topWall.transform.globalPosition = new Vector(0, 750)
         topWall.start()
 
         const bottomWall = new HorizontalWall('Bottom Wall')
-        bottomWall.transform.globalPosition = new Vector(0, -300)
+        bottomWall.transform.globalPosition = new Vector(0, -750)
         bottomWall.start()
 
         const scoreBackground = new ScoreBackground('Score Background')

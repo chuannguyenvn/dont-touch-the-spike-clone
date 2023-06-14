@@ -5,6 +5,7 @@ import Vector from '../../math/Vector'
 import Node from '../Node'
 import Rect from '../../math/Rect'
 import Transform from './Transform'
+import DrawLayer from '../../configs-and-resources/DrawLayers'
 
 abstract class UIElement extends Renderer {
     // COMPONENT METADATA //
@@ -20,6 +21,7 @@ abstract class UIElement extends Renderer {
 
     constructor(owner: Node) {
         super(owner)
+        this.drawLayer = DrawLayer.UI
     }
 
     get rect(): Rect {
