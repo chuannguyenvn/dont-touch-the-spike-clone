@@ -11,6 +11,7 @@ import Drawable from '../../engine/rendering/Drawable'
 import BirdGame from '../BirdGame'
 import Ease from '../../engine/utility/tween/Ease'
 import GameState from '../GameState'
+import DrawLayer from '../../engine/configs-and-resources/DrawLayers'
 
 class HorizontalWall extends Wall {
     private renderer: Renderer
@@ -24,13 +25,14 @@ class HorizontalWall extends Wall {
 
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.drawOrder = 100
-        this.rectangle = new RectangleShape(new Vector(400, 1000), Color.GREY)
+        this.rectangle = new RectangleShape(new Vector(400, 300), Color.GREY)
         this.renderer.setDrawable(this.rectangle)
+        this.renderer.drawLayer = DrawLayer.UI
 
         BirdGame.scoreChanged.subscribe(this.scoreChangedHandler.bind(this))
 
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
-            this.transform.tweenPositionY(0, 1, 0, Ease.OUT_CUBIC, false)
+            this.transform.tweenPositionY(this.startYPos * 0.375, 1, 0.7, Ease.OUT_CUBIC, false)
         })
 
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
@@ -52,7 +54,6 @@ class HorizontalWall extends Wall {
         }
 
         this.startYPos = this.transform.globalPosition.y
-        console.log(this.startYPos)
     }
 
     private scoreChangedHandler(score: number): void {

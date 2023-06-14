@@ -17,13 +17,16 @@ class TweenEngine {
         const finishedTweens: TweenBase[] = []
 
         for (const tween of TweenEngine._tweens) {
+            if (tween._delay > 0) {
+                tween._delay -= Time.deltaTime()
+                continue
+            }
+
             if (!tween._isStarted) tween._start()
 
-            if (tween._startTime + tween._delay < Time.timeSinceGameStart()) {
-                const x = (Time.timeSinceGameStart() - tween._startTime) / tween._duration
-                const easedX = easeDictionary[tween._ease](x)
-                tween.evaluate(easedX)
-            }
+            const x = (Time.timeSinceGameStart() - tween._startTime) / tween._duration
+            const easedX = easeDictionary[tween._ease](x)
+            tween.evaluate(easedX)
 
             if (tween._startTime + tween._duration < Time.timeSinceGameStart()) {
                 finishedTweens.push(tween)

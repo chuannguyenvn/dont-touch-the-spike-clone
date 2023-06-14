@@ -33,9 +33,11 @@ class BirdGame extends Game {
         BirdGame._currentScore = value
         BirdGame.scoreChanged.invoke(value)
     }
-    
+
     public static init(): void {
-        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(-1, () => BirdGame.currentScore = 0)
+        BirdGame.stateMachine
+            .configure(GameState.WELCOME)
+            .onEntry(-1, () => (BirdGame.currentScore = 0))
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(-1, () => {
             if (BirdGame.highScore < BirdGame._currentScore)
                 BirdGame.highScore = BirdGame._currentScore
@@ -72,11 +74,11 @@ class BirdGame extends Game {
         })
 
         const topWall = new HorizontalWall('Top Wall')
-        topWall.transform.globalPosition = new Vector(0, 750)
+        topWall.transform.globalPosition = new Vector(0, 400)
         topWall.start()
 
         const bottomWall = new HorizontalWall('Bottom Wall')
-        bottomWall.transform.globalPosition = new Vector(0, -750)
+        bottomWall.transform.globalPosition = new Vector(0, -400)
         bottomWall.start()
 
         const scoreBackground = new ScoreBackground('Score Background')
