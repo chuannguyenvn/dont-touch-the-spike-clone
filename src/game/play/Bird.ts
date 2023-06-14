@@ -63,7 +63,7 @@ class Bird extends Node {
         // this.particleEmitter.setCount(100)
         // this.particleEmitter.setVelocityMagnitude(10)
         // this.particleEmitter.play()
-        
+
         this.touchedLeftWall = new GameEvent()
         this.touchedRightWall = new GameEvent()
         this.touchedLeftWall.subscribe(this.turnRight.bind(this))
@@ -103,6 +103,9 @@ class Bird extends Node {
         if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
 
         this.handleSpawnTrailDot()
+        
+        if (Input.getKeyDown('z')) Time.isPaused = true
+        if (Input.getKeyUp('z')) Time.isPaused = false
     }
 
     public turnLeft(): void {
