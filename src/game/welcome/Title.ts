@@ -8,6 +8,7 @@ import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 import Transform from '../../engine/node/component/Transform'
 import UIText from '../../engine/node/component/UIText'
+import Ease from '../../engine/utility/tween/Ease'
 
 class Title extends Node {
     public transform: Transform
@@ -17,7 +18,6 @@ class Title extends Node {
     constructor(name: string) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.globalPosition = new Vector(0, 150)
 
         this.textContent = new TextContent("DON'T TOUCH", Color.GREY)
         this.textContent.font = '60px tahoma'
@@ -27,13 +27,17 @@ class Title extends Node {
         this.text.drawOrder = 200
 
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
+            this.transform.globalPosition = new Vector(0, 150)
+
             this.isVisible = true
             this.isActive = true
         })
 
         BirdGame.stateMachine.configure(GameState.WELCOME).onExit(this.getGuid(), () => {
-            this.isVisible = false
-            this.isActive = false
+            this.transform.tweenPositionY(500, 0.5, 0, Ease.OUT_CUBIC, false, () => {
+                this.isVisible = false
+                this.isActive = false
+            })
         })
     }
 }
@@ -67,4 +71,4 @@ class TitleBottom extends Node {
     }
 }
 
-export {Title, TitleBottom}
+export { Title, TitleBottom }

@@ -33,11 +33,11 @@ class HorizontalWall extends Wall {
         BirdGame.scoreChanged.subscribe(this.scoreChangedHandler.bind(this))
 
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
-            this.transform.tweenPositionY(this.startYPos * 0.375, 1, 0.7, Ease.OUT_CUBIC, false)
+            this.transform.tweenPositionY(this.startYPos * 0.375, 0.5, 0.7, Ease.OUT_CUBIC, false)
         })
 
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
-            this.transform.tweenPositionY(this.startYPos, 1, 0, Ease.IN_CUBIC, false)
+            this.transform.tweenPositionY(this.startYPos, 0.5, 0.5, Ease.OUT_CUBIC, false)
         })
     }
 
