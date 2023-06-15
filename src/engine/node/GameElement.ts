@@ -1,5 +1,4 @@
-﻿interface GameElement
-{
+﻿interface GameElement {
     isActive: boolean
     isVisible: boolean
 }

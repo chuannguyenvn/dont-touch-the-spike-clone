@@ -20,10 +20,11 @@ import StateMachine from '../engine/utility/StateMachine'
 class BirdGame extends Game {
     public static highScore = 0
     public static scoreChanged: ParamGameEvent<number> = new ParamGameEvent<number>()
-    private static _currentScore = 0
     public static stateMachine: StateMachine<GameState> = new StateMachine<GameState>(
         GameState.INIT
     )
+
+    private static _currentScore = 0
 
     static get currentScore(): number {
         return BirdGame._currentScore

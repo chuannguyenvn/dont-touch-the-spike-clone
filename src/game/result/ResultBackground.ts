@@ -18,7 +18,7 @@ class ResultBackground extends Node {
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.scale = new Vector(1, 0)
-        
+
         const rectangle = new RectangleShape(new Vector(400, 150), new Color(0.5, 0.5, 0.5, 0.5))
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(rectangle)

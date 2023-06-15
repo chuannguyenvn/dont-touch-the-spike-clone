@@ -1,4 +1,4 @@
-﻿import GameElement from "../node/GameElement"
+﻿import GameElement from '../node/GameElement'
 
 class ObjectPool<T extends GameElement> {
     private createFunction: () => T

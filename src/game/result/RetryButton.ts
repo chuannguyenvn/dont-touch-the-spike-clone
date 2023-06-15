@@ -10,7 +10,6 @@ import { Alignment } from '../../engine/node/component/UIElement'
 import TextContent from '../../engine/rendering/TextContent'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
-import DrawLayer from '../../engine/configs-and-resources/DrawLayers'
 
 class RetryButton extends Node {
     public transform: Transform

@@ -11,14 +11,14 @@ class Transform extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.TRANSFORM
     public readonly _componentRequirements: ComponentType[] = []
+    public rotation: number = 0
+    public scale: Vector = Vector.ONE
 
     // COMPONENT PROPERTIES //
     constructor(owner: Node) {
         super(owner)
     }
 
-    public rotation: number = 0
-    public scale: Vector = Vector.ONE
     private _localPosition: Vector = Vector.ZERO
 
     get localPosition(): Vector {

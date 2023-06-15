@@ -28,7 +28,7 @@ class HighScore extends Node {
 
         this.isVisible = false
         this.isActive = false
-        
+
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true

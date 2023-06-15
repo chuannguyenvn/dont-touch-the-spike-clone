@@ -1,24 +1,23 @@
-﻿
-import Game from '../engine/Game'
+﻿import Game from '../engine/Game'
 import Time from '../engine/system/Time'
 import Color from '../engine/math/Color'
 import Vector from '../engine/math/Vector'
-import Renderer from "../engine/node/component/Renderer"
-import ObjectPool from "../engine/utility/ObjectPool"
-import Timer from "../engine/utility/Timer"
-import Ease from "../engine/utility/tween/Ease"
-import CollisionBackground from "../game/CollisionBackground"
-import BirdAnimator from "../game/BirdAnimator"
-import ComponentType from "../engine/node/component/ComponentType"
-import CircleShape from "../engine/rendering/CircleShape"
-import TextContent from "../engine/rendering/TextContent"
-import UIText from "../engine/node/component/UIText"
-import CircleCollider from "../engine/node/component/CircleCollider"
-import Transform from "../engine/node/component/Transform"
-import RectangleShape from "../engine/rendering/RectangleShape"
-import RectangleCollider from "../engine/node/component/RectangleCollider"
-import Node from "../engine/node/Node"
-import Ball from "./Ball"  
+import Renderer from '../engine/node/component/Renderer'
+import ObjectPool from '../engine/utility/ObjectPool'
+import Timer from '../engine/utility/Timer'
+import Ease from '../engine/utility/tween/Ease'
+import CollisionBackground from '../game/CollisionBackground'
+import BirdAnimator from '../game/BirdAnimator'
+import ComponentType from '../engine/node/component/ComponentType'
+import CircleShape from '../engine/rendering/CircleShape'
+import TextContent from '../engine/rendering/TextContent'
+import UIText from '../engine/node/component/UIText'
+import CircleCollider from '../engine/node/component/CircleCollider'
+import Transform from '../engine/node/component/Transform'
+import RectangleShape from '../engine/rendering/RectangleShape'
+import RectangleCollider from '../engine/node/component/RectangleCollider'
+import Node from '../engine/node/Node'
+import Ball from './Ball'
 
 class Test extends Game {
     public static init(): void {

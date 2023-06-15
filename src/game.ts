@@ -5,8 +5,7 @@ import Vector from './engine/math/Vector'
 import { InputBuildOptions, InputOption } from './engine/builder/build-options/InputBuildOptions'
 import Color from './engine/math/Color'
 import SoundBuildOptions from './engine/builder/build-options/SoundBuildOptions'
-import Test from './test/Test'
-import BirdGame from "./game/BirdGame"
+import BirdGame from './game/BirdGame'
 
 class Game {
     constructor() {

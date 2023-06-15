@@ -3,10 +3,9 @@ import Timer from '../utility/Timer'
 
 class Time {
     public static _lastFrameTime: number
+    public static isPaused: boolean = false
     private static _startTime: number
     private static _timeSinceGameStart: number = 0
-
-    public static isPaused: boolean = false
     private static _timers: Map<number, Timer> = new Map<number, Timer>()
 
     public static _init() {

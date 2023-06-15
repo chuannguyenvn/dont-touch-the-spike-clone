@@ -80,4 +80,4 @@ enum Alignment {
     BOTTOM_RIGHT,
 }
 
-export { UIElement, Alignment }
+export {UIElement, Alignment}

@@ -67,4 +67,4 @@ class TitleBottom extends Node {
     }
 }
 
-export { Title, TitleBottom }
+export {Title, TitleBottom}

@@ -136,7 +136,6 @@ class Bird extends Node {
         this.jumpSprite.flipX = true
         this.glideSprite.flipX = true
     }
-    
 
     private move(): void {
         if (this.isMovingRight) {

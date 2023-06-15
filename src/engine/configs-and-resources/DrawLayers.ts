@@ -1,5 +1,6 @@
 ﻿// Top values get rendered behind
-enum DrawLayer {
+enum DrawLayer
+{
     DEFAULT,
     UI,
     RED,

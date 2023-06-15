@@ -4,25 +4,18 @@ import Node from '../Node'
 import Debug from '../../system/Debug'
 import ComponentType from './ComponentType'
 import Vector from '../../math/Vector'
-import Transform from "./Transform"
-import Renderer from "./Renderer"
-import CircleCollider from "./CircleCollider"
-import Rigidbody from "./Rigidbody"
-import Ball from "../../../test/Ball"
-
+import Ball from '../../../test/Ball'
 
 class ParticleEmitter extends Component {
     // COMPONENT METADATA //
     public readonly type: ComponentType = ComponentType.PARTICLE_EMITTER
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
-
+    public _gravity: Vector = Vector.ZERO
     // COMPONENT PROPERTIES //
     private _initialized: boolean = false
     private _pool: ObjectPool<Ball>
-
     private _count: number = 10
     private _velocityMagnitude: number = 10
-    public _gravity: Vector = Vector.ZERO
 
     constructor(owner: Node) {
         super(owner)
