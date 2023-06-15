@@ -9,13 +9,15 @@ class PlayButton extends ButtonNode {
     init(): void {
         super.init()
 
-        this.transform.globalPosition = new Vector(0, -100)
+        this.transform.globalPosition = new Vector(0, -125)
 
         const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
         buttonSprite.height = 100
         buttonSprite.width = 300
         this.button.setDrawable(buttonSprite)
-
+        this.button.drawOrder = 100
+        this.text.drawOrder = 101
+        
         this.isVisible = false
         this.isActive = false
         this.textContent.text = 'PLAY'

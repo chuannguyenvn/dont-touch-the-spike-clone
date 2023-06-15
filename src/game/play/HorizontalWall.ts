@@ -28,6 +28,7 @@ class HorizontalWall extends Wall {
         this.rectangle = new RectangleShape(new Vector(400, 300), Color.GREY)
         this.renderer.setDrawable(this.rectangle)
         this.renderer.drawLayer = DrawLayer.UI
+        this.renderer.drawOrder = 500
 
         BirdGame.scoreChanged.subscribe(this.scoreChangedHandler.bind(this))
 
@@ -48,6 +49,8 @@ class HorizontalWall extends Wall {
             const spikeXPos = x
             const spikeYPos = Maths.sign(this.transform.globalPosition.y) * 250
             spike.transform.globalPosition = new Vector(spikeXPos, spikeYPos)
+            spike.renderer.drawLayer = DrawLayer.UI
+            spike.renderer.drawOrder = 500
             spike.start()
 
             this.spikes.push(spike)
