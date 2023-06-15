@@ -49,7 +49,11 @@ class Renderer extends Component {
     }
 
     public _draw(deltaTime: number): void {
-        if (!this.owner.isVisible) return
+        let node: Node | null = this.owner
+        while (node) {
+            if (!node.isVisible) return
+            node = node.parentNode
+        }
         this.drawable._draw()
     }
 
