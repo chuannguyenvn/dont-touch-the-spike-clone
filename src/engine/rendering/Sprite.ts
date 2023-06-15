@@ -10,27 +10,27 @@ class Sprite implements Drawable {
     public color: Color
     public saturation = 70
     public drawOrder: number
-    public maxWidth = 100
-    public maxHeight = 100
+    public width = 100
+    public height = 100
     public flipX = false
     public flipY = false
     public scale: Vector = Vector.ONE
-    public offSet: Vector
-    private _image: HTMLImageElement
+    public offSet: Vector = Vector.ZERO
+    protected _image: HTMLImageElement
 
     constructor(imagePath = '') {
         this.setImage(imagePath)
     }
 
-    _draw() {
+    public _draw() {
         Canvas._canvasContext.scale(
             this.scale.x * (this.flipX ? -1 : 1),
             this.scale.y * (this.flipY ? -1 : 1)
         )
         Canvas._canvasContext.drawImage(
             this._image,
-            -this._image.width / 2,
-            -this._image.height / 2
+            this.offSet.x - this._image.width / 2,
+            this.offSet.y - this._image.height / 2
         )
         // Canvas._canvasContext.globalCompositeOperation = "saturation"
         // Canvas._canvasContext.fillStyle = `hsl(0,${this.saturation}%,50%)`

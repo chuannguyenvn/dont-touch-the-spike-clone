@@ -4,12 +4,13 @@ import UIButton from '../../engine/node/component/UIButton'
 import UIText from '../../engine/node/component/UIText'
 import ComponentType from '../../engine/node/component/ComponentType'
 import Vector from '../../engine/math/Vector'
-import RectangleShape from '../../engine/rendering/RectangleShape'
 import Color from '../../engine/math/Color'
 import { Alignment } from '../../engine/node/component/UIElement'
 import TextContent from '../../engine/rendering/TextContent'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
+import Resource from '../../engine/system/Resource'
+import NineSliceType from '../../engine/configs-and-resources/NineSliceTypes'
 
 class RetryButton extends Node {
     public transform: Transform
@@ -20,10 +21,12 @@ class RetryButton extends Node {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.globalPosition = new Vector(0, -150)
 
-        const rectangle = new RectangleShape(new Vector(200, 100), Color.WHITE)
+        const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON)
+        buttonSprite.height = 100
+        buttonSprite.width = 300
         this.button = this.addComponent(ComponentType.BUTTON) as UIButton
         this.button.elementSize = new Vector(200, 100)
-        this.button.setDrawable(rectangle)
+        this.button.setDrawable(buttonSprite)
         this.button.pivot = Alignment.MID_CENTER
         this.button.drawOrder = 1000
 
@@ -37,10 +40,10 @@ class RetryButton extends Node {
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         this.button.hovered.subscribe(() => {
-            rectangle.color = Color.WHITE
+            buttonSprite.color = Color.WHITE
         })
         this.button.unhovered.subscribe(() => {
-            rectangle.color = Color.BLACK
+            buttonSprite.color = Color.BLACK
         })
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
