@@ -12,20 +12,28 @@ class UIButton extends UIElement implements MouseInteractable {
     public readonly _componentRequirements: ComponentType[] = [ComponentType.TRANSFORM]
 
     // COMPONENT PROPERTIES //
+    public _lastFrameHovered = false
     public clicked: GameEvent = new GameEvent()
     public hovered: GameEvent = new GameEvent()
+    public unhovered: GameEvent = new GameEvent()
 
     constructor(owner: Node) {
         super(owner)
         Input.registerMouseInteractable(this)
     }
 
-    _click(position: Vector): void {
+    _checkClick(position: Vector): void {
         if (this.rect.isPointInside(position) && Input.getMouseDown()) this.clicked.invoke()
     }
 
-    _hover(position: Vector): void {
-        if (this.rect.isPointInside(position)) this.hovered.invoke()
+    _checkHover(position: Vector): void {
+        if (this.rect.isPointInside(position)) {
+            this.hovered.invoke()
+            this._lastFrameHovered = true
+        } else if (this._lastFrameHovered) {
+            this._lastFrameHovered = false
+            this.unhovered.invoke()
+        }
     }
 }
 

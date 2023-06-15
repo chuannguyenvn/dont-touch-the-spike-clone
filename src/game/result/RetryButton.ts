@@ -25,6 +25,7 @@ class RetryButton extends Node {
         this.button.elementSize = new Vector(200, 100)
         this.button.setDrawable(rectangle)
         this.button.pivot = Alignment.MID_CENTER
+        this.button.drawOrder = 1000
 
         const textContent = new TextContent('Retry', Color.GREY)
         textContent.font = '30px tahoma'
@@ -35,6 +36,12 @@ class RetryButton extends Node {
         this.isActive = false
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
+        this.button.hovered.subscribe(() => {
+            rectangle.color = Color.WHITE
+        })
+        this.button.unhovered.subscribe(() => {
+            rectangle.color = Color.BLACK
+        })
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
             this.isActive = true

@@ -4,9 +4,9 @@ import Node from '../Node'
 interface MouseInteractable {
     owner: Node
 
-    _click(position: Vector): void
+    _checkClick(position: Vector): void
 
-    _hover(position: Vector): void
+    _checkHover(position: Vector): void
 }
 
 export default MouseInteractable
