@@ -16,6 +16,7 @@ class RetryButton extends ButtonNode {
         buttonSprite.height = 100
         buttonSprite.width = 300
         this.button.setDrawable(buttonSprite)
+        this.button.elementSize = new Vector(300, 100)
 
         this.isVisible = false
         this.isActive = false

@@ -16,6 +16,7 @@ class PlayButton extends ButtonNode {
         this.button.setDrawable(buttonSprite)
         this.button.drawOrder = 100
         this.text.drawOrder = 101
+        this.button.elementSize = new Vector(300, 100)
 
         this.isVisible = false
         this.isActive = false

@@ -16,6 +16,7 @@ import HighScore from './result/HighScore'
 import RetryButton from './result/RetryButton'
 import PauseButton from './play/PauseButton'
 import StateMachine from '../engine/utility/StateMachine'
+import ResultTextPanel from "./result/ResultTextPanel"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -95,11 +96,8 @@ class BirdGame extends Game {
         const pauseButton = new PauseButton('Pause Button')
         pauseButton.start()
 
-        const resultBackground = new ResultBackground('Result Background')
-        resultBackground.start()
-
-        const resultScore = new ResultScore('Result Score')
-        resultScore.start()
+        const resultTextPanel = new ResultTextPanel('Result')
+        bird.scoreChanged.subscribe(resultTextPanel.changeScore.bind(resultTextPanel))
 
         const highScore = new HighScore('High Score')
         highScore.start()
