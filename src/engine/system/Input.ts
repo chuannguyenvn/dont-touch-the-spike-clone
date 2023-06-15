@@ -7,14 +7,18 @@ import Debug from './Debug'
 class Input {
     private static _mouseInteractables: MouseInteractable[] = []
 
-    private static _isMouseClickedLastFrame = false
+    private static _isMouseDownLastFrame = false
+    private static _isMouseUpLastFrame = false
     private static _lastKeyUpKey: string
     private static _lastKeyDownKey: string
     private static _lastMousePosition: Vector
 
     public static _init(inputBuildOptions: InputBuildOptions): void {
         const mouseDownHandler = (event: MouseEvent): void => {
-            Input._isMouseClickedLastFrame = true
+            Input._isMouseDownLastFrame = true
+        }
+        const mouseUpHandler = (event: MouseEvent): void => {
+            Input._isMouseUpLastFrame = true
         }
 
         const keyUpHandler = (event: KeyboardEvent): void => {
@@ -29,6 +33,7 @@ class Input {
             if (event) Input._lastMousePosition = new Vector(event.clientX, event.clientY, 1)
         }
 
+        document.addEventListener('mouseup', mouseUpHandler, false)
         document.addEventListener('mousedown', mouseDownHandler, false)
         document.addEventListener('keyup', keyUpHandler, false)
         document.addEventListener('keydown', keyDownHandler, false)
@@ -47,7 +52,8 @@ class Input {
     }
 
     public static _resetInput(): void {
-        Input._isMouseClickedLastFrame = false
+        Input._isMouseUpLastFrame = false
+        Input._isMouseDownLastFrame = false
         Input._lastKeyUpKey = ''
         Input._lastKeyDownKey = ''
     }
@@ -65,7 +71,11 @@ class Input {
     }
 
     public static getMouseDown(): boolean {
-        return Input._isMouseClickedLastFrame
+        return Input._isMouseDownLastFrame
+    }
+
+    public static getMouseUp(): boolean {
+        return Input._isMouseUpLastFrame
     }
 
     public static getMousePosition(): Vector {

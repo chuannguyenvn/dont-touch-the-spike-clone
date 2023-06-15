@@ -23,7 +23,7 @@ class UIButton extends UIElement implements MouseInteractable {
     }
 
     _checkClick(position: Vector): void {
-        if (this.rect.isPointInside(position) && Input.getMouseDown()) this.clicked.invoke()
+        if (this.rect.isPointInside(position) && Input.getMouseUp()) this.clicked.invoke()
     }
 
     _checkHover(position: Vector): void {
