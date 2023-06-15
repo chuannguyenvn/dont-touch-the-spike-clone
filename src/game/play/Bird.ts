@@ -12,8 +12,9 @@ import { GameEvent, ParamGameEvent } from '../../engine/utility/Event'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 import TrailDot from './TrailDot'
-import Tween from '../../engine/utility/tween/Tween'
 import ParticleEmitter from '../../engine/node/component/ParticleEmiter'
+import Resource from '../../engine/system/Resource'
+import SpriteType from '../../engine/configs-and-resources/SpriteTypes'
 
 class Bird extends Node {
     public touchedLeftWall: GameEvent
@@ -25,7 +26,6 @@ class Bird extends Node {
     public renderer: Renderer
     public particleEmitter: ParticleEmitter
 
-    private isLocked = true
     private isAlive = true
     private lastJumpTime = 0
     private lastJumpPosY: number
@@ -35,13 +35,13 @@ class Bird extends Node {
     private jumpCurveYCoeff = 100
     private jumpSprite: Sprite
     private glideSprite: Sprite
+    private deadSprite: Sprite
 
     private jumpSpriteTimeout = 0.4
     private jumpSpriteTimer = 0.4
     private trailDotSpawnTimeout = 0.07
     private trailDotSpawnTimer = 0.07
     private trailDotEffectiveTime = 0.4
-    private dieSaturationTween: Tween<number>
 
     public init(): void {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
@@ -53,9 +53,7 @@ class Bird extends Node {
         this.collider.size = new Vector(20, 20)
         this.collider.collisionStarted.subscribe(this.handleCollisionStart.bind(this))
 
-        const sprite = new Sprite('./assets/kenney/Characters/character_0000.png')
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
-        this.renderer.setDrawable(sprite)
         this.renderer.drawOrder = 5
 
         this.particleEmitter = this.addComponent(ComponentType.PARTICLE_EMITTER) as ParticleEmitter
@@ -73,56 +71,56 @@ class Bird extends Node {
         this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
         this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
 
-        this.jumpSprite = new Sprite('assets/Jump.png')
+        this.jumpSprite = Resource.getSprite(SpriteType.BIRD_JUMP)
         this.jumpSprite.scale = Vector.ONE.multiply(0.12)
-        this.glideSprite = new Sprite('assets/Glide.png')
+        this.glideSprite = Resource.getSprite(SpriteType.BIRD_GLIDE)
         this.glideSprite.scale = Vector.ONE.multiply(0.12)
+        this.deadSprite = Resource.getSprite(SpriteType.BIRD_DEAD)
+        this.deadSprite.scale = Vector.ONE.multiply(0.12)
 
         this.scoreChanged = new ParamGameEvent<number>()
 
         this.turnRight()
 
-        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
-            this.isLocked = true
-            this.transform.globalPosition = this.transform.globalPosition.withX(0)
-            if (this.dieSaturationTween) this.dieSaturationTween.end()
-            this.glideSprite.saturation = 70
+        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
+            this.transform.globalPosition = Vector.ZERO
         })
 
         BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
             this.collider.isActive = true
-            this.glideSprite.saturation = 70
             this.isAlive = true
-            this.isLocked = false
             this.jump()
         })
 
         BirdGame.stateMachine.configure(GameState.PLAY).onExit(this.getGuid(), () => {
             this.collider.isActive = false
         })
+
+        BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
+            this.isAlive = false
+            this.renderer.setDrawable(this.deadSprite)
+            this.deadSprite.flipX = this.isMovingRight
+        })
     }
 
     public update(): void {
-        if (this.isLocked) {
+        if (BirdGame.stateMachine.currentState === GameState.WELCOME) {
             this.playIdleAnimation()
-            return
+        } else if (BirdGame.stateMachine.currentState === GameState.PLAY) {
+            this.move()
+            if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
+
+            const elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
+            this.transform.globalPosition = this.transform.globalPosition.withY(
+                this.jumpYFunction(elapsedJumpTime)
+            )
+
+            this.jumpSpriteTimer -= Time.deltaTime()
+            if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
+
+            this.handleSpawnTrailDot()
+        } else if (BirdGame.stateMachine.currentState === GameState.RESULT) {
         }
-
-        if (this.isAlive) this.move()
-        if (Input.getKeyDown(' ') || Input.getMouseDown()) this.jump()
-
-        const elapsedJumpTime = Time.timeSinceGameStart() - this.lastJumpTime
-        this.transform.globalPosition = this.transform.globalPosition.withY(
-            this.jumpYFunction(elapsedJumpTime)
-        )
-
-        this.jumpSpriteTimer -= Time.deltaTime()
-        if (this.jumpSpriteTimer < 0) this.renderer.setDrawable(this.glideSprite)
-
-        this.handleSpawnTrailDot()
-
-        if (Input.getKeyDown('z')) Time.isPaused = true
-        if (Input.getKeyUp('z')) Time.isPaused = false
     }
 
     public turnLeft(): void {
@@ -167,9 +165,7 @@ class Bird extends Node {
             if (this.isMovingRight) this.touchedRightWall.invoke()
             else this.touchedLeftWall.invoke()
         } else if (collider.owner.name === 'Spike') {
-            this.isAlive = false
             BirdGame.stateMachine.changeState(GameState.RESULT)
-            // this.dieSaturationTween = this.glideSprite.tweenSaturation(0, 0.2, 0, Ease.LINEAR, false)
         }
     }
 
