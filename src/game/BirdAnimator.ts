@@ -16,8 +16,8 @@ class BirdAnimator extends Node {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.globalPosition = Vector.LEFT.multiply(500)
 
-        const jumpSprite = Resource.getSprite(SpriteType.BIRD_JUMP)
-        const glideSprite = Resource.getSprite(SpriteType.BIRD_GLIDE)
+        const jumpSprite = Resource.getSprite(SpriteType.BIRD_DEFAULT_JUMP)
+        const glideSprite = Resource.getSprite(SpriteType.BIRD_DEFAULT_GLIDE)
         jumpSprite.scale = Vector.ONE.multiply(0.3)
         glideSprite.scale = Vector.ONE.multiply(0.3)
         this.animator = this.addComponent(ComponentType.ANIMATOR) as Animator

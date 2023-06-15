@@ -4,6 +4,7 @@
     PLAY,
     PAUSE,
     RESULT,
+    SHOP,
 }
 
 export default GameState
