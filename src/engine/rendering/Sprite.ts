@@ -18,7 +18,7 @@ class Sprite implements Drawable {
     public offSet: Vector = Vector.ZERO
     protected _image: HTMLImageElement
 
-    constructor(imagePath = '') {
+    constructor(imagePath: string) {
         this.setImage(imagePath)
     }
 

@@ -21,7 +21,7 @@ class RetryButton extends Node {
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.globalPosition = new Vector(0, -150)
 
-        const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON)
+        const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
         buttonSprite.height = 100
         buttonSprite.width = 300
         this.button = this.addComponent(ComponentType.BUTTON) as UIButton
@@ -30,20 +30,27 @@ class RetryButton extends Node {
         this.button.pivot = Alignment.MID_CENTER
         this.button.drawOrder = 1000
 
-        const textContent = new TextContent('Retry', Color.GREY)
-        textContent.font = '30px tahoma'
+        const textContent = new TextContent('REPLAY', Color.WHITE)
+        textContent.font = '40px tahoma'
         this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(textContent)
+        this.text.drawOrder = 1001
 
         this.isVisible = false
         this.isActive = false
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         this.button.hovered.subscribe(() => {
-            buttonSprite.color = Color.WHITE
+            const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_HOVERED)
+            buttonSprite.height = 100
+            buttonSprite.width = 300
+            this.button.setDrawable(buttonSprite)
         })
         this.button.unhovered.subscribe(() => {
-            buttonSprite.color = Color.BLACK
+            const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
+            buttonSprite.height = 100
+            buttonSprite.width = 300
+            this.button.setDrawable(buttonSprite)
         })
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.isVisible = true
