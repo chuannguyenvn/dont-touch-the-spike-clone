@@ -18,7 +18,7 @@ class Game {
 
         const debugBuildOptions = new DebugBuildOptions()
         debugBuildOptions.isDebugging = true
-        debugBuildOptions.showFps = true
+        debugBuildOptions.showFps = false
         webBuilder.buildDebug(debugBuildOptions)
 
         webBuilder.buildTime()

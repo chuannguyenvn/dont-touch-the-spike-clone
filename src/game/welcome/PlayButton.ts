@@ -1,36 +1,39 @@
-﻿import Node from '../../engine/node/Node'
-import ComponentType from '../../engine/node/component/ComponentType'
-import Transform from '../../engine/node/component/Transform'
-import Vector from '../../engine/math/Vector'
-import UIButton from '../../engine/node/component/UIButton'
-import RectangleShape from '../../engine/rendering/RectangleShape'
-import Color from '../../engine/math/Color'
-import { Alignment } from '../../engine/node/component/UIElement'
-import UIText from '../../engine/node/component/UIText'
-import TextContent from '../../engine/rendering/TextContent'
+﻿import Vector from '../../engine/math/Vector'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
+import ButtonNode from '../../engine/premade/ButtonNode'
+import Resource from '../../engine/system/Resource'
+import NineSliceType from '../../engine/configs-and-resources/NineSliceTypes'
 
-class PlayButton extends Node {
-    public transform: Transform
-    public button: UIButton
-    public text: UIText
-
+class PlayButton extends ButtonNode {
     init(): void {
-        this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
+        super.init()
+
         this.transform.globalPosition = new Vector(0, -100)
 
-        const rectangle = new RectangleShape(new Vector(200, 100), Color.WHITE)
-        this.button = this.addComponent(ComponentType.BUTTON) as UIButton
-        this.button.elementSize = new Vector(200, 100)
-        this.button.setDrawable(rectangle)
-        this.button.pivot = Alignment.MID_CENTER
+        const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
+        buttonSprite.height = 100
+        buttonSprite.width = 300
+        this.button.setDrawable(buttonSprite)
 
-        const textContent = new TextContent('Play', Color.GREY)
-        textContent.font = '30px tahoma'
-        this.text = this.addComponent(ComponentType.TEXT) as UIText
-        this.text.setDrawable(textContent)
+        this.isVisible = false
+        this.isActive = false
+        this.textContent.text = 'PLAY'
 
+        this.button.clicked.subscribe(this.changeToPlayState.bind(this))
+        this.button.hovered.subscribe(() => {
+            const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_HOVERED)
+            buttonSprite.height = 100
+            buttonSprite.width = 300
+            this.button.setDrawable(buttonSprite)
+        })
+        this.button.unhovered.subscribe(() => {
+            const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
+            buttonSprite.height = 100
+            buttonSprite.width = 300
+            this.button.setDrawable(buttonSprite)
+        })
+        
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
             this.isVisible = true
