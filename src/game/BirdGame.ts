@@ -10,14 +10,12 @@ import VerticalWall from './play/VerticalWall'
 import ScoreBackground from './play/ScoreBackground'
 import ScoreText from './play/ScoreText'
 import PlayButton from './welcome/PlayButton'
-import HighScore from './result/HighScore'
 import RetryButton from './result/RetryButton'
 import PauseButton from './play/PauseButton'
 import StateMachine from '../engine/utility/StateMachine'
 import ResultTextPanel from './result/ResultTextPanel'
 import Shop from './shop/Shop'
 import SkinType from './shop/SkinType'
-import ShopButton from './shop/ShopButton'
 import SkinData from './shop/SkinData'
 
 class BirdGame extends Game {
@@ -121,10 +119,7 @@ class BirdGame extends Game {
 
         const resultTextPanel = new ResultTextPanel('Result')
         bird.scoreChanged.subscribe(resultTextPanel.changeScore.bind(resultTextPanel))
-
-        const highScore = new HighScore('High Score')
-        highScore.start()
-
+        
         const retryButton = new RetryButton('Retry Button')
         retryButton.start()
 
