@@ -7,7 +7,7 @@ class CircleShape implements Drawable {
     public drawOrder: number
     public color: Color
     public size: number
-    public offSet: Vector
+    public offSet: Vector = Vector.ZERO
 
     constructor(size: number, color: Color) {
         this.color = color

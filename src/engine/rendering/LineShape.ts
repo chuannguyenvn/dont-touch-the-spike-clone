@@ -7,7 +7,7 @@ class LineShape implements Drawable {
     public drawOrder: number
     public color: Color
     public width: number
-    public offSet: Vector
+    public offSet: Vector = Vector.ZERO
     public path: Vector[]
     public dashPattern: number[]
 

@@ -7,7 +7,7 @@ class TextContent implements Drawable {
     public text: string
     public color: Color
     public drawOrder: number
-    public offSet: Vector
+    public offSet: Vector = Vector.ZERO
     public font: string
     public lineHeight: number = 0
 

@@ -13,11 +13,15 @@ import Time from '../../engine/system/Time'
 import BirdGame from '../BirdGame'
 import SkinType from './SkinType'
 import Shop from './Shop'
+import Sprite from '../../engine/rendering/Sprite'
+import SpriteType from '../../engine/configs-and-resources/SpriteTypes'
+import DrawLayer from '../../engine/configs-and-resources/DrawLayers'
 
 class ShopItem extends Node {
     public transform: Transform
     public buttonNode: ButtonNode
     public skin: RendererNode
+    public candy: RendererNode
 
     private skinData: SkinData
     private isJumping: boolean = true
@@ -39,13 +43,22 @@ class ShopItem extends Node {
         this.buttonNode.transform.localPosition = new Vector(0, -50)
         this.buttonNode.textContent.text = skinData.price.toString()
         this.buttonNode.textContent.color = Color.WHITE
-        this.buttonNode.text.drawable.offSet = new Vector(-500, 0)
+        this.buttonNode.textContent.font = '30px tahoma'
+        this.buttonNode.textContent.offSet = new Vector(-20, 0)
         this.buttonNode.button.clicked.subscribe(this.purchase.bind(this))
 
         this.skin = new RendererNode('Skin')
         this.skin.setParent(this)
-
         this.skin.renderer.setDrawable(skinData.jumpSprite)
+
+        this.candy = new RendererNode('Candy')
+        this.candy.setParent(this)
+        const candySprite = new Sprite(SpriteType.CANDY)
+        candySprite.scale = Vector.ONE.multiply(0.2)
+        this.candy.renderer.setDrawable(candySprite)
+        this.candy.renderer.drawLayer = DrawLayer.UI
+        this.candy.renderer.drawOrder = 1002
+        this.candy.transform.localPosition = new Vector(15, -50)
 
         new Timer(
             () => {
@@ -69,8 +82,11 @@ class ShopItem extends Node {
     }
 
     public purchase(): void {
-        if (BirdGame.candyCount < this.skinData.price) return
+        if (this.purchased || BirdGame.candyCount < this.skinData.price) return
         this.purchased = true
+
+        this.buttonNode.textContent.offSet = new Vector(0, 0)
+        this.candy.isVisible = false
         BirdGame.candyCount -= this.skinData.price
         BirdGame.unlockedSkins.push(this.skinData.skinType)
         this.buttonNode.button.clicked.unsubscribe(this.purchase)
@@ -82,12 +98,10 @@ class ShopItem extends Node {
 
     private changeSkinHandler(skinType: SkinType) {
         if (!this.purchased) return
-        if (skinType === this.skinData.skinType)
-        {
+        if (skinType === this.skinData.skinType) {
             this.buttonNode.textContent.text = 'ON'
             BirdGame.currentSkin = this.skinData
-        }
-        else {
+        } else {
             this.buttonNode.textContent.text = 'OFF'
         }
     }

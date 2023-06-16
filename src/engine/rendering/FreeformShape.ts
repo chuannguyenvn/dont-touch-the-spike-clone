@@ -7,7 +7,7 @@ class FreeformShape implements Drawable {
     public drawOrder: number
     public color: Color
     public _points: Vector[]
-    public offSet: Vector
+    public offSet: Vector = Vector.ZERO
 
     constructor(color: Color) {
         this.color = color

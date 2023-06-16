@@ -18,7 +18,7 @@ abstract class UIElement extends Renderer {
     public drawOrder: number
     public color: Color
     public elementSize: Vector
-    
+
     constructor(owner: Node) {
         super(owner)
         this.drawLayer = DrawLayer.UI
@@ -37,7 +37,7 @@ abstract class UIElement extends Renderer {
             if (!node.isVisible) return
             node = node.parentNode
         }
-        
+
         let normalizedCoordinate = Vector.ZERO
         switch (this.pivot) {
             case Alignment.TOP_LEFT:
@@ -69,7 +69,9 @@ abstract class UIElement extends Renderer {
                 break
         }
 
-        this.drawable.offSet = this.elementSize.multiplyComp(normalizedCoordinate)
+        this.drawable.offSet = this.drawable.offSet.add(
+            this.elementSize.multiplyComp(normalizedCoordinate)
+        )
         this.drawable._draw()
     }
 }
@@ -86,4 +88,4 @@ enum Alignment {
     BOTTOM_RIGHT,
 }
 
-export {UIElement, Alignment}
+export { UIElement, Alignment }

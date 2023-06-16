@@ -7,7 +7,7 @@ class RectangleShape implements Drawable {
     public drawOrder: number
     public color: Color
     public size: Vector
-    public offSet: Vector
+    public offSet: Vector = Vector.ZERO
 
     constructor(size: Vector, color: Color) {
         this.color = color
