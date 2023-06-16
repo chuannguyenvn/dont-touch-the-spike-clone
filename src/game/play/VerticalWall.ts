@@ -36,7 +36,7 @@ class VerticalWall extends Wall {
             this.spikes[spikeIndices[i]].show()
         }
 
-        if (BirdGame.stateMachine.currentState === GameState.PLAY && Maths.randomRangeInt(0, 3) === 0) {
+        if (BirdGame.stateMachine.currentState === GameState.PLAY && Math.random() < 0.35) {
             const yPos =
                 this.spikes[spikeIndices[spikeIndices.length - 1]].transform.globalPosition.y
             const candy = new Candy('Candy')
