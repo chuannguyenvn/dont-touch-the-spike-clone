@@ -84,6 +84,8 @@ class Bird extends Node {
 
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
             this.transform.globalPosition = Vector.ZERO
+            this.jumpSprite = BirdGame.currentSkin.jumpSprite
+            this.glideSprite = BirdGame.currentSkin.glideSprite
         })
 
         BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
@@ -198,7 +200,7 @@ class Bird extends Node {
 
         this.trailDotSpawnTimer -= Time.deltaTime()
         if (this.trailDotSpawnTimer < 0) {
-            const trailDot = new TrailDot('Dot', this.transform.globalPosition)
+            const trailDot = new TrailDot('Dot', this.transform.globalPosition, BirdGame.currentSkin.trailColor)
             trailDot.start()
             this.trailDotSpawnTimer = this.trailDotSpawnTimeout
         }

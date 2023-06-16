@@ -68,7 +68,7 @@ class ShopItem extends Node {
         )
     }
 
-    private purchase(): void {
+    public purchase(): void {
         if (BirdGame.candyCount < this.skinData.price) return
         this.purchased = true
         BirdGame.candyCount -= this.skinData.price

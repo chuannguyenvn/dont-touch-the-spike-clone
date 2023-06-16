@@ -8,9 +8,12 @@ import Vector from '../../engine/math/Vector'
 import GameState from '../GameState'
 import BirdGame from '../BirdGame'
 import SkinType from './SkinType'
-import ShopButton from "./ShopButton"
-import CandyCounter from "./CandyCounter"
-import {ParamGameEvent} from "../../engine/utility/Event"
+import ShopButton from './ShopButton'
+import CandyCounter from './CandyCounter'
+import { ParamGameEvent } from '../../engine/utility/Event'
+import ButtonNode from '../../engine/premade/ButtonNode'
+import NineSliceType from '../../engine/configs-and-resources/NineSliceTypes'
+import NineSlice from '../../engine/rendering/NineSlice'
 
 class Shop extends Node {
     public static changeSkin: ParamGameEvent<SkinType> = new ParamGameEvent<SkinType>()
@@ -67,6 +70,7 @@ class Shop extends Node {
         defaultSkin.transform.globalPosition = new Vector(0, 175)
         this.shopItems.push(defaultSkin)
         this.addChild(defaultSkin)
+        defaultSkin.purchase()
 
         const angrySkin = new ShopItem('Angry', this.skins[1])
         angrySkin.transform.globalPosition = new Vector(-100, 25)
@@ -89,26 +93,50 @@ class Shop extends Node {
         this.addChild(zombieSkin)
 
         this.shopItems.forEach((item) => (item.isActive = item.isVisible = false))
+        
+        BirdGame.currentSkin = this.skins[0]
+
+        const shopButton = new ShopButton('Shop Button')
+        shopButton.start()
+
+        const candyCounter = new CandyCounter('Candy Counter')
+        candyCounter.start()
+        candyCounter.setParent(this)
+
+        const backButton = new ButtonNode(
+            'Back Button',
+            new NineSlice(NineSliceType.BUTTON_IDLE),
+            new NineSlice(NineSliceType.BUTTON_IDLE)
+        )
+        backButton.button.clicked.subscribe(() =>
+            BirdGame.stateMachine.changeState(GameState.WELCOME)
+        )
+        backButton.setButtonSize(new Vector(70, 32))
+        backButton.textContent.font = "20px verdana"
+        backButton.textContent.text = "Back"
+        backButton.transform.globalPosition = new Vector(-160, 200)
+        backButton.start()
+        backButton.isVisible = false
 
         BirdGame.stateMachine.configure(GameState.SHOP).onEntry(this.getGuid(), () => {
             this.shopItems.forEach((item) => (item.isActive = item.isVisible = true))
             this.isVisible = true
+            backButton.isVisible = true
         })
 
         BirdGame.stateMachine.configure(GameState.SHOP).onExit(this.getGuid(), () => {
             this.shopItems.forEach((item) => (item.isActive = item.isVisible = false))
             this.isVisible = false
+            backButton.isVisible = false
+        })
+        
+        BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
+            shopButton.isVisible = true
         })
 
-        BirdGame.currentSkin = this.skins[0]
-
-        const shopButton = new ShopButton('Shop Button')
-        shopButton.start()
-        shopButton.setParent(this)
-
-        const candyCounter = new CandyCounter('Candy Counter')
-        candyCounter.start()
-        candyCounter.setParent(this)
+        BirdGame.stateMachine.configure(GameState.WELCOME).onExit(this.getGuid(), () => {
+            shopButton.isVisible = false
+        })
     }
 }
 

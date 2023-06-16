@@ -20,9 +20,9 @@ class CandyCounter extends Node {
         super(name)
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.globalPosition = new Vector(-175, 200)
+        this.transform.globalPosition = new Vector(175, 200)
         
-        this.textContent = new TextContent("10")
+        this.textContent = new TextContent("0")
         this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(this.textContent)
 
@@ -41,6 +41,8 @@ class CandyCounter extends Node {
         BirdGame.stateMachine.configure(GameState.SHOP).onExit(this.getGuid(), () => {
             this.isVisible = false
         })
+        
+        BirdGame.candyCountChanged.subscribe((count) => this.textContent.text = count.toString())
     }
 }
 

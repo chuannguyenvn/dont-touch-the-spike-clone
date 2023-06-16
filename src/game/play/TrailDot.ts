@@ -11,14 +11,14 @@ class TrailDot extends Node {
     public transform: Transform
     public renderer: Renderer
 
-    constructor(name: string, position: Vector) {
+    constructor(name: string, position: Vector, color: Color) {
         super(name)
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
         this.transform.tweenScale(Vector.ONE.multiply(0.2), 0.2, 0, Ease.IN_EXPO, false)
         // Why?
         this.transform.globalPosition = new Vector(position.x, position.y)
 
-        const circle = new CircleShape(8, new Color(0.93, 0.2, 0.38))
+        const circle = new CircleShape(8, color)
         this.renderer = this.addComponent(ComponentType.RENDERER) as Renderer
         this.renderer.setDrawable(circle)
         this.renderer.drawOrder = 0

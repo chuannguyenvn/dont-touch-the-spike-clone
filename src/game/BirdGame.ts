@@ -1,4 +1,4 @@
-﻿import { ParamGameEvent } from '../engine/utility/Event'
+﻿import {GameEvent, ParamGameEvent} from '../engine/utility/Event'
 import GameState from './GameState'
 import Game from '../engine/Game'
 import Vector from '../engine/math/Vector'
@@ -38,7 +38,21 @@ class BirdGame extends Game {
         BirdGame.scoreChanged.invoke(value)
     }
 
-    public static candyCount: number = 8
+    private static _candyCount: number = 10
+
+    static get candyCount(): number
+    {
+        return this._candyCount
+    }
+
+    static set candyCount(value: number)
+    {
+        this._candyCount = value
+        BirdGame.candyCountChanged.invoke(value)
+    }
+    
+    public static candyCountChanged: ParamGameEvent<number> = new ParamGameEvent<number>()
+    
     public static currentSkin: SkinData
     public static unlockedSkins: SkinType[] = [SkinType.DEFAULT]
 
