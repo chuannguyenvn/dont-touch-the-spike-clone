@@ -10,7 +10,7 @@ class Sound {
     }
 
     public static playOnce(clip: SoundClip): void {
-        const audio = Resource._sounds.get(clip) as HTMLAudioElement
+        const audio =new Audio(clip)
         audio.loop = false
         audio.play()
     }

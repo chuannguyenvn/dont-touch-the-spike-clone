@@ -15,6 +15,8 @@ import TrailDot from './TrailDot'
 import ParticleEmitter from '../../engine/node/component/ParticleEmiter'
 import Resource from '../../engine/system/Resource'
 import SpriteType from '../../engine/configs-and-resources/SpriteTypes'
+import Sound from '../../engine/system/Sound'
+import SoundClip from '../../engine/configs-and-resources/SoundClips'
 
 class Bird extends Node {
     public touchedLeftWall: GameEvent
@@ -79,7 +81,7 @@ class Bird extends Node {
         this.deadSprite.scale = Vector.ONE.multiply(0.12)
 
         this.scoreChanged = new ParamGameEvent<number>()
-        
+
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
             this.transform.globalPosition = Vector.ZERO
             this.jumpSprite = BirdGame.currentSkin.jumpSprite
@@ -162,6 +164,7 @@ class Bird extends Node {
         this.lastJumpTime = Time.timeSinceGameStart()
         this.lastJumpPosY = this.transform.globalPosition.y
         this.jumpSpriteTimer = this.jumpSpriteTimeout
+        Sound.playOnce(SoundClip.FLAP)
     }
 
     private jumpYFunction(elapsedTime: number): number {
@@ -173,11 +176,14 @@ class Bird extends Node {
         if (collider.owner.name === 'Wall') {
             if (this.isMovingRight) this.touchedRightWall.invoke()
             else this.touchedLeftWall.invoke()
+            Sound.playOnce(SoundClip.POP)
         } else if (collider.owner.name === 'Spike') {
             BirdGame.stateMachine.changeState(GameState.RESULT)
+            Sound.playOnce(SoundClip.DEAD)
         } else if (collider.owner.name === 'Candy') {
             BirdGame.candyCount++
             collider.owner.destroy()
+            Sound.playOnce(SoundClip.CANDY)
         }
     }
 
