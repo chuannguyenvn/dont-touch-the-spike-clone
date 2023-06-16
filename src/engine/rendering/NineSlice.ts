@@ -4,6 +4,7 @@ import Canvas from '../system/Canvas'
 class NineSlice extends Sprite {
     public _draw(): void {
         const s = this._image.width / 3
+        const fix = 1
 
         const part1: [number, number, number, number] = [0, 0, s, s]
         const part2: [number, number, number, number] = [s, 0, s, s]
@@ -18,14 +19,7 @@ class NineSlice extends Sprite {
         const width = this.width
         const height = this.height
 
-        Canvas._canvasContext.drawImage(
-            this._image,
-            ...part1,
-            -width / 2,
-            -height / 2,
-            s,
-            s
-        )
+        Canvas._canvasContext.drawImage(this._image, ...part1, -width / 2, -height / 2, s, s)
         Canvas._canvasContext.drawImage(
             this._image,
             ...part3,
@@ -53,42 +47,42 @@ class NineSlice extends Sprite {
         Canvas._canvasContext.drawImage(
             this._image,
             ...part2,
-            s - width / 2,
+            s - width / 2 - fix,
             -height / 2,
-            width - 2 * s,
+            width - 2 * s + fix * 2,
             s
         )
         Canvas._canvasContext.drawImage(
             this._image,
             ...part8,
-            s - width / 2,
+            s - width / 2 - fix,
             height - s - height / 2,
-            width - 2 * s,
+            width - 2 * s + fix * 2,
             s
         )
         Canvas._canvasContext.drawImage(
             this._image,
             ...part4,
             -width / 2,
-            s - height / 2,
+            s - height / 2 - fix,
             s,
-            height - 2 * s
+            height - 2 * s + fix * 2
         )
         Canvas._canvasContext.drawImage(
             this._image,
             ...part6,
             width - s - width / 2,
-            s - height / 2,
+            s - height / 2 - fix,
             s,
-            height - 2 * s
+            height - 2 * s + fix * 2
         )
         Canvas._canvasContext.drawImage(
             this._image,
             ...part5,
-            s - width / 2,
-            s - height / 2,
-            width - 2 * s,
-            height - 2 * s
+            s - width / 2 - fix,
+            s - height / 2 - fix,
+            width - 2 * s + fix * 2,
+            height - 2 * s + fix * 2
         )
     }
 }
