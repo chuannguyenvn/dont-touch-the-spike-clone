@@ -21,6 +21,10 @@ class Physics {
         this._colliders.push(collider)
     }
 
+    public static _unregisterCollider(collider: Collider): void {
+        this._colliders = this._colliders.filter((c) => c !== collider)
+    }
+
     public static _registerRigidbody(rigidbody: Rigidbody): void {
         this._colliders = this._colliders.filter(
             (collider) => collider.owner.getGuid() !== rigidbody.owner.getGuid()

@@ -38,7 +38,7 @@ class BirdGame extends Game {
         BirdGame.scoreChanged.invoke(value)
     }
 
-    private static _candyCount: number = 10
+    private static _candyCount: number = 0
 
     static get candyCount(): number
     {

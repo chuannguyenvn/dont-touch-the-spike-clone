@@ -79,13 +79,12 @@ class Bird extends Node {
         this.deadSprite.scale = Vector.ONE.multiply(0.12)
 
         this.scoreChanged = new ParamGameEvent<number>()
-
-        this.turnRight()
-
+        
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
             this.transform.globalPosition = Vector.ZERO
             this.jumpSprite = BirdGame.currentSkin.jumpSprite
             this.glideSprite = BirdGame.currentSkin.glideSprite
+            this.turnRight()
         })
 
         BirdGame.stateMachine.configure(GameState.PLAY).onEntry(this.getGuid(), () => {
@@ -176,6 +175,9 @@ class Bird extends Node {
             else this.touchedLeftWall.invoke()
         } else if (collider.owner.name === 'Spike') {
             BirdGame.stateMachine.changeState(GameState.RESULT)
+        } else if (collider.owner.name === 'Candy') {
+            BirdGame.candyCount++
+            collider.owner.destroy()
         }
     }
 
@@ -200,7 +202,11 @@ class Bird extends Node {
 
         this.trailDotSpawnTimer -= Time.deltaTime()
         if (this.trailDotSpawnTimer < 0) {
-            const trailDot = new TrailDot('Dot', this.transform.globalPosition, BirdGame.currentSkin.trailColor)
+            const trailDot = new TrailDot(
+                'Dot',
+                this.transform.globalPosition,
+                BirdGame.currentSkin.trailColor
+            )
             trailDot.start()
             this.trailDotSpawnTimer = this.trailDotSpawnTimeout
         }

@@ -20,14 +20,14 @@ class CandyCounter extends Node {
         super(name)
 
         this.transform = this.addComponent(ComponentType.TRANSFORM) as Transform
-        this.transform.globalPosition = new Vector(175, 200)
+        this.transform.globalPosition = new Vector(125, 200)
         
         this.textContent = new TextContent("0")
         this.text = this.addComponent(ComponentType.TEXT) as UIText
         this.text.setDrawable(this.textContent)
 
         const candySprite = Resource.getSprite(SpriteType.CANDY)
-        candySprite.scale = Vector.ONE.multiply(0.34)
+        candySprite.scale = Vector.ONE.multiply(0.25)
         candySprite.offSet = new Vector(150, 0)
         this.rendererNode = new RendererNode('Candy Sprite')
         this.rendererNode.renderer.setDrawable(candySprite)

@@ -4,6 +4,7 @@ import Vector from '../../engine/math/Vector'
 import Maths from '../../engine/math/Maths'
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
+import Candy from './Candy'
 
 class VerticalWall extends Wall {
     constructor(name: string) {
@@ -30,9 +31,19 @@ class VerticalWall extends Wall {
     public showSpike(): void {
         this.collider.isActive = true
         const spikeCount = this.difficultyFunction(BirdGame.currentScore)
-        const spikeIndices = Maths.randomIntBag(0, this.spikes.length, spikeCount)
-        for (let i = 0; i < spikeIndices.length; i++) {
+        const spikeIndices = Maths.randomIntBag(0, this.spikes.length, spikeCount + 1)
+        for (let i = 0; i < spikeIndices.length - 1; i++) {
             this.spikes[spikeIndices[i]].show()
+        }
+
+        if (BirdGame.stateMachine.currentState === GameState.PLAY && Maths.randomRangeInt(0, 3) === 0) {
+            const yPos =
+                this.spikes[spikeIndices[spikeIndices.length - 1]].transform.globalPosition.y
+            const candy = new Candy('Candy')
+            candy.transform.globalPosition = new Vector(
+                Maths.sign(this.transform.globalPosition.x) * 150,
+                yPos
+            )
         }
     }
 
