@@ -33,14 +33,6 @@ class ScoreBackground extends Node {
             this.isVisible = false
             this.isActive = false
         })
-
-        BirdGame.stateMachine.configure(GameState.SHOP).onEntry(this.getGuid(), () => {
-            this.isVisible = false
-        })
-
-        BirdGame.stateMachine.configure(GameState.SHOP).onExit(this.getGuid(), () => {
-            this.isVisible = true
-        })
     }
 }
 
