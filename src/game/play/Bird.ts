@@ -103,9 +103,11 @@ class Bird extends Node {
         })
 
         BirdGame.stateMachine.configure(GameState.SHOP).onEntry(this.getGuid(), () => {
-            this.isAlive = false
-            this.renderer.setDrawable(this.deadSprite)
-            this.deadSprite.flipX = this.isMovingRight
+            this.isVisible = false
+        })
+
+        BirdGame.stateMachine.configure(GameState.SHOP).onExit(this.getGuid(), () => {
+            this.isVisible = true
         })
     }
 

@@ -23,8 +23,8 @@ class ParamGameEvent<T> {
         this._eventCallbacks.push(callback)
     }
 
-    public unsubscribe(): void {
-        // TODO
+    public unsubscribe(callback: (arg: T) => void): void {
+        this._eventCallbacks = this._eventCallbacks.filter((c) => c !== callback)
     }
 
     public invoke(arg: T): void {
@@ -34,4 +34,4 @@ class ParamGameEvent<T> {
     }
 }
 
-export { GameEvent, ParamGameEvent }
+export {GameEvent, ParamGameEvent}

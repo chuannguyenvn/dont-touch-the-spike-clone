@@ -5,6 +5,7 @@ import Vector from '../../engine/math/Vector'
 import Ease from '../../engine/utility/tween/Ease'
 import Resource from '../../engine/system/Resource'
 import NineSliceType from '../../engine/configs-and-resources/NineSliceTypes'
+import NineSlice from "../../engine/rendering/NineSlice"
 
 class ResultTextPanel extends PanelWithTextNode {
     constructor(name: string) {
@@ -16,9 +17,12 @@ class ResultTextPanel extends PanelWithTextNode {
         this.text.drawOrder = 1001
         this.textContent.lineHeight = 40
 
-        const panel = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
+        const panel = new NineSlice(NineSliceType.BUTTON_IDLE)
+        panel.width = 300  
+        panel.height = 100  
         this.panel.setDrawable(panel)
         this.panel.drawOrder = 1000
+
 
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
             this.textContent.text = `SCORE: ${BirdGame.currentScore}\nHIGH SCORE: ${BirdGame.highScore}`

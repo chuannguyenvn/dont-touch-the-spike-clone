@@ -10,6 +10,7 @@
     BIRD_ZOMBIE_JUMP = 'assets/Zombie_Jump.png',
     BIRD_ZOMBIE_GLIDE = 'assets/Zombie_Glide.png',
     BIRD_DEAD = 'assets/Dead.png',
+    CANDY = 'assets/Candy.png',
     PAUSE = 'assets/Pause.png',
     PLAY = 'assets/Play.png',
 }

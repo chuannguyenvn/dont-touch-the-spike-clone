@@ -10,7 +10,9 @@ import NineSlice from '../../engine/rendering/NineSlice'
 import Color from '../../engine/math/Color'
 import Vector from '../../engine/math/Vector'
 import Time from '../../engine/system/Time'
-import { Alignment } from '../../engine/node/component/UIElement'
+import BirdGame from '../BirdGame'
+import SkinType from './SkinType'
+import Shop from './Shop'
 
 class ShopItem extends Node {
     public transform: Transform
@@ -19,6 +21,7 @@ class ShopItem extends Node {
 
     private skinData: SkinData
     private isJumping: boolean = true
+    private purchased: boolean = false
 
     constructor(name: string, skinData: SkinData) {
         super(name)
@@ -34,10 +37,10 @@ class ShopItem extends Node {
         this.buttonNode.setButtonSize(new Vector(100, 50))
         this.buttonNode.setParent(this)
         this.buttonNode.transform.localPosition = new Vector(0, -50)
-
         this.buttonNode.textContent.text = skinData.price.toString()
         this.buttonNode.textContent.color = Color.WHITE
         this.buttonNode.text.drawable.offSet = new Vector(-500, 0)
+        this.buttonNode.button.clicked.subscribe(this.purchase.bind(this))
 
         this.skin = new RendererNode('Skin')
         this.skin.setParent(this)
@@ -55,12 +58,38 @@ class ShopItem extends Node {
             -1,
             1
         )
+
+        Shop.changeSkin.subscribe(this.changeSkinHandler.bind(this))
     }
 
     update() {
         this.skin.transform.localPosition = this.skin.transform.localPosition.withY(
             Math.sin(Time.timeSinceGameStart()) * 5
         )
+    }
+
+    private purchase(): void {
+        if (BirdGame.candyCount < this.skinData.price) return
+        this.purchased = true
+        BirdGame.candyCount -= this.skinData.price
+        BirdGame.unlockedSkins.push(this.skinData.skinType)
+        this.buttonNode.button.clicked.unsubscribe(this.purchase)
+        this.buttonNode.button.clicked.subscribe(() =>
+            Shop.changeSkin.invoke(this.skinData.skinType)
+        )
+        Shop.changeSkin.invoke(this.skinData.skinType)
+    }
+
+    private changeSkinHandler(skinType: SkinType) {
+        if (!this.purchased) return
+        if (skinType === this.skinData.skinType)
+        {
+            this.buttonNode.textContent.text = 'ON'
+            BirdGame.currentSkin = this.skinData
+        }
+        else {
+            this.buttonNode.textContent.text = 'OFF'
+        }
     }
 }
 

@@ -7,11 +7,18 @@ import ShopItem from './ShopItem'
 import Vector from '../../engine/math/Vector'
 import GameState from '../GameState'
 import BirdGame from '../BirdGame'
+import SkinType from './SkinType'
+import ShopButton from "./ShopButton"
+import CandyCounter from "./CandyCounter"
+import {ParamGameEvent} from "../../engine/utility/Event"
 
 class Shop extends Node {
+    public static changeSkin: ParamGameEvent<SkinType> = new ParamGameEvent<SkinType>()
+
     private skins: SkinData[] = [
         new SkinData(
             'Normie',
+            SkinType.DEFAULT,
             Resource.getSprite(SpriteType.BIRD_DEFAULT_JUMP),
             Resource.getSprite(SpriteType.BIRD_DEFAULT_GLIDE),
             Color.fromHex('d62945'),
@@ -19,6 +26,7 @@ class Shop extends Node {
         ),
         new SkinData(
             'Angry',
+            SkinType.ANGRY,
             Resource.getSprite(SpriteType.BIRD_ANGRY_JUMP),
             Resource.getSprite(SpriteType.BIRD_ANGRY_GLIDE),
             Color.fromHex('283756'),
@@ -26,6 +34,7 @@ class Shop extends Node {
         ),
         new SkinData(
             'Pinky',
+            SkinType.PINKY,
             Resource.getSprite(SpriteType.BIRD_PINKY_JUMP),
             Resource.getSprite(SpriteType.BIRD_PINKY_GLIDE),
             Color.fromHex('ee4496'),
@@ -33,6 +42,7 @@ class Shop extends Node {
         ),
         new SkinData(
             'Roundy',
+            SkinType.ROUNDY,
             Resource.getSprite(SpriteType.BIRD_ROUND_JUMP),
             Resource.getSprite(SpriteType.BIRD_ROUND_GLIDE),
             Color.fromHex('3b5ba9'),
@@ -40,6 +50,7 @@ class Shop extends Node {
         ),
         new SkinData(
             'Zomby',
+            SkinType.ZOMBIE,
             Resource.getSprite(SpriteType.BIRD_ZOMBIE_JUMP),
             Resource.getSprite(SpriteType.BIRD_ZOMBIE_GLIDE),
             Color.fromHex('09aa4b'),
@@ -53,34 +64,51 @@ class Shop extends Node {
         super(name)
 
         const defaultSkin = new ShopItem('Default', this.skins[0])
-        defaultSkin.transform.globalPosition = new Vector(0, 100)
+        defaultSkin.transform.globalPosition = new Vector(0, 175)
         this.shopItems.push(defaultSkin)
+        this.addChild(defaultSkin)
 
         const angrySkin = new ShopItem('Angry', this.skins[1])
-        angrySkin.transform.globalPosition = new Vector(-100, 0)
+        angrySkin.transform.globalPosition = new Vector(-100, 25)
         this.shopItems.push(angrySkin)
+        this.addChild(angrySkin)
 
         const pinkySkin = new ShopItem('Pinky', this.skins[2])
-        pinkySkin.transform.globalPosition = new Vector(100, 0)
+        pinkySkin.transform.globalPosition = new Vector(100, 25)
         this.shopItems.push(pinkySkin)
+        this.addChild(pinkySkin)
 
         const roundySkin = new ShopItem('Roundy', this.skins[3])
-        roundySkin.transform.globalPosition = new Vector(-100, -100)
+        roundySkin.transform.globalPosition = new Vector(-100, -125)
         this.shopItems.push(roundySkin)
+        this.addChild(roundySkin)
 
         const zombieSkin = new ShopItem('Zombie', this.skins[4])
-        zombieSkin.transform.globalPosition = new Vector(100, -100)
+        zombieSkin.transform.globalPosition = new Vector(100, -125)
         this.shopItems.push(zombieSkin)
+        this.addChild(zombieSkin)
 
         this.shopItems.forEach((item) => (item.isActive = item.isVisible = false))
 
         BirdGame.stateMachine.configure(GameState.SHOP).onEntry(this.getGuid(), () => {
             this.shopItems.forEach((item) => (item.isActive = item.isVisible = true))
+            this.isVisible = true
         })
 
         BirdGame.stateMachine.configure(GameState.SHOP).onExit(this.getGuid(), () => {
             this.shopItems.forEach((item) => (item.isActive = item.isVisible = false))
+            this.isVisible = false
         })
+
+        BirdGame.currentSkin = this.skins[0]
+
+        const shopButton = new ShopButton('Shop Button')
+        shopButton.start()
+        shopButton.setParent(this)
+
+        const candyCounter = new CandyCounter('Candy Counter')
+        candyCounter.start()
+        candyCounter.setParent(this)
     }
 }
 
