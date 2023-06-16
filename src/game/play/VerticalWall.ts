@@ -44,6 +44,7 @@ class VerticalWall extends Wall {
                 Maths.sign(this.transform.globalPosition.x) * 150,
                 yPos
             )
+            candy.start()
         }
     }
 

@@ -47,7 +47,7 @@ class Candy extends Node {
 
     update() {
         this.transform.globalPosition = this.transform.globalPosition.withY(
-            Math.sin(Time.timeSinceGameStart()) * 5
+            Math.sin(Time.timeSinceGameStart()) * 5 + this.initPosY
         )
         this.transform.rotation = Math.sin(Time.timeSinceGameStart() * 1.2) * 10
     }
