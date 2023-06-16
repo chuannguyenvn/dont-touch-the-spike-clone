@@ -10,13 +10,14 @@ import VerticalWall from './play/VerticalWall'
 import ScoreBackground from './play/ScoreBackground'
 import ScoreText from './play/ScoreText'
 import PlayButton from './welcome/PlayButton'
-import ResultBackground from './result/ResultBackground'
-import ResultScore from './result/ResultScore'
 import HighScore from './result/HighScore'
 import RetryButton from './result/RetryButton'
 import PauseButton from './play/PauseButton'
 import StateMachine from '../engine/utility/StateMachine'
-import ResultTextPanel from "./result/ResultTextPanel"
+import ResultTextPanel from './result/ResultTextPanel'
+import Shop from './shop/Shop'
+import SkinType from './shop/SkinType'
+import ShopButton from "./shop/ShopButton"
 
 class BirdGame extends Game {
     public static highScore = 0
@@ -35,6 +36,9 @@ class BirdGame extends Game {
         BirdGame._currentScore = value
         BirdGame.scoreChanged.invoke(value)
     }
+
+    public static currentSkin: SkinType = SkinType.DEFAULT
+    public static unlockedSkins: SkinType[] = [SkinType.DEFAULT]
 
     public static init(): void {
         BirdGame.stateMachine
@@ -104,6 +108,12 @@ class BirdGame extends Game {
 
         const retryButton = new RetryButton('Retry Button')
         retryButton.start()
+
+        const shop = new Shop('Shop')
+        shop.start()
+        
+        const shopButton = new ShopButton("Shop Button")
+        shopButton.start()
 
         BirdGame.stateMachine.changeState(GameState.WELCOME)
     }

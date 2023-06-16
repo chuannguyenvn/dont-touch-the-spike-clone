@@ -71,9 +71,9 @@ class Bird extends Node {
         this.touchedLeftWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
         this.touchedRightWall.subscribe(() => this.scoreChanged.invoke(BirdGame.currentScore))
 
-        this.jumpSprite = Resource.getSprite(SpriteType.BIRD_DEFAULT_JUMP)
+        this.jumpSprite = Resource.getSprite(SpriteType.BIRD_ROUND_JUMP)
         this.jumpSprite.scale = Vector.ONE.multiply(0.12)
-        this.glideSprite = Resource.getSprite(SpriteType.BIRD_DEFAULT_GLIDE)
+        this.glideSprite = Resource.getSprite(SpriteType.BIRD_ROUND_GLIDE)
         this.glideSprite.scale = Vector.ONE.multiply(0.12)
         this.deadSprite = Resource.getSprite(SpriteType.BIRD_DEAD)
         this.deadSprite.scale = Vector.ONE.multiply(0.12)
@@ -97,6 +97,12 @@ class Bird extends Node {
         })
 
         BirdGame.stateMachine.configure(GameState.RESULT).onEntry(this.getGuid(), () => {
+            this.isAlive = false
+            this.renderer.setDrawable(this.deadSprite)
+            this.deadSprite.flipX = this.isMovingRight
+        })
+
+        BirdGame.stateMachine.configure(GameState.SHOP).onEntry(this.getGuid(), () => {
             this.isAlive = false
             this.renderer.setDrawable(this.deadSprite)
             this.deadSprite.flipX = this.isMovingRight

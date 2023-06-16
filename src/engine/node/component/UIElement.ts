@@ -18,7 +18,7 @@ abstract class UIElement extends Renderer {
     public drawOrder: number
     public color: Color
     public elementSize: Vector
-
+    
     constructor(owner: Node) {
         super(owner)
         this.drawLayer = DrawLayer.UI
@@ -30,8 +30,14 @@ abstract class UIElement extends Renderer {
     }
 
     public _draw(): void {
-        if (!this.owner.isVisible) return
+        if (!this.owner.isVisible || !this.drawable) return
 
+        let node: Node | null = this.owner
+        while (node) {
+            if (!node.isVisible) return
+            node = node.parentNode
+        }
+        
         let normalizedCoordinate = Vector.ZERO
         switch (this.pivot) {
             case Alignment.TOP_LEFT:

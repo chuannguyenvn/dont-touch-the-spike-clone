@@ -2,39 +2,25 @@
 import BirdGame from '../BirdGame'
 import GameState from '../GameState'
 import ButtonNode from '../../engine/premade/ButtonNode'
-import Resource from '../../engine/system/Resource'
 import NineSliceType from '../../engine/configs-and-resources/NineSliceTypes'
 import Ease from '../../engine/utility/tween/Ease'
+import NineSlice from '../../engine/rendering/NineSlice'
 
 class PlayButton extends ButtonNode {
-    init(): void {
-        super.init()
+    constructor(name: string) {
+        super(
+            name,
+            new NineSlice(NineSliceType.BUTTON_IDLE),
+            new NineSlice(NineSliceType.BUTTON_HOVERED)
+        )
         
-        const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
-        buttonSprite.height = 100
-        buttonSprite.width = 300
-        this.button.setDrawable(buttonSprite)
+        this.setButtonSize(new Vector(300, 100))
         this.button.drawOrder = 100
         this.text.drawOrder = 101
-        this.button.elementSize = new Vector(300, 100)
 
         this.isVisible = false
         this.isActive = false
         this.textContent.text = 'PLAY'
-
-        this.button.clicked.subscribe(this.changeToPlayState.bind(this))
-        this.button.hovered.subscribe(() => {
-            const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_HOVERED)
-            buttonSprite.height = 100
-            buttonSprite.width = 300
-            this.button.setDrawable(buttonSprite)
-        })
-        this.button.unhovered.subscribe(() => {
-            const buttonSprite = Resource.getNineSlice(NineSliceType.BUTTON_IDLE)
-            buttonSprite.height = 100
-            buttonSprite.width = 300
-            this.button.setDrawable(buttonSprite)
-        })
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {

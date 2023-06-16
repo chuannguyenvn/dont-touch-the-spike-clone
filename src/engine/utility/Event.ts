@@ -5,8 +5,8 @@
         this._eventCallbacks.push(callback)
     }
 
-    public unsubscribe(): void {
-        // TODO
+    public unsubscribe(callback: () => void): void {
+        this._eventCallbacks = this._eventCallbacks.filter((c) => c !== callback)
     }
 
     public invoke(): void {
