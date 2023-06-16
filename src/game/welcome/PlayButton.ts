@@ -14,7 +14,7 @@ class PlayButton extends ButtonNode {
             new NineSlice(NineSliceType.BUTTON_HOVERED)
         )
         
-        this.setButtonSize(new Vector(300, 100))
+        this.setButtonSize(new Vector(300, 75))
         this.button.drawOrder = 100
         this.text.drawOrder = 101
 
@@ -24,7 +24,7 @@ class PlayButton extends ButtonNode {
 
         this.button.clicked.subscribe(this.changeToPlayState.bind(this))
         BirdGame.stateMachine.configure(GameState.WELCOME).onEntry(this.getGuid(), () => {
-            this.transform.globalPosition = new Vector(0, -125)
+            this.transform.globalPosition = new Vector(0, -112.5)
             this.isVisible = true
             this.isActive = true
         })
