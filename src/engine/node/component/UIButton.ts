@@ -23,10 +23,22 @@ class UIButton extends UIElement implements MouseInteractable {
     }
 
     _checkClick(position: Vector): void {
+        let node: Node | null = this.owner
+        while (node) {
+            if (!node.isActive) return
+            node = node.parentNode
+        }
+        
         if (this.rect.isPointInside(position) && Input.getMouseUp()) this.clicked.invoke()
     }
 
     _checkHover(position: Vector): void {
+        let node: Node | null = this.owner
+        while (node) {
+            if (!node.isActive) return
+            node = node.parentNode
+        }
+        
         if (this.rect.isPointInside(position)) {
             this.hovered.invoke()
             this._lastFrameHovered = true
